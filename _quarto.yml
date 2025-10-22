@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: docs
+  render: 
+    - "*.qmd"
+    - "!homeworks"
+    - "!activities"
+    - "!labs"
+    - "!old.lectures"
+  
+name: "dku-stats-101-spr2025s3"
+
+website:
+  title: "DKU Stats 101 - Spring 2025 S3"
+  navbar: 
+    left:
+      - text: "Course Introduction"
+        href: index.html
+      - text: "Schedule and Course Materials"
+        href: schedulematerials.html
+      - text: "Homework"
+        href: homework.html
+      - text: "R Help Manual"
+        href: rmanual.html
+    right: 
+      - icon: github
+        href: https://github.com/andrewmacd/dkustats101fall2025s2
+
+format:
+  html:
+    theme: spacelab
+    css: styles.css
+    toc: true
+
+
+

@@ -1,0 +1,319 @@
+---
+title: "Course Schedule and Class Materials"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Important: class schedule is subject to change, contingent on mitigating circumstances and the progress we make as a class. If there are any changes, I will announce them on Canvas.
+
+# Unit 1: Distributions
+
+## Lecture 1.1: Class welcome (Thursday, October 23)
+
+Reading to do before class: Chapter 1, 2.1 and 2.2, and 3
+
+Topics covered:
+
+-   What are data and variables?
+-   How to display quantitative and qualitative variables
+-   Contingency tables
+
+## Lab 1.1: R and Quarto familiarization (Thursday, October 23)
+
+-   Lab files: [Lab 1.1]
+
+## Online lab 1.1 (due Sunday, October 26 at 11:59:00 pm)
+
+-   [Introduction to R](https://learn.datacamp.com/courses/free-introduction-to-r)
+-   [Introduction to the Tidyverse](https://learn.datacamp.com/courses/introduction-to-the-tidyverse)
+
+## Lecture 1.2: Characteristics of distributions (Tuesday, October 28)
+
+Reading to do before class: Chapter 2.3-5 and 4
+
+Topics covered:
+
+-   How to describe the shape, center, and spread of a distribution
+
+-   How to compare distributions
+
+-   Dealing with problem distributions (outliers, reexpression)
+
+-   Lecture webpage: [Lecture 1.2]
+
+-   Lecture activity: [Lecture 1.2 activity]
+    -   Make sure to extract (unzip) the lab files before attempting to modify them!
+
+## Unit 1 homework - progress check (due Wednesday, October 29 at 23:59:00)
+
+-   Homework files: [Unit 1 homework instructions]
+
+## Lecture 1.3: Comparing distributions and the Normal distribution (Thursday, October 30)
+
+Reading to do before class: Chapter 5
+
+Topics covered:
+
+-   Standard deviation and standardizing values
+
+-   Normal models
+
+-   Normal percentiles
+
+-   Lecture webpage: [Lecture 1.3]
+
+-   Lecture activity: [Lecture 1.3 activity]
+
+## Lab 1.2: Advanced Quarto editing (Thursday, October 30)
+
+-   Lab files: [Lab 1.2]
+    -   Make sure to extract (unzip) the lab files before attempting to modify them!
+
+## Online lab 1.2 (due on Friday, October 31 at 23:59:00)
+
+-   [Introduction to Data Visualization with ggplot2](https://learn.datacamp.com/courses/introduction-to-data-visualization-with-ggplot2)
+
+## Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)
+
+-   Homework files: [Unit 1 homework]
+-   Homework sample solutions: [Unit 1 homework sample solutions]
+
+# Unit 2: Relationships between variables
+
+## Lecture 2.1: Association and correlation (Tuesday, November 4)
+
+Reading to do before class: Chapter 6
+
+Topics covered:
+
+-   Scatterplots
+
+-   Correlations
+
+-   Does correlation imply causation?
+
+-   Lecture webpage: [Lecture 2.1]
+
+-   Lecture activity: [Lecture 2.1 activity]
+
+## Lecture 2.2: Simple Linear Regression (Thursday, November 6)
+
+Reading to do before class: Chapter 7
+
+Topics covered:
+
+-   Line of best fit: least squares
+
+-   The linear model
+
+-   What are residuals
+
+-   Regression assumptions
+
+-   Lecture webpage: [Lecture 2.2]
+
+-   Lecture activity: [Lecture 2.2 activity]
+
+## Lab 2.1: Working with regressions using `dplyr` (Thursday, November 6)
+
+-   Lab files: [Lab 2.1]
+    -   Make sure to extract (unzip) the lab files before attempting to modify them!
+
+## Lecture 2.3: Regression Wisdom (Friday, November 7)
+
+- *Note the special class time!*
+
+Reading to do before class: Chapter 8
+
+Topics covered:
+
+-   Beware extrapolation
+
+-   Outliers and leverage
+
+-   Lurking variables
+
+-   Straightening scatterplots
+
+-   Lecture webpage: [Lecture 2.3]
+
+-   Lecture activity: [Lecture 2.3 activity]
+
+## Online lab 2.2 (due on Friday, November 7 at 23:59:00)
+
+-   [Intermediate Data Visualization with ggplot2](https://app.datacamp.com/learn/courses/intermediate-data-visualization-with-ggplot2)
+
+## Unit 2 homework - progress check (due Sunday, November 9 at 23:59:00)
+
+-   Homework files: [Unit 2 homework instructions]
+
+## Lecture 2.4: Multiple Regression (Tuesday, November 11)
+
+Reading to do before class: Chapter 9
+
+Topics covered:
+
+-   What is multiple regression?
+
+-   Interpreting multiple regression coefficients
+
+-   Partial regression plots
+
+-   Indicator variables
+
+-   Lecture webpage: [Lecture 2.4]
+
+-   Lecture activity: [Lecture 2.4 activity]
+
+## Unit 2 homework (due Sunday, November 16 at 11:59:00)
+
+-   Homework files: [Unit 2 homework instructions]
+
+# Unit 3: Measuring uncertainty
+
+## Lecture 3.1: Confidence intervals - proportions (Thursday, November 13)
+
+Reading to do before class: Chapter 13
+
+Topics covered:
+
+-   What is a sampling distribution?
+
+-   When does the normal model apply?
+
+-   Constructing a confidence interval
+
+-   Interpreting a confidence interval
+
+-   Lecture webpage: [Lecture 3.1]
+
+-   Lecture activity: [Lecture 3.1 activity]
+
+## Lab 2.2: Interpreting coefficients (Thursday, November 13)
+
+-   Lab files: [Lab 2.2]
+    -   Make sure to extract (unzip) the lab files before attempting to modify them!
+
+## Lecture 3.2: Confidence intervals - means (Tuesday, November 18)
+
+Reading to do before class: Chapter 14
+
+Topics covered:
+
+-   The Central Limit Theorem
+
+-   Confidence interval for means
+
+-   Interpreting a confidence interval
+
+-   Final thoughts on confidence intervals
+
+-   Lecture webpage: [Lecture 3.2]
+
+-   No lecture activity
+
+## Lecture 3.3: Hypothesis testing (Thursday, November 20)
+
+Reading to do before class: Chapter 15
+
+Topics covered:
+
+-   What are hypotheses?
+
+-   $p$ values
+
+-   $p$ values and decisions -- how to make a decision
+
+-   Lecture webpage: [Lecture 3.3]
+
+-   Lecture activity: [Lecture 3.3 activity]
+
+## Lab 3.1: Bootstrapping (Thursday, November 20)
+
+-   Lab files: [Lab 3.1]
+    -   Make sure to extract (unzip) the lab files before attempting to modify them!
+
+## Lecture 3.4: Hypothesis testing wisdom (Tuesday, November 25)
+
+Reading to do before class: Chapter 16
+
+Topics covered:
+
+- Interpreting p-values
+
+- Alpha and critical values
+
+- Practical vs. statistical significance
+
+- Type I and II errors
+
+- Power of a test
+
+-   Lecture webpage: [Lecture 3.4]
+
+-   Lecture activity: [Lecture 3.4 activity]
+
+## In-class Unit 3 exam: Thursday, November 27 from 6:00 pm to 7:15 pm
+
+# Unit 4: Statistical inference
+
+## Lecture 4.1: Comparing groups (Thursday, November 27)
+
+Reading to do before class: Chapter 17
+
+Topics covered:
+
+-   Confidence intervals for comparing two samples
+
+-   Assumptions and conditions for two-sample hypothesis tests
+
+-   Two-sample $z$ test
+
+-   Two-sample $t$ test
+
+-   Lecture webpage: [Lecture 4.1]
+
+-   Lecture activity: [Lecture 4.1 activity]
+
+## Lecture 4.2: Returning to regression (Tuesday, December 2)
+
+Reading to do before class: Chapter 20
+
+Topics covered:
+
+-   Regression inference and intuition
+
+-   The regression table
+
+-   Confidence and prediction intervals
+
+-   Lecture webpage: [Lecture 4.2]
+
+-   Lecture activity: [Lecture 4.2 activity]
+
+## Final class 4.3: Interpretation activity (Thursday, December 4)
+
+-   How to read academic statistical results
+
+-   Locating the model
+
+-   Interpreting the test
+
+-   Determining possible weaknesses of the model
+
+-   Final class activity: [Final class 4.3 activity]
+
+## Online lab 4.1 (due on Friday, December 6 at 11:59:00)
+
+- Your choice of any DataCamp course (as long as it relates to statistics)
+  + Send the completion certificate from the end of the course to the lab manager, Jingyu Wang, on Teams
+
+## Final project - progress check (due Sunday, December 8 at 23:59:00)
+
+-   Homework files: [Final project instructions]
+
+## Final project (due Wednesday, December 10 at 23:59:00)
+
+-   Homework files:  [Final project instructions]

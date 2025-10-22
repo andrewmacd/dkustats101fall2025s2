@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R Manual – DKU Stats 101 - Spring 2025 S3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-35fd0a5f43bb2600a33a7e8521cd9424.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">DKU Stats 101 - Spring 2025 S3</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Course Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./schedulematerials.html"> 
+<span class="menu-text">Schedule and Course Materials</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./rmanual.html" aria-current="page"> 
+<span class="menu-text">R Help Manual</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/andrewmacd/dkustats101fall2025s2"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a>
+  <ul class="collapse">
+  <li><a href="#install-software" id="toc-install-software" class="nav-link" data-scroll-target="#install-software">Install software</a></li>
+  <li><a href="#notes-on-use" id="toc-notes-on-use" class="nav-link" data-scroll-target="#notes-on-use">Notes on use</a></li>
+  <li><a href="#install-packages" id="toc-install-packages" class="nav-link" data-scroll-target="#install-packages">Install packages</a></li>
+  <li><a href="#keyboard-shortcuts-tips" id="toc-keyboard-shortcuts-tips" class="nav-link" data-scroll-target="#keyboard-shortcuts-tips">Keyboard shortcuts &amp; tips</a></li>
+  <li><a href="#basic-functions" id="toc-basic-functions" class="nav-link" data-scroll-target="#basic-functions">Basic functions</a></li>
+  <li><a href="#piping" id="toc-piping" class="nav-link" data-scroll-target="#piping">Piping</a></li>
+  </ul></li>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management">Data Management</a>
+  <ul class="collapse">
+  <li><a href="#importing-datasets" id="toc-importing-datasets" class="nav-link" data-scroll-target="#importing-datasets">Importing datasets</a></li>
+  <li><a href="#removing-datasets" id="toc-removing-datasets" class="nav-link" data-scroll-target="#removing-datasets">Removing datasets</a></li>
+  <li><a href="#rename-a-dataset" id="toc-rename-a-dataset" class="nav-link" data-scroll-target="#rename-a-dataset">Rename a dataset</a></li>
+  <li><a href="#dealing-with-factors" id="toc-dealing-with-factors" class="nav-link" data-scroll-target="#dealing-with-factors">Dealing with factors</a></li>
+  <li><a href="#select-and-subset" id="toc-select-and-subset" class="nav-link" data-scroll-target="#select-and-subset">Select and subset</a>
+  <ul class="collapse">
+  <li><a href="#selecting-columns" id="toc-selecting-columns" class="nav-link" data-scroll-target="#selecting-columns">Selecting columns</a></li>
+  <li><a href="#selecting-rows" id="toc-selecting-rows" class="nav-link" data-scroll-target="#selecting-rows">Selecting rows</a></li>
+  </ul></li>
+  <li><a href="#recoding-variables" id="toc-recoding-variables" class="nav-link" data-scroll-target="#recoding-variables">Recoding variables</a></li>
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values">Missing values</a></li>
+  <li><a href="#helpful-summary-functions" id="toc-helpful-summary-functions" class="nav-link" data-scroll-target="#helpful-summary-functions">Helpful summary functions</a>
+  <ul class="collapse">
+  <li><a href="#summarizing-data" id="toc-summarizing-data" class="nav-link" data-scroll-target="#summarizing-data">Summarizing data</a></li>
+  <li><a href="#finding-normal-distribution-quantile-information" id="toc-finding-normal-distribution-quantile-information" class="nav-link" data-scroll-target="#finding-normal-distribution-quantile-information">Finding normal distribution &amp; quantile information</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#tables-plots" id="toc-tables-plots" class="nav-link" data-scroll-target="#tables-plots">Tables &amp; Plots</a>
+  <ul class="collapse">
+  <li><a href="#frequency-table-and-contingency-table" id="toc-frequency-table-and-contingency-table" class="nav-link" data-scroll-target="#frequency-table-and-contingency-table">Frequency table and contingency table</a></li>
+  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram">Histogram</a></li>
+  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">Boxplot</a></li>
+  <li><a href="#bar-chart" id="toc-bar-chart" class="nav-link" data-scroll-target="#bar-chart">Bar chart</a></li>
+  <li><a href="#qq-plot-in-ggplot" id="toc-qq-plot-in-ggplot" class="nav-link" data-scroll-target="#qq-plot-in-ggplot">QQ Plot in ggplot</a></li>
+  <li><a href="#scatterplot-in-ggplot" id="toc-scatterplot-in-ggplot" class="nav-link" data-scroll-target="#scatterplot-in-ggplot">Scatterplot in ggplot</a></li>
+  <li><a href="#correlation-in-ggcorrplot" id="toc-correlation-in-ggcorrplot" class="nav-link" data-scroll-target="#correlation-in-ggcorrplot">Correlation in ggcorrplot</a></li>
+  <li><a href="#adding-features-to-ggplots" id="toc-adding-features-to-ggplots" class="nav-link" data-scroll-target="#adding-features-to-ggplots">Adding features to ggplots</a>
+  <ul class="collapse">
+  <li><a href="#change-the-colors-and-lines" id="toc-change-the-colors-and-lines" class="nav-link" data-scroll-target="#change-the-colors-and-lines">Change the colors and lines</a></li>
+  <li><a href="#add-labels-and-title" id="toc-add-labels-and-title" class="nav-link" data-scroll-target="#add-labels-and-title">Add labels and title</a></li>
+  <li><a href="#add-lines-to-the-graph" id="toc-add-lines-to-the-graph" class="nav-link" data-scroll-target="#add-lines-to-the-graph">Add lines to the graph</a></li>
+  </ul></li>
+  <li><a href="#arrange-multiple-ggplot-plots" id="toc-arrange-multiple-ggplot-plots" class="nav-link" data-scroll-target="#arrange-multiple-ggplot-plots">Arrange multiple ggplot plots</a></li>
+  </ul></li>
+  <li><a href="#multiple-variable-analysis" id="toc-multiple-variable-analysis" class="nav-link" data-scroll-target="#multiple-variable-analysis">Multiple variable analysis</a>
+  <ul class="collapse">
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
+  <li><a href="#simple-regression" id="toc-simple-regression" class="nav-link" data-scroll-target="#simple-regression">Simple regression</a>
+  <ul class="collapse">
+  <li><a href="#calculating-the-regression-coefficients" id="toc-calculating-the-regression-coefficients" class="nav-link" data-scroll-target="#calculating-the-regression-coefficients">Calculating the regression coefficients</a></li>
+  <li><a href="#graphing-the-residuals" id="toc-graphing-the-residuals" class="nav-link" data-scroll-target="#graphing-the-residuals">Graphing the residuals</a></li>
+  </ul></li>
+  <li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link" data-scroll-target="#multiple-regression">Multiple regression</a>
+  <ul class="collapse">
+  <li><a href="#graphing-partial-residual-plots" id="toc-graphing-partial-residual-plots" class="nav-link" data-scroll-target="#graphing-partial-residual-plots">Graphing partial residual plots</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals">Confidence intervals</a>
+  <ul class="collapse">
+  <li><a href="#confidence-interval-for-proportion" id="toc-confidence-interval-for-proportion" class="nav-link" data-scroll-target="#confidence-interval-for-proportion">Confidence interval for proportion</a>
+  <ul class="collapse">
+  <li><a href="#recode-variable" id="toc-recode-variable" class="nav-link" data-scroll-target="#recode-variable">Recode variable</a></li>
+  <li><a href="#sample-proportion-and-standard-deviation" id="toc-sample-proportion-and-standard-deviation" class="nav-link" data-scroll-target="#sample-proportion-and-standard-deviation">Sample proportion and standard deviation</a></li>
+  <li><a href="#confidence-interval" id="toc-confidence-interval" class="nav-link" data-scroll-target="#confidence-interval">Confidence interval</a></li>
+  </ul></li>
+  <li><a href="#confidence-interval-for-mean" id="toc-confidence-interval-for-mean" class="nav-link" data-scroll-target="#confidence-interval-for-mean">Confidence interval for mean</a></li>
+  </ul></li>
+  <li><a href="#hypothesis-tests" id="toc-hypothesis-tests" class="nav-link" data-scroll-target="#hypothesis-tests">Hypothesis tests</a>
+  <ul class="collapse">
+  <li><a href="#hypothesis-test-for-proportion" id="toc-hypothesis-test-for-proportion" class="nav-link" data-scroll-target="#hypothesis-test-for-proportion">Hypothesis test for proportion</a></li>
+  <li><a href="#hypothesis-test-for-mean" id="toc-hypothesis-test-for-mean" class="nav-link" data-scroll-target="#hypothesis-test-for-mean">Hypothesis test for mean</a></li>
+  <li><a href="#inference-for-difference-between-two-samples" id="toc-inference-for-difference-between-two-samples" class="nav-link" data-scroll-target="#inference-for-difference-between-two-samples">Inference for Difference between Two Samples</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">R Manual</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>credit to Maisie Zhang, the first Stats 101 head tutor, for compiling this guide.</p>
+</blockquote>
+<section id="general" class="level1">
+<h1>General</h1>
+<section id="install-software" class="level2">
+<h2 class="anchored" data-anchor-id="install-software">Install software</h2>
+<p>Note that you must install R <strong>before</strong> RStudio and both programs are required</p>
+<p><a href="https://cran.r-project.org/">R statistical package</a></p>
+<p><a href="https://www.rstudio.com/products/rstudio/download/">R Studio user interface</a></p>
+</section>
+<section id="notes-on-use" class="level2">
+<h2 class="anchored" data-anchor-id="notes-on-use">Notes on use</h2>
+<ul>
+<li>Case: does differentiate between uppercase and lowercase</li>
+<li>Variable name: consists of letters, numbers and the dot or underline characters, and starts with a letter or the dot not followed by a number</li>
+<li>Punctuation: only English punctuation is accepted</li>
+<li>Pound sign: <code>#</code> leads a comment line</li>
+<li>Dollar sign: <code>$</code> extracts elements by name from a named list and is often used as <code>&lt;data.frame&gt;$&lt;column&gt;</code></li>
+<li>Percent sign: <code>%</code> is not accepted as percentage and percentage needs to be expressed as fraction</li>
+<li>Assignment operator: <code>&lt;-</code> (left arrow) assigns a value to a name
+<ul>
+<li>Example: <code>x &lt;- 2 + 3</code></li>
+</ul></li>
+<li>To R, the result is a vector, even though for simple calculations the vector has only one element</li>
+<li>Pipe operator: <code>%&gt;%</code> indicates that you are passing the result of one function to the next function. Requires the <code>tidyverse</code> package</li>
+</ul>
+</section>
+<section id="install-packages" class="level2">
+<h2 class="anchored" data-anchor-id="install-packages">Install packages</h2>
+<p>R by default comes with many built-in tools however the real power of the program comes from the packages others have written to extend R.</p>
+<p>To install a new package, there are two options:</p>
+<ol type="1">
+<li>Use the command line:</li>
+</ol>
+<pre><code>install.packages ("ggplot2")</code></pre>
+<ol start="2" type="1">
+<li>Use the user interface:</li>
+</ol>
+<ul>
+<li>Click Tools - Install Packages…</li>
+<li>Type ggplot2 in Packages blank</li>
+<li>Click Install</li>
+</ul>
+<p>then, on the command line, type:</p>
+<pre><code>library(ggplot2)</code></pre>
+<blockquote class="blockquote">
+<p>You only need to install a package once. However, each time you restart R, you must load the library again using the <code>library()</code> command</p>
+</blockquote>
+</section>
+<section id="keyboard-shortcuts-tips" class="level2">
+<h2 class="anchored" data-anchor-id="keyboard-shortcuts-tips">Keyboard shortcuts &amp; tips</h2>
+<ul>
+<li>Navigate command history: Up / Down</li>
+<li>Clear console: Ctrl + L</li>
+<li>Change font size: click Tools - Global Options… - Appearance - Editor Font size</li>
+</ul>
+</section>
+<section id="basic-functions" class="level2">
+<h2 class="anchored" data-anchor-id="basic-functions">Basic functions</h2>
+<p>Usually in this class we will be using <code>dpylr</code> package to do most calculations and data manipulation. But in some cases you may find it faster to use the base R functions.</p>
+<p><code>help()</code> : the primary interface to the help systems</p>
+<blockquote class="blockquote">
+<p>example: <code>help(mean)</code></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>A more convenient way is to type just ? and the function name. For example, help(mean) and ?mean work the same</p>
+</blockquote>
+<p><code>c():</code> combines values into a vector or list</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2</code></pre>
+</div>
+</div>
+<p><code>mean(x, na.rm = FALSE)</code>: arithmetic mean</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20.09062</code></pre>
+</div>
+</div>
+<p><code>sd(x, na.rm = FALSE)</code>: sample standard deviation which uses denominator n-1</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.026948</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Note this function does NOT calculate population SD but the sample SD</p>
+</blockquote>
+<p><code>summary()</code>: for numeric variables, returns minimum, 1st quartile, median, mean, 3rd quartile, and maximum; for categorical variables, returns counts of all categories</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  10.40   15.43   19.20   20.09   22.80   33.90 </code></pre>
+</div>
+</div>
+</section>
+<section id="piping" class="level2">
+<h2 class="anchored" data-anchor-id="piping">Piping</h2>
+<p>The usual way to operate on data in this class is with pipes <code>%&gt;%</code>; a pipe will carry over the result of one calculation to the following calculation. You can create arbitrarily long computation chains that can save you a lot of typing over using the built-in R functions.</p>
+<p>To do some of the calculations in the following sections, you can do instead:</p>
+<p><code>mean(mtcars$mpg)</code> piped version:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mean
+1 20.09062</code></pre>
+</div>
+</div>
+<p>We can combine the <code>mean()</code> and the <code>sd()</code> function in one command like the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mpg), <span class="at">sd =</span> <span class="fu">sd</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mean       sd
+1 20.09062 6.026948</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="data-management" class="level1">
+<h1>Data Management</h1>
+<section id="importing-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="importing-datasets">Importing datasets</h2>
+<p>All datasets in this class are in .csv format (comma separated values). To import a .csv dataset, you need to:</p>
+<ul>
+<li>Click File - Import Dataset - From Text (base)…</li>
+<li>Select the file</li>
+<li>Make sure <code>Heading: Yes</code></li>
+<li><code>na.strings</code>: if the dataset has any missing values, enter the code for missing values</li>
+<li><code>Strings as factors</code>: make sure this is ticked</li>
+</ul>
+<blockquote class="blockquote">
+<p>In R, categorical variables are represented as factors. So be careful here as some string values that are simply ID variables should not be classified as factors. There are a number of R commands that can convert between strings and factors later if you need to clean up your dataset after importing it.</p>
+</blockquote>
+</section>
+<section id="removing-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="removing-datasets">Removing datasets</h2>
+<p><code>rm(mtcars)</code></p>
+<blockquote class="blockquote">
+<p>The datasets we work with in R are not very large so I don’t recommend removing any datasets from memory. Once you delete it, there is no way to recover the dataset.</p>
+</blockquote>
+</section>
+<section id="rename-a-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="rename-a-dataset">Rename a dataset</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mpgcars <span class="ot">&lt;-</span> mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dealing-with-factors" class="level2">
+<h2 class="anchored" data-anchor-id="dealing-with-factors">Dealing with factors</h2>
+<p>R stores categorical variables as a type of variable called a <code>factor</code>. This is different than variables stored as simply text - R will not perform any operations in variables stored simply as text.</p>
+<p>To convert between text and factors, you can use the following commands:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"pear"</span>, <span class="st">"banana"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Will not work properly because the variable is a text variable</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fruits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Length     Class      Mode 
+        3 character character </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The factor command will convert it to a factor so R can interpret the contents</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">factor</span>(fruits))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> apple banana   pear 
+     1      1      1 </code></pre>
+</div>
+</div>
+<p>It is not a commonly used function, but if for some reason you need to convert back to text, you can use <code>as.character()</code> or <code>as.numeric()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">factor</span>(fruits)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Converts a factor back to text. as.numeric() does the same if the factor names are numbers</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(fruits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "apple"  "pear"   "banana"</code></pre>
+</div>
+</div>
+</section>
+<section id="select-and-subset" class="level2">
+<h2 class="anchored" data-anchor-id="select-and-subset">Select and subset</h2>
+<section id="selecting-columns" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-columns">Selecting columns</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg
+Mazda RX4           21.0
+Mazda RX4 Wag       21.0
+Datsun 710          22.8
+Hornet 4 Drive      21.4
+Hornet Sportabout   18.7
+Valiant             18.1
+Duster 360          14.3
+Merc 240D           24.4
+Merc 230            22.8
+Merc 280            19.2
+Merc 280C           17.8
+Merc 450SE          16.4
+Merc 450SL          17.3
+Merc 450SLC         15.2
+Cadillac Fleetwood  10.4
+Lincoln Continental 10.4
+Chrysler Imperial   14.7
+Fiat 128            32.4
+Honda Civic         30.4
+Toyota Corolla      33.9
+Toyota Corona       21.5
+Dodge Challenger    15.5
+AMC Javelin         15.2
+Camaro Z28          13.3
+Pontiac Firebird    19.2
+Fiat X1-9           27.3
+Porsche 914-2       26.0
+Lotus Europa        30.4
+Ford Pantera L      15.8
+Ferrari Dino        19.7
+Maserati Bora       15.0
+Volvo 142E          21.4</code></pre>
+</div>
+</div>
+<p>To select multiple columns you can do:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(mpg, cyl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg cyl
+Mazda RX4           21.0   6
+Mazda RX4 Wag       21.0   6
+Datsun 710          22.8   4
+Hornet 4 Drive      21.4   6
+Hornet Sportabout   18.7   8
+Valiant             18.1   6
+Duster 360          14.3   8
+Merc 240D           24.4   4
+Merc 230            22.8   4
+Merc 280            19.2   6
+Merc 280C           17.8   6
+Merc 450SE          16.4   8
+Merc 450SL          17.3   8
+Merc 450SLC         15.2   8
+Cadillac Fleetwood  10.4   8
+Lincoln Continental 10.4   8
+Chrysler Imperial   14.7   8
+Fiat 128            32.4   4
+Honda Civic         30.4   4
+Toyota Corolla      33.9   4
+Toyota Corona       21.5   4
+Dodge Challenger    15.5   8
+AMC Javelin         15.2   8
+Camaro Z28          13.3   8
+Pontiac Firebird    19.2   8
+Fiat X1-9           27.3   4
+Porsche 914-2       26.0   4
+Lotus Europa        30.4   4
+Ford Pantera L      15.8   8
+Ferrari Dino        19.7   6
+Maserati Bora       15.0   8
+Volvo 142E          21.4   4</code></pre>
+</div>
+</div>
+<p>More details on advanced select commands can be found here:</p>
+<p><a href="https://dplyr.tidyverse.org/reference/select.html">Selecting columns documentation</a></p>
+</section>
+<section id="selecting-rows" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-rows">Selecting rows</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Valiant        18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Merc 280       19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C      17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</code></pre>
+</div>
+</div>
+<p>As with the column example, multiple criteria can be used:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">6</span> <span class="sc">&amp;</span> hp<span class="sc">==</span><span class="dv">110</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4      21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag  21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</code></pre>
+</div>
+</div>
+<p>More details on advanced filter commands can be found here:</p>
+<p><a href="https://dplyr.tidyverse.org/reference/filter.html">Filtering rows documentation</a></p>
+</section>
+</section>
+<section id="recoding-variables" class="level2">
+<h2 class="anchored" data-anchor-id="recoding-variables">Recoding variables</h2>
+<p>The main <code>dplyr</code> verb for recoding a variable is <code>mutate</code>. With <code>mutate</code>, you can either simply rescale a variable or do more complex transformations, such as the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Weight is defined as 1000s of pounds; a ton is 2000 pounds</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tons =</span> (wt <span class="sc">/</span> <span class="dv">2000</span>) <span class="sc">*</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A more complex transformation using the helper function <code>case_when</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note we need to convert the strings to a factor after the case_when call</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cartype =</span> <span class="fu">case_when</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    tons <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"light"</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    tons <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> tons <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"medium"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    tons <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"heavy"</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cartype =</span> <span class="fu">factor</span>(cartype))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>More details on advanced <code>mutate</code> commands can be found here:</p>
+<p><a href="https://dplyr.tidyverse.org/reference/mutate.html">Mutate documentation</a></p>
+<p>More details on advanced <code>case_when</code> commands can be found here:</p>
+<p><a href="https://dplyr.tidyverse.org/reference/case_when.html">Case when documentation</a></p>
+</section>
+<section id="missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="missing-values">Missing values</h2>
+<p>Many datasets have missing values (for a variety of reasons). It is always important to check if your dataset has any missing values (in R, these are stored by default as <code>NA</code>).</p>
+<p>To check the total number of missing values, we can use the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mtcars.missing <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the first observation missing</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>mtcars.missing[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span> (mtcars.missing))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    mpg     cyl    disp      hp    drat      wt    qsec      vs      am    gear 
+      1       0       0       0       0       0       0       0       0       0 
+   carb    tons cartype 
+      0       0       0 </code></pre>
+</div>
+</div>
+<p>Most functions in R have a flag to remove missing values. If there is a missing value, the function will return an error if the flag is not set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mtcars.missing<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mtcars.missing<span class="sc">$</span>mpg, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20.06129</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Sometimes cases with missing values suggest that certain types of observations are not stored properly. It is always important to check if there are any patterns in the observations with missing values before removal.</p>
+</blockquote>
+</section>
+<section id="helpful-summary-functions" class="level2">
+<h2 class="anchored" data-anchor-id="helpful-summary-functions">Helpful summary functions</h2>
+<section id="summarizing-data" class="level3">
+<h3 class="anchored" data-anchor-id="summarizing-data">Summarizing data</h3>
+<p>The simpliest way to summarize data is the <code>summary()</code> command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  10.40   15.43   19.20   20.09   22.80   33.90 </code></pre>
+</div>
+</div>
+<p>To develop more complex summary statistics, you can use longer piped structures from <code>dplyr</code> as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(wt), <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+    cyl  mean     n
+  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1     4  2.29    11
+2     6  3.12     7
+3     8  4.00    14</code></pre>
+</div>
+</div>
+<p>To view more samples of the <code>summarize()</code> function, see here:</p>
+<p><a href="https://dplyr.tidyverse.org/reference/summarise.html">Summarize documetation</a></p>
+</section>
+<section id="finding-normal-distribution-quantile-information" class="level3">
+<h3 class="anchored" data-anchor-id="finding-normal-distribution-quantile-information">Finding normal distribution &amp; quantile information</h3>
+<p>If you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the amount of area under the normal curve cumulative up to +2 sd from the mean </span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9772499</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># At how many standard deviations away from the mean is 97.5% of the area under the normal curve</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.959964</code></pre>
+</div>
+</div>
+<p>If you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the <code>quantile()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate a uniform distribution</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>dist<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">1000</span>, <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">1</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># theoretically, the quantile should match the probability for a uniform distribution</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(dist, <span class="at">probs=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     50% 
+0.506135 </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="tables-plots" class="level1">
+<h1>Tables &amp; Plots</h1>
+<section id="frequency-table-and-contingency-table" class="level2">
+<h2 class="anchored" data-anchor-id="frequency-table-and-contingency-table">Frequency table and contingency table</h2>
+<p>Creating a frequency table is quite easy in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mtcars<span class="sc">$</span>cyl, mtcars<span class="sc">$</span>gear)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+     3  4  5
+  4  1  8  2
+  6  2  4  1
+  8 12  0  2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(<span class="fu">table</span>(mtcars<span class="sc">$</span>cyl, mtcars<span class="sc">$</span>gear))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     
+       3  4  5 Sum
+  4    1  8  2  11
+  6    2  4  1   7
+  8   12  0  2  14
+  Sum 15 12  5  32</code></pre>
+</div>
+</div>
+<p>So is making a contingency table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(mtcars<span class="sc">$</span>cyl, mtcars<span class="sc">$</span>gear))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+          3       4       5
+  4 0.03125 0.25000 0.06250
+  6 0.06250 0.12500 0.03125
+  8 0.37500 0.00000 0.06250</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(mtcars<span class="sc">$</span>cyl, mtcars<span class="sc">$</span>gear)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     
+            3       4       5     Sum
+  4   0.03125 0.25000 0.06250 0.34375
+  6   0.06250 0.12500 0.03125 0.21875
+  8   0.37500 0.00000 0.06250 0.43750
+  Sum 0.46875 0.37500 0.15625 1.00000</code></pre>
+</div>
+</div>
+<p>Changing the method of calculating the margins can be done with the <code>margin</code> option.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(mtcars<span class="sc">$</span>cyl, mtcars<span class="sc">$</span>gear), <span class="at">margin=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+             3          4          5
+  4 0.09090909 0.72727273 0.18181818
+  6 0.28571429 0.57142857 0.14285714
+  8 0.85714286 0.00000000 0.14285714</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(mtcars<span class="sc">$</span>cyl, mtcars<span class="sc">$</span>gear), <span class="at">margin=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+             3          4          5
+  4 0.06666667 0.66666667 0.40000000
+  6 0.13333333 0.33333333 0.20000000
+  8 0.80000000 0.00000000 0.40000000</code></pre>
+</div>
+</div>
+</section>
+<section id="histogram" class="level2">
+<h2 class="anchored" data-anchor-id="histogram">Histogram</h2>
+<p>Histograms are quite easy using <code>ggplot</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x=</span>wt)) <span class="sc">+</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/hist.1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Details on how to modify the graphical parameters of <code>geom_histogram()</code> can be found here:</p>
+<p><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">Histogram documetation</a></p>
+<blockquote class="blockquote">
+<p>Remember, histograms should only be use for quantitative data. Even if a categorical variable is numeric (cylinders, for example), you should represent that variable with a bar chart.</p>
+</blockquote>
+</section>
+<section id="boxplot" class="level2">
+<h2 class="anchored" data-anchor-id="boxplot">Boxplot</h2>
+<p>Boxplots are useful if you want to compare the distribution of a variable across several different categories. For example, boxplots are a good way to compare the distribution of car weight by number of cylinders in a car.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(cyl), <span class="at">y=</span>wt)) <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/boxplot.1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>The grouping variable <code>x</code> must be categorical in the box plot call</p>
+</blockquote>
+<p>Details on how to modify the graphical parameters of <code>geom_boxplot()</code> can be found here:</p>
+<p><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">Boxplot documetation</a></p>
+</section>
+<section id="bar-chart" class="level2">
+<h2 class="anchored" data-anchor-id="bar-chart">Bar chart</h2>
+<p>Bar charts are the best way to display the distribution of categorical variables. Since we generally don’t assign importance to the order or distance between categories, we can only simply show the count of each category independently.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/barchart.1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Details on how to modify the graphical parameters of <code>geom_bar()</code> can be found here:</p>
+<p><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">Bar chart documetation</a></p>
+</section>
+<section id="qq-plot-in-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="qq-plot-in-ggplot">QQ Plot in ggplot</h2>
+<p>QQ plots are useful to determine if a distribution is normal shaped. While we won’t discuss it in this class, it may be helpful for certain projects you work on. Similar to other singe variable ggplots, you can create one as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">sample=</span>wt)) <span class="sc">+</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/qqplot.1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Information on how to interpret these plots can be found in Chapter 5 of the textbok.</p>
+<p>Details on how to modify the graphical parameters of <code>geom_qq()</code> can be found here:</p>
+<p><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">QQ plot documetation</a></p>
+</section>
+<section id="scatterplot-in-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplot-in-ggplot">Scatterplot in ggplot</h2>
+<p>Scatterplots are the most common way to display a two-variable relationship and are one of the most common graphical displays.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x=</span>wt, <span class="at">y=</span>mpg)) <span class="sc">+</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/scatterplot.1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Remember that your response variable should always be on the y axis on a scatterplot</p>
+</blockquote>
+<p>It is relatively common to add a line of best fit into a scatterplot to summarize the relationship between the two variables. You can do so by using the <code>geom_smooth()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x=</span>wt, <span class="at">y=</span>mpg)) <span class="sc">+</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/scatterplot.2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There are a number of different options for how to choose a best fit line, remember to select the one that you think best represents the relationship between the two variables.</p>
+<p>Details on how to modify the graphical parameters of <code>geom_point()</code> and <code>geom_smooth()</code> can be found here:</p>
+<p><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">Scatterplot documetation</a></p>
+<p><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">Smoother documetation</a></p>
+</section>
+<section id="correlation-in-ggcorrplot" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-in-ggcorrplot">Correlation in ggcorrplot</h2>
+<p>One helpful graphical display to quickly summarize the relationship between many variables is a correlation plot. It displays the correlation between the variables you specify in your dataset. First, you need to work out which variables you want to include in the correlation matrix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>mtcars.subset <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(mpg, cyl, wt, disp))</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># use = complete.obs here in case of missing values</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>mtcars.cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(mtcars.subset, <span class="at">use=</span><span class="st">"complete.obs"</span>)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>mtcars.cor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            mpg        cyl         wt       disp
+mpg   1.0000000 -0.8521620 -0.8676594 -0.8475514
+cyl  -0.8521620  1.0000000  0.7824958  0.9020329
+wt   -0.8676594  0.7824958  1.0000000  0.8879799
+disp -0.8475514  0.9020329  0.8879799  1.0000000</code></pre>
+</div>
+</div>
+<p>Then simply use the <code>ggcorrplot()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(mtcars.cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/corplot.2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Details on how to modify the graphical parameters of <code>ggcorrplot()</code> can be found here:</p>
+<p><a href="https://cran.r-project.org/web/packages/ggcorrplot/readme/README.html">ggcorrplot documetation</a></p>
+</section>
+<section id="adding-features-to-ggplots" class="level2">
+<h2 class="anchored" data-anchor-id="adding-features-to-ggplots">Adding features to ggplots</h2>
+<p>You can modify ggplots to add many different features. Below is a short list of basic things you can add but this is not by far a complete list.</p>
+<section id="change-the-colors-and-lines" class="level3">
+<h3 class="anchored" data-anchor-id="change-the-colors-and-lines">Change the colors and lines</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span> (mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt)) <span class="sc">+</span> </span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"#FF6666"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/graph.features.1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="add-labels-and-title" class="level3">
+<h3 class="anchored" data-anchor-id="add-labels-and-title">Add labels and title</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span> (<span class="at">x =</span> wt)) <span class="sc">+</span> </span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Weight"</span>) <span class="sc">+</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span> (<span class="st">"Count"</span>) <span class="sc">+</span> </span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Weight of Cars in the MPG Dataset"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/graph.features.2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="add-lines-to-the-graph" class="level3">
+<h3 class="anchored" data-anchor-id="add-lines-to-the-graph">Add lines to the graph</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt)) <span class="sc">+</span> </span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span> () <span class="sc">+</span> </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(wt))) <span class="sc">+</span> </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/graph.features.3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="arrange-multiple-ggplot-plots" class="level2">
+<h2 class="anchored" data-anchor-id="arrange-multiple-ggplot-plots">Arrange multiple ggplot plots</h2>
+<p>Often it can be helpful to combine many plots of the same time (histograms, for example) into one larger plot. To do this, you will need to install the <code>gridExtra</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt)) <span class="sc">+</span> </span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span> ()</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> hp)) <span class="sc">+</span> </span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span> ()</span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/graph.arrange.1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Details on how to modify the graphical parameters of <code>grid.arrange()</code> can be found here:</p>
+<p><a href="https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html">gridExtra documentation</a></p>
+</section>
+</section>
+<section id="multiple-variable-analysis" class="level1">
+<h1>Multiple variable analysis</h1>
+<section id="correlation" class="level2">
+<h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
+<p>The default <code>dplyr</code> method of calculating a correlation can only do a two variable comparison.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">cor</span>(wt, mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  cor(wt, mpg)
+1   -0.8676594</code></pre>
+</div>
+</div>
+<p>To calculate the correlation between many variables, we can use the advanced package <code>corrr</code> as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrr)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(mpg, disp, wt)) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  term     mpg   disp     wt
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 mpg   NA     -0.848 -0.868
+2 disp  -0.848 NA      0.888
+3 wt    -0.868  0.888 NA    </code></pre>
+</div>
+</div>
+<p>The <code>corrr</code> package has many advanced features and graphical capabilities if you need to calculate something more specific than the correlation matrix of the dataset.</p>
+<p>Details on <code>corr()</code> can be found here:</p>
+<p><a href="https://corrr.tidymodels.org/">corrr documentation</a></p>
+</section>
+<section id="simple-regression" class="level2">
+<h2 class="anchored" data-anchor-id="simple-regression">Simple regression</h2>
+<section id="calculating-the-regression-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-the-regression-coefficients">Calculating the regression coefficients</h3>
+<p>The standard way to calculate a regression is as follows, with the response variable on the left and the predictor variable on the right:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mtcars, mpg <span class="sc">~</span> wt)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ wt, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.5432 -2.3647 -0.1252  1.4096  6.8727 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.046 on 30 degrees of freedom
+Multiple R-squared:  0.7528,    Adjusted R-squared:  0.7446 
+F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+</div>
+</div>
+<p>There is not a particularly elegant means of calculating regressions using the <code>tidy</code> package, however, it is often useful, particularly when conducting many regressions, to use the <code>broom</code> package to return the regression results in a data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    37.3      1.88      19.9  8.24e-19
+2 wt             -5.34     0.559     -9.56 1.29e-10</code></pre>
+</div>
+</div>
+<p>For more details on <code>tidy()</code>, you can go here:</p>
+<p><a href="https://cran.r-project.org/web/packages/broom/vignettes/broom.html">tidy documentation</a></p>
+</section>
+<section id="graphing-the-residuals" class="level3">
+<h3 class="anchored" data-anchor-id="graphing-the-residuals">Graphing the residuals</h3>
+<p>To graph the residuals, we can use the <code>augment()</code> function from the <code>broom</code> package to add in the residuals into the results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>aug.fit <span class="ot">&lt;-</span> <span class="fu">augment</span>(fit)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>aug.fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 32 × 9
+   .rownames           mpg    wt .fitted .resid   .hat .sigma .cooksd .std.resid
+   &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Mazda RX4          21    2.62    23.3 -2.28  0.0433   3.07 1.33e-2    -0.766 
+ 2 Mazda RX4 Wag      21    2.88    21.9 -0.920 0.0352   3.09 1.72e-3    -0.307 
+ 3 Datsun 710         22.8  2.32    24.9 -2.09  0.0584   3.07 1.54e-2    -0.706 
+ 4 Hornet 4 Drive     21.4  3.22    20.1  1.30  0.0313   3.09 3.02e-3     0.433 
+ 5 Hornet Sportabout  18.7  3.44    18.9 -0.200 0.0329   3.10 7.60e-5    -0.0668
+ 6 Valiant            18.1  3.46    18.8 -0.693 0.0332   3.10 9.21e-4    -0.231 
+ 7 Duster 360         14.3  3.57    18.2 -3.91  0.0354   3.01 3.13e-2    -1.31  
+ 8 Merc 240D          24.4  3.19    20.2  4.16  0.0313   3.00 3.11e-2     1.39  
+ 9 Merc 230           22.8  3.15    20.5  2.35  0.0314   3.07 9.96e-3     0.784 
+10 Merc 280           19.2  3.44    18.9  0.300 0.0329   3.10 1.71e-4     0.100 
+# ℹ 22 more rows</code></pre>
+</div>
+</div>
+<p>And then we can graph the residuals as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aug.fit, <span class="fu">aes</span>(<span class="at">x=</span>.fitted, <span class="at">y=</span>.resid)) <span class="sc">+</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/regression.4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aug.fit, <span class="fu">aes</span>(<span class="at">x=</span>.resid)) <span class="sc">+</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/regression.4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="multiple-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-regression">Multiple regression</h2>
+<p>Multiple regression works similarly to two variable regressions. You can easily construct advanced models (including categorical predictors and interaction terms) using the <code>lm()</code> command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Three variable regression</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mtcars, mpg<span class="sc">~</span>disp<span class="sc">+</span>wt)</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)  35.0      2.16        16.2  4.91e-16
+2 disp         -0.0177   0.00919     -1.93 6.36e- 2
+3 wt           -3.35     1.16        -2.88 7.43e- 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model with a categorical predictor</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mtcars, mpg<span class="sc">~</span>wt<span class="sc">+</span><span class="fu">factor</span>(cyl))</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term         estimate std.error statistic  p.value
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     34.0      1.89      18.0  6.26e-17
+2 wt              -3.21     0.754     -4.25 2.13e- 4
+3 factor(cyl)6    -4.26     1.39      -3.07 4.72e- 3
+4 factor(cyl)8    -6.07     1.65      -3.67 9.99e- 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model with an interaction term</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mtcars, mpg<span class="sc">~</span>wt<span class="sc">+</span><span class="fu">factor</span>(cyl)<span class="sc">+</span><span class="fu">factor</span>(cyl)<span class="sc">*</span>wt)</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mod3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  term            estimate std.error statistic  p.value
+  &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)        39.6       3.19    12.4   2.06e-12
+2 wt                 -5.65      1.36    -4.15  3.13e- 4
+3 factor(cyl)6      -11.2       9.36    -1.19  2.44e- 1
+4 factor(cyl)8      -15.7       4.84    -3.24  3.22e- 3
+5 wt:factor(cyl)6     2.87      3.12     0.920 3.66e- 1
+6 wt:factor(cyl)8     3.45      1.63     2.12  4.34e- 2</code></pre>
+</div>
+</div>
+<section id="graphing-partial-residual-plots" class="level3">
+<h3 class="anchored" data-anchor-id="graphing-partial-residual-plots">Graphing partial residual plots</h3>
+<p>Partial residual plots help graphically display the relationship between a single predictor variable and the response variable after controlling for, or partialling out, the effect of all other predictor variables. If your regression specification meets all of the conditions for linear regression, this plot will illustrate the independent impact of the predictor variable on the response variable.</p>
+<p>There are a few packages that can generate these plots, <code>car</code> being perhaps the best supported.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">crPlots</span>(mod1, <span class="at">terms =</span> <span class="sc">~</span> ., <span class="at">layout =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rmanual_files/figure-html/multi.regression.2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can interpret these graphs as displaying the change in MPG from the mean (listed on the <code>y</code> axis) as <code>displ</code> or <code>wt</code> changes over its range. These are a type of marginal plots - it show the marginal impact of the predictor variable on the response variable after controlling for the impact of all other variables.</p>
+<blockquote class="blockquote">
+<p>Note that in the <code>crPlot()</code> call, the <code>terms</code> function is a one-sided formula that specifies a subset of the predictor variables for which you would like to generate plots. One component-plus-residual plot is drawn for each regressor. The default <code>~ .</code> is to plot all numeric regressors. You can modify this term to subtract terms with the specification <code>terms = ~ . - X3</code>, which would plot against all regressors except for <code>X3</code>, while <code>terms = ~ log(X4)</code> would give the plot for the predictor <code>X4</code> that is represented in the model by <code>log(X4)</code>. If this argument is a quoted name of one of the predictors, the component-plus-residual plot is drawn for that predictor only.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>For the <code>layout</code> option, if set to a value like <code>c(1, 1)</code> or <code>c(4, 3)</code>, the layout of the graph will have this many rows and columns. If not set, the program will select an appropriate layout. If the number of graphs exceed nine, you must select the layout yourself, or you will get a maximum of nine per page.</p>
+</blockquote>
+<p>For more details on <code>crPlots()</code>, you can go here:</p>
+<p><a href="https://search.r-project.org/CRAN/refmans/car/html/crPlots.html">crPlots documentation</a></p>
+</section>
+</section>
+</section>
+<section id="confidence-intervals" class="level1">
+<h1>Confidence intervals</h1>
+<section id="confidence-interval-for-proportion" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval-for-proportion">Confidence interval for proportion</h2>
+<p>To calculate the confidence interval of a proportion, there are often several steps involved. First you will need to possibly recode the variable and select the cases of interest, then obtain two properties of the sample (sample proportion, sample standard deviation) and find the appropriate <span class="math inline">\(z\)</span> score (<span class="math inline">\(z^*\)</span>) needed for your confidence interval.</p>
+<blockquote class="blockquote">
+<p>Remember to check the necessary conditions first!</p>
+</blockquote>
+<section id="recode-variable" class="level3">
+<h3 class="anchored" data-anchor-id="recode-variable">Recode variable</h3>
+<p>It is easiet to work with the variable if successes are marked as 1 and failures maked as 0 in the dataset. You may want to recode your variable to make your calculations easier (see <a href="#recoding-variables">Recoding Variables</a>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">heavy =</span> <span class="fu">case_when</span>(</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>    tons <span class="sc">&lt;</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>    tons <span class="sc">&gt;=</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">1</span> </span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sample-proportion-and-standard-deviation" class="level3">
+<h3 class="anchored" data-anchor-id="sample-proportion-and-standard-deviation">Sample proportion and standard deviation</h3>
+<p>First we need to find the key features of our sample.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>heavy.sum.data <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prop =</span> <span class="fu">mean</span>(heavy),</span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">len =</span> <span class="fu">length</span>(heavy)) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sd =</span> <span class="fu">sqrt</span>(prop<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>prop)<span class="sc">/</span>len))</span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>heavy.sum.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   prop len         sd
+1 0.625  32 0.08558165</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Remember, the formula for sample sd is <span class="math inline">\(\sigma(\hat{p})=\sqrt{\frac{pq}{n}}\)</span></p>
+</blockquote>
+</section>
+<section id="confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval">Confidence interval</h3>
+<p>First we need to calculate the margin of error (MOE). In the below example we are interested in a 95% confidence interval. <code>qnorm(0.975)</code> finds the appropriate value of <span class="math inline">\(z^*\)</span> .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>heavy.sum.data <span class="ot">&lt;-</span> heavy.sum.data <span class="sc">%&gt;%</span> </span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moe =</span> sd <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, we both subtract and add the MOE to the sample proportion to find the confidence interval.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>heavy.sum.data<span class="sc">$</span>prop <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span>heavy.sum.data<span class="sc">$</span>moe, heavy.sum.data<span class="sc">$</span>moe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.457263 0.792737</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="confidence-interval-for-mean" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval-for-mean">Confidence interval for mean</h2>
+<p>The R procedure for mean confidence intervals is very similar to proportions, differing only in the method of calculating the standard deviation, which must be done using the <code>sd()</code> function.</p>
+<blockquote class="blockquote">
+<p>Remember to check the necessary conditions first!</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>mpg.sum.data <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mpg),</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">len =</span> <span class="fu">length</span>(mpg),</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(mpg)) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moe =</span> sd <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>),</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">lower.bound =</span> mean <span class="sc">-</span> moe,</span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">upper.bound =</span> mean <span class="sc">+</span> moe)</span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mpg.sum.data<span class="sc">$</span>lower.bound, mpg.sum.data<span class="sc">$</span>upper.bound)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  8.278024 31.903226</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="hypothesis-tests" class="level1">
+<h1>Hypothesis tests</h1>
+<section id="hypothesis-test-for-proportion" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-test-for-proportion">Hypothesis test for proportion</h2>
+<p>If we are interested in testing whether there are more heavy cars with 6 cylinders compared to the overall proportion of heavy cars, the R code for such a test is relatively straightforward.</p>
+<blockquote class="blockquote">
+<p>Remember to check the necessary conditions first!</p>
+</blockquote>
+<p>First, identify the hypotheses and calculate the sample information.</p>
+<p><span class="math inline">\(H_0: 6cyl.heavy.prop = 0.625\)</span></p>
+<p><span class="math inline">\(H_a: 6cyl.heavy.prop \neq 0.625\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>mean.heavy <span class="ot">&lt;-</span> <span class="fu">mean</span>(mtcars<span class="sc">$</span>heavy)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>hyp.test.prop <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">6</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prop =</span> <span class="fu">mean</span>(heavy),</span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">len =</span> <span class="fu">length</span>(heavy),</span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sqrt</span>(mean.heavy<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>mean.heavy)<span class="sc">/</span>len))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note that the sd is calculated as if the null hypothesis were true; we use the population mean to calculate here.</p>
+</blockquote>
+<p>Next, calculate the <span class="math inline">\(z\)</span> distance between the sample and the population mean.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>z.score <span class="ot">&lt;-</span> (hyp.test.prop<span class="sc">$</span>prop <span class="sc">-</span> mean.heavy)<span class="sc">/</span>hyp.test.prop<span class="sc">$</span>sd</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>z.score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.29277</code></pre>
+</div>
+</div>
+<p>Finally, we find the <span class="math inline">\(p\)</span> value for that difference and compare it to our <span class="math inline">\(\alpha\)</span> value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that our test was specified as two sided, therefore we need to multiply by 2</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>p.value <span class="ot">&lt;-</span> (<span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(z.score)))<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7696979</code></pre>
+</div>
+</div>
+<p>There is a 77% chance that one would observe a difference that large or larger from the sample mean by simple sample variation. In other words, we fail to reject the null hypothesis if our <span class="math inline">\(\alpha\)</span> is 5%.</p>
+</section>
+<section id="hypothesis-test-for-mean" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-test-for-mean">Hypothesis test for mean</h2>
+<p>Hypothesis test for the means are very similar, though in this case we use the sample sd to estimate the population sd.</p>
+<blockquote class="blockquote">
+<p>Remember to check the necessary conditions first!</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>mean.mpg <span class="ot">&lt;-</span> <span class="fu">mean</span>(mtcars<span class="sc">$</span>mpg)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>hyp.test.mean <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">6</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mpg),</span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">len =</span> <span class="fu">length</span>(mpg),</span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(mpg)<span class="sc">/</span><span class="fu">sqrt</span>(len))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Instead of calculating a <span class="math inline">\(z\)</span> score, because of the need to correct for small sample bias, we must use the <span class="math inline">\(t\)</span> distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>t.score <span class="ot">&lt;-</span> (hyp.test.mean<span class="sc">$</span>mean <span class="sc">-</span> mean.mpg) <span class="sc">/</span> hyp.test.mean<span class="sc">$</span>sd</span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>df.test <span class="ot">&lt;-</span> hyp.test.mean<span class="sc">$</span>len <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>p.value <span class="ot">&lt;-</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(t.score), <span class="at">df=</span>df.test)<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5500829</code></pre>
+</div>
+</div>
+<p>There is a 55% chance that one would observe a difference that large or larger from the sample mean by simple sample variation. In other words, we fail to reject the null hypothesis if our <span class="math inline">\(\alpha\)</span> is 5%.</p>
+</section>
+<section id="inference-for-difference-between-two-samples" class="level2">
+<h2 class="anchored" data-anchor-id="inference-for-difference-between-two-samples">Inference for Difference between Two Samples</h2>
+<p>The R code for <span class="math inline">\(t\)</span> tests is very similar to the code for hypothesis testing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>fourcyl <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(mpg),</span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">len=</span><span class="fu">length</span>(mpg),</span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(mpg))</span>
+<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a>eightcyl <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb108-8"><a href="#cb108-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">8</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(mpg),</span>
+<span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">len=</span><span class="fu">length</span>(mpg),</span>
+<span id="cb108-11"><a href="#cb108-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(mpg))</span>
+<span id="cb108-12"><a href="#cb108-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-13"><a href="#cb108-13" aria-hidden="true" tabindex="-1"></a>diff.sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(fourcyl<span class="sc">$</span>sd <span class="sc">^</span> <span class="dv">2</span> <span class="sc">/</span> fourcyl<span class="sc">$</span>len <span class="sc">+</span> eightcyl<span class="sc">$</span>sd <span class="sc">^</span> <span class="dv">2</span> <span class="sc">/</span> eightcyl<span class="sc">$</span>len)</span>
+<span id="cb108-14"><a href="#cb108-14" aria-hidden="true" tabindex="-1"></a>diff.mpg.t  <span class="ot">&lt;-</span> (fourcyl<span class="sc">$</span>mean <span class="sc">-</span> eightcyl<span class="sc">$</span>mean) <span class="sc">/</span> diff.sd</span>
+<span id="cb108-15"><a href="#cb108-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-16"><a href="#cb108-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that the df here is just an approximation; the textbook provides the correct formula.</span></span>
+<span id="cb108-17"><a href="#cb108-17" aria-hidden="true" tabindex="-1"></a><span class="co"># The rule of thumb method from the the textbook recommends using the lowest df of the two samples</span></span>
+<span id="cb108-18"><a href="#cb108-18" aria-hidden="true" tabindex="-1"></a><span class="co"># minus one.</span></span>
+<span id="cb108-19"><a href="#cb108-19" aria-hidden="true" tabindex="-1"></a>diff.mpg.p  <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(diff.mpg.t), <span class="at">df =</span> <span class="fu">min</span>(<span class="fu">c</span>(fourcyl<span class="sc">$</span>len, eightcyl<span class="sc">$</span>len))<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb108-20"><a href="#cb108-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-21"><a href="#cb108-21" aria-hidden="true" tabindex="-1"></a>diff.mpg.p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.847002e-05</code></pre>
+</div>
+</div>
+<p>In other words, the odds that, assuming the two samples have the same sample mean, the odds that we would see a difference between the two sample means this large or larger is effectively zero, therefore we can reject the null hypothesis.</p>
+<p>R does have a built-in method to do this calculation but you should understand how to achieve the same result by direct calcuation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>fourcyl.data <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mpg)</span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>eightcyl.data <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">8</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb110-7"><a href="#cb110-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mpg)</span>
+<span id="cb110-8"><a href="#cb110-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-9"><a href="#cb110-9" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(fourcyl.data<span class="sc">$</span>mpg, eightcyl.data, <span class="at">alternative =</span> <span class="st">"two.sided"</span> , <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  fourcyl.data$mpg and eightcyl.data
+t = 7.5967, df = 14.967, p-value = 1.641e-06
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+  8.318518 14.808755
+sample estimates:
+mean of x mean of y 
+ 26.66364  15.10000 </code></pre>
+</div>
+</div>
+<p>Due to the first method using a rule of thumb method for calculating the degrees of freedom, the result is slightly different but very close to the R function result.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

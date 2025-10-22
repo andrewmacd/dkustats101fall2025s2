@@ -1,0 +1,805 @@
+---
+title: "R Manual"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library (ggcorrplot)
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+
+
+data(mtcars)
+```
+
+>credit to Maisie Zhang, the first Stats 101 head tutor, for compiling this guide. 
+
+# General	
+## Install software
+
+Note that you must install R **before** RStudio and both programs are required
+
+[R statistical package](https://cran.r-project.org/)
+
+[R Studio user interface](https://www.rstudio.com/products/rstudio/download/)
+
+## Notes on use
+
+* Case: does differentiate between uppercase and lowercase
+* Variable name: consists of letters, numbers and the dot or underline characters, and starts with a letter or the dot not followed by a number
+* Punctuation: only English punctuation is accepted
+* Pound sign: `#` leads a comment line
+* Dollar sign: `$` extracts elements by name from a named list and is often used as `<data.frame>$<column>`
+* Percent sign: `%` is not accepted as percentage and percentage needs to be expressed as fraction
+* Assignment operator: `<-` (left arrow) assigns a value to a name
+  * Example: `x <- 2 + 3`
+* To R, the result is a vector, even though for simple calculations the vector has only one element
+* Pipe operator: `%>%` indicates that you are passing the result of one function to the next function. Requires the `tidyverse` package 
+
+## Install packages
+
+R by default comes with many built-in tools however the real power of the program comes from the packages others have written to extend R. 
+
+To install a new package, there are two options:
+
+1. Use the command line:
+```
+install.packages ("ggplot2")
+```
+
+2. Use the user interface:
+  * Click Tools - Install Packages...
+  * Type ggplot2  in Packages blank
+  * Click Install
+
+then, on the command line, type:
+
+```
+library(ggplot2)
+```
+
+> You only need to install a package once. However, each time you restart R, you must load the library again using the `library()` command
+
+## Keyboard shortcuts & tips
+
+* Navigate command history: Up / Down
+* Clear console:	Ctrl + L
+* Change font size: click Tools - Global Options... - Appearance - Editor Font size
+
+## Basic functions
+
+Usually in this class we will be using `dpylr` package to do most calculations and data manipulation. But in some cases you may find it faster to use the base R functions.
+
+`help()` : the primary interface to the help systems
+
+> example: `help(mean)`
+
+> A more convenient way is to type just ? and the function name. For example, help(mean) and ?mean work the same
+
+`c():` combines values into a vector or list
+
+```{r basic.function1}
+result <- c(1, 2)
+
+result
+```
+
+`mean(x, na.rm = FALSE)`: arithmetic mean
+
+```{r basic.function.2}
+mean(mtcars$mpg)
+```
+
+`sd(x, na.rm = FALSE)`: sample standard deviation which uses denominator n-1 
+
+```{r basic.function.3}
+sd(mtcars$mpg)
+```
+
+> Note this function does NOT calculate population SD but the sample SD
+
+`summary()`: for numeric variables, returns minimum, 1st quartile, median, mean, 3rd quartile, and maximum; for categorical variables, returns counts of all categories
+
+```{r basic.function.4}
+summary(mtcars$mpg)
+```
+
+## Piping
+
+The usual way to operate on data in this class is with pipes `%>%`; a pipe will carry over the result of one calculation to the following calculation. You can create arbitrarily long computation chains that can save you a lot of typing over using the built-in R functions. 
+
+To do some of the calculations in the following sections, you can do instead:
+
+`mean(mtcars$mpg)` piped version:
+
+```{r piping.1}
+mtcars %>% 
+  summarize(mean = mean(mpg))
+```
+
+We can combine the `mean()` and the `sd()` function in one command like the following:
+
+```{r piping.2}
+mtcars %>% 
+  summarize(mean = mean(mpg), sd = sd(mpg))
+```
+
+# Data Management
+
+## Importing datasets
+
+All datasets in this class are in .csv format (comma separated values). To import a .csv dataset, you need to:
+
+* Click File - Import Dataset - From Text (base)...
+* Select the file
+* Make sure `Heading: Yes`
+* `na.strings`: if the dataset has any missing values, enter the code for missing values 
+* `Strings as factors`: make sure this is ticked
+
+> In R, categorical variables are represented as factors. So be careful here as some string values that are simply ID variables should not be classified as factors. There are a number of R commands that can convert between strings and factors later if you need to clean up your dataset after importing it.
+
+## Removing datasets
+
+`rm(mtcars)`
+
+> The datasets we work with in R are not very large so I don't recommend removing any datasets from memory. Once you delete it, there is no way to recover the dataset.
+
+## Rename a dataset
+
+```{r rename.dataset.1}
+mpgcars <- mtcars
+```
+
+## Dealing with factors
+
+R stores categorical variables as a type of variable called a `factor`. This is different than variables stored as simply text - R will not perform any operations in variables stored simply as text.
+
+To convert between text and factors, you can use the following commands:
+
+```{r factors.1}
+fruits <- c("apple", "pear", "banana")
+
+# Will not work properly because the variable is a text variable
+summary(fruits)
+
+# The factor command will convert it to a factor so R can interpret the contents
+summary(factor(fruits))
+```
+
+It is not a commonly used function, but if for some reason you need to convert back to text, you can use `as.character()` or `as.numeric()`
+
+```{r factors.2}
+fruits <- factor(fruits)
+
+# Converts a factor back to text. as.numeric() does the same if the factor names are numbers
+as.character(fruits)
+```
+
+## Select and subset
+
+### Selecting columns
+
+```{r find.data.1}
+mtcars %>% 
+  select(mpg)
+```
+
+To select multiple columns you can do:
+
+```{r find.data.2}
+mtcars %>% 
+  select(c(mpg, cyl))
+```
+
+More details on advanced select commands can be found here:
+
+[Selecting columns documentation](https://dplyr.tidyverse.org/reference/select.html)
+
+### Selecting rows
+
+```{r find.data.3}
+mtcars %>% 
+  filter(cyl==6)
+```
+
+As with the column example, multiple criteria can be used:
+
+```{r find.data.4}
+mtcars %>% 
+  filter(cyl==6 & hp==110)
+```
+
+More details on advanced filter commands can be found here:
+
+[Filtering rows documentation](https://dplyr.tidyverse.org/reference/filter.html)
+
+## Recoding variables
+
+The main `dplyr` verb for recoding a variable is `mutate`. With `mutate`, you can either simply rescale a variable or do more complex transformations, such as the following:
+
+```{r recode.1}
+# Weight is defined as 1000s of pounds; a ton is 2000 pounds
+mtcars <- mtcars %>% 
+  mutate(tons = (wt / 2000) * 1000)
+```
+
+A more complex transformation using the helper function `case_when`:
+
+```{r recode.2}
+# Note we need to convert the strings to a factor after the case_when call
+mtcars <- mtcars %>% 
+  mutate(cartype = case_when(
+    tons < 1 ~ "light",
+    tons >= 1 & tons < 2 ~ "medium",
+    tons > 2 ~ "heavy"
+  )) %>% 
+  mutate(cartype = factor(cartype))
+```
+
+More details on advanced `mutate` commands can be found here:
+
+[Mutate documentation](https://dplyr.tidyverse.org/reference/mutate.html)
+
+More details on advanced `case_when` commands can be found here:
+
+[Case when documentation](https://dplyr.tidyverse.org/reference/case_when.html)
+
+## Missing values
+
+Many datasets have missing values (for a variety of reasons). It is always important to check if your dataset has any missing values (in R, these are stored by default as `NA`).
+
+To check the total number of missing values, we can use the following:
+
+```{r missing.data.1}
+mtcars.missing <- mtcars
+
+# Make the first observation missing
+mtcars.missing[1,1] <- NA
+
+colSums(is.na (mtcars.missing))
+```
+
+Most functions in R have a flag to remove missing values. If there is a missing value, the function will return an error if the flag is not set.
+
+```{r missing.data.2}
+mean(mtcars.missing$mpg)
+
+mean(mtcars.missing$mpg, na.rm=TRUE)
+```
+
+> Sometimes cases with missing values suggest that certain types of observations are not stored properly. It is always important to check if there are any patterns in the observations with missing values before removal.
+
+## Helpful summary functions
+
+### Summarizing data
+
+The simpliest way to summarize data is the `summary()` command.
+
+```{r summary.1}
+summary(mtcars$mpg)
+```
+
+To develop more complex summary statistics, you can use longer piped structures from `dplyr` as follows:
+
+```{r summary.2}
+mtcars %>%
+  group_by(cyl) %>%
+  summarise(mean = mean(wt), n = n())
+```
+
+To view more samples of the `summarize()` function, see here:
+
+[Summarize documetation](https://dplyr.tidyverse.org/reference/summarise.html)
+
+### Finding normal distribution & quantile information
+
+If you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.
+
+```{r summary.3}
+# What is the amount of area under the normal curve cumulative up to +2 sd from the mean 
+pnorm(2, mean=0, sd=1)
+
+# At how many standard deviations away from the mean is 97.5% of the area under the normal curve
+qnorm(0.975, mean=0, sd=1)
+```
+
+If you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the `quantile()` function.
+
+```{r summary.4}
+# generate a uniform distribution
+dist<-runif(1000, min=0, max=1)
+
+# theoretically, the quantile should match the probability for a uniform distribution
+quantile(dist, probs=0.5)
+```
+
+# Tables & Plots
+
+## Frequency table and contingency table
+
+Creating a frequency table is quite easy in R.
+
+```{r tables.1}
+table(mtcars$cyl, mtcars$gear)
+
+addmargins(table(mtcars$cyl, mtcars$gear))
+```
+
+So is making a contingency table.
+
+```{r tables.2}
+prop.table(table(mtcars$cyl, mtcars$gear))
+
+addmargins(prop.table(table(mtcars$cyl, mtcars$gear)))
+```
+
+Changing the method of calculating the margins can be done  with the `margin` option. 
+
+```{r tables.3}
+prop.table(table(mtcars$cyl, mtcars$gear), margin=1)
+
+prop.table(table(mtcars$cyl, mtcars$gear), margin=2)
+```
+
+## Histogram
+
+Histograms are quite easy using `ggplot`.
+
+```{r hist.1}
+ggplot(mtcars, aes(x=wt)) +
+  geom_histogram()
+```
+
+Details on how to modify the graphical parameters of `geom_histogram()` can be found here:
+
+[Histogram documetation](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
+
+> Remember, histograms should only be use for quantitative data. Even if a categorical variable is numeric (cylinders, for example), you should represent that variable with a bar chart.
+
+## Boxplot
+
+Boxplots are useful if you want to compare the distribution of a variable across several different categories. For example, boxplots are a good way to compare the distribution of car weight by number of cylinders in a car. 
+
+```{r boxplot.1}
+ggplot(mtcars, aes(x=factor(cyl), y=wt)) +
+  geom_boxplot()
+```
+
+> The grouping variable `x` must be categorical in the box plot call
+
+Details on how to modify the graphical parameters of `geom_boxplot()` can be found here:
+
+[Boxplot documetation](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)
+
+## Bar chart
+
+Bar charts are the best way to display the distribution of categorical variables. Since we generally don't assign importance to the order or distance between categories, we can only simply show the count of each category independently.
+
+```{r barchart.1}
+ggplot(mtcars, aes(x=factor(cyl))) +
+  geom_bar()
+```
+
+Details on how to modify the graphical parameters of `geom_bar()` can be found here:
+
+[Bar chart documetation](https://ggplot2.tidyverse.org/reference/geom_bar.html)
+
+## QQ Plot in ggplot
+
+QQ plots are useful to determine if a distribution is normal shaped. While we won't discuss it in this class, it may be helpful for certain projects you work on. Similar to other singe variable ggplots, you can create one as follows:
+
+```{r qqplot.1}
+ggplot(mtcars, aes(sample=wt)) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+Information on how to interpret these plots can be found in Chapter 5 of the textbok.
+
+Details on how to modify the graphical parameters of `geom_qq()` can be found here:
+
+[QQ plot documetation](https://ggplot2.tidyverse.org/reference/geom_qq.html)
+
+## Scatterplot in ggplot
+
+Scatterplots are the most common way to display a two-variable relationship and are one of the most common graphical displays. 
+
+```{r scatterplot.1}
+ggplot(mtcars, aes(x=wt, y=mpg)) +
+  geom_point()
+```
+
+> Remember that your response variable should always be on the y axis on a scatterplot
+
+It is relatively common to add a line of best fit into a scatterplot to summarize the relationship between the two variables. You can do so by using the `geom_smooth()` function.
+
+```{r scatterplot.2}
+ggplot(mtcars, aes(x=wt, y=mpg)) +
+  geom_point() +
+  geom_smooth(method=lm, se=FALSE)
+```
+
+There are a number of different options for how to choose a best fit line, remember to select the one that you think best represents the relationship between the two variables.
+
+Details on how to modify the graphical parameters of `geom_point()` and `geom_smooth()` can be found here:
+
+[Scatterplot documetation](https://ggplot2.tidyverse.org/reference/geom_point.html)
+
+[Smoother documetation](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
+
+## Correlation in ggcorrplot
+
+One helpful graphical display to quickly summarize the relationship between many variables is a correlation plot. It displays the correlation between the variables you specify in your dataset. First, you need to work out which variables you want to include in the correlation matrix.
+
+```{r corplot.1}
+mtcars.subset <- mtcars %>% 
+  select(c(mpg, cyl, wt, disp))
+
+# use = complete.obs here in case of missing values
+mtcars.cor <- cor(mtcars.subset, use="complete.obs")
+
+mtcars.cor
+```
+
+Then simply use the `ggcorrplot()` function.
+
+```{r corplot.2}
+ggcorrplot(mtcars.cor)
+```
+
+Details on how to modify the graphical parameters of `ggcorrplot()` can be found here:
+
+[ggcorrplot documetation](https://cran.r-project.org/web/packages/ggcorrplot/readme/README.html)
+
+## Adding features to ggplots
+
+You can modify ggplots to add many different features. Below is a short list of basic things you can add but this is not by far a complete list.
+
+### Change the colors and lines
+
+```{r graph.features.1}
+ggplot (mtcars, aes(x = wt)) + 
+  geom_histogram(fill = "#FF6666", alpha = 0.8, color = "black", linetype = "dashed", size = 1)
+```
+
+### Add labels and title
+
+```{r graph.features.2}
+ggplot(mtcars, aes (x = wt)) + 
+  geom_histogram() +
+  xlab("Weight") +
+  ylab ("Count") + 
+  ggtitle("Weight of Cars in the MPG Dataset")
+```
+
+### Add lines to the graph
+
+```{r graph.features.3}
+ggplot(mtcars, aes(x = wt)) + 
+  geom_histogram () + 
+  geom_vline(aes(xintercept = mean(wt))) + 
+  geom_hline(aes(yintercept = 3))
+```
+
+## Arrange multiple ggplot plots
+
+Often it can be helpful to combine many plots of the same time (histograms, for example) into one larger plot. To do this, you will need to install the `gridExtra` package.
+
+```{r graph.arrange.1}
+library(gridExtra)
+
+p1 <- ggplot(mtcars, aes(x = wt)) + 
+  geom_histogram ()
+
+p2 <- ggplot(mtcars, aes(x = hp)) + 
+  geom_histogram ()
+
+grid.arrange(p1, p2)
+```
+
+Details on how to modify the graphical parameters of `grid.arrange()` can be found here:
+
+[gridExtra documentation](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html)
+
+# Multiple variable analysis
+
+## Correlation
+
+The default `dplyr` method of calculating a correlation can only do a two variable comparison. 
+
+```{r correlation.1}
+
+
+mtcars %>% 
+  summarize(cor(wt, mpg))
+```
+
+To calculate the correlation between many variables, we can use the advanced package `corrr` as follows:
+
+```{r correlation.2}
+library(corrr)
+
+mtcars %>% 
+  select(c(mpg, disp, wt)) %>% 
+  correlate()
+```
+
+The `corrr` package has many advanced features and graphical capabilities if you need to calculate something more specific than the correlation matrix of the dataset.
+
+Details on `corr()` can be found here:
+
+[corrr documentation](https://corrr.tidymodels.org/)
+
+## Simple regression
+
+### Calculating the regression coefficients
+
+The standard way to calculate a regression is as follows, with the response variable on the left and the predictor variable on the right:
+
+```{r regression.1}
+fit <- lm(data=mtcars, mpg ~ wt)
+
+summary(fit)
+```
+
+There is not a particularly elegant means of calculating regressions using the `tidy` package, however, it is often useful, particularly when conducting many regressions, to use the `broom` package to return the regression results in a data frame.
+
+```{r regression.2}
+library(broom)
+
+tidy(fit)
+```
+
+For more details on `tidy()`, you can go here:
+
+[tidy documentation](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
+
+### Graphing the residuals
+
+To graph the residuals, we can use the `augment()` function from the `broom` package to add in the residuals into the results.
+
+```{r regression.3}
+aug.fit <- augment(fit)
+
+aug.fit
+```
+
+And then we can graph the residuals as follows:
+
+```{r regression.4}
+ggplot(aug.fit, aes(x=.fitted, y=.resid)) +
+  geom_point()
+
+ggplot(aug.fit, aes(x=.resid)) +
+  geom_histogram()
+```
+
+## Multiple regression
+
+Multiple regression works similarly to two variable regressions. You can easily construct advanced models (including categorical predictors and interaction terms) using the `lm()` command:
+
+```{r multi.regression.1}
+# Three variable regression
+mod1 <- lm(data=mtcars, mpg~disp+wt)
+tidy(mod1)
+
+# Model with a categorical predictor
+mod2 <- lm(data=mtcars, mpg~wt+factor(cyl))
+tidy(mod2)
+
+# Model with an interaction term
+mod3 <- lm(data=mtcars, mpg~wt+factor(cyl)+factor(cyl)*wt)
+tidy(mod3)
+```
+
+### Graphing partial residual plots
+
+Partial residual plots help graphically display the relationship between a single predictor variable and the response variable after controlling for, or partialling out, the effect of all other predictor variables. If your regression specification meets all of the conditions for linear regression, this plot will illustrate the independent impact of the predictor variable on the response variable.
+
+There are a few packages that can generate these plots, `car` being perhaps the best supported.
+
+```{r multi.regression.2}
+library(car)
+
+crPlots(mod1, terms = ~ ., layout = NULL)
+```
+
+You can interpret these graphs as displaying the change in MPG from the mean (listed on the `y` axis) as `displ` or `wt` changes over its range. These are a type of marginal plots - it show the marginal impact of the predictor variable on the response variable after controlling for the impact of all other variables.
+
+>Note that in the `crPlot()` call, the `terms` function is a one-sided formula that specifies a subset of the predictor variables for which you would like to generate plots. One component-plus-residual plot is drawn for each regressor. The default `~ .` is to plot all numeric regressors. You can modify this term to subtract terms with the specification `terms = ~ . - X3`, which would plot against all regressors except for `X3`, while `terms = ~ log(X4)` would give the plot for the predictor `X4` that is represented in the model by `log(X4)`. If this argument is a quoted name of one of the predictors, the component-plus-residual plot is drawn for that predictor only.
+
+>For the `layout` option, if set to a value like `c(1, 1)` or `c(4, 3)`, the layout of the graph will have this many rows and columns. If not set, the program will select an appropriate layout. If the number of graphs exceed nine, you must select the layout yourself, or you will get a maximum of nine per page.
+
+For more details on `crPlots()`, you can go here:
+
+[crPlots documentation](https://search.r-project.org/CRAN/refmans/car/html/crPlots.html)
+
+# Confidence intervals
+
+## Confidence interval for proportion
+
+To calculate the confidence interval of a proportion, there are often several steps involved. First you will need to possibly recode the variable and select the cases of interest, then obtain two properties of the sample (sample proportion, sample standard deviation) and find the appropriate $z$ score ($z^*$) needed for your confidence interval.
+
+> Remember to check the necessary conditions first!
+
+### Recode variable
+
+It is easiet to work with the variable if successes are marked as 1 and failures maked as 0 in the dataset. You may want to recode your variable to make your calculations easier (see [Recoding Variables](#recoding-variables))
+
+```{r conf.interval.prop.1}
+mtcars <- mtcars %>% 
+  mutate(heavy = case_when(
+    tons < 1.5 ~ 0,
+    tons >= 1.5 ~ 1 
+  ))
+```
+
+### Sample proportion and standard deviation
+
+First we need to find the key features of our sample. 
+
+```{r conf.interval.prop.2}
+heavy.sum.data <- mtcars %>% 
+  summarize(prop = mean(heavy),
+            len = length(heavy)) %>% 
+  mutate(sd = sqrt(prop*(1-prop)/len))
+
+heavy.sum.data
+```
+
+>Remember, the formula for sample sd is $\sigma(\hat{p})=\sqrt{\frac{pq}{n}}$
+
+### Confidence interval
+
+First we need to calculate the margin of error (MOE). In the below example we are interested in a 95% confidence interval. `qnorm(0.975)` finds the appropriate value of $z^*$ .
+
+```{r conf.interval.prop.3}
+heavy.sum.data <- heavy.sum.data %>% 
+  mutate(moe = sd * qnorm(0.975))
+```
+
+Finally, we both subtract and add the MOE to the sample proportion to find the confidence interval.
+
+```{r conf.interval.prop.4}
+heavy.sum.data$prop + c(-heavy.sum.data$moe, heavy.sum.data$moe)
+```
+
+## Confidence interval for mean
+
+The R procedure for mean confidence intervals is very similar to proportions, differing only in the method of calculating the standard deviation, which must be done using the `sd()` function.
+
+> Remember to check the necessary conditions first!
+
+```{r conf.interval.mean.1}
+mpg.sum.data <- mtcars %>% 
+  summarize(mean = mean(mpg),
+            len = length(mpg),
+            sd = sd(mpg)) %>% 
+  mutate(moe = sd * qnorm(0.975),
+         lower.bound = mean - moe,
+         upper.bound = mean + moe)
+
+c(mpg.sum.data$lower.bound, mpg.sum.data$upper.bound)
+```
+
+# Hypothesis tests
+
+## Hypothesis test for proportion
+
+If we are interested in testing whether there are more heavy cars with 6 cylinders compared to the overall proportion of heavy cars, the R code for such a test is relatively straightforward.
+
+> Remember to check the necessary conditions first!
+
+First, identify the hypotheses and calculate the sample information.
+
+$H_0: 6cyl.heavy.prop = `r mean(mtcars$heavy)`$
+
+$H_a: 6cyl.heavy.prop \neq `r mean(mtcars$heavy)`$
+
+```{r hyp.test.prop.1}
+mean.heavy <- mean(mtcars$heavy)
+
+hyp.test.prop <- mtcars %>% 
+  filter(cyl==6) %>% 
+  summarize(prop = mean(heavy),
+            len = length(heavy),
+            sd = sqrt(mean.heavy*(1-mean.heavy)/len))
+```
+
+> Note that the sd is calculated as if the null hypothesis were true; we use the population mean to calculate here.
+
+Next, calculate the $z$ distance between the sample and the population mean.
+
+```{r hyp.test.prop.2}
+z.score <- (hyp.test.prop$prop - mean.heavy)/hyp.test.prop$sd
+
+z.score
+```
+
+Finally, we find the $p$ value for that difference and compare it to our $\alpha$ value.
+
+```{r hyp.test.prop.3}
+# Note that our test was specified as two sided, therefore we need to multiply by 2
+p.value <- (pnorm(-abs(z.score)))*2
+
+p.value
+```
+
+There is a 77% chance that one would observe a difference that large or larger from the sample mean by simple sample variation. In other words, we fail to reject the null hypothesis if our $\alpha$ is 5%.
+
+## Hypothesis test for mean
+
+Hypothesis test for the means are very similar, though in this case we use the sample sd to estimate the population sd.
+
+> Remember to check the necessary conditions first!
+
+```{r hyp.test.mean.1}
+mean.mpg <- mean(mtcars$mpg)
+
+hyp.test.mean <- mtcars %>% 
+  filter(cyl==6) %>% 
+  summarize(mean = mean(mpg),
+            len = length(mpg),
+            sd = sd(mpg)/sqrt(len))
+```
+
+Instead of calculating a $z$ score, because of the need to correct for small sample bias, we must use the $t$ distribution.
+
+```{r hyp.test.mean.2}
+t.score <- (hyp.test.mean$mean - mean.mpg) / hyp.test.mean$sd
+df.test <- hyp.test.mean$len - 1
+
+p.value <- pt(-abs(t.score), df=df.test)*2
+
+p.value
+```
+
+There is a 55% chance that one would observe a difference that large or larger from the sample mean by simple sample variation. In other words, we fail to reject the null hypothesis if our $\alpha$ is 5%.
+
+## Inference for Difference between Two Samples
+
+The R code for $t$ tests is very similar to the code for hypothesis testing.
+
+```{r t.test.1}
+fourcyl <- mtcars %>% 
+  filter(cyl==4) %>% 
+  summarize(mean=mean(mpg),
+            len=length(mpg),
+            sd=sd(mpg))
+
+eightcyl <- mtcars %>% 
+  filter(cyl==8) %>% 
+  summarize(mean=mean(mpg),
+            len=length(mpg),
+            sd=sd(mpg))
+
+diff.sd <- sqrt(fourcyl$sd ^ 2 / fourcyl$len + eightcyl$sd ^ 2 / eightcyl$len)
+diff.mpg.t  <- (fourcyl$mean - eightcyl$mean) / diff.sd
+
+# Note that the df here is just an approximation; the textbook provides the correct formula.
+# The rule of thumb method from the the textbook recommends using the lowest df of the two samples
+# minus one.
+diff.mpg.p  <- 2 * pt(-abs(diff.mpg.t), df = min(c(fourcyl$len, eightcyl$len))-1)
+
+diff.mpg.p
+```
+
+In other words, the odds that, assuming the two samples have the same sample mean, the odds that we would see a difference between the two sample means this large or larger is effectively zero, therefore we can reject the null hypothesis.
+
+R does have a built-in method to do this calculation but you should understand how to achieve the same result by direct calcuation.
+
+```{r t.test.2}
+fourcyl.data <- mtcars %>% 
+  filter(cyl==4) %>% 
+  select(mpg)
+
+eightcyl.data <- mtcars %>% 
+  filter(cyl==8) %>% 
+  select(mpg)
+
+t.test(fourcyl.data$mpg, eightcyl.data, alternative = "two.sided" , mu = 0, var.equal = FALSE, conf.level = 0.95)
+```
+
+Due to the first method using a rule of thumb method for calculating the degrees of freedom, the result is slightly different but very close to the R function result.
