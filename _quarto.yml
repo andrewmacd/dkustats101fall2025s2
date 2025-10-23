@@ -8,10 +8,10 @@ project:
     - "!labs"
     - "!old.lectures"
   
-name: "dku-stats-101-spr2025s3"
+name: "dku-stats-101-fall2025s2"
 
 website:
-  title: "DKU Stats 101 - Spring 2025 S3"
+  title: "DKU Stats 101 - Fall 2025 S2"
   navbar: 
     left:
       - text: "Course Introduction"
