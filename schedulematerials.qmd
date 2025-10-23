@@ -22,7 +22,7 @@ Topics covered:
 
 ## Lab 1.1: R and Quarto familiarization (Thursday, October 23)
 
--   Lab files: [Lab 1.1]
+-   Lab files: [Lab 1.1](labs/Lab 1.1/Lab 1.1.zip)
 
 ## Online lab 1.1 (due Sunday, October 26 at 11:59:00 pm)
 
