@@ -46,10 +46,6 @@ Topics covered:
 -   Lecture activity: [Lecture 1.2 activity]
     -   Make sure to extract (unzip) the lab files before attempting to modify them!
 
-## Unit 1 homework - progress check (due Wednesday, October 29 at 23:59:00)
-
--   Homework files: [Unit 1 homework instructions]
-
 ## Lecture 1.3: Comparing distributions and the Normal distribution (Thursday, October 30)
 
 Reading to do before class: Chapter 5
@@ -71,13 +67,17 @@ Topics covered:
 -   Lab files: [Lab 1.2]
     -   Make sure to extract (unzip) the lab files before attempting to modify them!
 
+## Unit 1 homework - progress check (due Thursday, October 30 at 23:59:00)
+
+-   Homework files: [Unit 1 homework instructions](homeworks/Unit 1 homework/unit.1.homework.zip)
+
 ## Online lab 1.2 (due on Friday, October 31 at 23:59:00)
 
 -   [Introduction to Data Visualization with ggplot2](https://learn.datacamp.com/courses/introduction-to-data-visualization-with-ggplot2)
 
 ## Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)
 
--   Homework files: [Unit 1 homework]
+-   Homework files: [Unit 1 homework](homeworks/Unit 1 homework/unit.1.homework.zip)
 -   Homework sample solutions: [Unit 1 homework sample solutions]
 
 # Unit 2: Relationships between variables

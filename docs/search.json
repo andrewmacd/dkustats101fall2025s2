@@ -35,13 +35,6 @@
     "text": "Lecture 1.2: Characteristics of distributions (Tuesday, October 28)\nReading to do before class: Chapter 2.3-5 and 4\nTopics covered:\n\nHow to describe the shape, center, and spread of a distribution\nHow to compare distributions\nDealing with problem distributions (outliers, reexpression)\nLecture webpage: [Lecture 1.2]\nLecture activity: [Lecture 1.2 activity]\n\nMake sure to extract (unzip) the lab files before attempting to modify them!"
   },
   {
-    "objectID": "schedulematerials.html#unit-1-homework---progress-check-due-wednesday-october-29-at-235900",
-    "href": "schedulematerials.html#unit-1-homework---progress-check-due-wednesday-october-29-at-235900",
-    "title": "Course Schedule and Class Materials",
-    "section": "Unit 1 homework - progress check (due Wednesday, October 29 at 23:59:00)",
-    "text": "Unit 1 homework - progress check (due Wednesday, October 29 at 23:59:00)\n\nHomework files: [Unit 1 homework instructions]"
-  },
-  {
     "objectID": "schedulematerials.html#lecture-1.3-comparing-distributions-and-the-normal-distribution-thursday-october-30",
     "href": "schedulematerials.html#lecture-1.3-comparing-distributions-and-the-normal-distribution-thursday-october-30",
     "title": "Course Schedule and Class Materials",
@@ -56,6 +49,13 @@
     "text": "Lab 1.2: Advanced Quarto editing (Thursday, October 30)\n\nLab files: [Lab 1.2]\n\nMake sure to extract (unzip) the lab files before attempting to modify them!"
   },
   {
+    "objectID": "schedulematerials.html#unit-1-homework---progress-check-due-thursday-october-30-at-235900",
+    "href": "schedulematerials.html#unit-1-homework---progress-check-due-thursday-october-30-at-235900",
+    "title": "Course Schedule and Class Materials",
+    "section": "Unit 1 homework - progress check (due Thursday, October 30 at 23:59:00)",
+    "text": "Unit 1 homework - progress check (due Thursday, October 30 at 23:59:00)\n\nHomework files: Unit 1 homework instructions"
+  },
+  {
     "objectID": "schedulematerials.html#online-lab-1.2-due-on-friday-october-31-at-235900",
     "href": "schedulematerials.html#online-lab-1.2-due-on-friday-october-31-at-235900",
     "title": "Course Schedule and Class Materials",
@@ -67,7 +67,7 @@
     "href": "schedulematerials.html#unit-1-homework-due-sunday-november-2-at-235900-pm",
     "title": "Course Schedule and Class Materials",
     "section": "Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)",
-    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)\n\nHomework files: [Unit 1 homework]\nHomework sample solutions: [Unit 1 homework sample solutions]"
+    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)\n\nHomework files: Unit 1 homework\nHomework sample solutions: [Unit 1 homework sample solutions]"
   },
   {
     "objectID": "schedulematerials.html#lecture-2.1-association-and-correlation-tuesday-november-4",
@@ -270,7 +270,7 @@
     "href": "homework.html",
     "title": "Homework",
     "section": "",
-    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\n[Unit 1 homework]\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\n[Unit 2 homework]\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
+    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\n[Unit 2 homework]\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
   },
   {
     "objectID": "rmanual.html",
@@ -375,7 +375,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.4861657"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.5074038"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",
