@@ -1,0 +1,116 @@
+---
+title: "Lecture 1.2 - Characteristics of distributions"
+author: "Professor MacDonald"
+date: "10/28/2025"
+engine: knitr
+format: 
+    live-html: 
+      output-file: lecture.1.2.html
+webr:
+  cell-options:
+    autorun: false
+    warning: false
+  packages:
+    - tidyverse
+    - gapminder
+  resources:
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/classheights.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/classroster.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{webr}
+#| label: setup
+#| include: false
+#| autorun: true
+
+theme_set(theme_classic())
+
+classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+heights <- read.csv("classheights.csv", fileEncoding="UTF-8-BOM")
+```
+
+# Characteristics of distributions
+
+## Distribution of common quantities
+
+Many phenomena in nature have a relatively easily guessed distribution characteristics
+
+-   What is the distribution of length of rivers in the U.S.?
+-   What is the distribution of width of flower sepals?
+-   What is the distribution of life expectancy across countries in 2007?
+
+Features to guess:
+
+-   Shape
+-   Center
+-   Spread
+
+```{webr}
+#| label: pick1
+sample(classroster$name, 1)
+```
+
+## Graphs of common quantities
+
+### Length of rivers in the U.S.
+
+```{webr}
+#| label: riverlength
+#| caption: "Graph of river lengths"
+ggplot(data.frame(rivers), aes(x=rivers)) + 
+  geom_histogram(fill="blue4", color="black") +
+  labs(x="Length in miles", y="count")
+```
+
+### Flower sepal width
+
+```{webr}
+#| label: flowerwidth
+#| caption: "Graph of flower sepal widths"
+ggplot(iris, aes(x=Sepal.Width)) + 
+  geom_histogram(fill="blue4", color="black", bins=15) +
+  labs(x="Sepal width", y="Count")
+```
+
+### Life expetancy in 2007
+
+```{webr}
+#| label: lifexpectancy
+#| caption: "Graph of life expectancies"
+gap2007 <-gapminder %>%
+  filter(year==2007)
+
+ggplot(gap2007, aes(x=lifeExp)) + 
+  geom_histogram(fill="blue4", color="black") +
+  labs(x="Life expectancy in years", y="Count")
+```
+
+## Height activity
+
+What do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses.
+
+```{webr}
+#| label: pick2
+sample(classroster$name, 1)
+```
+
+## Height distribution
+
+```{webr}
+#| label: heightdistribution
+#| caption: "Distribution of heights in our class"
+
+ggplot(heights, aes(x=heightincm)) +
+  geom_histogram()
+```
+
+
+## Closing thoughts
+
+-   Many distributions can be guessed in advanced based on the data generating process
+-   You should have at least a guess as to what the distribution is before starting your exploratory data analysis
+-   Think carefully about what your variable is actually measuring
+-   Characteristics of distributions are **summaries** of the data, almost always obscure features of the data
+-   Don't mislead your readers!!

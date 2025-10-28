@@ -41,7 +41,7 @@ Topics covered:
 
 -   Dealing with problem distributions (outliers, reexpression)
 
--   Lecture webpage: [Lecture 1.2]
+-   Lecture webpage: [Lecture 1.2](lectures/lecture.1.2.html)
 
 -   Lecture activity: [Lecture 1.2 activity]
     -   Make sure to extract (unzip) the lab files before attempting to modify them!
