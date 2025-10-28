@@ -1,6 +1,6 @@
 ---
 title: "Lecture 1.2 - Characteristics of distributions activity"
-subtitle: "DKU Stats 101 Spring 2025"
+subtitle: "DKU Stats 101 Fall 2025 Session 2"
 author: "Professor MacDonald"
 date: "10/28/2025"
 format: 
