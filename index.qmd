@@ -68,7 +68,7 @@ Because of the pandemic situation this term, the course structure is going to be
 
 # How to prepare
 
-We will be using three different online tools for this class, you will need to sign up for two of these tools. Our main class hub will be on Canvas, where I will provide appropriate links for when you need to use the other tools.
+We will be using two different online tools for this class, you will need to sign up for one of these tools. Our main class hub will be Teams, where I will provide appropriate links for when you need to use the other tools.
 
 1.  [R and RStudio](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu): These software packages that implement the R statistical programming language are free and very popular tools for conducting statistical investigations, including all of the homeworks for this class.
     -   [Quarto](https://quarto.org/docs/computations/r.html): Quarto is a flexible document formatting standard that allows you to create nice looking documents that easily mix text and R code output (I made this website with Quarto - you can view the code [here](https://github.com/andrewmacd/dkustats101fall2024)). All your homeworks, midterm, and final projects will be written inside of Quarto documents. Instructions on how to use the Quarto syntax will be provided with the first homework assignment.
@@ -119,9 +119,9 @@ Since the course moves very quickly, if you are submitting work late that means 
 ## Contact Policy
 
 1.  I usually try to reply to emails on the same day (though not in the evenings), however responses may be slower on the weekend
-2.  Do not email me 2 hours before a homework is due and expect an immediate response!
-3.  For general questions, such as how should one interpret a question on a homework or quiz, you should ask the question in the Discussion section of the Canvas website. That way others can benefit from the response or someone else may be able to answer more quickly than I can. If you email me a question that really belongs in the help channel I will ask you to repost it.
-4.  Many questions can be answered by carefully checking the class website or reviewing the materials in on Canvas. If in doubt, though, feel free to ask.
+2.  Do not message me 2 hours before a homework is due and expect an immediate response!
+3.  For general questions, such as how should one interpret a question on a homework or quiz, you should ask the question in the Discussion section of the Teams site. That way others can benefit from the response or someone else may be able to answer more quickly than I can. If you email me a question that really belongs in the help channel I will ask you to repost it.
+4.  Many questions can be answered by carefully checking the class website or reviewing the materials in on Teams. If in doubt, though, feel free to ask.
 
 ## ChatGPT (and similar) Policy
 
