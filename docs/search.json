@@ -39,7 +39,7 @@
     "href": "schedulematerials.html#lecture-1.3-comparing-distributions-and-the-normal-distribution-thursday-october-30",
     "title": "Course Schedule and Class Materials",
     "section": "Lecture 1.3: Comparing distributions and the Normal distribution (Thursday, October 30)",
-    "text": "Lecture 1.3: Comparing distributions and the Normal distribution (Thursday, October 30)\nReading to do before class: Chapter 5\nTopics covered:\n\nStandard deviation and standardizing values\nNormal models\nNormal percentiles\nLecture webpage: [Lecture 1.3]\nLecture activity: Lecture 1.3 activity"
+    "text": "Lecture 1.3: Comparing distributions and the Normal distribution (Thursday, October 30)\nReading to do before class: Chapter 5\nTopics covered:\n\nStandard deviation and standardizing values\nNormal models\nNormal percentiles\nLecture webpage: Lecture 1.3\nLecture activity: Lecture 1.3 activity"
   },
   {
     "objectID": "schedulematerials.html#lab-1.2-advanced-quarto-editing-thursday-october-30",
@@ -217,46 +217,74 @@
     "text": "Final project (due Wednesday, December 10 at 23:59:00)\n\nHomework files: [Final project instructions]"
   },
   {
-    "objectID": "lectures/lecture.1.2.html#distribution-of-common-quantities",
-    "href": "lectures/lecture.1.2.html#distribution-of-common-quantities",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Distribution of common quantities",
-    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread"
+    "objectID": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
+    "href": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Thoughts about comparing groups",
+    "text": "Thoughts about comparing groups\n\nFaceted histograms are a reasonable display to show distributions by a categorical variable\n\nHowever these displays become hard to interpret when the number of levels in a category grows large\n\nMuch easier to interpret is side by side box plots\nBox plots capture many important characteristics of a distribution into a summary display\nThink carefully about how you treat outliers\nLet’s view data from the 2023-2024 NBA season"
   },
   {
-    "objectID": "lectures/lecture.1.2.html#graphs-of-common-quantities",
-    "href": "lectures/lecture.1.2.html#graphs-of-common-quantities",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Graphs of common quantities",
-    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n\n\n\n\n\n\n\n\n\nFlower sepal width\n\n\n\n\n\n\n\n\n\n\nLife expetancy in 2007"
+    "objectID": "lectures/lecture.1.3.html#two-group-comparison",
+    "href": "lectures/lecture.1.3.html#two-group-comparison",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Two group comparison",
+    "text": "Two group comparison\n\nNBA side-by-side histograms of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L (better)"
   },
   {
-    "objectID": "lectures/lecture.1.2.html#height-activity",
-    "href": "lectures/lecture.1.2.html#height-activity",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Height activity",
-    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses."
+    "objectID": "lectures/lecture.1.3.html#many-group-comparison",
+    "href": "lectures/lecture.1.3.html#many-group-comparison",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Many group comparison",
+    "text": "Many group comparison\n\nNBA side-by-side histograms of points scored by team\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by team (better)\n\n\n\n\n\n\n\n\n\n\nYour turn\n\nWork with your neighbor to analyze a different set of statistics\n\nCan be by division or not\nRemember the key features of distributions\n\nShape\nCenter\nSpread\n\n\nInterpret your results"
   },
   {
-    "objectID": "lectures/lecture.1.2.html#height-distribution",
-    "href": "lectures/lecture.1.2.html#height-distribution",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Height distribution",
-    "text": "Height distribution"
+    "objectID": "lectures/lecture.1.3.html#checking-outliers---assists",
+    "href": "lectures/lecture.1.3.html#checking-outliers---assists",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking outliers - assists",
+    "text": "Checking outliers - assists\n\nOutliers - assists\n\n\n\n\n\n\n\n\n\n\nAssists &gt; 40 - true outliers?"
   },
   {
-    "objectID": "lectures/lecture.1.2.html#closing-thoughts",
-    "href": "lectures/lecture.1.2.html#closing-thoughts",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Closing thoughts",
-    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
+    "objectID": "lectures/lecture.1.3.html#checking-outliers---points",
+    "href": "lectures/lecture.1.3.html#checking-outliers---points",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking outliers - points",
+    "text": "Checking outliers - points\n\nOutliers - points\n\n\n\n\n\n\n\n\n\n\nPoints by team &gt; 150 - true outliers?"
   },
   {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\n[Unit 2 homework]\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
+    "objectID": "lectures/lecture.1.3.html#in-summary",
+    "href": "lectures/lecture.1.3.html#in-summary",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "In summary",
+    "text": "In summary\n\nThink about which kind of display is appropriate for comparing distributions\nWhen conditioning on a categorical variable, boxplots are usually better\nBut boxplots lose information\nThink carefully about omitting outliers\nOutliers may reveal important information about your dataset!"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
+    "href": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Titanic passengers and the Normal distribution",
+    "text": "Titanic passengers and the Normal distribution\n\n\n\nTitanic\n\n\n\nDataset of passengers on the Titanic\n\n\n\n\n\n\n\n\n\nWhat are your expectations for how age should be distributed?\n\n\n\n\n\n\n\n\n\n\nWe are going to violate our first three rules:\n\nMake a picture\nMake a picture\nMake a picture\n\n\n\n\nWere the passenger ages normally distributed?\nTo answer that question, we need some information about the distribution\nRemember, our main information about distributions is:\n\nShape\nCenter\nSpread\n\n\n\nInformation about age\n\nStandard deviation: 14.4\nMean: 29.9\nNormal model: \\(N(\\mu, \\sigma) = N(29.9,14.4)\\)\n\n\\(\\mu\\) is the theoretical mean\n\\(\\sigma\\) is the theoretical standard deviation\nThese values define the data generating process\nWe only see some values of the data generating process, but if we saw infinite values, the mean would be \\(\\mu\\) and the sd would be \\(\\sigma\\)\nMore on this in the second half of class\n\nHow can we check normality using this information?"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#checking-normality",
+    "href": "lectures/lecture.1.3.html#checking-normality",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking normality",
+    "text": "Checking normality\n\nThinking about normality\n\nWe can check normality by comparing the quantiles of our data with that of the known quantiles of the normal distribution\n\nWe know approximately 95% of the data lies within two standard deviations\nTherefore, 2.5% data with the lowest values lie outside of -2 standard deviations and 2.5% of data with the highest values lie outside of 2 standard deviations\n\nSimilarly, we know the same information for data within one standard deviation (16%, 68%, 16%)\n\n\n\nData within standard deviations"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#checking-against-the-data",
+    "href": "lectures/lecture.1.3.html#checking-against-the-data",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking against the data",
+    "text": "Checking against the data\n\nHistogram of ages from the data\n\n\n\n\n\n\n\n\n\n\nNormality and scaling\n\nNote that normality does not depend on the size of the standard deviation or the size of the mean\nCould easily change the units to be months instead of years\n\nMean would increase a lot\nStandard deviation would increase a lot\nHowever, amount of observations within each standard deviation would stay the same"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#final-thoughts-on-normality",
+    "href": "lectures/lecture.1.3.html#final-thoughts-on-normality",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Final thoughts on normality",
+    "text": "Final thoughts on normality\n\nWhen is the normal distribution useful?\n\nWhen we know a data-generating process is normally distributed we don’t even need to sample the population\n\nCan find out exactly how much data is between a certain number of standard deviations\n\nWhen we expect a data-generating process to be normally distributed, can test for deviations from normality\n\nIn the case of Titanic passengers, some parts of the distribution were more bunched up, others more spread out\n\nA lot of our statistical techniques require or work better when the data is ‘roughly’ normal\n\nWill detail these in the coming weeks\n\nWe can transform our data to be closer to normal\n\nNote that transformations won’t work if the data has multiple modes, can only correct skew\n\n\n\n\nWhat transformation would be helpful for age?"
   },
   {
     "objectID": "index.html",
@@ -306,6 +334,48 @@
     "title": "Course Introduction",
     "section": "Disabilities Policy",
     "text": "Disabilities Policy\nIf you need an accommodation due to a disability, you should not hesitate to request one. The process is that requests should be sent to the Dean of Undergraduate Studies, who will contact me with recommended type of accommodation that is needed. You do not need to disclose your reason for requesting an accommodation with me, and asking through the Dean of Undergraduate Studies helps make things official for both you and me."
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\n[Unit 2 homework]\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#distribution-of-common-quantities",
+    "href": "lectures/lecture.1.2.html#distribution-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Distribution of common quantities",
+    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#graphs-of-common-quantities",
+    "href": "lectures/lecture.1.2.html#graphs-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Graphs of common quantities",
+    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n\n\n\n\n\n\n\n\n\nFlower sepal width\n\n\n\n\n\n\n\n\n\n\nLife expetancy in 2007"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#height-activity",
+    "href": "lectures/lecture.1.2.html#height-activity",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height activity",
+    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses."
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#height-distribution",
+    "href": "lectures/lecture.1.2.html#height-distribution",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height distribution",
+    "text": "Height distribution"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#closing-thoughts",
+    "href": "lectures/lecture.1.2.html#closing-thoughts",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Closing thoughts",
+    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
   },
   {
     "objectID": "rmanual.html",
@@ -410,7 +480,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.5018501"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n     50% \n0.467227"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",
@@ -530,47 +600,5 @@
     "title": "R Manual",
     "section": "Inference for Difference between Two Samples",
     "text": "Inference for Difference between Two Samples\nThe R code for \\(t\\) tests is very similar to the code for hypothesis testing.\n\nfourcyl &lt;- mtcars %&gt;% \n  filter(cyl==4) %&gt;% \n  summarize(mean=mean(mpg),\n            len=length(mpg),\n            sd=sd(mpg))\n\neightcyl &lt;- mtcars %&gt;% \n  filter(cyl==8) %&gt;% \n  summarize(mean=mean(mpg),\n            len=length(mpg),\n            sd=sd(mpg))\n\ndiff.sd &lt;- sqrt(fourcyl$sd ^ 2 / fourcyl$len + eightcyl$sd ^ 2 / eightcyl$len)\ndiff.mpg.t  &lt;- (fourcyl$mean - eightcyl$mean) / diff.sd\n\n# Note that the df here is just an approximation; the textbook provides the correct formula.\n# The rule of thumb method from the the textbook recommends using the lowest df of the two samples\n# minus one.\ndiff.mpg.p  &lt;- 2 * pt(-abs(diff.mpg.t), df = min(c(fourcyl$len, eightcyl$len))-1)\n\ndiff.mpg.p\n\n[1] 1.847002e-05\n\n\nIn other words, the odds that, assuming the two samples have the same sample mean, the odds that we would see a difference between the two sample means this large or larger is effectively zero, therefore we can reject the null hypothesis.\nR does have a built-in method to do this calculation but you should understand how to achieve the same result by direct calcuation.\n\nfourcyl.data &lt;- mtcars %&gt;% \n  filter(cyl==4) %&gt;% \n  select(mpg)\n\neightcyl.data &lt;- mtcars %&gt;% \n  filter(cyl==8) %&gt;% \n  select(mpg)\n\nt.test(fourcyl.data$mpg, eightcyl.data, alternative = \"two.sided\" , mu = 0, var.equal = FALSE, conf.level = 0.95)\n\n\n    Welch Two Sample t-test\n\ndata:  fourcyl.data$mpg and eightcyl.data\nt = 7.5967, df = 14.967, p-value = 1.641e-06\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n  8.318518 14.808755\nsample estimates:\nmean of x mean of y \n 26.66364  15.10000 \n\n\nDue to the first method using a rule of thumb method for calculating the degrees of freedom, the result is slightly different but very close to the R function result."
-  },
-  {
-    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html",
-    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "",
-    "text": "#| label: setup\n#| include: false\n#| autorun: true\n\ntheme_set(theme_classic())\n\nclassroster &lt;- read.csv(\"classroster.csv\", fileEncoding=\"UTF-8-BOM\")\nheights &lt;- read.csv(\"classheights.csv\", fileEncoding=\"UTF-8-BOM\")"
-  },
-  {
-    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#distribution-of-common-quantities",
-    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#distribution-of-common-quantities",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Distribution of common quantities",
-    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread\n\n\n#| label: pick1\nsample(classroster$name, 1)"
-  },
-  {
-    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#graphs-of-common-quantities",
-    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#graphs-of-common-quantities",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Graphs of common quantities",
-    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n#| label: riverlength\n#| caption: \"Graph of river lengths\"\nggplot(data.frame(rivers), aes(x=rivers)) + \n  geom_histogram(fill=\"blue4\", color=\"black\") +\n  labs(x=\"Length in miles\", y=\"count\")\n\n\n\nFlower sepal width\n\n#| label: flowerwidth\n#| caption: \"Graph of flower sepal widths\"\nggplot(iris, aes(x=Sepal.Width)) + \n  geom_histogram(fill=\"blue4\", color=\"black\", bins=15) +\n  labs(x=\"Sepal width\", y=\"Count\")\n\n\n\nLife expetancy in 2007\n\n#| label: lifexpectancy\n#| caption: \"Graph of life expectancies\"\ngap2007 &lt;-gapminder %&gt;%\n  filter(year==2007)\n\nggplot(gap2007, aes(x=lifeExp)) + \n  geom_histogram(fill=\"blue4\", color=\"black\") +\n  labs(x=\"Life expectancy in years\", y=\"Count\")"
-  },
-  {
-    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-activity",
-    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-activity",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Height activity",
-    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses.\n\n#| label: pick2\nsample(classroster$name, 1)"
-  },
-  {
-    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-distribution",
-    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-distribution",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Height distribution",
-    "text": "Height distribution\n\n#| label: heightdistribution\n#| caption: \"Distribution of heights in our class\"\n\nggplot(heights, aes(x=heightincm)) +\n  geom_histogram()"
-  },
-  {
-    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#closing-thoughts",
-    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#closing-thoughts",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Closing thoughts",
-    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
   }
 ]

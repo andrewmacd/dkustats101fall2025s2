@@ -1,0 +1,391 @@
+---
+title: "Lecture 1.3 - Advanced distributions"
+author: "Professor MacDonald"
+date: "10/30/2025"
+engine: knitr
+format: 
+    live-html: 
+      output-file: lecture.1.3.html
+webr:
+  cell-options:
+    autorun: false
+    warning: false
+  packages:
+    - tidyverse
+    - gridExtra
+    - knitr
+  resources:
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2025s4/main/lectures/datasets/nba2024.2025.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2025s4/main/lectures/datasets/titanic.survival.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2025s4/main/lectures/datasets/classroster.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{webr}
+#| label: setup
+#| include: false
+#| autorun: true
+
+theme_set(theme_classic())
+
+titanic.survival <- read.csv("titanic.survival.csv")
+classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+nbaboxscores <- read.csv("nba2024.2025.csv")
+
+titanic.survival <- titanic.survival %>% 
+  rename(name = v1)
+
+titanic_mean <- mean(titanic.survival$age)
+titanic_sd <- sd(titanic.survival$age)
+
+nbaboxscores <- nbaboxscores %>% 
+  mutate(at.home = case_when(home.away == home ~ TRUE,
+                             TRUE ~ FALSE),
+         div = case_when(team_id == "BOS" ~ "East",
+                         team_id == "NYK" ~ "East",
+                         team_id == "MIL" ~ "East",
+                         team_id == "CLE" ~ "East",
+                         team_id == "ORL" ~ "East",
+                         team_id == "IND" ~ "East",
+                         team_id == "PHI" ~ "East",
+                         team_id == "MIA" ~ "East",
+                         team_id == "CHI" ~ "East",
+                         team_id == "ATL" ~ "East",
+                         team_id == "BKN" ~ "East",
+                         team_id == "TOR" ~ "East",
+                         team_id == "CHA" ~ "East",
+                         team_id == "WAS" ~ "East",
+                         team_id == "DET" ~ "East",
+                         TRUE ~ "West"))
+```
+
+```{r}
+#| label: rsetup
+#| include: false
+
+titanic.survival <- read.csv("datasets/titanic.survival.csv", fileEncoding="UTF-8-BOM")
+```
+
+# More on distributions
+
+## Thoughts about comparing groups
+
+-   Faceted histograms are a reasonable display to show distributions by a categorical variable
+    -   However these displays become hard to interpret when the number of levels in a category grows large
+-   Much easier to interpret is side by side box plots
+-   Box plots capture many important characteristics of a distribution into a summary display
+-   Think carefully about how you treat outliers
+-   Let's view data from the 2023-2024 NBA season
+
+## Two group comparison
+
+### NBA side-by-side histograms of points scored by W/L
+
+```{webr}
+#| label: nbacomparisonhist
+#| caption: "Histogram of points scored in NBA games"
+pts.data <- nbaboxscores %>% 
+  group_by(winner) %>% 
+  mutate(mean.pts = mean(PTS))
+
+ggplot(pts.data, aes(x=PTS)) +
+  geom_histogram(fill="blue4") +
+  labs(x="Points scored", y="Count") +
+  facet_wrap(~winner) + 
+  geom_vline(aes(xintercept = mean.pts, group=winner), color="red") +
+  scale_x_continuous(sec.axis = sec_axis(~ . , name = "Did the team win?", breaks = NULL, labels = NULL))
+```
+
+### NBA boxplot comparison of points scored by W/L
+
+```{webr}
+#| label: nbacomaprisonbox
+#| caption: "Boxplot of points scored in NBA games"
+ggplot(nbaboxscores, aes(x=winner,y=PTS)) + 
+  geom_boxplot() + 
+  labs(x="Team won the game?", y="Points scored")
+```
+
+### NBA boxplot comparison of points scored by W/L (better)
+
+```{webr}
+#| label: nbacomparisonbetterbox
+#| caption: "Beter boxplot of points scored in NBA games"
+ggplot(nbaboxscores, aes(x=winner,y=PTS)) + 
+  geom_boxplot(fill="light blue") + 
+  labs(x="Team won the game?", y="Points scored") + 
+  coord_flip()
+```
+
+## Many group comparison
+
+### NBA side-by-side histograms of points scored by team
+
+```{webr}
+#| label: nbateamcomparisonhist
+#| caption: "Histogram of points scored by team"
+ggplot(nbaboxscores, aes(x=PTS)) +
+  geom_histogram(fill="blue4") +
+  labs(x="Points scored by team", y="Count") +
+  facet_wrap( ~ as.factor(team_id))
+```
+
+### NBA boxplot comparison of points scored by team (better)
+
+```{webr}
+#| label: nbateamcomparisonbox
+#| caption: "Boxplot of points scored by team"
+ggplot(nbaboxscores, aes(x=as.factor(team),y=PTS, fill=div)) + 
+  geom_boxplot() + 
+  labs(x="Team", y="Points scored by team") +
+   scale_x_discrete(guide = guide_axis(n.dodge=2)) +
+   guides(fill=guide_legend(title="Division"))
+```
+
+### Your turn
+
+- Work with your neighbor to analyze a different set of statistics
+  + Can be by division or not
+  + Remember the key features of distributions
+    - Shape
+    - Center
+    - Spread
+- Interpret your results
+
+```{webr}
+#| label: nbateamdescribe
+#| caption: "Information about the NBA dataset"
+# Get a list of variable names
+names(nbaboxscores)
+
+# Take a quick look at the data
+glimpse(nbaboxscores)
+```
+
+```{webr}
+#| label: picker1
+sample(classroster$name, 1)
+```
+
+## Checking outliers - assists
+
+### Outliers - assists
+
+```{webr}
+#| label: assistsoutlier
+#| caption: "Assists outliers"
+ggplot(nbaboxscores, aes(x=AST)) +
+  geom_histogram(fill="blue4", binwidth=1) +
+  labs(x="Assists", y="Count")
+```
+
+### Assists > 40 - true outliers?
+
+```{webr}
+#| label: assistsoutliercheck
+#| caption: "Assists outliers - specific cases"
+nbaboxscores %>% 
+    filter(AST > 40) %>%
+    select(date, team, opponent, PTS, REB)
+```
+
+```{webr}
+#| label: picker2
+sample(classroster$name, 1)
+```
+
+## Checking outliers - points
+
+### Outliers - points
+
+```{webr}
+#| label: pointsoutliers
+#| caption: "Points outliers"
+ggplot(nbaboxscores, aes(x=PTS)) +
+  geom_histogram(fill="blue4", binwidth=1) +
+  labs(x="Points", y="Count")
+```
+
+### Points by team > 150 - true outliers?
+
+```{webr}
+#| label: pointsoutliercheck
+#| caption: "Points outliers - specific cases" 
+nbaboxscores %>% 
+    filter(PTS > 150) %>%
+    select(date, team, opponent, PTS, REB)
+```
+
+```{webr}
+#| label: picker3
+sample(classroster$name, 1)
+```
+
+## In summary
+
+-   Think about which kind of display is appropriate for comparing distributions
+-   When conditioning on a categorical variable, boxplots are usually better
+-   But boxplots lose information
+-   Think carefully about omitting outliers
+-   Outliers may reveal important information about your dataset!
+
+## Titanic passengers and the Normal distribution
+
+![Titanic](images/Lecture 1.3/Titanic.jpg){width="800"}
+
+### Dataset of passengers on the Titanic
+
+```{webr}
+#| label: datastructure
+#| caption: "Titanic survival dataset structure"
+kable(head(titanic.survival))
+```
+
+-   What are your expectations for how age should be distributed?
+
+```{webr}
+#| label: picker4
+sample(classroster$name, 1)
+```
+
+-   We are going to violate our first three rules:
+    1.  Make a picture
+    2.  Make a picture
+    3.  Make a picture
+
+### Were the passenger ages normally distributed?
+
+To answer that question, we need some information about the distribution
+
+Remember, our main information about distributions is:
+
+-   Shape
+
+-   Center
+
+-   Spread
+
+### Information about `age`
+
+-   Standard deviation: `r round(sd(titanic.survival$age), digits=1)`
+-   Mean: `r round(mean(titanic.survival$age), digits=1)`
+-   Normal model: $N(\mu, \sigma) = N(`r round(mean(titanic.survival$age), digits=1)`,`r round(sd(titanic.survival$age), digits=1)`)$
+    -   $\mu$ is the theoretical mean
+    -   $\sigma$ is the theoretical standard deviation
+    -   These values define the data generating process
+    -   We only see some values of the data generating process, but if we saw infinite values, the mean would be $\mu$ and the sd would be $\sigma$
+    -   More on this in the second half of class
+-   How can we check normality using this information?
+
+```{webr}
+#| label: picker5
+sample(classroster$name, 1)
+```
+
+## Checking normality
+
+### Thinking about normality
+
+-   We can check normality by comparing the quantiles of our data with that of the known quantiles of the normal distribution
+    -   We know approximately 95% of the data lies within two standard deviations
+    -   Therefore, 2.5% data with the lowest values lie outside of -2 standard deviations and 2.5% of data with the highest values lie outside of 2 standard deviations
+-   Similarly, we know the same information for data within one standard deviation (16%, 68%, 16%)
+
+### Data within standard deviations
+
+```{webr}
+#| label: agesd
+#| caption: "Standard deviations of age"
+norm.dist <- rnorm(1000000)
+
+ds.low <- density(norm.dist, from=min(norm.dist), to=-2)
+ds.high <- density(norm.dist, from=2, to=max(norm.dist))
+ds.low.mid <- density(norm.dist, from=min(norm.dist), to=-1)
+ds.high.mid <- density(norm.dist, from=1, to=max(norm.dist))
+
+ds.low.data <- data.frame(x = ds.low$x, y = ds.low$y)
+ds.low.mid.data <- data.frame(x = ds.low.mid$x, y = ds.low.mid$y)
+ds.high.data <- data.frame(x = ds.high$x, y = ds.high$y)
+ds.high.mid.data <- data.frame(x = ds.high.mid$x, y = ds.high.mid$y)
+
+two.sd <- ggplot(data.frame(norm.dist), aes(norm.dist)) + 
+  geom_density() + 
+  geom_vline(xintercept=-2, color="dark red") +
+  geom_vline(xintercept=2, color="dark red") +
+  geom_area(data = ds.low.data, aes(x = x, y = y), fill="blue4", color="blue4") +
+  geom_area(data = ds.high.data, aes(x = x, y = y), fill="blue4", color="blue4") + 
+  labs(x="Standard deviations", y="Density") + 
+  scale_x_continuous(breaks=c(-3, -2, -1, 0, 1, 2, 3), limits=(c(-4, 4))) +
+  annotate(geom="text", x=-3, y=0.1, label="~2.5% of the data") +
+  annotate(geom="text", x=3, y=0.1, label="~2.5% of the data") +
+  annotate(geom="text", x=0, y=0.1, label="~95% of the data") 
+  
+one.sd <- ggplot(data.frame(norm.dist), aes(norm.dist)) +
+  geom_density() +
+  geom_vline(xintercept = -1, color="dark red") +
+  geom_vline(xintercept = 1, color="dark red") +
+  geom_area(data = ds.low.mid.data, aes(x = x, y = y), fill="blue4", color="blue4") +
+  geom_area(data = ds.high.mid.data, aes(x = x, y = y), fill="blue4", color="blue4") +
+  labs(x="Standard deviations", y="Density") + 
+  scale_x_continuous(breaks=c(-3, -2, -1, 0, 1, 2, 3), limits=(c(-4, 4))) +
+  annotate(geom="text", x=-2.5, y=0.2, label="~16% of the data") +
+  annotate(geom="text", x=2.5, y=0.2, label="~16% of the data") +
+  annotate(geom="text", x=0, y=0.2, label="~68% of the data") 
+
+grid.arrange(two.sd, one.sd)
+```
+
+## Checking against the data
+
+### Histogram of ages from the data
+
+```{webr}
+#| label: agehist
+#| caption: "Theoretical vs. actual age distributions"
+norm.dist.titanic <- rnorm(1000000, mean=titanic_mean, sd=titanic_sd)
+norm.dist.titanic <- data.frame(norm.dist.titanic)
+
+ggplot(titanic.survival, aes(x=age)) + 
+  geom_histogram(aes(y=..density..), fill="blue4") +
+  geom_vline(xintercept=titanic_mean, color="dark red") + 
+  geom_density(data=norm.dist.titanic, aes(norm.dist.titanic), color="dark red") +
+  labs(x="Age", y="Count") +
+  scale_x_continuous(limits=c(-10, 80))
+```
+
+### Normality and scaling
+
+-   Note that normality does not depend on the size of the standard deviation or the size of the mean
+-   Could easily change the units to be months instead of years
+    -   Mean would increase a lot
+    -   Standard deviation would increase a lot
+    -   However, amount of observations within each standard deviation would stay the same
+
+## Final thoughts on normality
+
+### When is the normal distribution useful?
+
+-   When we know a data-generating process is normally distributed we don't even need to sample the population
+    -   Can find out exactly how much data is between a certain number of standard deviations
+-   When we expect a data-generating process to be normally distributed, can test for deviations from normality
+    -   In the case of Titanic passengers, some parts of the distribution were more bunched up, others more spread out
+-   A lot of our statistical techniques require or work better when the data is 'roughly' normal
+    -   Will detail these in the coming weeks
+-   We can transform our data to be closer to normal
+    -   Note that transformations won't work if the data has multiple modes, can only correct skew
+
+### What transformation would be helpful for `age`?
+
+```{webr}
+#| label: agehist2
+#| caption: "Transformation check"
+ggplot(titanic.survival, aes(x=age)) + 
+  geom_histogram(fill="blue4") +
+  labs(x="Age", y="Count")
+```
+
+```{webr}
+#| label: picker6
+sample(classroster$name, 1)
+```
