@@ -76,7 +76,7 @@ titanic.survival <- read.csv("datasets/titanic.survival.csv", fileEncoding="UTF-
 -   Much easier to interpret is side by side box plots
 -   Box plots capture many important characteristics of a distribution into a summary display
 -   Think carefully about how you treat outliers
--   Let's view data from the 2023-2024 NBA season
+-   Let's view data from the 2024-2025 NBA season
 
 ## Two group comparison
 
@@ -136,7 +136,7 @@ ggplot(nbaboxscores, aes(x=PTS)) +
 ```{webr}
 #| label: nbateamcomparisonbox
 #| caption: "Boxplot of points scored by team"
-ggplot(nbaboxscores, aes(x=as.factor(team),y=PTS, fill=div)) + 
+ggplot(nbaboxscores, aes(x=as.factor(team_id),y=PTS, fill=div)) + 
   geom_boxplot() + 
   labs(x="Team", y="Points scored by team") +
    scale_x_discrete(guide = guide_axis(n.dodge=2)) +
@@ -187,7 +187,7 @@ ggplot(nbaboxscores, aes(x=AST)) +
 #| caption: "Assists outliers - specific cases"
 nbaboxscores %>% 
     filter(AST > 40) %>%
-    select(date, team, opponent, PTS, REB)
+    select(game, team_id, PTS, REB)
 ```
 
 ```{webr}
