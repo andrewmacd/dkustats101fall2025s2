@@ -206,7 +206,7 @@ ggplot(nbaboxscores, aes(x=AST)) +
 #| caption: "Assists outliers - specific cases"
 nbaboxscores %>% 
     filter(AST > 40) %>%
-    select(game_id, team_id, home.away, PTS, REB, gameDate)
+    select(game_id, team_id, home.away, PTS, TRB, gameDate)
 ```
 
 ```{webr}
@@ -233,7 +233,7 @@ ggplot(nbaboxscores, aes(x=PTS)) +
 #| caption: "Points outliers - specific cases" 
 nbaboxscores %>% 
     filter(PTS > 150) %>%
-    select(game_id, team_id, home.away, PTS, REB, gameDate)
+    select(game_id, team_id, home.away, PTS, TRB, gameDate)
 ```
 
 ```{webr}
