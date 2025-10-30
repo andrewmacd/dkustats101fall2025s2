@@ -40,7 +40,7 @@ titanic_mean <- mean(titanic.survival$age)
 titanic_sd <- sd(titanic.survival$age)
 
 nbaboxscores <- nbaboxscores %>% 
-  mutate(at.home = case_when(home.away == home ~ TRUE,
+  mutate(at.home = case_when(home.away == "home" ~ TRUE,
                              TRUE ~ FALSE),
          div = case_when(team_id == "BOS" ~ "East",
                          team_id == "NYK" ~ "East",
@@ -152,6 +152,25 @@ ggplot(nbaboxscores, aes(x=as.factor(team_id),y=PTS, fill=div)) +
     - Center
     - Spread
 - Interpret your results
+- Variable definitions:
+  + MP: minutes played
+  + FG: field goal baskets made
+  + FGA: field goal baskets attempted
+  + FG.: field goal percentage
+  + X3P: three pointers made
+  + X3PA: three pointers attempted
+  + FT: free throws made
+  + FTA: free throws attempted
+  + FT.: free throw percentage
+  + ORB: offensive rebounds
+  + DRB: defensive rebounds
+  + TRB: total rebounds
+  + AST: assists
+  + STL: steals
+  + BLK: blocks
+  + TOV: turnovers
+  + PF: personal fouls
+  + PTS: points scored
 
 ```{webr}
 #| label: nbateamdescribe
@@ -187,7 +206,7 @@ ggplot(nbaboxscores, aes(x=AST)) +
 #| caption: "Assists outliers - specific cases"
 nbaboxscores %>% 
     filter(AST > 40) %>%
-    select(game, team_id, PTS, REB)
+    select(game_id, team_id, home.away, PTS, REB, gameDate)
 ```
 
 ```{webr}
@@ -214,7 +233,7 @@ ggplot(nbaboxscores, aes(x=PTS)) +
 #| caption: "Points outliers - specific cases" 
 nbaboxscores %>% 
     filter(PTS > 150) %>%
-    select(date, team, opponent, PTS, REB)
+    select(game_id, team_id, home.away, PTS, REB, gameDate)
 ```
 
 ```{webr}
