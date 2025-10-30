@@ -46,7 +46,7 @@
     "href": "schedulematerials.html#lab-1.2-advanced-quarto-editing-thursday-october-30",
     "title": "Course Schedule and Class Materials",
     "section": "Lab 1.2: Advanced Quarto editing (Thursday, October 30)",
-    "text": "Lab 1.2: Advanced Quarto editing (Thursday, October 30)\n\nLab files: [Lab 1.2]\n\nMake sure to extract (unzip) the lab files before attempting to modify them!"
+    "text": "Lab 1.2: Advanced Quarto editing (Thursday, October 30)\n\nLab files: Lab 1.2\n\nMake sure to extract (unzip) the lab files before attempting to modify them!"
   },
   {
     "objectID": "schedulematerials.html#unit-1-homework---progress-check-due-thursday-october-30-at-235900",
@@ -530,5 +530,47 @@
     "title": "R Manual",
     "section": "Inference for Difference between Two Samples",
     "text": "Inference for Difference between Two Samples\nThe R code for \\(t\\) tests is very similar to the code for hypothesis testing.\n\nfourcyl &lt;- mtcars %&gt;% \n  filter(cyl==4) %&gt;% \n  summarize(mean=mean(mpg),\n            len=length(mpg),\n            sd=sd(mpg))\n\neightcyl &lt;- mtcars %&gt;% \n  filter(cyl==8) %&gt;% \n  summarize(mean=mean(mpg),\n            len=length(mpg),\n            sd=sd(mpg))\n\ndiff.sd &lt;- sqrt(fourcyl$sd ^ 2 / fourcyl$len + eightcyl$sd ^ 2 / eightcyl$len)\ndiff.mpg.t  &lt;- (fourcyl$mean - eightcyl$mean) / diff.sd\n\n# Note that the df here is just an approximation; the textbook provides the correct formula.\n# The rule of thumb method from the the textbook recommends using the lowest df of the two samples\n# minus one.\ndiff.mpg.p  &lt;- 2 * pt(-abs(diff.mpg.t), df = min(c(fourcyl$len, eightcyl$len))-1)\n\ndiff.mpg.p\n\n[1] 1.847002e-05\n\n\nIn other words, the odds that, assuming the two samples have the same sample mean, the odds that we would see a difference between the two sample means this large or larger is effectively zero, therefore we can reject the null hypothesis.\nR does have a built-in method to do this calculation but you should understand how to achieve the same result by direct calcuation.\n\nfourcyl.data &lt;- mtcars %&gt;% \n  filter(cyl==4) %&gt;% \n  select(mpg)\n\neightcyl.data &lt;- mtcars %&gt;% \n  filter(cyl==8) %&gt;% \n  select(mpg)\n\nt.test(fourcyl.data$mpg, eightcyl.data, alternative = \"two.sided\" , mu = 0, var.equal = FALSE, conf.level = 0.95)\n\n\n    Welch Two Sample t-test\n\ndata:  fourcyl.data$mpg and eightcyl.data\nt = 7.5967, df = 14.967, p-value = 1.641e-06\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n  8.318518 14.808755\nsample estimates:\nmean of x mean of y \n 26.66364  15.10000 \n\n\nDue to the first method using a rule of thumb method for calculating the degrees of freedom, the result is slightly different but very close to the R function result."
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "",
+    "text": "#| label: setup\n#| include: false\n#| autorun: true\n\ntheme_set(theme_classic())\n\nclassroster &lt;- read.csv(\"classroster.csv\", fileEncoding=\"UTF-8-BOM\")\nheights &lt;- read.csv(\"classheights.csv\", fileEncoding=\"UTF-8-BOM\")"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#distribution-of-common-quantities",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#distribution-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Distribution of common quantities",
+    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread\n\n\n#| label: pick1\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#graphs-of-common-quantities",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#graphs-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Graphs of common quantities",
+    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n#| label: riverlength\n#| caption: \"Graph of river lengths\"\nggplot(data.frame(rivers), aes(x=rivers)) + \n  geom_histogram(fill=\"blue4\", color=\"black\") +\n  labs(x=\"Length in miles\", y=\"count\")\n\n\n\nFlower sepal width\n\n#| label: flowerwidth\n#| caption: \"Graph of flower sepal widths\"\nggplot(iris, aes(x=Sepal.Width)) + \n  geom_histogram(fill=\"blue4\", color=\"black\", bins=15) +\n  labs(x=\"Sepal width\", y=\"Count\")\n\n\n\nLife expetancy in 2007\n\n#| label: lifexpectancy\n#| caption: \"Graph of life expectancies\"\ngap2007 &lt;-gapminder %&gt;%\n  filter(year==2007)\n\nggplot(gap2007, aes(x=lifeExp)) + \n  geom_histogram(fill=\"blue4\", color=\"black\") +\n  labs(x=\"Life expectancy in years\", y=\"Count\")"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-activity",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-activity",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height activity",
+    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses.\n\n#| label: pick2\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-distribution",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-distribution",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height distribution",
+    "text": "Height distribution\n\n#| label: heightdistribution\n#| caption: \"Distribution of heights in our class\"\n\nggplot(heights, aes(x=heightincm)) +\n  geom_histogram()"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#closing-thoughts",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#closing-thoughts",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Closing thoughts",
+    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
   }
 ]

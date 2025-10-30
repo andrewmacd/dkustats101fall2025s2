@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Professor MacDonald">
+<meta name="dcterms.date" content="2025-10-28">
 
-<title>Course Introduction – DKU Stats 101 - Fall 2025 S2</title>
+<title>Lecture 1.2 - Characteristics of distributions – DKU Stats 101 - Fall 2025 S2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b4406b7675125bc2ba204020e191172.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-88e77c2e7946dc1e54cfe5c331b01367.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b4406b7675125bc2ba204020e191172.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-88e77c2e7946dc1e54cfe5c331b01367.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -79,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">DKU Stats 101 - Fall 2025 S2</span>
     </a>
   </div>
@@ -90,19 +92,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Course Introduction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./schedulematerials.html"> 
+    <a class="nav-link" href="../schedulematerials.html"> 
 <span class="menu-text">Schedule and Course Materials</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./homework.html"> 
+    <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./rmanual.html"> 
+    <a class="nav-link" href="../rmanual.html"> 
 <span class="menu-text">R Help Manual</span></a>
   </li>  
 </ul>
@@ -128,20 +130,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-at-a-glance" id="toc-course-at-a-glance" class="nav-link active" data-scroll-target="#course-at-a-glance">Course at a glance</a></li>
-  <li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course description</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives">Course objectives</a></li>
-  <li><a href="#course-structure" id="toc-course-structure" class="nav-link" data-scroll-target="#course-structure">Course structure</a></li>
-  <li><a href="#how-to-prepare" id="toc-how-to-prepare" class="nav-link" data-scroll-target="#how-to-prepare">How to prepare</a></li>
-  <li><a href="#required-texts" id="toc-required-texts" class="nav-link" data-scroll-target="#required-texts">Required texts</a></li>
-  <li><a href="#course-policies" id="toc-course-policies" class="nav-link" data-scroll-target="#course-policies">Course policies</a>
+  <li><a href="#characteristics-of-distributions" id="toc-characteristics-of-distributions" class="nav-link active" data-scroll-target="#characteristics-of-distributions">Characteristics of distributions</a>
   <ul class="collapse">
-  <li><a href="#assessment" id="toc-assessment" class="nav-link" data-scroll-target="#assessment">Assessment</a></li>
-  <li><a href="#lateness-policy" id="toc-lateness-policy" class="nav-link" data-scroll-target="#lateness-policy">Lateness policy</a></li>
-  <li><a href="#contact-policy" id="toc-contact-policy" class="nav-link" data-scroll-target="#contact-policy">Contact Policy</a></li>
-  <li><a href="#chatgpt-and-similar-policy" id="toc-chatgpt-and-similar-policy" class="nav-link" data-scroll-target="#chatgpt-and-similar-policy">ChatGPT (and similar) Policy</a></li>
-  <li><a href="#academic-dishonesty-policy" id="toc-academic-dishonesty-policy" class="nav-link" data-scroll-target="#academic-dishonesty-policy">Academic Dishonesty Policy</a></li>
-  <li><a href="#disabilities-policy" id="toc-disabilities-policy" class="nav-link" data-scroll-target="#disabilities-policy">Disabilities Policy</a></li>
+  <li><a href="#distribution-of-common-quantities" id="toc-distribution-of-common-quantities" class="nav-link" data-scroll-target="#distribution-of-common-quantities">Distribution of common quantities</a></li>
+  <li><a href="#graphs-of-common-quantities" id="toc-graphs-of-common-quantities" class="nav-link" data-scroll-target="#graphs-of-common-quantities">Graphs of common quantities</a>
+  <ul class="collapse">
+  <li><a href="#length-of-rivers-in-the-u.s." id="toc-length-of-rivers-in-the-u.s." class="nav-link" data-scroll-target="#length-of-rivers-in-the-u.s.">Length of rivers in the U.S.</a></li>
+  <li><a href="#flower-sepal-width" id="toc-flower-sepal-width" class="nav-link" data-scroll-target="#flower-sepal-width">Flower sepal width</a></li>
+  <li><a href="#life-expetancy-in-2007" id="toc-life-expetancy-in-2007" class="nav-link" data-scroll-target="#life-expetancy-in-2007">Life expetancy in 2007</a></li>
+  </ul></li>
+  <li><a href="#height-activity" id="toc-height-activity" class="nav-link" data-scroll-target="#height-activity">Height activity</a></li>
+  <li><a href="#height-distribution" id="toc-height-distribution" class="nav-link" data-scroll-target="#height-distribution">Height distribution</a></li>
+  <li><a href="#closing-thoughts" id="toc-closing-thoughts" class="nav-link" data-scroll-target="#closing-thoughts">Closing thoughts</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -151,14 +151,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Course Introduction</h1>
+<h1 class="title">Lecture 1.2 - Characteristics of distributions</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Professor MacDonald </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 28, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -168,143 +180,100 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="course-at-a-glance" class="level1">
-<h1>Course at a glance</h1>
+<div class="cell" data-autorun="true">
+<pre class="{webr}"><code>#| label: setup
+#| include: false
+#| autorun: true
+
+theme_set(theme_classic())
+
+classroster &lt;- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+heights &lt;- read.csv("classheights.csv", fileEncoding="UTF-8-BOM")</code></pre>
+</div>
+<section id="characteristics-of-distributions" class="level1">
+<h1>Characteristics of distributions</h1>
+<section id="distribution-of-common-quantities" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-common-quantities">Distribution of common quantities</h2>
+<p>Many phenomena in nature have a relatively easily guessed distribution characteristics</p>
 <ul>
-<li>Tuesday/Thursday class at 12:00 pm to 2:30 pm in Library room 2001</li>
-<li>Thursday lab at 6:00 pm to 7:15 pm in Library room 2001</li>
-<li>Office hours:
-<ul>
-<li>Wednesday from 1:00 pm to 5:00 pm in WDR 3114</li>
-</ul></li>
-<li>Homeworks are all due at 11:59 pm</li>
-<li>All other announcements and information are posted on the class Teams site</li>
-<li>Stats 101 lab manager: Jingyu Wang
-<ul>
-<li>Office hours: Fridays from 2:00 to 4:00 pm in WDR 2134</li>
-</ul></li>
+<li>What is the distribution of length of rivers in the U.S.?</li>
+<li>What is the distribution of width of flower sepals?</li>
+<li>What is the distribution of life expectancy across countries in 2007?</li>
 </ul>
-</section>
-<section id="course-description" class="level1">
-<h1>Course description</h1>
-<p>How can we use data to shed light on age-old and new human problems such as pollution, discrimination, and economic growth? How can we be “sure” that the evidence we have points us in the right direction? How meaningful are our findings? Do our results suggest the relationships we find between factors such smoking and cancer are meaningful or meaningless? How would we know? How should one properly display and explain your statistical results to these important issues?</p>
-<p>This class introduces you to the tools and concepts that begin to tackle these questions. We will cover topics such as data summaries, sampling, data analysis, production of graphical displays, and regression techniques. The goal at the end of the course is that you will be able to conduct basic data manipulation, know how to properly summarize and display data, and make basic statistical inferences using real datasets.</p>
-<p>The emphasis in the course will not be on learning mathematical formulas related to statistics but rather to develop an intuitive understanding of statistical inference and measures of uncertainty. For those interested in further study of statistics in a more rigorous way, you may also consider taking the following courses:</p>
+<p>Features to guess:</p>
 <ul>
-<li>Math 205: the mathematical foundations of statistics</li>
-<li>Econ 203: advanced study of modern regression techniques for Economists</li>
-<li>PoliSci 301: Statistical techniques to infer causation</li>
-<li>Social Sciences 320: advanced statistical techniques applied to real-world problems</li>
+<li>Shape</li>
+<li>Center</li>
+<li>Spread</li>
 </ul>
-<p>A third set of goals for the course is that you will also be able to read more fluently research literature that employs statistics. During this course I will reference, in class, a number of historically important academic articles and we will analyze the data from those articles. Doing so should help you understand how data is used (and misused) to construct social science arguments.</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: pick1
+sample(classroster$name, 1)</code></pre>
+</div>
 </section>
-<section id="course-objectives" class="level1">
-<h1>Course objectives</h1>
-<p>Upon completing the course, you will develop the following abilities:</p>
-<ol type="1">
-<li>Intuitively interpret statistics in course materials and in the larger world</li>
-<li>Become a statistics results producer in addition to a statistics consumer</li>
-<li>Assess when and how to use statistics to answer specific questions in the social sciences</li>
-<li>Analyze how previously learned problems can be answered with statistical methods</li>
-<li>Apply statistical methods to future social science coursework and capstone project</li>
-<li>Judge how appropriately statistics are used in everyday life when reading the news, business reports, and other real-world applications</li>
-</ol>
-<p>In support of this you will be able to:</p>
+<section id="graphs-of-common-quantities" class="level2">
+<h2 class="anchored" data-anchor-id="graphs-of-common-quantities">Graphs of common quantities</h2>
+<section id="length-of-rivers-in-the-u.s." class="level3">
+<h3 class="anchored" data-anchor-id="length-of-rivers-in-the-u.s.">Length of rivers in the U.S.</h3>
+<div class="cell" data-caption="Graph of river lengths">
+<pre class="{webr}"><code>#| label: riverlength
+#| caption: "Graph of river lengths"
+ggplot(data.frame(rivers), aes(x=rivers)) + 
+  geom_histogram(fill="blue4", color="black") +
+  labs(x="Length in miles", y="count")</code></pre>
+</div>
+</section>
+<section id="flower-sepal-width" class="level3">
+<h3 class="anchored" data-anchor-id="flower-sepal-width">Flower sepal width</h3>
+<div class="cell" data-caption="Graph of flower sepal widths">
+<pre class="{webr}"><code>#| label: flowerwidth
+#| caption: "Graph of flower sepal widths"
+ggplot(iris, aes(x=Sepal.Width)) + 
+  geom_histogram(fill="blue4", color="black", bins=15) +
+  labs(x="Sepal width", y="Count")</code></pre>
+</div>
+</section>
+<section id="life-expetancy-in-2007" class="level3">
+<h3 class="anchored" data-anchor-id="life-expetancy-in-2007">Life expetancy in 2007</h3>
+<div class="cell" data-caption="Graph of life expectancies">
+<pre class="{webr}"><code>#| label: lifexpectancy
+#| caption: "Graph of life expectancies"
+gap2007 &lt;-gapminder %&gt;%
+  filter(year==2007)
+
+ggplot(gap2007, aes(x=lifeExp)) + 
+  geom_histogram(fill="blue4", color="black") +
+  labs(x="Life expectancy in years", y="Count")</code></pre>
+</div>
+</section>
+</section>
+<section id="height-activity" class="level2">
+<h2 class="anchored" data-anchor-id="height-activity">Height activity</h2>
+<p>What do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses.</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: pick2
+sample(classroster$name, 1)</code></pre>
+</div>
+</section>
+<section id="height-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="height-distribution">Height distribution</h2>
+<div class="cell" data-caption="Distribution of heights in our class">
+<pre class="{webr}"><code>#| label: heightdistribution
+#| caption: "Distribution of heights in our class"
+
+ggplot(heights, aes(x=heightincm)) +
+  geom_histogram()</code></pre>
+</div>
+</section>
+<section id="closing-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="closing-thoughts">Closing thoughts</h2>
 <ul>
-<li>Understand and interpret basic statistical properties of data (confidence intervals, t-tests, etc.)</li>
-<li>Identify when various statistical tests are appropriate given a specific dataset</li>
-<li>Formulate testable hypotheses in the data and learn how to execute those tests</li>
-<li>Interpret statistical results to understand both significance of the results and their substantive impact</li>
-<li>Illustrate statistical results with appropriate and clear graphical displays that provide meaning to the reader</li>
-<li>Evaluate critically other, published, statistical work with the skills and techniques learned in class</li>
-<li>Propose an independent research project that integrates statistical methods with their research interest for their capstone project</li>
+<li>Many distributions can be guessed in advanced based on the data generating process</li>
+<li>You should have at least a guess as to what the distribution is before starting your exploratory data analysis</li>
+<li>Think carefully about what your variable is actually measuring</li>
+<li>Characteristics of distributions are <strong>summaries</strong> of the data, almost always obscure features of the data</li>
+<li>Don’t mislead your readers!!</li>
 </ul>
-</section>
-<section id="course-structure" class="level1">
-<h1>Course structure</h1>
-<p>Because of the pandemic situation this term, the course structure is going to be a little flexible - please bear with me as we make it through this term. All changes to the usual course schedule will be announced on Slack.</p>
-<p><em>In general</em>, each week will proceed roughly as follows:</p>
-<ul>
-<li><strong>Monday-Thursday</strong>: Read the textbook chapter, make progress on the lab(s) and homework</li>
-<li><strong>Tuesday 12:00 pm-2:30 pm</strong>: Class session with a conceptual review of the chapter material</li>
-<li><strong>Thursday 12:00 pm-2:30 pm</strong>: Second weekly class session</li>
-<li><strong>Thursday 6:00 pm-7:15 pm</strong>: Lab activities designed to help gain familiarity with the technical aspects of using R, RStudio and Quarto.</li>
-<li><strong>Friday</strong>: Complete DataCamp lab(s) before <strong>midnight</strong></li>
-<li><strong>Sunday</strong>: Complete the homework or homework checks that are due before <strong>midnight</strong> on Sunday</li>
-</ul>
-</section>
-<section id="how-to-prepare" class="level1">
-<h1>How to prepare</h1>
-<p>We will be using two different online tools for this class, you will need to sign up for one of these tools. Our main class hub will be Teams, where I will provide appropriate links for when you need to use the other tools.</p>
-<ol type="1">
-<li><a href="https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu">R and RStudio</a>: These software packages that implement the R statistical programming language are free and very popular tools for conducting statistical investigations, including all of the homeworks for this class.
-<ul>
-<li><a href="https://quarto.org/docs/computations/r.html">Quarto</a>: Quarto is a flexible document formatting standard that allows you to create nice looking documents that easily mix text and R code output (I made this website with Quarto - you can view the code <a href="https://github.com/andrewmacd/dkustats101fall2024">here</a>). All your homeworks, midterm, and final projects will be written inside of Quarto documents. Instructions on how to use the Quarto syntax will be provided with the first homework assignment.</li>
-</ul></li>
-<li><a href="https://www.datacamp.com/groups/shared_links/7abae156c5e998e1ced4c332e2d413e9ab037eb1184f85b5046a3e2f745b1141">DataCamp</a>: DataCamp has a lot of very useful tutorials that will help you learn how to code in R.</li>
-</ol>
-</section>
-<section id="required-texts" class="level1">
-<h1>Required texts</h1>
-<p>Intro Stats, 6th Edition by De Veaux et. al.</p>
-</section>
-<section id="course-policies" class="level1">
-<h1>Course policies</h1>
-<p>I will detail the policy for this course below. Basically, try to learn stuff, don’t cheat, and be active in class and things should go just fine for you.</p>
-<section id="assessment" class="level2">
-<h2 class="anchored" data-anchor-id="assessment">Assessment</h2>
-<ul>
-<li><p>Homework <strong>65%</strong>: At the end of the first two groups of content, a homework will be assigned that will ask you to analyze a dataset and answer questions related to that concept group. These homeworks are due at the noted date at 11:59 pm China time. Each homework will also have a best graph contest, where the person whose classmates vote as having the best graph wins some extra credit points.</p>
-<ul>
-<li><p>Homework 1: 10%</p></li>
-<li><p>Homework 2: 25%</p></li>
-<li><p>Final project: 30%</p></li>
-</ul></li>
-<li><p>Homework checks <strong>3%</strong>: To make sure you are making good progress on your homework, the Sunday before the homework is due (except for the first homework) you will be required to submit your progress on the homework so far. You are required to have tried to have answered all the questions covered by the lectures and textbook up to the specified cutoff. I will not check your answers but rather check to see if you have made a good effort to answer all the questions derived from the material already covered. If you have a reasonable answer for each question checked you will get full points. If you have not made an effort to answer all the questions reviewed you will get a zero.</p></li>
-<li><p>Unit 3 exam <strong>25%</strong>: Unit 3 comprehension is better checked through an in-class exam. The exam will be open notes but closed book and will take place during the normal lab session that week.</p></li>
-<li><p>Data Camp labs <strong>5%</strong>: A number of labs on the website Data Camp will be assigned to you; these labs are pass/fail and you will receive full credit if you complete each of the labs by the specified due date.</p></li>
-<li><p>Syllabus quiz <strong>1%</strong>: A short quiz after the first class regarding the course requirements.</p></li>
-<li><p>Placement exams <strong>1%</strong>: A short quiz that you will take at both the start and end of class to measure how much pre-knowledge you have and how much knowledge you have gained during the course. Exams are pass/fail depending on if you complete them or not</p></li>
-<li><p>Attendance &amp; warmup quizzes: I want you to attend class - there are a lot of studies that show those who attend class and pay attention, learn more and have higher grades. However, I am not your parent. So, it is up to you if you want to be assessed for attendance. Attendance is therefore optional, but, you can sign a pledge at the start of class promising to attend all classes and stay for the entire class (you can miss up to one class without an excuse) and if you complete the pledge, you will receive an extra 1% of extra credit on your final grade. However, if you fail the pledge, you will receive -1% grade deduction. Similarly, the beginning of the class warmup quizzes are partially for me to see how well you have understood the textbook materials, but it is also an incentive for you to read and understand the textbook chapters before class. I will not record your grade on the quizzes. However, you can also sign a pledge to count your warmup quizzes as part of your grade. If you agree to be assessed on the warmup quizzes, you must maintain at least a 75% average on the quizzes (I will drop your lowest quiz score). If you do, you will receive 2% extra credit on your final grade. If you sign the pledge but fail to maintain the average, you will be deducted 2% from your final grade.</p></li>
-</ul>
-</section>
-<section id="lateness-policy" class="level2">
-<h2 class="anchored" data-anchor-id="lateness-policy">Lateness policy</h2>
-<p>Since the course moves very quickly, if you are submitting work late that means you are falling behind on other material and it may be difficult for you to recover. Therefore, I have a fairly strict lateness policy.</p>
-<ul>
-<li>All major assignments are due at <strong>11:59:00 pm</strong>. Not 11:59:01 or 11:59:31.</li>
-<li>If it is later than 11:59:00 pm, then the assignment will be assessed a 5% lateness penalty</li>
-<li>If it is later than 12:29:00 am, then the assignment will be assessed a 10% lateness penalty</li>
-<li>If it is later than 11:59:00 pm the next day, the assignment will be assessed a 50% lateness penalty</li>
-<li>If it is later than 2 days from the due date, I will no longer accept the assignment</li>
-</ul>
-<blockquote class="blockquote">
-<p>Please be sure to check that your homework is complete and make sure to submit it a few minutes early. You can submit multiple times on Teams so make sure you have a nearly complete version uploaded even if you want to keep working on it right up to the deadline. I will not be sympathetic to messages that complain of computer problems when you are trying to submit for the first time at 11:58:51 pm.</p>
-</blockquote>
-</section>
-<section id="contact-policy" class="level2">
-<h2 class="anchored" data-anchor-id="contact-policy">Contact Policy</h2>
-<ol type="1">
-<li>I usually try to reply to emails on the same day (though not in the evenings), however responses may be slower on the weekend</li>
-<li>Do not message me 2 hours before a homework is due and expect an immediate response!</li>
-<li>For general questions, such as how should one interpret a question on a homework or quiz, you should ask the question in the Discussion section of the Teams site. That way others can benefit from the response or someone else may be able to answer more quickly than I can. If you email me a question that really belongs in the help channel I will ask you to repost it.</li>
-<li>Many questions can be answered by carefully checking the class website or reviewing the materials in on Teams. If in doubt, though, feel free to ask.</li>
-</ol>
-</section>
-<section id="chatgpt-and-similar-policy" class="level2">
-<h2 class="anchored" data-anchor-id="chatgpt-and-similar-policy">ChatGPT (and similar) Policy</h2>
-<p>Unless otherwise specified on an assignment, you may use ChatGPT as much as you wish. However, most of the assignments in this class are not very amenable to ChatGPT help. Your main grade will be understanding, annotating, and interpreting your output. Producing the output is the very simple minimal requirement. Also, ChatGPT often makes many coding mistakes. If you rely too much on ChatGPT to code, you will not understand when it makes mistakes and why it makes mistakes.</p>
-</section>
-<section id="academic-dishonesty-policy" class="level2">
-<h2 class="anchored" data-anchor-id="academic-dishonesty-policy">Academic Dishonesty Policy</h2>
-<p>Don’t cheat. Don’t be that person. Yes, you. You know exactly what I’m talking about too.</p>
-<p>More specifically, you are expected to strictly adhere to the Duke Kunshan University Community Standard in all of your work and participation, and violations will be enforced. More details can be found <a href="https://ugstudies.dukekunshan.edu.cn/academic-integrity/">here</a>.</p>
-<p>All work must be done exclusively by the individual to whom it has been assigned. Any instance of copying code or analysis from others is considered cheating. You may exchange general ideas about how to complete the assignment but you must write your own code and also write your own analysis.</p>
-<p>It may sound cliché to say, but if you cheat and borrow others code or answers you are only cheating yourself; you will not learn how to do statistics and doing so will mean you will do worse on the midterm and the final anyway. Cheating is ultimately self-defeating so for both of our benefit, please, don’t do it. If you are having trouble completing the assignment and feel tempted to cheat, please contact me directly instead with the difficulties you are having.</p>
-</section>
-<section id="disabilities-policy" class="level2">
-<h2 class="anchored" data-anchor-id="disabilities-policy">Disabilities Policy</h2>
-<p>If you need an accommodation due to a disability, you should not hesitate to request one. The process is that requests should be sent to the Dean of Undergraduate Studies, who will contact me with recommended type of accommodation that is needed. You do not need to disclose your reason for requesting an accommodation with me, and asking through the Dean of Undergraduate Studies helps make things official for both you and me.</p>
 
 
 </section>
