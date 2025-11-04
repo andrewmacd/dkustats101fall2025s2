@@ -94,7 +94,7 @@ Topics covered:
 
 -   Does correlation imply causation?
 
--   Lecture webpage: [Lecture 2.1](lectures/lectuer.2.1.html)
+-   Lecture webpage: [Lecture 2.1](lectures/lecture.2.1.html)
 
 -   Lecture activity: [Lecture 2.1 activity](activities/Lecture 2.1/lecture.2.1.activity.zip)
 
