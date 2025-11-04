@@ -1,0 +1,210 @@
+---
+title: "Lecture 2.1 - Association activity"
+author: "Student"
+date: "11/4/2025"
+format: 
+  pdf:
+    colorlinks: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Add libraries here
+library(tidyverse)
+library(kableExtra)
+
+mcdonalds <- read.csv("mcdonalds.csv")
+```
+
+![](mcdonaldsfood.jpg)
+
+# Planning
+
+## Expectations
+
+You should develop some expectations based on some pre-existing ideas about how you think the data is related. Pick `Calories` and another quantitative variable and write down how you expect the two to be related.
+
+> Write down your expectation and provide a brief reason for the expectation. Remember to describe your expectation about the relationship between the two variables in terms of direction, form, strength, and outliers.
+
+*Let's pick `Total.Fat`. Probably the relationship is positive, somewhat linear, with a moderate strength. Outliers may include very fatty items or ones that are high in sugar but low in fat.*
+
+## Direction of the relationship
+
+Make a decision about which variable is the outcome variable you care about and which is the variable that predicts it. Write down your choice.
+
+*Outcome variable is `Calories`, predictor variable is `Total.Fat`. Fat is one component of energy a food may contain (a calorie).*
+
+# Investigation
+
+## Distribution displays
+
+### Histograms
+
+-   Make histograms of your two variables using `ggplot()` and `geom_histogram()`. Do you see anything unusual? What do you think these distributions indicate about the possible relationship between the two?
+
+```{r}
+#| label: fig-histograms
+#| message: false
+#| warning: false
+#| echo: false
+#| fig-cap: "Histogram of predictor and response variables"
+#| fig-subcap: 
+#|     - "Histogram of Total Fat"
+#|     - "Histogram of Calories"
+
+ggplot(mcdonalds, aes(x=Total.Fat)) +
+  geom_histogram(fill="blue", color="black") + 
+  labs(y="Count", x="Total fat (g)")
+
+ggplot(mcdonalds, aes(x=Calories)) +
+  geom_histogram(fill="pink", color="red") + 
+  labs(y="Count", x="Calories")
+```
+
+*It seems that both are right skewed. It is a bit hard to tell what the relationship will be from the histograms. As identified in the previous lecture, the outlier here is 40 piece chicken nuggets.*
+
+```{r}
+#| label: outliercheck
+#| tbl-cap: "Outliers"
+#| echo: false
+
+mcdonalds %>% 
+  filter(Total.Fat > 80 | Calories > 1500) %>% 
+  select(c(Category, Item, Total.Fat, Calories)) %>% 
+  kbl() %>% 
+  kable_styling()
+```
+
+### Scatterplot
+
+-   Make a high-quality scatterplot of the two variables using `geom_point()`. You can add a smoother to the scatterplot by adding a `geom_smooth()` layer to your `ggplot`.
+
+```{r}
+#| label: relationshipplot
+#| fig-cap: "Relationship between Calories and Total Fat"
+#| echo: false
+#| message: false
+
+ggplot(mcdonalds, aes(x=Calories, y=Total.Fat)) + 
+  geom_point() +
+  geom_smooth() + 
+  labs(x="Total fat (g)", y="Calories")
+```
+
+Describe the relationship between the two variables using the terms we learned in class.
+
+-   *Direction: positive*
+-   *Form: mostly linear*
+-   *Strength: relatively strong, but with some possible group issues*
+-   *Outliers: the already noted outlier, chicken nuggets (40 piece)*
+
+> Does the relationship match your expectations? Why or why not? Write some notes about comparing expectations vs. reality.
+
+*Yes, this fairly closely matches what we expected. Generally speaking, the more fat, the more calories. This suggests most of the calories come from the fat in McDonald's menu items.*
+
+### Correlation
+
+Find correlation result – does it match the scatterplot? Your expectations? Why or why not?
+
+The RStudio code for correlations is:
+
+```         
+cor(x, y, use="complete.obs")
+```
+
+```{r}
+#| label: correlation
+#| echo: true
+
+cor(mcdonalds$Calories, mcdonalds$Total.Fat)
+```
+
+-   Note: you will need to replace `x` and `y` in the above line of code with the variables of interest. Remember to directly specify a variable, it should be in the `<dataset name>$<variabe>` format.
+
+*Yes, it does match the expectations. It does look highly linear.*
+
+## Analysis
+
+### Outliers
+
+If you have any outliers, identify them. Do you think they should be excluded from your analysis? Why or why not? If you remove the outliers (via the `filter()` verb), does it change your correlation? The shape of the smoother?
+
+*As identified above, is is the chicken nugget menu item. I think it should be excluded, it is not the kind of item a regular person usually orders - it is for sharing.*
+
+```{r}
+#| label: nooutliercorrelation
+
+mcdonalds.nooutlier <- mcdonalds %>% 
+  filter(Calories < 1500)
+
+cor(mcdonalds.nooutlier$Calories, mcdonalds.nooutlier$Total.Fat)
+```
+
+*The correlation does not change very much, it is already on a line of best fit so this is not surprising. The item type is just a lot more of the same kind of food in "normal" menu items.*
+
+```{r}
+#| label: fig-nooutlierscatter
+#| fig-cap: "Relationship between Calories and Total Fat"
+#| echo: false
+#| message: false
+
+ggplot(mcdonalds.nooutlier, aes(x=Total.Fat, y=Calories)) +
+  geom_point() +
+  geom_smooth() + 
+  labs(x="Total fat (g)", y="Calories")
+```
+
+*Here we can see that the relationship is still strong without the outlier. However, this plot also draws our focus to the cases with 0 fat that sometimes have a lot of calories that we did not notice earlier.*
+
+```{r}
+#| label: zerofatoutliers
+#| tbl-cap: "No fat but high calorie outliers"
+#| echo: false
+
+mcdonalds.nooutlier %>% 
+  filter(Total.Fat==0) %>% 
+  select(c(Category, Item, Total.Fat, Calories)) %>% 
+  kbl() %>% 
+  kable_styling()
+```
+
+*From here, we need to consider if these are really part of the relationship we are interested in.*
+
+### Transformations
+
+-   Could the relationship of your two chosen variables benefit from being re-expressed? Try a few re-expressions and see how it affects the relationship and correlation.
+    -   Hint: remember, you can use the `mutate()` verb in a piped command, such as: `mutate(logcals = log(Calories))`
+
+*Since the relationship was already linear, a reexpression will probably not help here. A view of the reexpressed graphs confirms this.*
+
+```{r}
+#| label: fig-reexpressions
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "Log and squared reexpressions"
+#| fig-subcap: 
+#|    - "Log of Total Fat vs. Calories"
+#|    - "Square of Total Fat vs. Calories"
+
+mcdonalds.nooutlier <- mcdonalds.nooutlier %>% 
+  mutate(`Log of Total Fat` = log(Total.Fat),
+         `Square of Total Fat` = Total.Fat^2)
+
+
+ggplot(mcdonalds.nooutlier, aes(x=`Log of Total Fat`, y=Calories)) +
+  geom_point() +
+  geom_smooth() + 
+  labs(x="Log Total fat", y="Calories")
+
+ggplot(mcdonalds.nooutlier, aes(x=`Square of Total Fat`, y=Calories)) +
+  geom_point() +
+  geom_smooth() + 
+  labs(x="Square of Total fat", y="Calories")
+```
+
+### Conclusion
+
+Overall, summarize what you have learned about the relationship of your two variables.

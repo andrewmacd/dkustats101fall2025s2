@@ -97,6 +97,7 @@ Topics covered:
 -   Lecture webpage: [Lecture 2.1](lectures/lecture.2.1.html)
 
 -   Lecture activity: [Lecture 2.1 activity](activities/Lecture 2.1/lecture.2.1.activity.zip)
+    -   Sample solution: [Lecture 2.1 activity sample solution](activities/Lecture 2.1/lecture.2.1.activity.solution.zip)
 
 ## Lecture 2.2: Simple Linear Regression (Thursday, November 6)
 
