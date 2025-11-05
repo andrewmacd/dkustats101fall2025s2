@@ -18,21 +18,14 @@ format:
 # Put any setup code here
 ```
 
-::: {#fig-books layout-ncol=2}
-
-![](){#fig-}
-
-![](){#fig-}
-
-Cars in India
-:::
+![Bookshelf](books.jpg){height=40%}
 
 ## Scoring guide 
 
 ### Content
 
 - The information requested in the question prompts are only a starting point, if you find other interesting information along the way, please report that. You don't need to look at the data forever but if there is obviously something else interesting in the data you should report it.
-- You must have up to Question 2 completed for the homework check on November 16
+- You must have up to Question 2 completed for the homework check on November 9
 - You do not need to be an expert on books for a good score, but I will expect you to look up basic information, such as "what is a good review score on Amazon?", "what is an ISBN number?" and "what are the most popular genres of books on Amazon?" and so on to help you understand and set expectations your data.
 - The information requested in the question prompts are only a starting point, if you find other interesting information along the way, please report that. You don't need to look at the data forever but if there is obviously something else interesting in the data you should report it.
 
@@ -73,11 +66,11 @@ One column should be the variable name, the second should be the variable type a
 
 ## Question 2: Association (20 points)
 
-Using the `mutate()` verb as described in the DataCamp lab, make a new variable called `Age` that subtracts the year 2025 from the book's `publish_year`. Please display your code using `#| echo: true` code block option.
+Using the `mutate()` verb as described in the DataCamp lab, make a new variable called `age` that subtracts the year 2025 from the book's `publish_year`. Please display your code using `#| echo: true` code block option.
 
-### 2a. Investigating `Age` vs. `KM.driven`
+### 2a. Investigating `age` vs. `average_rating`
 
-Using the Think-Show-Tell framework from the textbook (example on page 213), please examine the relationship *in association terms* between `Age` and `KM.drive`. How strongly are they associated?
+Using the Think-Show-Tell framework from the textbook (example on page 213), please examine the relationship *in association terms* between `age` and `average_rating`. How strongly are they associated?
 
 Note: for this question and all other Think sections in the homework, you do not need to report the W's of the data (you have already completed this in Q1)
 
@@ -93,9 +86,9 @@ Note: for this question and all other Think sections in the homework, you do not
 
 *Please interpret the meaning of your finding here, especially with respect to your expectation*
 
-### 2b. Investigating `Age` vs. `Imperfections`
+### 2b. Investigating `age` vs. `rating_number`
 
-Using the Think-Show-Tell framework from the textbook, please examine the relationship *in association terms* between `Age` and `Imperfections`. How strongly are they associated? 
+Using the Think-Show-Tell framework from the textbook, please examine the relationship *in association terms* between `age` and `rating_number``. How strongly are they associated? 
 
 > Think
 
@@ -111,15 +104,15 @@ Using the Think-Show-Tell framework from the textbook, please examine the relati
 
 ### 2c. Thinking about your results
 
-Consider the results of 2a. and 2b. together. What can we understand about how cars are used over time in India, according to this dataset?
+Consider the results of 2a. and 2b. together. What can we understand about how books are rated on Amazon from this information? What do you think explains the relationships you have identified?
 
-> **Complete up to here for Homework Check** - due November 16th at 11:59 pm.
+> **Complete up to here for Homework Check** - due November 9th at 11:59 pm.
 
 ## Question 3: Simple regression (20 points)
 
 ### 3a. Investigating `price` vs. `average_rating`
 
-Using the Think-Show-Tell framework from the textbook, please examine how the price of a used car is related to the age of a used car.
+Using the Think-Show-Tell framework from the textbook, please examine how the price of a book is related to the rating of a book.
 
 > Think 
 
@@ -151,11 +144,11 @@ Similar to 3a. and 3b., fully analyze the relationship between price and the wei
 
 ### 3d. Thinking about your results
 
-What can we learn about the determinants of the price of a used car in India in these two investigations? Do the results surprise you? What lurking variables do you think could be at work here, if any?
+What can we learn about how price is determined in these two investigations? Do the results surprise you? What lurking variables do you think could be at work here, if any?
 
 ## Question 4: Multiple regression (30 points)
 
-### 4a. Investigating `average_rating` vs. `price` and `rating_number`
+### 4a. Investigating `average_rating` vs. `price`, `rating_number`, and `age`
 
 Using the Think-Show-Tell framework from the textbook, please examine, using a multiple regression model, how `average_rating` relate to `price` and `rating_number`. Make use of all the tools described in the textbook to assess model fit in the `Think again` section - if it is necessary to revise your model, do it in the `Think again` section. Then state any updated conclusions in the `Revising conclusions` section.
 

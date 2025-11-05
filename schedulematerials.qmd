@@ -148,7 +148,7 @@ Topics covered:
 
 ## Unit 2 homework - progress check (due Sunday, November 9 at 23:59:00)
 
--   Homework files: [Unit 2 homework instructions]
+-   Homework files: [Unit 2 homework instructions](Homeworks/Unit 2 homework/unit.2.homework.zip)
 
 ## Lecture 2.4: Multiple Regression (Tuesday, November 11)
 
@@ -170,7 +170,7 @@ Topics covered:
 
 ## Unit 2 homework (due Sunday, November 16 at 11:59:00)
 
--   Homework files: [Unit 2 homework instructions]
+-   Homework files: [Unit 2 homework instructions](Homeworks/Unit 2 homework/unit.2.homework.zip)
 
 # Unit 3: Measuring uncertainty
 
