@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Professor MacDonald">
+<meta name="dcterms.date" content="2025-11-04">
 
-<title>Homework – DKU Stats 101 - Fall 2025 S2</title>
+<title>Lecture 2.1 - Association and correlation – DKU Stats 101 - Fall 2025 S2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b4406b7675125bc2ba204020e191172.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-88e77c2e7946dc1e54cfe5c331b01367.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b4406b7675125bc2ba204020e191172.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-88e77c2e7946dc1e54cfe5c331b01367.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -79,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">DKU Stats 101 - Fall 2025 S2</span>
     </a>
   </div>
@@ -90,19 +92,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Course Introduction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./schedulematerials.html"> 
+    <a class="nav-link" href="../schedulematerials.html"> 
 <span class="menu-text">Schedule and Course Materials</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./homework.html" aria-current="page"> 
+    <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./rmanual.html"> 
+    <a class="nav-link" href="../rmanual.html"> 
 <span class="menu-text">R Help Manual</span></a>
   </li>  
 </ul>
@@ -128,10 +130,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#unit-1-homework-due-sunday-november-2-at-235900" id="toc-unit-1-homework-due-sunday-november-2-at-235900" class="nav-link active" data-scroll-target="#unit-1-homework-due-sunday-november-2-at-235900">Unit 1 homework (due Sunday, November 2 at 23:59:00)</a></li>
-  <li><a href="#unit-2-homework-due-sunday-november-16-at-235900" id="toc-unit-2-homework-due-sunday-november-16-at-235900" class="nav-link" data-scroll-target="#unit-2-homework-due-sunday-november-16-at-235900">Unit 2 homework (due Sunday, November 16 at 23:59:00)</a></li>
-  <li><a href="#unit-3-exam-thursday-november-27-from-600-pm-to-715-pm" id="toc-unit-3-exam-thursday-november-27-from-600-pm-to-715-pm" class="nav-link" data-scroll-target="#unit-3-exam-thursday-november-27-from-600-pm-to-715-pm">Unit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)</a></li>
-  <li><a href="#final-project-due-wednesday-december-10-at-235900" id="toc-final-project-due-wednesday-december-10-at-235900" class="nav-link" data-scroll-target="#final-project-due-wednesday-december-10-at-235900">Final project (due Wednesday, December 10 at 23:59:00)</a></li>
+  <li><a href="#association-and-correlation" id="toc-association-and-correlation" class="nav-link active" data-scroll-target="#association-and-correlation">Association and correlation</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#viewing-an-example-relationship" id="toc-viewing-an-example-relationship" class="nav-link" data-scroll-target="#viewing-an-example-relationship">Viewing an example relationship</a></li>
+  <li><a href="#bedrooms-and-square-feet---direction" id="toc-bedrooms-and-square-feet---direction" class="nav-link" data-scroll-target="#bedrooms-and-square-feet---direction">Bedrooms and square feet - direction</a></li>
+  <li><a href="#bedrooms-and-square-feet---form" id="toc-bedrooms-and-square-feet---form" class="nav-link" data-scroll-target="#bedrooms-and-square-feet---form">Bedrooms and square feet - form</a></li>
+  <li><a href="#bedrooms-and-square-feet---strength" id="toc-bedrooms-and-square-feet---strength" class="nav-link" data-scroll-target="#bedrooms-and-square-feet---strength">Bedrooms and square feet - strength</a>
+  <ul class="collapse">
+  <li><a href="#correlation-as-a-measure-of-strength" id="toc-correlation-as-a-measure-of-strength" class="nav-link" data-scroll-target="#correlation-as-a-measure-of-strength">Correlation as a measure of strength</a></li>
+  </ul></li>
+  <li><a href="#bedrooms-and-square-feet---outlier" id="toc-bedrooms-and-square-feet---outlier" class="nav-link" data-scroll-target="#bedrooms-and-square-feet---outlier">Bedrooms and square feet - outlier</a>
+  <ul class="collapse">
+  <li><a href="#outlier---actual-observation" id="toc-outlier---actual-observation" class="nav-link" data-scroll-target="#outlier---actual-observation">Outlier - actual observation</a></li>
+  <li><a href="#data-with-no-outlier" id="toc-data-with-no-outlier" class="nav-link" data-scroll-target="#data-with-no-outlier">Data with no outlier</a></li>
+  <li><a href="#describing-the-association" id="toc-describing-the-association" class="nav-link" data-scroll-target="#describing-the-association">Describing the association</a></li>
+  </ul></li>
+  <li><a href="#does-bed-and-square-feeet-relationship-match-expectations" id="toc-does-bed-and-square-feeet-relationship-match-expectations" class="nav-link" data-scroll-target="#does-bed-and-square-feeet-relationship-match-expectations">Does bed and square feeet relationship match expectations?</a></li>
+  <li><a href="#relationship-reexpressed" id="toc-relationship-reexpressed" class="nav-link" data-scroll-target="#relationship-reexpressed">Relationship reexpressed?</a>
+  <ul class="collapse">
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn">Your turn</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -140,14 +161,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework</h1>
+<h1 class="title">Lecture 2.1 - Association and correlation</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Professor MacDonald </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 4, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -157,30 +190,254 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="unit-1-homework-due-sunday-november-2-at-235900" class="level1">
-<h1>Unit 1 homework (due Sunday, November 2 at 23:59:00)</h1>
+<div class="cell" data-autorun="true">
+<pre class="{webr}"><code>#| label: setup
+#| include: false
+#| autorun: true
+
+theme_set(theme_classic())
+
+kc.houses &lt;- read.csv("king.county.sales.recent.csv")
+classroster &lt;- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+
+kc.houses &lt;- kc.houses %&gt;% 
+  mutate(view = ifelse(rowSums(across(starts_with("view"))) &gt; 0, 1, 0)) %&gt;% 
+  mutate(wfnt = factor(wfnt, levels=c(0, 1), labels=c("Not on waterfront", "On waterfront"))) %&gt;% 
+  mutate(view = factor(view, levels=c(0, 1), labels=c("No view", "View")))
+</code></pre>
+</div>
+<section id="association-and-correlation" class="level1">
+<h1>Association and correlation</h1>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
+<p>In your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.</p>
 <ul>
-<li><a href="homeworks/Unit 1 homework/unit.1.homework.zip">Unit 1 homework</a></li>
-<li>[Unit 1 homework sample solutions]</li>
+<li>0.95</li>
+<li>0.75</li>
+<li>0.5</li>
+<li>0.25</li>
+<li>0.0</li>
+<li>-0.25</li>
+<li>-0.5</li>
+<li>-0.75</li>
+<li>-0.95</li>
+</ul>
+<p>Pick a few of these and draw by hand what you expect these graphs to look like.</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: pick1
+
+sample(classroster$name, 1)</code></pre>
+</div>
+</section>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Lecture 2.1/seattle.jpg" class="img-fluid figure-img" width="800"></p>
+<figcaption>Seattle</figcaption>
+</figure>
+</div>
+</section>
+<section id="viewing-an-example-relationship" class="level2">
+<h2 class="anchored" data-anchor-id="viewing-an-example-relationship">Viewing an example relationship</h2>
+<ul>
+<li>First, what is our expectation about the relationship between bedrooms and square feet?</li>
+<li>Direction?</li>
+<li>Form?</li>
+<li>Strength?</li>
+<li>Outliers?</li>
 </ul>
 </section>
-<section id="unit-2-homework-due-sunday-november-16-at-235900" class="level1">
-<h1>Unit 2 homework (due Sunday, November 16 at 23:59:00)</h1>
+<section id="bedrooms-and-square-feet---direction" class="level2">
+<h2 class="anchored" data-anchor-id="bedrooms-and-square-feet---direction">Bedrooms and square feet - direction</h2>
+<p>A scatterplot is the easiest way to check for direction. In this case, the direction is obvious</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqdirection
+
+# should we jitter this?
+ggplot(kc.houses, aes(x=sqft, y=beds)) + 
+  geom_point() +
+  labs(x="Square feet", y="Beds")</code></pre>
+</div>
+</section>
+<section id="bedrooms-and-square-feet---form" class="level2">
+<h2 class="anchored" data-anchor-id="bedrooms-and-square-feet---form">Bedrooms and square feet - form</h2>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqform
+
+ggplot(kc.houses, aes(x=sqft, y=beds)) + 
+  geom_point(position="jitter") +
+  geom_smooth(method="loess", se=FALSE) +
+  labs(x="Square feet", y="Beds")</code></pre>
+</div>
+</section>
+<section id="bedrooms-and-square-feet---strength" class="level2">
+<h2 class="anchored" data-anchor-id="bedrooms-and-square-feet---strength">Bedrooms and square feet - strength</h2>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqstrength
+
+ggplot(kc.houses, aes(x=sqft, y=beds)) + 
+  geom_point(position="jitter") +
+  geom_smooth(method="loess", se=FALSE) +
+  labs(x="Square feet", y="Beds")</code></pre>
+</div>
+<section id="correlation-as-a-measure-of-strength" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-as-a-measure-of-strength">Correlation as a measure of strength</h3>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqcorr
+
+kable(kc.houses %&gt;% 
+        summarize(cor(beds, sqft, use="complete.obs")), col.names="Correlation")</code></pre>
+</div>
+<p>This correlation is a little weaker than perhaps what we expected</p>
 <ul>
-<li><a href="homeworks/Unit 2 homework/unit.2.homework.zip">Unit 2 homework</a></li>
-<li>[Unit 2 homework sample solutions]</li>
+<li>In general, mechanically generated processes with little noise can have very high correlations</li>
+<li>Most correlations of social or real world processes rarely have above moderate correlation due to noise</li>
 </ul>
 </section>
-<section id="unit-3-exam-thursday-november-27-from-600-pm-to-715-pm" class="level1">
-<h1>Unit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)</h1>
 </section>
-<section id="final-project-due-wednesday-december-10-at-235900" class="level1">
-<h1>Final project (due Wednesday, December 10 at 23:59:00)</h1>
+<section id="bedrooms-and-square-feet---outlier" class="level2">
+<h2 class="anchored" data-anchor-id="bedrooms-and-square-feet---outlier">Bedrooms and square feet - outlier</h2>
+<p>Again, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqoutlierplot
+
+ggplot(kc.houses, aes(x=sqft, y=beds)) + 
+  geom_point(position="jitter") +
+  geom_smooth(method="loess", se=FALSE)  +
+  geom_text(data=kc.houses %&gt;% filter(sqft &gt; 2500 &amp; beds &lt; 1), # Filter data first
+    aes(label=beds), vjust=0.5, color="red") +
+  labs(x="Square feet", y="Beds")</code></pre>
+</div>
+<p>To investigate if this outlier matters, we can check some other values of the observation.</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqoutlier
+
+kable(
+  kc.houses %&gt;%
+    filter(sqft &gt; 2500 &amp; beds &lt; 1) %&gt;%
+    select(c(sale_price, sqft, sqft_lot, beds, stories)))</code></pre>
+</div>
+<p>What kind of outlier do you think this is? Why?</p>
+<section id="outlier---actual-observation" class="level3">
+<h3 class="anchored" data-anchor-id="outlier---actual-observation">Outlier - actual observation</h3>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqoutlier1
+
+kable(
+  kc.houses %&gt;%
+    filter(sqft &gt; 2500 &amp; beds &lt; 1) %&gt;%
+    select(c(latitude, longitude)))</code></pre>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Lecture 2.1/location1.png" class="img-fluid figure-img" width="800"></p>
+<figcaption>Location</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Lecture 2.1/location2.png" class="img-fluid figure-img" width="800"></p>
+<figcaption>House details</figcaption>
+</figure>
+</div>
+</section>
+<section id="data-with-no-outlier" class="level3">
+<h3 class="anchored" data-anchor-id="data-with-no-outlier">Data with no outlier</h3>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqnooutlier
+#| message: false
+
+#should we jitter this?
+kc.houses %&gt;%
+  filter(sqft &lt; 2500 | beds &gt; 1) %&gt;%  
+  ggplot(aes(x=sqft, y=beds)) + 
+    geom_point(position="jitter") +
+    geom_smooth(method="loess", se=FALSE) +
+    labs(x="Square feet", y="Beds")</code></pre>
+</div>
+</section>
+<section id="describing-the-association" class="level3">
+<h3 class="anchored" data-anchor-id="describing-the-association">Describing the association</h3>
+<ol type="1">
+<li>Direction - positive</li>
+<li>Form - linear</li>
+<li>Strength - moderate/strong</li>
+<li>Outliers - one possible</li>
+</ol>
+<p>Outlier:</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label:  bsqoutlier2
+
+kable(
+  kc.houses %&gt;%
+    filter(sqft&gt;2500 &amp; beds &lt; 1) %&gt;%
+    select(c(sale_price, sqft, sqft_lot, latitude, longitude)))</code></pre>
+</div>
+</section>
+</section>
+<section id="does-bed-and-square-feeet-relationship-match-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="does-bed-and-square-feeet-relationship-match-expectations">Does bed and square feeet relationship match expectations?</h2>
 <ul>
-<li>[Final project]</li>
+<li>Seems to, more or less, the larger the house, the more bedrooms, so the relationship is positive</li>
+<li>The relationship is fairly linear, indicating a strong relationship</li>
+<li>Relationship is moderate</li>
+<li>Outliers don’t seem like it is a problem</li>
 </ul>
+<p>However….</p>
+<ul>
+<li>What are some possible lurking variables that influence the relationship of bedrooms and bathrooms?</li>
+</ul>
+<div class="cell">
+<pre class="{webr}"><code>#| label: pick2
+
+sample(classroster$name, 1)</code></pre>
+</div>
+</section>
+<section id="relationship-reexpressed" class="level2">
+<h2 class="anchored" data-anchor-id="relationship-reexpressed">Relationship reexpressed?</h2>
+<p>One final issue to consider is if this relationship should be reexpressed - made more linear.</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: bsqreexpress
+
+kc.houses %&gt;%
+  mutate(log.sqft = log(sqft)) %&gt;%
+  ggplot(aes(x=log.sqft, y=beds)) + 
+    geom_point() +
+    geom_smooth(method="lm", se=FALSE) +
+    labs(x="Log square feet", y="Beds")</code></pre>
+</div>
+<ul>
+<li>Seems clearer</li>
+</ul>
+<section id="your-turn" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn">Your turn</h3>
+<p>With your partner, develop some expectations about some of the variables in the <code>kc.houses</code> dataset might be related.</p>
+<p>Variables:</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: datasetdetails
+
+kc.houses.short &lt;- kc.houses %&gt;% 
+  select(c(sale_price, year_built, sqft, sqft_lot, beds, bath_full, view, stories))
+
+kable(names(kc.houses.short), col.names=c("Variables"))</code></pre>
+</div>
+<p>What to do with your partner:</p>
+<ol type="1">
+<li>Write down an interesting question we think we might be able to answer by examining a relationship in this dataset</li>
+<li>Choose the variables that you think might be able to answer this question</li>
+<li>Write down what you expect the relationship to be between these two variables based on any prior knowledge</li>
+<li>Decide which variable is the response variable and which is the predictor variable</li>
+<li>Make a scatterplot using one of the codeblocks in the previous section and identify the features of the association</li>
+</ol>
+<div class="cell">
+<pre class="{webr}"><code>#| label: pick3
+sample(classroster$name, 1)</code></pre>
+</div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
