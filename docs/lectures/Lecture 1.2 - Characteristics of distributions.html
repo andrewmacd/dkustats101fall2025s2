@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Professor MacDonald">
+<meta name="dcterms.date" content="2025-10-28">
 
-<title>Homework – DKU Stats 101 - Fall 2025 S2</title>
+<title>Lecture 1.2 - Characteristics of distributions – DKU Stats 101 - Fall 2025 S2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b4406b7675125bc2ba204020e191172.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-88e77c2e7946dc1e54cfe5c331b01367.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b4406b7675125bc2ba204020e191172.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-88e77c2e7946dc1e54cfe5c331b01367.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -79,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">DKU Stats 101 - Fall 2025 S2</span>
     </a>
   </div>
@@ -90,19 +92,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Course Introduction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./schedulematerials.html"> 
+    <a class="nav-link" href="../schedulematerials.html"> 
 <span class="menu-text">Schedule and Course Materials</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./homework.html" aria-current="page"> 
+    <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./rmanual.html"> 
+    <a class="nav-link" href="../rmanual.html"> 
 <span class="menu-text">R Help Manual</span></a>
   </li>  
 </ul>
@@ -128,10 +130,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#unit-1-homework-due-sunday-november-2-at-235900" id="toc-unit-1-homework-due-sunday-november-2-at-235900" class="nav-link active" data-scroll-target="#unit-1-homework-due-sunday-november-2-at-235900">Unit 1 homework (due Sunday, November 2 at 23:59:00)</a></li>
-  <li><a href="#unit-2-homework-due-sunday-november-16-at-235900" id="toc-unit-2-homework-due-sunday-november-16-at-235900" class="nav-link" data-scroll-target="#unit-2-homework-due-sunday-november-16-at-235900">Unit 2 homework (due Sunday, November 16 at 23:59:00)</a></li>
-  <li><a href="#unit-3-exam-thursday-november-27-from-600-pm-to-715-pm" id="toc-unit-3-exam-thursday-november-27-from-600-pm-to-715-pm" class="nav-link" data-scroll-target="#unit-3-exam-thursday-november-27-from-600-pm-to-715-pm">Unit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)</a></li>
-  <li><a href="#final-project-due-wednesday-december-10-at-235900" id="toc-final-project-due-wednesday-december-10-at-235900" class="nav-link" data-scroll-target="#final-project-due-wednesday-december-10-at-235900">Final project (due Wednesday, December 10 at 23:59:00)</a></li>
+  <li><a href="#characteristics-of-distributions" id="toc-characteristics-of-distributions" class="nav-link active" data-scroll-target="#characteristics-of-distributions">Characteristics of distributions</a>
+  <ul class="collapse">
+  <li><a href="#distribution-of-common-quantities" id="toc-distribution-of-common-quantities" class="nav-link" data-scroll-target="#distribution-of-common-quantities">Distribution of common quantities</a></li>
+  <li><a href="#graphs-of-common-quantities" id="toc-graphs-of-common-quantities" class="nav-link" data-scroll-target="#graphs-of-common-quantities">Graphs of common quantities</a>
+  <ul class="collapse">
+  <li><a href="#length-of-rivers-in-the-u.s." id="toc-length-of-rivers-in-the-u.s." class="nav-link" data-scroll-target="#length-of-rivers-in-the-u.s.">Length of rivers in the U.S.</a></li>
+  <li><a href="#flower-sepal-width" id="toc-flower-sepal-width" class="nav-link" data-scroll-target="#flower-sepal-width">Flower sepal width</a></li>
+  <li><a href="#life-expetancy-in-2007" id="toc-life-expetancy-in-2007" class="nav-link" data-scroll-target="#life-expetancy-in-2007">Life expetancy in 2007</a></li>
+  </ul></li>
+  <li><a href="#height-activity" id="toc-height-activity" class="nav-link" data-scroll-target="#height-activity">Height activity</a></li>
+  <li><a href="#height-distribution" id="toc-height-distribution" class="nav-link" data-scroll-target="#height-distribution">Height distribution</a></li>
+  <li><a href="#closing-thoughts" id="toc-closing-thoughts" class="nav-link" data-scroll-target="#closing-thoughts">Closing thoughts</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -140,14 +151,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework</h1>
+<h1 class="title">Lecture 1.2 - Characteristics of distributions</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Professor MacDonald </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 28, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -157,30 +180,103 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="unit-1-homework-due-sunday-november-2-at-235900" class="level1">
-<h1>Unit 1 homework (due Sunday, November 2 at 23:59:00)</h1>
+<div class="cell" data-autorun="true">
+<pre class="{webr}"><code>#| label: setup
+#| include: false
+#| autorun: true
+
+theme_set(theme_classic())
+
+classroster &lt;- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+heights &lt;- read.csv("classheights.csv", fileEncoding="UTF-8-BOM")</code></pre>
+</div>
+<section id="characteristics-of-distributions" class="level1">
+<h1>Characteristics of distributions</h1>
+<section id="distribution-of-common-quantities" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-common-quantities">Distribution of common quantities</h2>
+<p>Many phenomena in nature have a relatively easily guessed distribution characteristics</p>
 <ul>
-<li><a href="homeworks/Unit 1 homework/unit.1.homework.zip">Unit 1 homework</a></li>
-<li>[Unit 1 homework sample solutions]</li>
+<li>What is the distribution of length of rivers in the U.S.?</li>
+<li>What is the distribution of width of flower sepals?</li>
+<li>What is the distribution of life expectancy across countries in 2007?</li>
 </ul>
-</section>
-<section id="unit-2-homework-due-sunday-november-16-at-235900" class="level1">
-<h1>Unit 2 homework (due Sunday, November 16 at 23:59:00)</h1>
+<p>Features to guess:</p>
 <ul>
-<li><a href="homeworks/Unit 2 homework/unit.2.homework.zip">Unit 2 homework</a></li>
-<li>[Unit 2 homework sample solutions]</li>
+<li>Shape</li>
+<li>Center</li>
+<li>Spread</li>
 </ul>
+<div class="cell">
+<pre class="{webr}"><code>#| label: pick1
+sample(classroster$name, 1)</code></pre>
+</div>
 </section>
-<section id="unit-3-exam-thursday-november-27-from-600-pm-to-715-pm" class="level1">
-<h1>Unit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)</h1>
+<section id="graphs-of-common-quantities" class="level2">
+<h2 class="anchored" data-anchor-id="graphs-of-common-quantities">Graphs of common quantities</h2>
+<section id="length-of-rivers-in-the-u.s." class="level3">
+<h3 class="anchored" data-anchor-id="length-of-rivers-in-the-u.s.">Length of rivers in the U.S.</h3>
+<div class="cell" data-caption="Graph of river lengths">
+<pre class="{webr}"><code>#| label: riverlength
+#| caption: "Graph of river lengths"
+ggplot(data.frame(rivers), aes(x=rivers)) + 
+  geom_histogram(fill="blue4", color="black") +
+  labs(x="Length in miles", y="count")</code></pre>
+</div>
 </section>
-<section id="final-project-due-wednesday-december-10-at-235900" class="level1">
-<h1>Final project (due Wednesday, December 10 at 23:59:00)</h1>
+<section id="flower-sepal-width" class="level3">
+<h3 class="anchored" data-anchor-id="flower-sepal-width">Flower sepal width</h3>
+<div class="cell" data-caption="Graph of flower sepal widths">
+<pre class="{webr}"><code>#| label: flowerwidth
+#| caption: "Graph of flower sepal widths"
+ggplot(iris, aes(x=Sepal.Width)) + 
+  geom_histogram(fill="blue4", color="black", bins=15) +
+  labs(x="Sepal width", y="Count")</code></pre>
+</div>
+</section>
+<section id="life-expetancy-in-2007" class="level3">
+<h3 class="anchored" data-anchor-id="life-expetancy-in-2007">Life expetancy in 2007</h3>
+<div class="cell" data-caption="Graph of life expectancies">
+<pre class="{webr}"><code>#| label: lifexpectancy
+#| caption: "Graph of life expectancies"
+gap2007 &lt;-gapminder %&gt;%
+  filter(year==2007)
+
+ggplot(gap2007, aes(x=lifeExp)) + 
+  geom_histogram(fill="blue4", color="black") +
+  labs(x="Life expectancy in years", y="Count")</code></pre>
+</div>
+</section>
+</section>
+<section id="height-activity" class="level2">
+<h2 class="anchored" data-anchor-id="height-activity">Height activity</h2>
+<p>What do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses.</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: pick2
+sample(classroster$name, 1)</code></pre>
+</div>
+</section>
+<section id="height-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="height-distribution">Height distribution</h2>
+<div class="cell" data-caption="Distribution of heights in our class">
+<pre class="{webr}"><code>#| label: heightdistribution
+#| caption: "Distribution of heights in our class"
+
+ggplot(heights, aes(x=heightincm)) +
+  geom_histogram()</code></pre>
+</div>
+</section>
+<section id="closing-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="closing-thoughts">Closing thoughts</h2>
 <ul>
-<li>[Final project]</li>
+<li>Many distributions can be guessed in advanced based on the data generating process</li>
+<li>You should have at least a guess as to what the distribution is before starting your exploratory data analysis</li>
+<li>Think carefully about what your variable is actually measuring</li>
+<li>Characteristics of distributions are <strong>summaries</strong> of the data, almost always obscure features of the data</li>
+<li>Don’t mislead your readers!!</li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
