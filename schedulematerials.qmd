@@ -121,7 +121,7 @@ Topics covered:
 
 -   Lab files: [Lab 2.1](labs/Lab%202.1/Lab%202.1.zip)
     -   Make sure to extract (unzip) the lab files before attempting to modify them!
-    -   Sample solution:[Lab 2.1 Sample Solution](labs/Lab%202.1/Lab.2.1.Sample.Solution.zip)
+    -   Sample solution:[Lab 2.1 Sample Solution](labs/Lab%202.1/Lab.2.1.Sample.Solutions.zip)
 
 ## Lecture 2.3: Regression Wisdom (Friday, November 7)
 
