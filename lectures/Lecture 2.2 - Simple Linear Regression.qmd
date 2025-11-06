@@ -33,13 +33,18 @@ global.data <- read.csv("Country_data.csv")
 classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
 
 global.data <- global.data %>% 
-  mutate(gdp.capita = World.Bank.Forecast.GDP.PPP / Population.2023)
+  mutate(gdp.capita = World.Bank.Forecast.GDP.PPP. / Population.2023 * 10,
+         hdi.score = HDI) %>% 
+  filter(if_all(c(gdp.capita, hdi.score), ~ !is.na(.)))
 
 global.data.nooutlier <- global.data %>%
-  filter(gdp.capita < 100000)
+  filter(gdp.capita > 1)
 
 global.data.log <- global.data %>%
   mutate(log.gdp.capita = log(gdp.capita))
+
+global.data.log.nooutlier <- global.data.log %>% 
+  filter(log.gdp.capita > -6)
 
 hdi.model <- lm(hdi.score ~ gdp.capita, data=global.data)
 global.data.augmented <- augment(hdi.model, global.data)
@@ -52,6 +57,10 @@ hdi.model.tidy.nooutlier <- tidy(hdi.model.nooutlier)
 hdi.model.log <- lm(hdi.score ~ log.gdp.capita, data=global.data.log)
 global.data.augmented.log <- augment(hdi.model.log, global.data.log)
 hdi.model.tidy.log <- tidy(hdi.model.log)
+
+hdi.model.log.nooutlier <- lm(hdi.score ~ log.gdp.capita, data=global.data.log.nooutlier)
+global.data.augmented.log.nooutlier <- augment(hdi.model.log.nooutlier, global.data.log.nooutlier)
+hdi.model.tidy.log.nooutlier <- tidy(hdi.model.log.nooutlier)
 ```
 
 ```{r}
@@ -61,13 +70,21 @@ hdi.model.tidy.log <- tidy(hdi.model.log)
 library(tidyverse)
 library(broom)
 
-global.data <- read.csv("datasets/HDI.2015.csv")
+global.data <- read.csv("datasets/Country_data.csv")
 
-global.data.nooutlier <- global.data %>%
-  filter(gdp.capita < 100000)
+global.data <- global.data %>% 
+  mutate(gdp.capita = World.Bank.Forecast.GDP.PPP. / Population.2023 * 10,
+         hdi.score = HDI) %>% 
+  filter(if_all(c(gdp.capita, hdi.score), ~ !is.na(.)))
 
 global.data.log <- global.data %>%
   mutate(log.gdp.capita = log(gdp.capita))
+
+global.data.nooutlier <- global.data %>%
+  filter(gdp.capita > 1)
+
+global.data.log.nooutlier <- global.data.log %>% 
+  filter(log.gdp.capita > -6)
 
 hdi.model <- lm(hdi.score ~ gdp.capita, data=global.data)
 global.data.augmented <- augment(hdi.model, global.data)
@@ -80,6 +97,10 @@ hdi.model.tidy.nooutlier <- tidy(hdi.model.nooutlier)
 hdi.model.log <- lm(hdi.score ~ log.gdp.capita, data=global.data.log)
 global.data.augmented.log <- augment(hdi.model.log, global.data.log)
 hdi.model.tidy.log <- tidy(hdi.model.log)
+
+hdi.model.log.nooutlier <- lm(hdi.score ~ log.gdp.capita, data=global.data.log.nooutlier)
+global.data.augmented.log.nooutlier <- augment(hdi.model.log.nooutlier, global.data.log.nooutlier)
+hdi.model.tidy.log.nooutlier <- tidy(hdi.model.log.nooutlier)
 ```
 
 
@@ -102,7 +123,6 @@ What do you expect the relationship between GDP per capita and HDI will be?
 
 ```{webr}
 #| label: picker0
-
 sample(classroster$name, 1)
 ```
 
@@ -111,10 +131,9 @@ sample(classroster$name, 1)
 ```{webr}
 #| label: fig-hdiscatterplot
 #| caption: "HDI as a function of GDP/cap"
-
 ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +
   geom_point() +
-  labs(x="GDP per capita", y="Human Development Index (HDI) score")
+  labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score")
 ```
 
 ### Smoother
@@ -122,10 +141,9 @@ ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +
 ```{webr}
 #| label: fig-hdismoother
 #| caption: "HDI as a function of GDP/cap with smoother"
-
 ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +
   geom_point() +
-  labs(x="GDP per capita", y="Human Development Index (HDI) score") +
+  labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") +
   geom_smooth(se=FALSE)
 ```
 
@@ -135,17 +153,15 @@ What do you think the intercept and the slope should be for a line of 'good' fit
 
 ```{webr}
 #| label: picker1
-
 sample(classroster$name, 1)
 ```
 
 ```{webr}
 #| label: fig-guessslope
 #| caption: "HDI as a function of GDP/cap"
-
 ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +
   geom_point() +
-  labs(x="GDP per capita", y="Human Development Index (HDI) score") +
+  labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") +
   geom_abline(intercept = 0, slope=0, color="blue")
 ```
 
@@ -156,10 +172,9 @@ ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +
 ```{webr}
 #| label: fig-leastsquares
 #| caption: "HDI as a function of GDP/cap with least squares line"
-
 ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +
   geom_point() +
-  labs(x="GDP per capita", y="Human Development Index (HDI) score") +
+  labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") +
   geom_smooth(method="lm", se=FALSE)
 ```
 
@@ -184,10 +199,9 @@ $\hat{y}= `r format(hdi.model.tidy$estimate[1], scientific=FALSE)` + `r format(h
 ```{webr}
 #| label: fig-leastsquares2
 #| caption: "HDI as a function of GDP/cap with least squares line"
-
 ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +
   geom_point() +
-  labs(x="GDP per capita", y="Human Development Index (HDI) score") +
+  labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") +
   geom_smooth(method="lm", se=FALSE)
 ```
 
@@ -229,12 +243,11 @@ Can easily plot the residuals, put the  "size of the miss" on the $y$ axis, and 
 ```{webr}
 #| label: fig-dataresiduals
 #| caption: "HDI model with residuals"
-
 ggplot(global.data.augmented, aes(gdp.capita, hdi.score)) + 
   geom_point() + 
   geom_smooth(method="lm", se=FALSE) +
   geom_segment(aes(xend = gdp.capita, yend = .fitted), linetype="dashed") + 
-  labs(x="GDP per capita", y="Human Development Index (HDI) score") 
+  labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") 
 ```
 
 ## Graphing the residuals
@@ -242,11 +255,10 @@ ggplot(global.data.augmented, aes(gdp.capita, hdi.score)) +
 ```{webr}
 #| label: fig-residualsplot
 #| caption: "HDI model residuals plot"
-
 ggplot(global.data.augmented, aes(gdp.capita, .resid)) + 
   geom_point() + 
   geom_hline(yintercept = 0, color = "blue", linetype='dashed') + 
-  labs(y = "Residuals", x="GDP per capita")
+  labs(y = "Residuals", x="GDP per capita (10000 USD) in PPP terms")
 ```
 
 ### Residuals vs. observed data
@@ -254,17 +266,16 @@ ggplot(global.data.augmented, aes(gdp.capita, .resid)) +
 ```{webr}
 #| label: fig-residualvsobserved
 #| caption: "Residuals vs. observed data"
-
 original <-
   ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +
   geom_point() +
-  labs(x="GDP per capita", y="Human Development Index (HDI) score") +
+  labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") +
   geom_smooth(method="lm", se=FALSE)
 
 resids <- ggplot(global.data.augmented, aes(gdp.capita, .resid)) + 
   geom_point() + 
   geom_hline(yintercept = 0, color = "blue", linetype='dashed') + 
-  labs(y = "Residuals", x="GDP per capita")
+  labs(y = "Residuals", x="GDP per capita (10000 USD) in PPP terms")
 
 grid.arrange(original, resids)
 ```
@@ -280,7 +291,6 @@ grid.arrange(original, resids)
 ```{webr}
 #| label: fig-residualstddev
 #| caption: "HDI model residuals distribution"
-
 ggplot(global.data.augmented, aes(x=.resid)) +
   geom_histogram(fill="blue4") +
   labs(x="Residuals", y="Count")
@@ -290,7 +300,6 @@ How would you interpret this histogram of the residuals?
 
 ```{webr}
 #| label: picker3
-
 sample(classroster$name, 1)
 ```
 
@@ -306,7 +315,6 @@ $R^2$ is just the return of $r$, the correlation coefficient. Remember:
 
 ```{webr}
 #| label: modelfit
-
 global.data.nooutlier <- global.data %>%
   filter(gdp.capita < 100000)
 
@@ -319,7 +327,6 @@ What do you think the $R^2$ will change to when we remove the outlier?
 
 ```{webr}
 #| label: picker4
-
 sample(classroster$name, 1)
 ```
 
@@ -327,7 +334,6 @@ sample(classroster$name, 1)
 
 ```{webr}
 #| label: correlationnooutlier
-
 round(cor(global.data.nooutlier$hdi.score, global.data.nooutlier$gdp.capita), digits=2)
 ```
 
@@ -356,7 +362,6 @@ Have we met these?
 
 ```{webr}
 #| label: picker5
-
 sample(classroster$name, 1)
 ```
 
@@ -366,7 +371,6 @@ sample(classroster$name, 1)
 
 ```{webr}
 #| label: logreexpress
-
 global.data.log <- global.data %>%
   mutate(log.gdp.capita = log(gdp.capita))
 
@@ -379,17 +383,15 @@ What will happen to the shape of the graph?
 
 ```{webr}
 #| label: picker6
-
 sample(classroster$name, 1)
 ```
 
 ```{webr}
 #| label: fig-logreexpressplot
 #| caption: "HDI model with log reexpression"
-
 ggplot(global.data.log, aes(x=log.gdp.capita, y=hdi.score)) +
   geom_point() +
-  labs(x="Log of GDP per capita", y="Human Development Index (HDI) score") +
+  labs(x="Log of GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") +
   geom_smooth(method="lm", se=FALSE)
 ```
 
@@ -399,29 +401,37 @@ Any guess as to the outlier?
 
 ```{webr}
 #| label: picker7
-
 sample(classroster$name, 1)
 ```
 
 ```{webr}
 #| label: fig-modeloutlier
 #| caption: "HDI model - outlier"
-
 ggplot(global.data.log, aes(x=log.gdp.capita, y=hdi.score)) +
-  geom_point() +
-  labs(x="Log of GDP per capita", y="Human Development Index (HDI) score") +
-  geom_smooth(method="lm", se=FALSE) +
-  geom_point(data=global.data.log %>% filter(log.gdp.capita > 9.5 & hdi.score < 0.61), color="red") +
-  geom_text(data=global.data.log %>% filter(log.gdp.capita > 9.5 & hdi.score < 0.61), aes(label=Country), nudge_y = -0.03)
+  geom_point(aes(color = log.gdp.capita < -6)) +  # color conditionally
+  scale_color_manual(values = c("FALSE" = "black", "TRUE" = "red")) +
+  geom_text(
+    data = subset(global.data.log, log.gdp.capita < -6),  # only label those < -6
+    aes(label = Country),
+    vjust = -0.5,
+    color = "red"
+  ) + 
+  labs(x="Log of GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") 
 ```
 
 ### Outlier
 
-![Equatorial Guinea map](images/Lecture 2.2/equatorial.guinea.map.jpg)
-
-![President's son](images/Lecture 2.2/son.jpg)
-
-![President's son's cars](images/Lecture 2.2/equatorial.guinea.cars.jpg)
+```{webr}
+#| label: outliers
+#| caption: "Outlier information"
+global.data.log %>% 
+  filter(log.gdp.capita < -6) %>% 
+  mutate(`World Bank PPP GDP estimate` = World.Bank.Forecast.GDP.PPP.*100000,
+         `Population 2023` = Population.2023,
+         `GDP per capita` = gdp.capita*100000) %>% 
+  select(c(Country, HDI, `World Bank PPP GDP estimate`, `Population 2023`, `GDP per capita`)) %>% 
+  kable()
+```
 
 
 ### Graphing the residuals - log
@@ -429,11 +439,10 @@ ggplot(global.data.log, aes(x=log.gdp.capita, y=hdi.score)) +
 ```{webr}
 #| label: fig-residualslog
 #| caption: "HDI model log/no outlier - residuals"
-
-ggplot(global.data.augmented.log, aes(log.gdp.capita, .resid)) + 
+ggplot(global.data.augmented.log.nooutlier, aes(log.gdp.capita, .resid)) + 
   geom_point() + 
   geom_hline(yintercept = 0, color = "blue", linetype='dashed') + 
-  labs(y = "Residuals", x="Log of GDP per capita")
+  labs(y = "Residuals", x="Log of GDP per capita (10000 USD) in PPP terms")
 ```
 
 ### Residuals standard deviation - log
@@ -441,16 +450,15 @@ ggplot(global.data.augmented.log, aes(log.gdp.capita, .resid)) +
 ```{webr}
 #| label: fig-residualsstddevlog
 #| caption: "HDI model log/no outlier - residuals distribution"
-
-ggplot(global.data.augmented.log, aes(x=.resid)) +
+ggplot(global.data.augmented.log.nooutlier, aes(x=.resid)) +
   geom_histogram(fill="blue4") +
   labs(x="Residuals", y="Count")
 ```
 
 ### $R^2$
 
-- The correlation coefficient: `r round(cor(global.data.log$hdi.score, global.data.log$log.gdp.capita), digits=2)`
-- Our $R^2$: `r as.numeric(round(glance(hdi.model.log)[1], digits=2))`
+- The correlation coefficient: `r round(cor(global.data.log.nooutlier$hdi.score, global.data.log.nooutlier$log.gdp.capita), digits=2)`
+- Our $R^2$: `r as.numeric(round(glance(hdi.model.log.nooutlier)[1], digits=2))`
 
 ### Regression assumptions
 
@@ -463,6 +471,5 @@ For the log reexpressed version, have the assumptions been met?
 
 ```{webr}
 #| label: picker8
-
 sample(classroster$name, 1)
 ```
