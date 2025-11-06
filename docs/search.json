@@ -88,7 +88,7 @@
     "href": "schedulematerials.html#lab-2.1-working-with-regressions-using-dplyr-thursday-november-6",
     "title": "Course Schedule and Class Materials",
     "section": "Lab 2.1: Working with regressions using dplyr (Thursday, November 6)",
-    "text": "Lab 2.1: Working with regressions using dplyr (Thursday, November 6)\n\nLab files: Lab 2.1\n\nMake sure to extract (unzip) the lab files before attempting to modify them!"
+    "text": "Lab 2.1: Working with regressions using dplyr (Thursday, November 6)\n\nLab files: Lab 2.1\n\nMake sure to extract (unzip) the lab files before attempting to modify them!\nSample solution:Lab 2.1 Sample Solution"
   },
   {
     "objectID": "schedulematerials.html#lecture-2.3-regression-wisdom-friday-november-7",
@@ -740,5 +740,278 @@
     "title": "R Manual",
     "section": "Inference for Difference between Two Samples",
     "text": "Inference for Difference between Two Samples\nThe R code for \\(t\\) tests is very similar to the code for hypothesis testing.\n\nfourcyl &lt;- mtcars %&gt;% \n  filter(cyl==4) %&gt;% \n  summarize(mean=mean(mpg),\n            len=length(mpg),\n            sd=sd(mpg))\n\neightcyl &lt;- mtcars %&gt;% \n  filter(cyl==8) %&gt;% \n  summarize(mean=mean(mpg),\n            len=length(mpg),\n            sd=sd(mpg))\n\ndiff.sd &lt;- sqrt(fourcyl$sd ^ 2 / fourcyl$len + eightcyl$sd ^ 2 / eightcyl$len)\ndiff.mpg.t  &lt;- (fourcyl$mean - eightcyl$mean) / diff.sd\n\n# Note that the df here is just an approximation; the textbook provides the correct formula.\n# The rule of thumb method from the the textbook recommends using the lowest df of the two samples\n# minus one.\ndiff.mpg.p  &lt;- 2 * pt(-abs(diff.mpg.t), df = min(c(fourcyl$len, eightcyl$len))-1)\n\ndiff.mpg.p\n\n[1] 1.847002e-05\n\n\nIn other words, the odds that, assuming the two samples have the same sample mean, the odds that we would see a difference between the two sample means this large or larger is effectively zero, therefore we can reject the null hypothesis.\nR does have a built-in method to do this calculation but you should understand how to achieve the same result by direct calcuation.\n\nfourcyl.data &lt;- mtcars %&gt;% \n  filter(cyl==4) %&gt;% \n  select(mpg)\n\neightcyl.data &lt;- mtcars %&gt;% \n  filter(cyl==8) %&gt;% \n  select(mpg)\n\nt.test(fourcyl.data$mpg, eightcyl.data, alternative = \"two.sided\" , mu = 0, var.equal = FALSE, conf.level = 0.95)\n\n\n    Welch Two Sample t-test\n\ndata:  fourcyl.data$mpg and eightcyl.data\nt = 7.5967, df = 14.967, p-value = 1.641e-06\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n  8.318518 14.808755\nsample estimates:\nmean of x mean of y \n 26.66364  15.10000 \n\n\nDue to the first method using a rule of thumb method for calculating the degrees of freedom, the result is slightly different but very close to the R function result."
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html",
+    "title": "Simple Linear Regression",
+    "section": "",
+    "text": "#| label: setup\n#| include: false\n#| autorun: true\n\ntheme_set(theme_classic())\n\nglobal.data &lt;- read.csv(\"Country_data.csv\")\nclassroster &lt;- read.csv(\"classroster.csv\", fileEncoding=\"UTF-8-BOM\")\n\nglobal.data &lt;- global.data %&gt;% \n  mutate(gdp.capita = World.Bank.Forecast.GDP.PPP. / Population.2023 * 10,\n         hdi.score = HDI) %&gt;% \n  filter(if_all(c(gdp.capita, hdi.score), ~ !is.na(.)))\n\nglobal.data.nooutlier &lt;- global.data %&gt;%\n  filter(gdp.capita &gt; 1)\n\nglobal.data.log &lt;- global.data %&gt;%\n  mutate(log.gdp.capita = log(gdp.capita))\n\nglobal.data.log.nooutlier &lt;- global.data.log %&gt;% \n  filter(log.gdp.capita &gt; -6)\n\nhdi.model &lt;- lm(hdi.score ~ gdp.capita, data=global.data)\nglobal.data.augmented &lt;- augment(hdi.model, global.data)\nhdi.model.tidy &lt;- tidy(hdi.model)\n\nhdi.model.nooutlier &lt;- lm(hdi.score ~ gdp.capita, data=global.data.nooutlier)  \nglobal.data.augmented.nooutlier &lt;- augment(hdi.model.nooutlier, global.data.nooutlier)\nhdi.model.tidy.nooutlier &lt;- tidy(hdi.model.nooutlier)\n\nhdi.model.log &lt;- lm(hdi.score ~ log.gdp.capita, data=global.data.log)\nglobal.data.augmented.log &lt;- augment(hdi.model.log, global.data.log)\nhdi.model.tidy.log &lt;- tidy(hdi.model.log)\n\nhdi.model.log.nooutlier &lt;- lm(hdi.score ~ log.gdp.capita, data=global.data.log.nooutlier)\nglobal.data.augmented.log.nooutlier &lt;- augment(hdi.model.log.nooutlier, global.data.log.nooutlier)\nhdi.model.tidy.log.nooutlier &lt;- tidy(hdi.model.log.nooutlier)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#line-of-best-fit",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#line-of-best-fit",
+    "title": "Simple Linear Regression",
+    "section": "Line of best fit",
+    "text": "Line of best fit\n\n\n\nHDI definition\n\n\nHow to describe the relationship between GDP per capita and HDI score?\nAs we learned:\n\nDirection\nForm\nStrength\nOutlier\n\nWhat do you expect the relationship between GDP per capita and HDI will be?\n\n#| label: picker0\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#scatterplot-of-gdp-per-capita-and-hdi",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#scatterplot-of-gdp-per-capita-and-hdi",
+    "title": "Simple Linear Regression",
+    "section": "Scatterplot of GDP per capita and HDI",
+    "text": "Scatterplot of GDP per capita and HDI\n\n#| label: fig-hdiscatterplot\n#| caption: \"HDI as a function of GDP/cap\"\nggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +\n  geom_point() +\n  labs(x=\"GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\")\n\n\nSmoother\n\n#| label: fig-hdismoother\n#| caption: \"HDI as a function of GDP/cap with smoother\"\nggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +\n  geom_point() +\n  labs(x=\"GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\") +\n  geom_smooth(se=FALSE)\n\n\n\nTaking a guess\nWhat do you think the intercept and the slope should be for a line of ‘good’ fit?\n\n#| label: picker1\nsample(classroster$name, 1)\n\n\n#| label: fig-guessslope\n#| caption: \"HDI as a function of GDP/cap\"\nggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +\n  geom_point() +\n  labs(x=\"GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\") +\n  geom_abline(intercept = 0, slope=0, color=\"blue\")\n\n\n\nLeast squares line\n\nSlope: 0.4498406, intercept: 0.6025812\n\n\n#| label: fig-leastsquares\n#| caption: \"HDI as a function of GDP/cap with least squares line\"\nggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +\n  geom_point() +\n  labs(x=\"GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\") +\n  geom_smooth(method=\"lm\", se=FALSE)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#linear-model-1",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#linear-model-1",
+    "title": "Simple Linear Regression",
+    "section": "Linear model",
+    "text": "Linear model\nIt’s better if we come up with a more formal model: \\(\\hat{y}= b_0 + b_1x\\)\n\\(\\hat{y}\\) is our predicted value \\(b_0\\) is the \\(y\\) intercept - the value when \\(x\\) is 0 \\(b_1\\) is the slope\n\nHelps with predictions\n\nFor values not in the sample, we can estimate their HDI score\n\nHelps assess model fit - we can compare different lines more easily\n\nMore specifically we can calculate the residuals\nResiduals are difference between our line and the actually observed value - how much our line ‘missed’ by\n\n\n\nLinear model for our data\n\\(\\hat{y}= 0.6025812 + 0.4498406x\\)\n\n#| label: fig-leastsquares2\n#| caption: \"HDI as a function of GDP/cap with least squares line\"\nggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +\n  geom_point() +\n  labs(x=\"GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\") +\n  geom_smooth(method=\"lm\", se=FALSE)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#least-squares-line-1",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#least-squares-line-1",
+    "title": "Simple Linear Regression",
+    "section": "Least squares line",
+    "text": "Least squares line\n\nBut how to calculate?\nMany different ways\n\nMake a line minimizing the least absolute deviations\nNon-parametric lines\nMake a line minimizing the sum of the squares of the deviations\n\nLeast squares line is most common\n\nAdvantages:\n\nEasy to calculate\nWell understood statistical properties\n\nDisadvantages:\n\nLine will be strongly influenced by outliers"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#examining-model-fit",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#examining-model-fit",
+    "title": "Simple Linear Regression",
+    "section": "Examining model fit",
+    "text": "Examining model fit\n\nChecking the residuals\nResidual standard deviation\n\\(R^2\\)\nChecking assumptions\n\n\nChecking the residuals\nAll real datasets have noise so the real formula is:\n\\(y = b_0 + b_1x + e\\)\nResidual = Observed - Predicted\n\n\\(e = y - \\hat{y}\\)\n\nCan easily plot the residuals, put the “size of the miss” on the \\(y\\) axis, and original data on the \\(x\\) axis\n\n\nResiduals - our data\n\n#| label: fig-dataresiduals\n#| caption: \"HDI model with residuals\"\nggplot(global.data.augmented, aes(gdp.capita, hdi.score)) + \n  geom_point() + \n  geom_smooth(method=\"lm\", se=FALSE) +\n  geom_segment(aes(xend = gdp.capita, yend = .fitted), linetype=\"dashed\") + \n  labs(x=\"GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\")"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#graphing-the-residuals",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#graphing-the-residuals",
+    "title": "Simple Linear Regression",
+    "section": "Graphing the residuals",
+    "text": "Graphing the residuals\n\n#| label: fig-residualsplot\n#| caption: \"HDI model residuals plot\"\nggplot(global.data.augmented, aes(gdp.capita, .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"blue\", linetype='dashed') + \n  labs(y = \"Residuals\", x=\"GDP per capita (10000 USD) in PPP terms\")\n\n\nResiduals vs. observed data\n\n#| label: fig-residualvsobserved\n#| caption: \"Residuals vs. observed data\"\noriginal &lt;-\n  ggplot(global.data, aes(x=gdp.capita, y=hdi.score)) +\n  geom_point() +\n  labs(x=\"GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\") +\n  geom_smooth(method=\"lm\", se=FALSE)\n\nresids &lt;- ggplot(global.data.augmented, aes(gdp.capita, .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"blue\", linetype='dashed') + \n  labs(y = \"Residuals\", x=\"GDP per capita (10000 USD) in PPP terms\")\n\ngrid.arrange(original, resids)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#residual-standard-deviation",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#residual-standard-deviation",
+    "title": "Simple Linear Regression",
+    "section": "Residual standard deviation",
+    "text": "Residual standard deviation\n\nSince the residuals are just another distribution, we can also examine their distribution\n\nWhat to look for: symmetrical, no skew/outliers\nStandard deviation not too large\n\n\n\nResidual standard deviation - our data\n\n#| label: fig-residualstddev\n#| caption: \"HDI model residuals distribution\"\nggplot(global.data.augmented, aes(x=.resid)) +\n  geom_histogram(fill=\"blue4\") +\n  labs(x=\"Residuals\", y=\"Count\")\n\nHow would you interpret this histogram of the residuals?\n\n#| label: picker3\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#r2",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#r2",
+    "title": "Simple Linear Regression",
+    "section": "\\(R^2\\)",
+    "text": "\\(R^2\\)\n\\(R^2\\) is just the return of \\(r\\), the correlation coefficient. Remember:\n\n\\(r\\) measures the strength of the association between \\(x\\) and \\(y\\)\n\nThat is, how reliably \\(x\\) varies with \\(y\\)\n\nThe correlation coefficient: 0.78\nOur \\(R^2\\): 0.61\n\n\n#| label: modelfit\nglobal.data.nooutlier &lt;- global.data %&gt;%\n  filter(gdp.capita &lt; 100000)\n\nhdi.model.nooutlier &lt;- lm(hdi.score ~ gdp.capita, data=global.data.nooutlier)  \nglobal.data.augmented.nooutlier &lt;- augment(hdi.model.nooutlier, global.data.nooutlier)\nhdi.model.tidy.nooutlier &lt;- tidy(hdi.model.nooutlier)\n\nWhat do you think the \\(R^2\\) will change to when we remove the outlier?\n\n#| label: picker4\nsample(classroster$name, 1)\n\n\nThe correlation coefficient for a model with the outlier removed:\n\n\n#| label: correlationnooutlier\nround(cor(global.data.nooutlier$hdi.score, global.data.nooutlier$gdp.capita), digits=2)\n\n\nOur \\(R^2\\) with the outlier removed:\n\n\n#| label: rsquarednooutlier\n\nas.numeric(round(glance(hdi.model.nooutlier)[1], digits=2))"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#how-to-interpret-r2",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#how-to-interpret-r2",
+    "title": "Simple Linear Regression",
+    "section": "How to interpret \\(R^2\\)",
+    "text": "How to interpret \\(R^2\\)\n\nIf there are no serious outliers and the relationship is linear, can provide a useful measure of how strongly the predictor variable is related to the response variable\n\nThe two assumptions above are quite strong - you need to always draw a picture to make sure they are true!\nShould not be interpreted as how strongly \\(x\\) causes \\(y\\), we only know about association."
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#regression-assumptions",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#regression-assumptions",
+    "title": "Simple Linear Regression",
+    "section": "Regression assumptions",
+    "text": "Regression assumptions\n\nQuantitative variable assumption\nStraight enough condition\nOutlier condition\nDoes the plot thicken condition?\n\nHave we met these?\n\n#| label: picker5\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.2 - Simple Linear Regression.html#reexpressions",
+    "href": "lectures/Lecture 2.2 - Simple Linear Regression.html#reexpressions",
+    "title": "Simple Linear Regression",
+    "section": "Reexpressions",
+    "text": "Reexpressions\n\nLog reexpressed\n\n#| label: logreexpress\nglobal.data.log &lt;- global.data %&gt;%\n  mutate(log.gdp.capita = log(gdp.capita))\n\nhdi.model.log &lt;- lm(hdi.score ~ log.gdp.capita, data=global.data.log)\nglobal.data.augmented.log &lt;- augment(hdi.model.log, global.data.log)\nhdi.model.tidy.log &lt;- tidy(hdi.model.log)\n\nWhat will happen to the shape of the graph?\n\n#| label: picker6\nsample(classroster$name, 1)\n\n\n#| label: fig-logreexpressplot\n#| caption: \"HDI model with log reexpression\"\nggplot(global.data.log, aes(x=log.gdp.capita, y=hdi.score)) +\n  geom_point() +\n  labs(x=\"Log of GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\") +\n  geom_smooth(method=\"lm\", se=FALSE)\n\n\n\nLog reexpressed - outlier\nAny guess as to the outlier?\n\n#| label: picker7\nsample(classroster$name, 1)\n\n\n#| label: fig-modeloutlier\n#| caption: \"HDI model - outlier\"\nggplot(global.data.log, aes(x=log.gdp.capita, y=hdi.score)) +\n  geom_point(aes(color = log.gdp.capita &lt; -6)) +  # color conditionally\n  scale_color_manual(values = c(\"FALSE\" = \"black\", \"TRUE\" = \"red\")) +\n  geom_text(\n    data = subset(global.data.log, log.gdp.capita &lt; -6),  # only label those &lt; -6\n    aes(label = Country),\n    vjust = -0.5,\n    color = \"red\"\n  ) + \n  labs(x=\"Log of GDP per capita (10000 USD) in PPP terms\", y=\"Human Development Index (HDI) score\") \n\n\n\nOutlier\n\n#| label: outliers\n#| caption: \"Outlier information\"\nglobal.data.log %&gt;% \n  filter(log.gdp.capita &lt; -6) %&gt;% \n  mutate(`World Bank PPP GDP estimate` = World.Bank.Forecast.GDP.PPP.*100000,\n         `Population 2023` = Population.2023,\n         `GDP per capita` = gdp.capita*100000) %&gt;% \n  select(c(Country, HDI, `World Bank PPP GDP estimate`, `Population 2023`, `GDP per capita`)) %&gt;% \n  kable()\n\n\n\nGraphing the residuals - log\n\n#| label: fig-residualslog\n#| caption: \"HDI model log/no outlier - residuals\"\nggplot(global.data.augmented.log.nooutlier, aes(log.gdp.capita, .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"blue\", linetype='dashed') + \n  labs(y = \"Residuals\", x=\"Log of GDP per capita (10000 USD) in PPP terms\")\n\n\n\nResiduals standard deviation - log\n\n#| label: fig-residualsstddevlog\n#| caption: \"HDI model log/no outlier - residuals distribution\"\nggplot(global.data.augmented.log.nooutlier, aes(x=.resid)) +\n  geom_histogram(fill=\"blue4\") +\n  labs(x=\"Residuals\", y=\"Count\")\n\n\n\n\\(R^2\\)\n\nThe correlation coefficient: 0.95\nOur \\(R^2\\): 0.91\n\n\n\nRegression assumptions\nFor the log reexpressed version, have the assumptions been met?\n\nQuantitative variable assumption\nStraight enough condition\nOutlier condition\nDoes the plot thicken condition?\n\n\n#| label: picker8\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "",
+    "text": "#| label: setup\n#| include: false\n#| autorun: true\n\ntheme_set(theme_classic())\n\ntitanic.survival &lt;- read.csv(\"titanic.survival.csv\")\nclassroster &lt;- read.csv(\"classroster.csv\", fileEncoding=\"UTF-8-BOM\")\nnbaboxscores &lt;- read.csv(\"nba2024.2025.csv\")\n\ntitanic.survival &lt;- titanic.survival %&gt;% \n  rename(name = v1)\n\ntitanic_mean &lt;- mean(titanic.survival$age)\ntitanic_sd &lt;- sd(titanic.survival$age)\n\nnbaboxscores &lt;- nbaboxscores %&gt;% \n  mutate(at.home = case_when(home.away == \"home\" ~ TRUE,\n                             TRUE ~ FALSE),\n         div = case_when(team_id == \"BOS\" ~ \"East\",\n                         team_id == \"NYK\" ~ \"East\",\n                         team_id == \"MIL\" ~ \"East\",\n                         team_id == \"CLE\" ~ \"East\",\n                         team_id == \"ORL\" ~ \"East\",\n                         team_id == \"IND\" ~ \"East\",\n                         team_id == \"PHI\" ~ \"East\",\n                         team_id == \"MIA\" ~ \"East\",\n                         team_id == \"CHI\" ~ \"East\",\n                         team_id == \"ATL\" ~ \"East\",\n                         team_id == \"BKN\" ~ \"East\",\n                         team_id == \"TOR\" ~ \"East\",\n                         team_id == \"CHA\" ~ \"East\",\n                         team_id == \"WAS\" ~ \"East\",\n                         team_id == \"DET\" ~ \"East\",\n                         TRUE ~ \"West\"))"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#thoughts-about-comparing-groups",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#thoughts-about-comparing-groups",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Thoughts about comparing groups",
+    "text": "Thoughts about comparing groups\n\nFaceted histograms are a reasonable display to show distributions by a categorical variable\n\nHowever these displays become hard to interpret when the number of levels in a category grows large\n\nMuch easier to interpret is side by side box plots\nBox plots capture many important characteristics of a distribution into a summary display\nThink carefully about how you treat outliers\nLet’s view data from the 2024-2025 NBA season"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#two-group-comparison",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#two-group-comparison",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Two group comparison",
+    "text": "Two group comparison\n\nNBA side-by-side histograms of points scored by W/L\n\n#| label: nbacomparisonhist\n#| caption: \"Histogram of points scored in NBA games\"\npts.data &lt;- nbaboxscores %&gt;% \n  group_by(winner) %&gt;% \n  mutate(mean.pts = mean(PTS))\n\nggplot(pts.data, aes(x=PTS)) +\n  geom_histogram(fill=\"blue4\") +\n  labs(x=\"Points scored\", y=\"Count\") +\n  facet_wrap(~winner) + \n  geom_vline(aes(xintercept = mean.pts, group=winner), color=\"red\") +\n  scale_x_continuous(sec.axis = sec_axis(~ . , name = \"Did the team win?\", breaks = NULL, labels = NULL))\n\n\n\nNBA boxplot comparison of points scored by W/L\n\n#| label: nbacomaprisonbox\n#| caption: \"Boxplot of points scored in NBA games\"\nggplot(nbaboxscores, aes(x=winner,y=PTS)) + \n  geom_boxplot() + \n  labs(x=\"Team won the game?\", y=\"Points scored\")\n\n\n\nNBA boxplot comparison of points scored by W/L (better)\n\n#| label: nbacomparisonbetterbox\n#| caption: \"Beter boxplot of points scored in NBA games\"\nggplot(nbaboxscores, aes(x=winner,y=PTS)) + \n  geom_boxplot(fill=\"light blue\") + \n  labs(x=\"Team won the game?\", y=\"Points scored\") + \n  coord_flip()"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#many-group-comparison",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#many-group-comparison",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Many group comparison",
+    "text": "Many group comparison\n\nNBA side-by-side histograms of points scored by team\n\n#| label: nbateamcomparisonhist\n#| caption: \"Histogram of points scored by team\"\nggplot(nbaboxscores, aes(x=PTS)) +\n  geom_histogram(fill=\"blue4\") +\n  labs(x=\"Points scored by team\", y=\"Count\") +\n  facet_wrap( ~ as.factor(team_id))\n\n\n\nNBA boxplot comparison of points scored by team (better)\n\n#| label: nbateamcomparisonbox\n#| caption: \"Boxplot of points scored by team\"\nggplot(nbaboxscores, aes(x=as.factor(team_id),y=PTS, fill=div)) + \n  geom_boxplot() + \n  labs(x=\"Team\", y=\"Points scored by team\") +\n   scale_x_discrete(guide = guide_axis(n.dodge=2)) +\n   guides(fill=guide_legend(title=\"Division\"))\n\n\n\nYour turn\n\nWork with your neighbor to analyze a different set of statistics\n\nCan be by division or not\nRemember the key features of distributions\n\nShape\nCenter\nSpread\n\n\nInterpret your results\nVariable definitions:\n\nMP: minutes played\nFG: field goal baskets made\nFGA: field goal baskets attempted\nFG.: field goal percentage\nX3P: three pointers made\nX3PA: three pointers attempted\nFT: free throws made\nFTA: free throws attempted\nFT.: free throw percentage\nORB: offensive rebounds\nDRB: defensive rebounds\nTRB: total rebounds\nAST: assists\nSTL: steals\nBLK: blocks\nTOV: turnovers\nPF: personal fouls\nPTS: points scored\n\n\n\n#| label: nbateamdescribe\n#| caption: \"Information about the NBA dataset\"\n# Get a list of variable names\nnames(nbaboxscores)\n\n# Take a quick look at the data\nglimpse(nbaboxscores)\n\n\n#| label: picker1\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#checking-outliers---assists",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#checking-outliers---assists",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking outliers - assists",
+    "text": "Checking outliers - assists\n\nOutliers - assists\n\n#| label: assistsoutlier\n#| caption: \"Assists outliers\"\nggplot(nbaboxscores, aes(x=AST)) +\n  geom_histogram(fill=\"blue4\", binwidth=1) +\n  labs(x=\"Assists\", y=\"Count\")\n\n\n\nAssists &gt; 40 - true outliers?\n\n#| label: assistsoutliercheck\n#| caption: \"Assists outliers - specific cases\"\nnbaboxscores %&gt;% \n    filter(AST &gt; 40) %&gt;%\n    select(game_id, team_id, home.away, PTS, TRB, gameDate)\n\n\n#| label: picker2\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#checking-outliers---points",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#checking-outliers---points",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking outliers - points",
+    "text": "Checking outliers - points\n\nOutliers - points\n\n#| label: pointsoutliers\n#| caption: \"Points outliers\"\nggplot(nbaboxscores, aes(x=PTS)) +\n  geom_histogram(fill=\"blue4\", binwidth=1) +\n  labs(x=\"Points\", y=\"Count\")\n\n\n\nPoints by team &gt; 150 - true outliers?\n\n#| label: pointsoutliercheck\n#| caption: \"Points outliers - specific cases\" \nnbaboxscores %&gt;% \n    filter(PTS &gt; 150) %&gt;%\n    select(game_id, team_id, home.away, PTS, TRB, gameDate)\n\n\n#| label: picker3\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#in-summary",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#in-summary",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "In summary",
+    "text": "In summary\n\nThink about which kind of display is appropriate for comparing distributions\nWhen conditioning on a categorical variable, boxplots are usually better\nBut boxplots lose information\nThink carefully about omitting outliers\nOutliers may reveal important information about your dataset!"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#titanic-passengers-and-the-normal-distribution",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#titanic-passengers-and-the-normal-distribution",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Titanic passengers and the Normal distribution",
+    "text": "Titanic passengers and the Normal distribution\n\n\n\nTitanic\n\n\n\nDataset of passengers on the Titanic\n\n#| label: datastructure\n#| caption: \"Titanic survival dataset structure\"\nkable(head(titanic.survival))\n\n\nWhat are your expectations for how age should be distributed?\n\n\n#| label: picker4\nsample(classroster$name, 1)\n\n\nWe are going to violate our first three rules:\n\nMake a picture\nMake a picture\nMake a picture\n\n\n\n\nWere the passenger ages normally distributed?\nTo answer that question, we need some information about the distribution\nRemember, our main information about distributions is:\n\nShape\nCenter\nSpread\n\n\n\nInformation about age\n\nStandard deviation: 14.4\nMean: 29.9\nNormal model: \\(N(\\mu, \\sigma) = N(29.9,14.4)\\)\n\n\\(\\mu\\) is the theoretical mean\n\\(\\sigma\\) is the theoretical standard deviation\nThese values define the data generating process\nWe only see some values of the data generating process, but if we saw infinite values, the mean would be \\(\\mu\\) and the sd would be \\(\\sigma\\)\nMore on this in the second half of class\n\nHow can we check normality using this information?\n\n\n#| label: picker5\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#checking-normality",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#checking-normality",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking normality",
+    "text": "Checking normality\n\nThinking about normality\n\nWe can check normality by comparing the quantiles of our data with that of the known quantiles of the normal distribution\n\nWe know approximately 95% of the data lies within two standard deviations\nTherefore, 2.5% data with the lowest values lie outside of -2 standard deviations and 2.5% of data with the highest values lie outside of 2 standard deviations\n\nSimilarly, we know the same information for data within one standard deviation (16%, 68%, 16%)\n\n\n\nData within standard deviations\n\n#| label: agesd\n#| caption: \"Standard deviations of age\"\nnorm.dist &lt;- rnorm(1000000)\n\nds.low &lt;- density(norm.dist, from=min(norm.dist), to=-2)\nds.high &lt;- density(norm.dist, from=2, to=max(norm.dist))\nds.low.mid &lt;- density(norm.dist, from=min(norm.dist), to=-1)\nds.high.mid &lt;- density(norm.dist, from=1, to=max(norm.dist))\n\nds.low.data &lt;- data.frame(x = ds.low$x, y = ds.low$y)\nds.low.mid.data &lt;- data.frame(x = ds.low.mid$x, y = ds.low.mid$y)\nds.high.data &lt;- data.frame(x = ds.high$x, y = ds.high$y)\nds.high.mid.data &lt;- data.frame(x = ds.high.mid$x, y = ds.high.mid$y)\n\ntwo.sd &lt;- ggplot(data.frame(norm.dist), aes(norm.dist)) + \n  geom_density() + \n  geom_vline(xintercept=-2, color=\"dark red\") +\n  geom_vline(xintercept=2, color=\"dark red\") +\n  geom_area(data = ds.low.data, aes(x = x, y = y), fill=\"blue4\", color=\"blue4\") +\n  geom_area(data = ds.high.data, aes(x = x, y = y), fill=\"blue4\", color=\"blue4\") + \n  labs(x=\"Standard deviations\", y=\"Density\") + \n  scale_x_continuous(breaks=c(-3, -2, -1, 0, 1, 2, 3), limits=(c(-4, 4))) +\n  annotate(geom=\"text\", x=-3, y=0.1, label=\"~2.5% of the data\") +\n  annotate(geom=\"text\", x=3, y=0.1, label=\"~2.5% of the data\") +\n  annotate(geom=\"text\", x=0, y=0.1, label=\"~95% of the data\") \n  \none.sd &lt;- ggplot(data.frame(norm.dist), aes(norm.dist)) +\n  geom_density() +\n  geom_vline(xintercept = -1, color=\"dark red\") +\n  geom_vline(xintercept = 1, color=\"dark red\") +\n  geom_area(data = ds.low.mid.data, aes(x = x, y = y), fill=\"blue4\", color=\"blue4\") +\n  geom_area(data = ds.high.mid.data, aes(x = x, y = y), fill=\"blue4\", color=\"blue4\") +\n  labs(x=\"Standard deviations\", y=\"Density\") + \n  scale_x_continuous(breaks=c(-3, -2, -1, 0, 1, 2, 3), limits=(c(-4, 4))) +\n  annotate(geom=\"text\", x=-2.5, y=0.2, label=\"~16% of the data\") +\n  annotate(geom=\"text\", x=2.5, y=0.2, label=\"~16% of the data\") +\n  annotate(geom=\"text\", x=0, y=0.2, label=\"~68% of the data\") \n\ngrid.arrange(two.sd, one.sd)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#checking-against-the-data",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#checking-against-the-data",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking against the data",
+    "text": "Checking against the data\n\nHistogram of ages from the data\n\n#| label: agehist\n#| caption: \"Theoretical vs. actual age distributions\"\nnorm.dist.titanic &lt;- rnorm(1000000, mean=titanic_mean, sd=titanic_sd)\nnorm.dist.titanic &lt;- data.frame(norm.dist.titanic)\n\nggplot(titanic.survival, aes(x=age)) + \n  geom_histogram(aes(y=..density..), fill=\"blue4\") +\n  geom_vline(xintercept=titanic_mean, color=\"dark red\") + \n  geom_density(data=norm.dist.titanic, aes(norm.dist.titanic), color=\"dark red\") +\n  labs(x=\"Age\", y=\"Count\") +\n  scale_x_continuous(limits=c(-10, 80))\n\n\n\nNormality and scaling\n\nNote that normality does not depend on the size of the standard deviation or the size of the mean\nCould easily change the units to be months instead of years\n\nMean would increase a lot\nStandard deviation would increase a lot\nHowever, amount of observations within each standard deviation would stay the same"
+  },
+  {
+    "objectID": "lectures/Lecture 1.3 - Advanced distributions.html#final-thoughts-on-normality",
+    "href": "lectures/Lecture 1.3 - Advanced distributions.html#final-thoughts-on-normality",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Final thoughts on normality",
+    "text": "Final thoughts on normality\n\nWhen is the normal distribution useful?\n\nWhen we know a data-generating process is normally distributed we don’t even need to sample the population\n\nCan find out exactly how much data is between a certain number of standard deviations\n\nWhen we expect a data-generating process to be normally distributed, can test for deviations from normality\n\nIn the case of Titanic passengers, some parts of the distribution were more bunched up, others more spread out\n\nA lot of our statistical techniques require or work better when the data is ‘roughly’ normal\n\nWill detail these in the coming weeks\n\nWe can transform our data to be closer to normal\n\nNote that transformations won’t work if the data has multiple modes, can only correct skew\n\n\n\n\nWhat transformation would be helpful for age?\n\n#| label: agehist2\n#| caption: \"Transformation check\"\nggplot(titanic.survival, aes(x=age)) + \n  geom_histogram(fill=\"blue4\") +\n  labs(x=\"Age\", y=\"Count\")\n\n\n#| label: picker6\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "",
+    "text": "#| label: setup\n#| include: false\n#| autorun: true\n\ntheme_set(theme_classic())\n\nclassroster &lt;- read.csv(\"classroster.csv\", fileEncoding=\"UTF-8-BOM\")\nheights &lt;- read.csv(\"classheights.csv\", fileEncoding=\"UTF-8-BOM\")"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#distribution-of-common-quantities",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#distribution-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Distribution of common quantities",
+    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread\n\n\n#| label: pick1\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#graphs-of-common-quantities",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#graphs-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Graphs of common quantities",
+    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n#| label: riverlength\n#| caption: \"Graph of river lengths\"\nggplot(data.frame(rivers), aes(x=rivers)) + \n  geom_histogram(fill=\"blue4\", color=\"black\") +\n  labs(x=\"Length in miles\", y=\"count\")\n\n\n\nFlower sepal width\n\n#| label: flowerwidth\n#| caption: \"Graph of flower sepal widths\"\nggplot(iris, aes(x=Sepal.Width)) + \n  geom_histogram(fill=\"blue4\", color=\"black\", bins=15) +\n  labs(x=\"Sepal width\", y=\"Count\")\n\n\n\nLife expetancy in 2007\n\n#| label: lifexpectancy\n#| caption: \"Graph of life expectancies\"\ngap2007 &lt;-gapminder %&gt;%\n  filter(year==2007)\n\nggplot(gap2007, aes(x=lifeExp)) + \n  geom_histogram(fill=\"blue4\", color=\"black\") +\n  labs(x=\"Life expectancy in years\", y=\"Count\")"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-activity",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-activity",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height activity",
+    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses.\n\n#| label: pick2\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-distribution",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#height-distribution",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height distribution",
+    "text": "Height distribution\n\n#| label: heightdistribution\n#| caption: \"Distribution of heights in our class\"\n\nggplot(heights, aes(x=heightincm)) +\n  geom_histogram()"
+  },
+  {
+    "objectID": "lectures/Lecture 1.2 - Characteristics of distributions.html#closing-thoughts",
+    "href": "lectures/Lecture 1.2 - Characteristics of distributions.html#closing-thoughts",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Closing thoughts",
+    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "",
+    "text": "#| label: setup\n#| include: false\n#| autorun: true\n\ntheme_set(theme_classic())\n\nkc.houses &lt;- read.csv(\"king.county.sales.recent.csv\")\nclassroster &lt;- read.csv(\"classroster.csv\", fileEncoding=\"UTF-8-BOM\")\n\nkc.houses &lt;- kc.houses %&gt;% \n  mutate(view = ifelse(rowSums(across(starts_with(\"view\"))) &gt; 0, 1, 0)) %&gt;% \n  mutate(wfnt = factor(wfnt, levels=c(0, 1), labels=c(\"Not on waterfront\", \"On waterfront\"))) %&gt;% \n  mutate(view = factor(view, levels=c(0, 1), labels=c(\"No view\", \"View\")))"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#exercise-1",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#exercise-1",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nIn your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.\n\n0.95\n0.75\n0.5\n0.25\n0.0\n-0.25\n-0.5\n-0.75\n-0.95\n\nPick a few of these and draw by hand what you expect these graphs to look like.\n\n#| label: pick1\n\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#exercise-2",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#exercise-2",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Exercise 2",
+    "text": "Exercise 2\n\n\n\nSeattle"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#viewing-an-example-relationship",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#viewing-an-example-relationship",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Viewing an example relationship",
+    "text": "Viewing an example relationship\n\nFirst, what is our expectation about the relationship between bedrooms and square feet?\nDirection?\nForm?\nStrength?\nOutliers?"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#bedrooms-and-square-feet---direction",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#bedrooms-and-square-feet---direction",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - direction",
+    "text": "Bedrooms and square feet - direction\nA scatterplot is the easiest way to check for direction. In this case, the direction is obvious\n\n#| label: bsqdirection\n\n# should we jitter this?\nggplot(kc.houses, aes(x=sqft, y=beds)) + \n  geom_point() +\n  labs(x=\"Square feet\", y=\"Beds\")"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#bedrooms-and-square-feet---form",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#bedrooms-and-square-feet---form",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - form",
+    "text": "Bedrooms and square feet - form\n\n#| label: bsqform\n\nggplot(kc.houses, aes(x=sqft, y=beds)) + \n  geom_point(position=\"jitter\") +\n  geom_smooth(method=\"loess\", se=FALSE) +\n  labs(x=\"Square feet\", y=\"Beds\")"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#bedrooms-and-square-feet---strength",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#bedrooms-and-square-feet---strength",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - strength",
+    "text": "Bedrooms and square feet - strength\n\n#| label: bsqstrength\n\nggplot(kc.houses, aes(x=sqft, y=beds)) + \n  geom_point(position=\"jitter\") +\n  geom_smooth(method=\"loess\", se=FALSE) +\n  labs(x=\"Square feet\", y=\"Beds\")\n\n\nCorrelation as a measure of strength\n\n#| label: bsqcorr\n\nkable(kc.houses %&gt;% \n        summarize(cor(beds, sqft, use=\"complete.obs\")), col.names=\"Correlation\")\n\nThis correlation is a little weaker than perhaps what we expected\n\nIn general, mechanically generated processes with little noise can have very high correlations\nMost correlations of social or real world processes rarely have above moderate correlation due to noise"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#bedrooms-and-square-feet---outlier",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#bedrooms-and-square-feet---outlier",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - outlier",
+    "text": "Bedrooms and square feet - outlier\nAgain, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values\n\n#| label: bsqoutlierplot\n\nggplot(kc.houses, aes(x=sqft, y=beds)) + \n  geom_point(position=\"jitter\") +\n  geom_smooth(method=\"loess\", se=FALSE)  +\n  geom_text(data=kc.houses %&gt;% filter(sqft &gt; 2500 & beds &lt; 1), # Filter data first\n    aes(label=beds), vjust=0.5, color=\"red\") +\n  labs(x=\"Square feet\", y=\"Beds\")\n\nTo investigate if this outlier matters, we can check some other values of the observation.\n\n#| label: bsqoutlier\n\nkable(\n  kc.houses %&gt;%\n    filter(sqft &gt; 2500 & beds &lt; 1) %&gt;%\n    select(c(sale_price, sqft, sqft_lot, beds, stories)))\n\nWhat kind of outlier do you think this is? Why?\n\nOutlier - actual observation\n\n#| label: bsqoutlier1\n\nkable(\n  kc.houses %&gt;%\n    filter(sqft &gt; 2500 & beds &lt; 1) %&gt;%\n    select(c(latitude, longitude)))\n\n\n\n\nLocation\n\n\n\n\n\nHouse details\n\n\n\n\nData with no outlier\n\n#| label: bsqnooutlier\n#| message: false\n\n#should we jitter this?\nkc.houses %&gt;%\n  filter(sqft &lt; 2500 | beds &gt; 1) %&gt;%  \n  ggplot(aes(x=sqft, y=beds)) + \n    geom_point(position=\"jitter\") +\n    geom_smooth(method=\"loess\", se=FALSE) +\n    labs(x=\"Square feet\", y=\"Beds\")\n\n\n\nDescribing the association\n\nDirection - positive\nForm - linear\nStrength - moderate/strong\nOutliers - one possible\n\nOutlier:\n\n#| label:  bsqoutlier2\n\nkable(\n  kc.houses %&gt;%\n    filter(sqft&gt;2500 & beds &lt; 1) %&gt;%\n    select(c(sale_price, sqft, sqft_lot, latitude, longitude)))"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#does-bed-and-square-feeet-relationship-match-expectations",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#does-bed-and-square-feeet-relationship-match-expectations",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Does bed and square feeet relationship match expectations?",
+    "text": "Does bed and square feeet relationship match expectations?\n\nSeems to, more or less, the larger the house, the more bedrooms, so the relationship is positive\nThe relationship is fairly linear, indicating a strong relationship\nRelationship is moderate\nOutliers don’t seem like it is a problem\n\nHowever….\n\nWhat are some possible lurking variables that influence the relationship of bedrooms and bathrooms?\n\n\n#| label: pick2\n\nsample(classroster$name, 1)"
+  },
+  {
+    "objectID": "lectures/Lecture 2.1 - Association and correlation.html#relationship-reexpressed",
+    "href": "lectures/Lecture 2.1 - Association and correlation.html#relationship-reexpressed",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Relationship reexpressed?",
+    "text": "Relationship reexpressed?\nOne final issue to consider is if this relationship should be reexpressed - made more linear.\n\n#| label: bsqreexpress\n\nkc.houses %&gt;%\n  mutate(log.sqft = log(sqft)) %&gt;%\n  ggplot(aes(x=log.sqft, y=beds)) + \n    geom_point() +\n    geom_smooth(method=\"lm\", se=FALSE) +\n    labs(x=\"Log square feet\", y=\"Beds\")\n\n\nSeems clearer\n\n\nYour turn\nWith your partner, develop some expectations about some of the variables in the kc.houses dataset might be related.\nVariables:\n\n#| label: datasetdetails\n\nkc.houses.short &lt;- kc.houses %&gt;% \n  select(c(sale_price, year_built, sqft, sqft_lot, beds, bath_full, view, stories))\n\nkable(names(kc.houses.short), col.names=c(\"Variables\"))\n\nWhat to do with your partner:\n\nWrite down an interesting question we think we might be able to answer by examining a relationship in this dataset\nChoose the variables that you think might be able to answer this question\nWrite down what you expect the relationship to be between these two variables based on any prior knowledge\nDecide which variable is the response variable and which is the predictor variable\nMake a scatterplot using one of the codeblocks in the previous section and identify the features of the association\n\n\n#| label: pick3\nsample(classroster$name, 1)"
   }
 ]
