@@ -1,0 +1,563 @@
+---
+title: "Regression Wisdom"
+author: "Professor MacDonald"
+date: "11/7/2025"
+engine: knitr
+format: 
+    live-html: 
+      output-file: lecture.2.3.html
+webr:
+  cell-options:
+    autorun: false
+    warning: false
+  packages:
+    - tidyverse
+    - knitr
+    - broom
+    - gridExtra
+    - kableExtra
+  resources:
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/auto.mpg.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/classroster.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{webr setup}
+#| label: setup
+#| include: false
+#| autorun: true
+
+theme_set(theme_classic())
+set.seed(23232323)
+
+auto.mpg <- read.csv("auto.mpg.csv")
+classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+```
+
+# Regression issues
+
+* Model fit measures
+* Extrapolation
+* Outliers
+  + Leverage
+  + Influence
+* Interpreting a regression
+
+## Model fit measures
+
+### Regression results
+
+Many parts of these results we already know how to interpret. For now, we will focus on model fit measures.
+
+- $R^2$
+- $s_e$
+- Residuals 5 number summary
+
+```{webr}
+#| label: basicmodel
+#| caption: "Simple regression model"
+mod.dis <- lm(mpg ~ displacement, data=auto.mpg)
+summary(mod.dis)
+```
+
+### Residuals - histogram
+
+```{webr}
+#| label: basicmodelresids
+#| caption: "Simple model residual distribution"
+auto.mpg.augment <- augment(mod.dis, auto.mpg)
+
+ggplot(auto.mpg.augment, aes(x=.resid)) +
+  geom_histogram(fill="blue4", color="black") + 
+  labs(y = "Count", x="Residual size") +
+  geom_vline(xintercept=0, color="red")
+```
+
+How would you interpret this residual histogram?
+
+```{webr}
+#| label: picker1
+sample(classroster$name, 1)
+```
+
+### Correlation review
+
+* Recall that a correlation, $r$, ranges from -1 to 1 and indicates the strength of the association between two variables
+  + If $r$ is -1 or 1 exactly, there is no variation, the correlation indicate the relationship is a straight line
+  + Note that $r$ does not indicate the slope
+  + If $r$ is 0, that means there is no relationship
+    - What is the slope in that case?
+    - $\hat{y} = b_0 + b_1*x$
+
+```{webr}
+#| label: picker2
+sample(classroster$name, 1)
+```
+
+### R squared definition
+
+* $R^2$ is the square of $r$ in a two variable case, so between 0 and 1
+
+* But, unlike $r$, $R^2$ is meaningful in multivariate models
+
+* Percent of the total variation in the data explained by the model
+
+* Sum of the errors from our model divided by sum of errors from the 'braindead' model of $\hat{y}=\bar{y}$
+
+* If the $R^2$ is small, that means our model doesn't beat the 'braindead' model by very much
+
+```{webr}
+#| label: braindead
+#| caption: "Base model vs. predictor variable model"
+ggplot(auto.mpg, aes(x=displacement, y=mpg)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  geom_hline(yintercept=mean(auto.mpg$mpg), color="red") +
+  labs(x="Displacement", y="MPG")
+```
+
+### When is $R^2$ "big enough"?
+
+* $R^2$ is useful, but only so much so
+
+* The closer $R^2$ is to 1, the more useful the model
+  + How close is "close"?
+  + Depends on the situation
+  + $R^2$ of 0.5 might be very bad for a model that uses height to predict weight
+    - Should be more closely related
+  + $R^2$ of 0.5 might be very good for a model using test scores to predict future income
+    - Response variable has a lot of factors that shape it and a lot of noise
+
+* **Good practice**: always report $R^2$ and $s_e$ and let readers analyze the results as well
+
+## Extrapolating
+
+* The farther a new value is from the range of $x$, the less trust we should place in the predicted value of $y$
+
+* Venture into new $x$ territory, called extrapolation
+
+* **Dubious**: questionable assumption that nothing changes about the relationship between x and y changes for extreme values of $x$
+
+### Predicting MPG of cars
+
+1970s data on automobiles
+
+```{webr}
+#| label: mpgmodel
+#| caption: "MPG modeled with weight"
+summary(lm(data=auto.mpg, mpg ~ weight), digits=3)
+```
+
+### Predicting the Maybach
+
+![Maybach](images/Lecture 2.3/maybach.exterior.jpg)
+
+### Predicting the Maybach
+
+![Maybach interior](images/Lecture 2.3/maybach.interior.jpg)
+
+### Predicting the Maybach
+
+
+![Maybach North Korea visit](images/Lecture 2.3/maybach.nk.jpg)
+
+Will our model do a good job predicting this car's miles per gallon?
+
+```{webr}
+#| label: picker3
+sample(classroster$name, 1)
+```
+
+### Can we predict this car's MPG using our model?
+
+Weight: 6581 pounds  
+  
+Model: 
+$\hat{y} = b_0 + b_1*x$  
+$\hat{y} = 46.3 + -0.00767*6581$  
+$\hat{y} = -4.17$ miles per gallon
+
+* Nonsense prediction
+
+### Be wary of out of sample predictions
+
+```{webr}
+#| label: mpgmodelgraph
+#| caption: "MPG model picture"
+ggplot(auto.mpg, aes(x=weight, y=mpg)) +
+  geom_point() +
+  geom_point(aes(x=6581, y=-4.17), color="red") +
+  labs(x="Weight", y="Miles per gallon", title="Miles per gallon as a function of weight") + 
+  annotate(geom="text", x=6500, y=-2.5, label="Maybach", color="red")
+```
+
+## Outliers
+
+### Height and net worth
+
+First, we can create random data for both a variable called `height` and one called `log net worth` but in the below example they are defined to be random and have no relation to each other.
+
+```{webr}
+#| label: basicwealthmodel
+#| caption: "Shoe and wealth definition"
+height <- rnorm(20, mean=178, sd=7.6)
+log.net.worth <- rnorm(20, mean=13.95, sd=3)
+ht.nw <- data.frame(height, log.net.worth)
+```
+
+```{webr}
+#| label: basicshoemodelgraph
+#| caption: "Shoe and wealth graph"
+# Run the model
+base.mod <- lm(log.net.worth ~ height, data=ht.nw)
+
+# Get the r squared
+r.sq <- base.mod %>% 
+  glance() %>% 
+  pull(r.squared)
+
+r.sq <- round(r.sq, 2)
+
+# Get the slope
+slope <- base.mod %>% 
+  tidy() %>% 
+  pull(estimate)
+
+slope <- round(slope[2], 3)
+
+base.label <- paste("Slope is ", slope, ", r2 is ", r.sq) 
+
+ggplot(ht.nw, aes(x=height, y=log.net.worth)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(x="Height", y="Log net worth", title="Log net worth as a a function of height") +
+  annotate(geom="text", x=185, y=19, label=base.label, color="red")
+```
+
+### Adding Steve Ballmer
+
+![Steve Ballmer](images/Lecture 2.3/ballmer.jpeg)
+
+```{webr}
+#| label: ballmermodel
+#| caption: "Adding Steve Ballmer"
+height.sb <- c(height, 196)
+log.net.worth.sb <- c(log.net.worth, 25.3)
+ht.nw.sb <- data.frame(height.sb, log.net.worth.sb)
+```
+
+What will happen to the slope and $R^2$?
+
+```{webr}
+#| label: picker4
+sample(classroster$name, 1)
+```
+
+### Steve Ballmer plot
+
+```{webr}
+#| label: ballmerplot
+#| caption: "Relationship with Steve Ballmer added"
+# Run the model
+sb.mod <- lm(log.net.worth.sb ~ height.sb, data=ht.nw.sb)
+
+# Get the r squared
+r.sq <- sb.mod %>% 
+  glance() %>% 
+  pull(r.squared)
+
+r.sq <- round(r.sq, 2)
+
+# Get the slope
+slope <- sb.mod %>% 
+  tidy() %>% 
+  pull(estimate)
+
+slope <- round(slope[2], 3)
+
+sb.label <- paste("Slope is ", slope, ", r2 is ", r.sq) 
+
+ggplot(ht.nw.sb, aes(x=height.sb, y=log.net.worth.sb)) +
+  geom_point() +
+  geom_point(data=ht.nw.sb %>% filter(log.net.worth.sb > 25), color="red") +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(x="Height", y="Log net worth", title="Log net worth as a a function of height with Steve Ballmer") +
+  annotate(geom="text", x=185, y=10, label=sb.label, color="red") + 
+  annotate(geom="text", x=193, y=24.5, label="Steve Ballmer", color="red")
+```
+
+### Adding Warren Buffet    
+
+![Warren Buffet](images/Lecture 2.3/warrenbuffet.jpeg)
+
+```{webr}
+#| label: buffetmodel
+#| caption: "Adding Warren Buffet"
+height.wb <- c(height, 178)
+log.net.worth.wb <- c(log.net.worth, 25.7)
+ht.nw.wb <- data.frame(height.wb, log.net.worth.wb)
+```
+
+```{webr}
+#| label: buffetplot
+#| caption: "Relationship with Warren Buffet added"
+# Run the model
+wb.mod <- lm(log.net.worth.wb ~ height.wb, data=ht.nw.wb)
+
+# Get the r squared
+r.sq <- wb.mod %>% 
+  glance() %>% 
+  pull(r.squared)
+
+r.sq <- round(r.sq, 2)
+
+# Get the slope
+slope <- wb.mod %>% 
+  tidy() %>% 
+  pull(estimate)
+
+slope <- round(slope[2], 3)
+
+wb.label <- paste("Slope is ", slope, ", r2 is ", r.sq) 
+
+ggplot(ht.nw.wb, aes(x=height.wb, y=log.net.worth.wb)) +
+  geom_point() +
+  geom_point(data=ht.nw.wb %>% filter(log.net.worth.wb > 25), color="red") +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(x="Log net worth", y="Height", title="Log net worth as a a function of height with Warren Buffet") +
+  annotate(geom="text", x=185, y=10, label=wb.label, color="red") + 
+  annotate(geom="text", x=178, y=25, label="Warren Buffet", color="red")
+```
+
+### Adding Aleksandar Vučić
+
+![Aleksandar Vučić](images/Lecture 2.3/serbia.png)
+
+```{webr}
+#| label: vucicmodel
+#| caption: "Adding Aleksandar Vučić"
+height.av <- c(height, 198)
+log.net.worth.av <- c(log.net.worth, 14.0)
+ht.nw.av <- data.frame(height.av, log.net.worth.av)
+```
+
+```{webr}
+#| label: vucicplot
+#| caption: "Relationship with Aleksandar Vučić added"
+# Run the model
+av.mod <- lm(log.net.worth.av ~ height.av, data=ht.nw.av)
+
+# Get the r squared
+r.sq <- av.mod %>% 
+  glance() %>% 
+  pull(r.squared)
+
+r.sq <- round(r.sq, 2)
+
+# Get the slope
+slope <- av.mod %>% 
+  tidy() %>% 
+  pull(estimate)
+
+slope <- round(slope[2], 3)
+
+av.label <- paste("Slope is ", slope, ", r2 is ", r.sq) 
+
+ggplot(ht.nw.av, aes(x=height.av, y=log.net.worth.av)) +
+  geom_point() +
+  geom_point(data=ht.nw.av %>% filter(height.av >= 198), color="red") +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(x="Log net worth", y="Height", title="Log net worth as a a function of height with Aleksandar Vučić") +
+  annotate(geom="text", x=185, y=10, label=av.label, color="red") +
+  annotate(geom="text", x=195, y=14.3, label="Aleksandar Vučić", color="red")
+```
+
+### Leverage vs. influence
+
+* A data point whose $x$ value is far from the mean of the rest of the $x$ values is said to have high leverage.
+
+* Leverage points have the potential to strongly pull on the regression line. 
+
+* A point is influential if omitting it from the analysis changes the model enough to make a meaningful difference.
+
+* Influence is determined by
+  + The residual 
+  + The leverage
+
+### Warnings
+
+* Influential points can hide in plots of residuals.
+
+* Points with high leverage pull line close to them, so have small residuals.
+
+* See points in scatterplot of original data.
+
+* Find regression model with and without the points.
+
+## Interpreting a regression
+
+### Step 1: develop some expectations
+
+Horsepower vs. MPG
+
+* More powerful engines probably are less fuel efficient
+
+* Relationship is likely roughly linear
+
+* The exact relationship depends on the efficiency of the engine
+  + Could be noisy
+
+### Step 2: make a picture
+
+```{webr}
+#| label: mpgplot
+#| caption: "Horsepower vs. mpg relationship"
+ggplot(auto.mpg, aes(x=horsepower, y=mpg)) + 
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  labs(x="Horsepower", y="Miles per gallon", title="Miles per gallon as a function of horsepower")
+```
+
+### Step 3: check the conditions
+
+* Quantitative variable condition
+
+* Straight enough condition
+
+* Outlier condition
+
+* Does the plot thicken
+
+* **Conclusion:**?
+
+```{webr}
+#| label: picker5
+sample(classroster$name, 1)
+```
+
+### Step 4: identify the units
+
+* Miles per gallon: amount of miles you can travel on one gallon of gas, a measure of efficiency. 
+  + Most gasoline-using cars have MPG between 10-40, higher being better
+  
+* Horsepower: power of the engine. 
+  + Typical values for standard cars are in the 100-200 range, higher meaning more powerful
+
+### Step 5: intepret the slope of the regression line
+
+```{webr}
+#| label: mpgregsummary
+#| caption: "MPG model"
+lm(data=auto.mpg, mpg ~ horsepower) %>%
+  tidy() %>%
+  select(c(term, estimate)) %>%
+  kbl(digits=3, col.names=c("Term", "Estimate")) %>% 
+  kable_styling()
+```
+
+* For every one unit increase in horsepower, miles per gallon decreases by about -0.15 units
+  + Is that a lot or a little?
+
+```{webr}
+#| label: picker6
+sample(classroster$name, 1)
+```
+
+### Step 6: determine reasonable values for the predictor variable
+
+```{webr}
+#| label: mpgmodunits
+#| caption: "Horsepower distribution information"
+auto.mpg %>%
+  summarize(min = min(horsepower, na.rm=TRUE), q1 = quantile(horsepower, p=0.25, na.rm=TRUE), median=median(horsepower, na.rm=TRUE), q3 = quantile(horsepower, p=0.75, na.rm=TRUE), max(horsepower, na.rm=TRUE)) %>%
+  kbl(col.names=c("Min", "Q1", "Median", "Q3", "Max")) %>% 
+  kable_styling()
+```
+
+### Step 7: interpret the intercept
+
+```{webr}
+#| label: mpgmodintercept
+#| caption: "MPG model summary"
+lm(data=auto.mpg, mpg ~ horsepower) %>%
+  tidy() %>%
+  select(c(term, estimate)) %>%
+  kbl(digits=3, col.names=c("Term", "Estimate")) %>% 
+  kable_styling()
+```
+
+### Step 8: solve for reasonable predictor values
+
+Horsepower = Q1 = 75:  
+
+$\hat{y} = b_0 + b_1*x$  
+$\hat{y} = 39.94 + -0.158*100$  
+$\hat{y} = 28.09$  
+
+Horsepower = Median = 93.5:  
+
+$\hat{y} = b_0 + b_1*x$  
+$\hat{y} = 39.94 + -0.158*100$  
+$\hat{y} = 25.17$  
+
+Horsepower = Q3 = 126:  
+
+$\hat{y} = b_0 + b_1*x$  
+$\hat{y} = 39.94 + -0.158*100$  
+$\hat{y} = 20.03$
+
+### Step 9: interpret the residuals and identify their units
+
+```{webr}
+#| label: mpgresids
+#| caption: "MPG model residuals"
+mod <- lm(data=auto.mpg, mpg ~ horsepower, na.action = na.exclude)
+auto.mpg.augment <- augment(mod, auto.mpg)
+
+ggplot(auto.mpg.augment, aes(x=horsepower, y=.resid)) +
+  geom_point() + 
+  geom_hline(yintercept = 0, color = "blue", linetype='dashed') + 
+  labs(y = "Residual error", x="Horsepower")
+```
+
+### Step 10: view the distribution of the residuals
+
+```{webr}
+#| label: mpgresidsdist
+#| caption: "MPG model residuals distribution"
+auto.mpg.augment <- augment(mod, auto.mpg)
+
+ggplot(auto.mpg.augment, aes(x=.resid)) +
+  geom_histogram(fill="blue4") + 
+  labs(x = "Residual size", y="Count", title="Residuals from a model of MPG as a function of HP")
+```
+
+### Step 11: interpret the residual standard error
+
+```{webr}
+#| label: mpgresidsse
+#| caption: "MPG model summary"
+summary(mod, digits=3)
+```
+
+### Step 12: interpret the R squared
+
+```{webr}
+#| label: mpgrsquared
+#| caption: "MPG model r squared"
+summary(mod, digits=3)
+```
+
+### Step 13: think about confounders
+
+* What are some confounders, or "lurking variables"?
+  + Categorical
+  + Quantitative
+
+```{webr}
+#| label: picker7
+sample(classroster$name, 1)
+```
+
+
