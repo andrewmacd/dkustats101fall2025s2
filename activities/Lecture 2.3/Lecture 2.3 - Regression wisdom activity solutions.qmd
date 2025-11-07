@@ -12,6 +12,14 @@ format:
 #| include: false
 
 # Put any setup code here
+library(tidyverse)
+library(kableExtra)
+library(modelsummary)
+library(broom)
+
+theme_set(theme_minimal())
+
+hurricanes <- read.csv("hurricanes.csv")
 ```
 
 ![](hurricane.jpeg){height=50% fig-align="center"}
@@ -33,17 +41,122 @@ Interpreting the output of regression tables is an essential skill for a statist
 These steps are steps that every statistical modeler should take when analyzing data.
 
 1.  Before starting, write a sentence or two on your expectation of the relationship -- what direction will it be, how strongly will the two be related, and does the predictor variable have a large or small impact on the response variable.
+
+> Let's take `LF.WindsKPH` as the predictor and `BaseDam2014` as the response variable
+
 2.  What are the units of the predictor and response variable?
+
+> Speed in KPH and US 2014 dollars.
+
 3.  Draw a scatterplot of the relationship between the two variables. Does it appear that one variable needs to be reexpressed? If so, find the best reexpression possible (the data may not look very pretty even after reinterpretation, your goal is to make the relationship as linear as possible)
+
+```{r}
+#| label: fig-winddmgscatter
+#| fig-cap: "Wind speed vs. damage"
+#| echo: false
+
+ggplot(hurricanes, aes(x=LF.WindsMPH, y=BaseDam2014)) +
+  geom_point() +
+  labs(x="Wind speed (kph)", y="Base damage (2014 USD)")
+```
+
+> Yes, does look like it could benefit from a reexpression.
+
+```{r}
+#| label: fig-logwinddmgscatter
+#| fig-cap: "Wind speed vs. log damage"
+#| echo: false
+
+hurricanes <- hurricanes %>% 
+  mutate(log.dmg.2014 = log(BaseDam2014))
+
+ggplot(hurricanes, aes(x=LF.WindsMPH, y=log.dmg.2014)) +
+  geom_point() +
+  labs(x="Wind speed (kph)", y="Base damage (Log 2014 USD)")
+```
+
+> Log transformed damage looks (somewhat) better
+
 4.  Conduct and view the results of your regression. Store it in a nice table using the `modelsummary()` command.
+
+```{r}
+#| label: simplemodel
+#| echo: false
+
+mod <- lm(data=hurricanes, log.dmg.2014~LF.WindsKPH)
+
+modelsummary(mod)
+```
+
 5.  Interpret the slope of the regression line -- does a one unit change in the predictor variable lead to a large or small change in the response variable?
+
+> A one-unit change in windspeed (1 km/h windspeed increase) predicts a 0.03 log change in damage. In casual terms, we can say that it results in about a 3% increase in predicted damage.
+
 6.  What are reasonable values for the predictor variables? For what range of $x$ would our best fit line have meaning and when would it not?
+
+> Reasonable values (in this context) would be something like 80 km/hr to 200 km/hr. Lower speed probably won't produce much (any?) damage and higher is not physically possible.
+
 7.  Interpret the intercept. Does it have meaning in this case?
+
+> It is the amount of damage when the windspeed is zero, which makes no sense.
+
 8.  Solve for the predicted value of the response variable at Q1 and Q3 of the predictor variable. Does moving from Q1 to Q3 of the predictor variable result in a large change (in your opinion) in the response variable?
+
+
+
 9.  Draw a box plot by hand of the residuals based on the regression results you can see from `summary(<your model name>)`. Does the boxplot suggest any problems? What are the units?
+
+```{r}
+#| label: fig-boxplotresids
+#| caption: "Boxplot of residuals of the model: windspeed vs. log 2014 USD damage"
+#| echo: false
+
+hurricane.resids <- augment(mod, hurricanes)
+
+ggplot(hurricane.resids, aes(x=.resid)) +
+  geom_boxplot() +
+  labs(x="Residual size") +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()
+)
+```
+
+> While not drawn by hand, we can see the residuals look roughly symmetrical with only one significant outlier.
+
 10. Interpret the residual standard error from these same results -- how big or small is it?
+
+```{r}
+#| label: modelsummarystderr
+
+summary(mod)$sigma
+exp(summary(mod)$sigma)
+```
+
+
+> The standard error indicates the average miss is about 2.1 log units (or about 8.1 unlogged units). Given that the reasonable range of logged damage goes from about 4 to 8, that indicates a rather large 'average' miss.
+
 11. Make a scatterplot of the fitted values ($\hat{y}$) vs. the residuals with a line at the 0 value of the $y$ axis. Interpret this plot.
+
+```{r}
+#| label: fig=residsplot
+#| fig-cap: "Residuals plot of the model: windspeed vs. log 2014 USD damage"
+#| echo: false
+
+ggplot(hurricane.resids, aes(x=.fitted, y=.resid)) +
+  geom_point() +
+  geom_hline(yintercept=0, color = "red", linetype = "dashed") +
+  labs(x="Fitted values", y="Residuals")
+```
+
+> Overall, there does not appear to be any non-linearities in the residuals. However, there does appear to be a significant Plot Thickens condition problem.
+
 11. Interpret the $R^2$ Specifically, how much of the variance in the response variable is this model explaining?
+
+```{r}
+#| 
+```
+
+
 13. What is some more information you'd like to know before making a final conclusion about the relationship between the two variables? Do you think there are any lurking variables?
 
 # Real data
