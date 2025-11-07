@@ -1,0 +1,612 @@
+---
+title: "Unit 1 homework sample solution"
+author: "Anonymous"
+date: "11/02/2025"
+subtitle: DKU Stats 101 Fall 2025 Session 2
+format: pdf
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+# Make sure that your data file is in the same location as where you have saved this document
+epl <- read.csv("epl.stats.cleaned.csv")
+```
+
+# Questions
+
+## Question 1: Displaying and describing the data (25 points)
+
+For this investigation, we are going to examine the distribution of goals.
+
+### 1a. Investigating offensive shots
+
+Using the Think-Show-Tell framework from the textbook, investigate the distribution of `home_shots` and `away_shots`.
+
+Note: I recommend you use the internet to look up how a shot is defined in football
+
+> *Think*
+>
+> The variables `home_shots` and `away_shots` record the total number of attempts made by the home and away teams to score in each football match. A shot refers to any intentional attempt to score, regardless of whether it results in a goal. Both variables are quantitative counts.
+>
+> I expect home teams to take more shots on average than away teams because of the home advantage, which often comes from factors such as crowd support, familiarity with the field, and reduced travel fatigue.
+>
+> To investigate the distribution of these variables, histograms can show the overall distribution and possible skewness, while boxplots allow for a clear comparison of the central tendency and spread between home and away teams. A summary statistics table can also help highlight differences in their averages, variability, and range.
+>
+> *Show*
+
+```{r}
+#| label: fig-q1a-hist
+#| echo: false
+#| warning: false
+#| fig-cap: "Histogram of shots taken by home and away teams"
+#| fig-subcap:
+#| - "Home Shots"
+#| - "Away Shots"
+
+ggplot(epl, aes(x = home_shots)) +
+  geom_histogram(fill = "lightblue", color = "black") +
+  labs(x = "Home Shots", y = "Count") +
+  theme_minimal()
+
+ggplot(epl, aes(x = away_shots)) +
+  geom_histogram(fill = "orange", color = "black") +
+  labs(x = "Away Shots", y = "Count") +
+  theme_minimal()
+```
+
+```{r}
+#| label: fig-q1a-boxplot
+#| echo: false
+#| warning: false
+#| fig-cap: "Boxplot of shots taken by home and away teams"
+
+ggplot(epl) +
+  geom_boxplot(aes(y = home_shots, x = "Home Shots"), fill = "lightblue", color = "black") +
+  geom_boxplot(aes(y = away_shots, x = "Away Shots"), fill = "orange", color = "black") +
+  labs(x = "Team Type", y = "Number of Shots") +
+  theme_minimal()
+```
+
+```{r}
+#| label: tbl-q1a-stats
+#| echo: false
+#| tbl-cap: "Statistics of variables: home_shots and away_shots"
+
+home.fivenum <- fivenum(epl$home_shots)
+away.fivenum <- fivenum(epl$away_shots)
+home.sumdata <- append(home.fivenum, length(na.omit(epl$home_shots)), after = 0)
+home.sumdata <- append(home.sumdata, sd(epl$home_shots, na.rm = TRUE), after = 1)
+home.sumdata <- append(home.sumdata, mean(epl$home_shots, na.rm = TRUE), after = 2)
+
+away.sumdata <- append(away.fivenum, length(na.omit(epl$away_shots)), after = 0)
+away.sumdata <- append(away.sumdata, sd(epl$away_shots, na.rm = TRUE), after = 1)
+away.sumdata <- append(away.sumdata, mean(epl$away_shots, na.rm = TRUE), after = 2)
+
+names <- c("Count", "Std Dev", "Mean", "Min", "25%", "Median", "75%", "Max")
+
+home.table <- data.frame(Statistic = names, Home_Shots = home.sumdata)
+away.table <- data.frame(Statistic = names, Away_Shots = away.sumdata)
+
+shots.sum.table <- cbind(home.table, Away_Shots = away.table$Away_Shots)
+
+kbl(shots.sum.table, digits = 2) %>%
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-q1a-outliers
+#| echo: false
+#| tbl-cap: "Outliers of the variables: home_shots and away_shots"
+
+Q1_home <- quantile(epl$home_shots, 0.25, na.rm = TRUE)
+Q3_home <- quantile(epl$home_shots, 0.75, na.rm = TRUE)
+IQR_home <- Q3_home - Q1_home
+upper_home <- Q3_home + 1.5 * IQR_home
+
+Q1_away <- quantile(epl$away_shots, 0.25, na.rm = TRUE)
+Q3_away <- quantile(epl$away_shots, 0.75, na.rm = TRUE)
+IQR_away <- Q3_away - Q1_away
+upper_away <- Q3_away + 1.5 * IQR_away
+
+epl %>%
+  filter(home_shots > upper_home | away_shots > upper_away) %>%
+  select(home_team, away_team, home_shots, away_shots) %>%
+  arrange(desc(home_shots)) %>%
+  kbl(col.names = c("Home Team", "Away Team", "Home Shots", "Away Shots")) %>%
+  kable_styling()
+```
+
+> *Tell*
+>
+> From Figure 1, we can observe that the distributions of `home_shots` and `away_shots` are unimodal and slightly right-skewed. Most matches fall between 5 and 20 shots, with home teams extending further to the right. On average, home teams take more shots (mean = 13.56, median = 13) than away teams (mean = 11.47, median = 11), which aligns with the expectation of a modest home advantage.
+>
+> As shown in Figure 2, home teams display a slightly wider spread and several upper outliers, reflecting a few high-shot matches. As shown in Table 1, the standard deviation is about 5.6 for home teams and 5.0 for away teams, indicating moderate variability. The interquartile ranges suggest that most matches fall within a consistent range of shots for both sides. Table 2 also shows that a small number of matches exceed 29 home or 25 away shots, representing genuine high-offense performances rather than data errors.
+
+### 1b. Investigating goals
+
+Using the Think-Show-Tell framework from the textbook (example on page 71), investigate the distribution of `home_goals` and `away_goals`.
+
+> *Think*
+>
+> The variables `home_goals` and `away_goals` represent the total number of goals scored by the home and away teams in each match. A goal is recorded when the ball completely crosses the goal line within the frame, following the official rules of football. Both variables are quantitative count variables.
+>
+> I expect the distributions of both variables to be right-skewed, since most matches have only a few goals while high-scoring games are relatively rare. On average, home teams are expected to score slightly more goals than away teams, which would be consistent with the modest home advantage observed in the previous question.
+>
+> To investigate these variables, histograms can show the overall goal distribution, while boxplots can compare the central tendency and spread between home and away teams. A summary statistics table can also provide a clear numerical comparison of averages, variation, and range.
+>
+> *Show*
+
+```{r}
+#| label: fig-q1b-hist
+#| echo: false
+#| warning: false
+#| fig-cap: "Histogram of goals scored by home and away teams"
+#| fig-subcap:
+#| - "Home Goals"
+#| - "Away Goals"
+
+ggplot(epl, aes(x = home_goals)) +
+  geom_histogram(fill = "lightblue", color = "black", bins = 10) +
+  scale_x_continuous(breaks = 0:max(epl$home_goals)) + 
+  labs(x = "Home Goals", y = "Count") +
+  theme_minimal()
+
+
+ggplot(epl, aes(x = away_goals)) +
+  geom_histogram(fill = "orange", color = "black", bins = 10) +
+  scale_x_continuous(breaks = 0:max(epl$away_goals)) +
+  labs(x = "Away Goals", y = "Count") +
+  theme_minimal()
+```
+
+```{r}
+#| label: fig-q1b-boxplot
+#| echo: false
+#| warning: false
+#| fig-cap: "Boxplot comparing the distributions of home_goals and away_goals"
+
+ggplot(epl) +
+  geom_boxplot(aes(y = home_goals, x = "Home Goals"), fill = "lightblue", color = "black") +
+  geom_boxplot(aes(y = away_goals, x = "Away Goals"), fill = "orange", color = "black") +
+  labs(x = "Team Type", y = "Number of Goals") +
+  theme_minimal()
+```
+
+```{r}
+#| label: tbl-q1b-stats
+#| echo: false
+#| tbl-cap: "Statistics of variables: home_goals and away_goals"
+
+homegoals.fivenum <- fivenum(epl$home_goals)
+awaygoals.fivenum <- fivenum(epl$away_goals)
+
+homegoals.sumdata <- append(homegoals.fivenum, length(na.omit(epl$home_goals)), after = 0)
+homegoals.sumdata <- append(homegoals.sumdata, sd(epl$home_goals, na.rm = TRUE), after = 1)
+homegoals.sumdata <- append(homegoals.sumdata, mean(epl$home_goals, na.rm = TRUE), after = 2)
+
+awaygoals.sumdata <- append(awaygoals.fivenum, length(na.omit(epl$away_goals)), after = 0)
+awaygoals.sumdata <- append(awaygoals.sumdata, sd(epl$away_goals, na.rm = TRUE), after = 1)
+awaygoals.sumdata <- append(awaygoals.sumdata, mean(epl$away_goals, na.rm = TRUE), after = 2)
+
+names <- c("Count", "Std Dev", "Mean", "Min", "25%", "Median", "75%", "Max")
+
+
+homegoals.table <- data.frame(Statistic = names, Home_Goals = homegoals.sumdata)
+awaygoals.table <- data.frame(Statistic = names, Away_Goals = awaygoals.sumdata)
+
+goals.sum.table <- cbind(homegoals.table, Away_Goals = awaygoals.table$Away_Goals)
+
+kbl(goals.sum.table, digits = 2) %>%
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-q1b-outliers
+#| echo: false
+#| tbl-cap: "Possible outliers of the variables: home_goals (> 5) or away_goals (> 5)"
+
+epl %>%
+  filter(home_goals > 5 | away_goals > 5) %>%
+  select(c(home_team, away_team, home_goals, away_goals)) %>%
+  arrange(desc(home_goals)) %>%
+  kbl(col.names = c("Home Team", "Away Team", "Home Goals", "Away Goals")) %>%
+  kable_styling()
+```
+
+> *Tell*
+>
+> As shown in Figure 3, the distributions of `home_goals` and `away_goals` are unimodal and strongly right-skewed, matching the expectation that most matches have only a few goals while high-scoring games are rare. Home teams score slightly more on average (mean = 1.50, median = 1) than away teams (mean = 1.29, median = 1), reflecting the modest home advantage as I expected.
+>
+> Figure 4 shows similar medians for both groups, but away goals have a slightly wider spread, while home goals include more extreme outliers. As shown in Table 3, standard deviations around 1.3 indicate limited variability, with most matches falling between 0 and 2 goals. Table 4 shows that games exceeding five goals are rare and mostly occur at home, suggesting that high-scoring matches are exceptional but genuine. Overall, the results align with expectations: football matches are generally low-scoring, and home teams tend to achieve slightly higher goal totals.
+
+### 1d. Thinking about your results
+
+Consider the results of 1b. and 1c. together. What can we understand about these offensive statistics?
+
+> Answers will vary here, good quality effort to interpret investigation of this question is required.
+
+## Question 2: Comparing groups (25 points)
+
+One popular theory about why teams have a home field advantage is that the intensity of the crowd influences the officials to be more favorable to the home team (see [this article](https://freakonomics.com/2011/12/football-freakonomics-how-advantageous-is-home-field-advantage-and-why/)). Let's see if our dataset supports this hypothesis.
+
+First, create a variable called `covid_match` where the variable is `TRUE` if the match was conducted in an empty stadium during Covid-19 and `FALSE` if it was not. Next, create a variable called `home_foul_advantage` that subtracts `home_fouls` from `away_fouls` and another variable called `home_yellow_advantage` that subtracts `home_yellow` from `away_yellow`.
+
+### 2a. Compare `home_foul_advantage` by the variable `covid_match`
+
+> *Think*
+>
+> The variable `home_foul_advantage` measures the difference in fouls between the away and home teams (`away_fouls - home_fouls`). Positive values indicate that away teams committed more fouls than home teams, which could suggest that referees were more lenient toward home teams.
+>
+> During the Covid-19 period, all matches were played in empty stadiums without an audience. Since there was no crowd pressure, I expect the home foul advantage to be smaller on average in Covid matches than in normal matches. In other words, referees may have called fouls more evenly when there were no audiences in the stands.
+>
+> Because `home_foul_advantage` is a quantitative variable and `covid_match` is a categorical variable with two groups (TRUE/FALSE), side-by-side boxplots or a summary statistics table comparing group means and spreads would be the best way to display and compare the data.
+>
+> *Show*
+
+```{r}
+#| label: tbl-q2a-data-prep
+#| echo: true
+
+epl_2 <- epl %>%
+  mutate(
+    covid_match = ifelse(attendance == 0 | is.na(attendance), TRUE, FALSE),
+    home_foul_advantage = away_fouls - home_fouls,
+    home_yellow_advantage = away_yellow - home_yellow
+  )
+```
+
+```{r}
+#| label: fig-q2a-boxplot
+#| echo: false
+#| warning: false
+#| fig-cap: "Boxplot of home foul advantage by audience presence"
+
+ggplot(epl_2, aes(x = factor(covid_match,
+                             levels = c(FALSE, TRUE),
+                             labels = c("Non-Covid Match", "Covid Match")),
+                  y = home_foul_advantage,
+                  fill = covid_match)) +
+  geom_boxplot(color = "black") +
+  scale_fill_manual(values = c("palegreen", "coral")) +
+  labs(
+    x = "Match Type",
+    y = "Home Foul Advantage"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r}
+#| label: tbl-q2a-stats
+#| echo: false
+#| tbl-cap: "Statistics of variable: home_foul_advantage by covid_match"
+
+with_audience <- epl_2 %>% filter(covid_match == FALSE)
+without_audience <- epl_2 %>% filter(covid_match == TRUE)
+
+with.fivenum <- fivenum(with_audience$home_foul_advantage)
+without.fivenum <- fivenum(without_audience$home_foul_advantage)
+
+with.sumdata <- append(with.fivenum, length(na.omit(with_audience$home_foul_advantage)), after = 0)
+with.sumdata <- append(with.sumdata, sd(with_audience$home_foul_advantage, na.rm = TRUE), after = 1)
+with.sumdata <- append(with.sumdata, mean(with_audience$home_foul_advantage, na.rm = TRUE), after = 2)
+
+without.sumdata <- append(without.fivenum, length(na.omit(without_audience$home_foul_advantage)), after = 0)
+without.sumdata <- append(without.sumdata, sd(without_audience$home_foul_advantage, na.rm = TRUE), after = 1)
+without.sumdata <- append(without.sumdata, mean(without_audience$home_foul_advantage, na.rm = TRUE), after = 2)
+
+names <- c("Count", "Std Dev", "Mean", "Min", "25%", "Median", "75%", "Max")
+with.table <- data.frame(Statistic = names, With_Audience = with.sumdata)
+without.table <- data.frame(Statistic = names, Without_Audience = without.sumdata)
+
+fouladv.sum.table <- cbind(with.table, Without_Audience = without.table$Without_Audience)
+
+kbl(fouladv.sum.table, digits = 2) %>%
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-q2a-outliers
+#| echo: false
+#| tbl-cap: "Possible outliers of home foul advantage by audience presence"
+
+
+Q1_with <- quantile(with_audience$home_foul_advantage, 0.25, na.rm = TRUE)
+Q3_with <- quantile(with_audience$home_foul_advantage, 0.75, na.rm = TRUE)
+IQR_with <- Q3_with - Q1_with
+upper_with <- Q3_with + 1.5 * IQR_with
+lower_with <- Q1_with - 1.5 * IQR_with
+
+Q1_without <- quantile(without_audience$home_foul_advantage, 0.25, na.rm = TRUE)
+Q3_without <- quantile(without_audience$home_foul_advantage, 0.75, na.rm = TRUE)
+IQR_without <- Q3_without - Q1_without
+upper_without <- Q3_without + 1.5 * IQR_without
+lower_without <- Q1_without - 1.5 * IQR_without
+
+outliers_with <- with_audience %>%
+  filter(home_foul_advantage > upper_with | home_foul_advantage < lower_with) %>%
+  select(date_cleaned, home_team, away_team, home_foul_advantage)
+
+outliers_without <- without_audience %>%
+  filter(home_foul_advantage > upper_without | home_foul_advantage < lower_without) %>%
+  select(date_cleaned, home_team, away_team, home_foul_advantage)
+
+outlier_table <- bind_rows(
+  outliers_with %>% mutate(Audience = "With Audience"),
+  outliers_without %>% mutate(Audience = "Without Audience")
+)
+
+kbl(outlier_table, col.names = c("Date", "Home Team", "Away Team", "Home Foul Advantage", "Audience")) %>%
+  kable_styling()
+```
+
+> *Tell*
+>
+> As shown in Figure 3, matches played with audiences tend to have a slightly higher median and a wider IQR. Several large positive outliers indicate games where away teams committed noticeably more fouls than home teams. In contrast, matches without audiences have a lower and negative median, along with a few extreme values on both sides, suggesting that foul calls became more balanced, or even slightly against home teams, when no crowd was present. This result is quite surprising - home teams do not have an advantage with an audience and without an audience they have a disadvantage. It is possible there is some sort of selection effect happening, in which home teams know they have an advantage and therefore make riskier plays on the ball though this theory would need additional testing.
+>
+> The outlier table also shows that most extreme positive values occurred with audiences, while negative or reversed cases appeared without audiences. None of these matches seem exceptional.
+
+### 2b. Compare `home_yellow_advantage` by the variable `covid_match`
+
+> *Think*
+>
+> The variable `home_yellow_advantage` measures the difference in yellow cards between the away and home teams (`away_yellow - home_yellow`). Positive values mean that away teams received more yellow cards, while negative values mean that home teams were penalized more often.
+>
+> Since yellow cards are a more serious referee decision than fouls, they may be more affected by psychological pressure from the crowd. I expect that with audiences, referees might be slightly more hesitant to give yellow cards to home players. Therefore, during the Covid-19 period when matches were played without crowds, I expect the home yellow advantage to be smaller on average, as referees were less influenced by audience reactions.
+>
+> Because `home_yellow_advantage` is a quantitative variable and `covid_match` is categorical with two groups (With/Without Audience), side-by-side boxplots and summary tables are appropriate to compare their distributions and averages.
+>
+> *Show*
+
+```{r}
+#| label: fig-q2b-boxplot
+#| echo: false
+#| warning: false
+#| fig-cap: "Boxplot of home yellow advantage by audience condition"
+
+ggplot(epl_2, aes(
+  x = factor(covid_match,
+             levels = c(FALSE, TRUE),
+             labels = c("Non-Covid Match", "Covid Match")),
+  y = home_yellow_advantage,
+  fill = covid_match
+)) +
+  geom_boxplot(color = "black") +
+  scale_fill_manual(values = c("palegreen", "coral")) +
+  labs(
+    x = "Match Type",
+    y = "Home Yellow Advantage"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r}
+#| label: tbl-q2b-stats
+#| echo: false
+#| tbl-cap: "Statistics of variable: Home Yellow Advantage"
+
+
+with.yellow.fivenum <- fivenum(with_audience$home_yellow_advantage)
+without.yellow.fivenum <- fivenum(without_audience$home_yellow_advantage)
+
+with.yellow.sum <- append(with.yellow.fivenum, length(na.omit(with_audience$home_yellow_advantage)), after = 0)
+with.yellow.sum <- append(with.yellow.sum, sd(with_audience$home_yellow_advantage, na.rm = TRUE), after = 1)
+with.yellow.sum <- append(with.yellow.sum, mean(with_audience$home_yellow_advantage, na.rm = TRUE), after = 2)
+
+without.yellow.sum <- append(without.yellow.fivenum, length(na.omit(without_audience$home_yellow_advantage)), after = 0)
+without.yellow.sum <- append(without.yellow.sum, sd(without_audience$home_yellow_advantage, na.rm = TRUE), after = 1)
+without.yellow.sum <- append(without.yellow.sum, mean(without_audience$home_yellow_advantage, na.rm = TRUE), after = 2)
+
+names <- c("Count", "Std Dev", "Mean", "Min", "25%", "Median", "75%", "Max")
+
+with.yellow.table <- data.frame(Statistic = names, With_Audience = with.yellow.sum)
+without.yellow.table <- data.frame(Statistic = names, Without_Audience = without.yellow.sum)
+
+yellowadv.sum.table <- cbind(with.yellow.table, Without_Audience = without.yellow.table$Without_Audience)
+
+kbl(yellowadv.sum.table, digits = 2) %>%
+  kable_styling()
+
+```
+
+```{r}
+#| label: tbl-q2b-outliers
+#| echo: false
+#| tbl-cap: "Possible outliers of home_yellow_advantage by match type"
+
+
+Q1_with <- quantile(with_audience$home_yellow_advantage, 0.25, na.rm = TRUE)
+Q3_with <- quantile(with_audience$home_yellow_advantage, 0.75, na.rm = TRUE)
+IQR_with <- Q3_with - Q1_with
+upper_with <- Q3_with + 1.5 * IQR_with
+lower_with <- Q1_with - 1.5 * IQR_with
+
+Q1_without <- quantile(without_audience$home_yellow_advantage, 0.25, na.rm = TRUE)
+Q3_without <- quantile(without_audience$home_yellow_advantage, 0.75, na.rm = TRUE)
+IQR_without <- Q3_without - Q1_without
+upper_without <- Q3_without + 1.5 * IQR_without
+lower_without <- Q1_without - 1.5 * IQR_without
+
+outliers_with <- with_audience %>%
+  filter(home_yellow_advantage > upper_with | home_yellow_advantage < lower_with) %>%
+  select(date_cleaned, home_team, away_team, home_yellow_advantage) %>%
+  mutate(Audience = "With Audience")
+
+outliers_without <- without_audience %>%
+  filter(home_yellow_advantage > upper_without | home_yellow_advantage < lower_without) %>%
+  select(date_cleaned, home_team, away_team, home_yellow_advantage) %>%
+  mutate(Audience = "Without Audience")
+
+outlier_table_yellow <- bind_rows(outliers_with, outliers_without)
+
+kbl(outlier_table_yellow,
+    col.names = c("Date", "Home Team", "Away Team", "Home Yellow Adv.", "Audience")) %>%
+  kable_styling()
+```
+
+> *Tell*
+>
+> As shown in Figure 5 and Table 4, the distributions of home_yellow_advantage are nearly identical across match types. Both with-audience and without-audience games have a median of 0 and an interquartile range from –1 to 1, indicating that referees typically issue similar numbers of yellow cards to home and away teams. The mean values (0.19 vs 0.03) and standard deviations (1.65 vs 1.55) differ only slightly, suggesting minimal change in officiating behavior during the Covid period.
+>
+> According to Table 5, when audiences were present, away teams occasionally received several more yellow cards than home teams, suggesting a mild referee bias consistent with the home advantage effect. In contrast, matches played without audiences show fewer and more balanced extremes. Overall, the results partly meet my expectation: while the home yellow advantage appears slightly smaller without crowds, the difference is minimal. This suggests that although crowd pressure may influence referees in rare cases, yellow-card decisions remain largely consistent across match conditions. This result is overall a surprise - there does not appear to be any meaningful effect in terms of yellow cards. 
+
+### 2c. Thinking about your results
+
+Consider the results of 2b. and 2c. together. What can we learn about hypothesis for this question? What conclusion would you draw? And what other information do you think you would need to be more confident in your conclusion?
+
+> Answers will vary here, good quality effort to interpret investigation of this question is required.
+
+## Question 3: Considering deviations (25 points)
+
+### 3a. Selecting your data
+
+Pick any team and create two subsets using the `filter` verb of just matches featuring that team, one subset for home, the other for away.
+
+```{r}
+#| label: q3a-filter-mancity-liverpool
+#| echo: true
+
+# Create subsets for Liverpool
+liverpool_home <- epl %>%
+  filter(home_team == "liverpool")
+
+liverpool_away <- epl %>%
+  filter(away_team == "liverpool")
+
+# Create subsets for Manchester City
+mancity_home <- epl %>%
+  filter(home_team == "manchester-city")
+
+mancity_away <- epl %>%
+  filter(away_team == "manchester-city")
+```
+
+### 3b. Finding the average
+
+Make a table of the averages of goals (home and away, separate columns), shots (home and away, separate columns), possession % (home and away, separate columns), and pass % (home and away, separate columns). Show your code using the `#| echo: true` code block option.
+
+```{r}
+#| label: q3b-averages
+#| echo: true
+#| tbl-cap: "Average goals, shots, possession, and pass % for Liverpool and Manchester City (home vs away)"
+
+team_avg <- data.frame(
+  Team = c("Liverpool", "Manchester City"),
+  Home_Goals = c(mean(liverpool_home$home_goals, na.rm = TRUE),
+                 mean(mancity_home$home_goals, na.rm = TRUE)),
+  Away_Goals = c(mean(liverpool_away$away_goals, na.rm = TRUE),
+                 mean(mancity_away$away_goals, na.rm = TRUE)),
+  Home_Shots = c(mean(liverpool_home$home_shots, na.rm = TRUE),
+                 mean(mancity_home$home_shots, na.rm = TRUE)),
+  Away_Shots = c(mean(liverpool_away$away_shots, na.rm = TRUE),
+                 mean(mancity_away$away_shots, na.rm = TRUE)),
+  Home_Possession = c(mean(liverpool_home$home_possessions, na.rm = TRUE),
+                      mean(mancity_home$home_possessions, na.rm = TRUE)),
+  Away_Possession = c(mean(liverpool_away$away_possessions, na.rm = TRUE),
+                      mean(mancity_away$away_possessions, na.rm = TRUE)),
+  Home_Pass = c(mean(liverpool_home$home_pass, na.rm = TRUE),
+                mean(mancity_home$home_pass, na.rm = TRUE)),
+  Away_Pass = c(mean(liverpool_away$away_pass, na.rm = TRUE),
+                mean(mancity_away$away_pass, na.rm = TRUE))
+)
+
+
+kbl(team_avg, digits = 2,
+    col.names = c("Team", "H Goals", "A Goals", "H Shots", "A Shots", "H Poss",
+                  "A Poss", "H Pass", "A Pass")) %>%
+  kable_styling()
+```
+
+### 3c. Normalizing the data
+
+Add a row to your table; find how many $z$ units each of the averages are away from the overall averages in the dataset. Show your code using the `#| echo: true` code block option.
+
+```{r}
+#| label: q3c-zscore
+#| echo: true
+#| tbl-cap: "Average goals, shots, possession, pass %, and z-score row relative to league averages"
+
+league_mean <- epl %>%
+  summarise(
+    Home_Goals = mean(home_goals, na.rm = TRUE),
+    Away_Goals = mean(away_goals, na.rm = TRUE),
+    Home_Shots = mean(home_shots, na.rm = TRUE),
+    Away_Shots = mean(away_shots, na.rm = TRUE),
+    Home_Possession = mean(home_possessions, na.rm = TRUE),
+    Away_Possession = mean(away_possessions, na.rm = TRUE),
+    Home_Pass = mean(home_pass, na.rm = TRUE),
+    Away_Pass = mean(away_pass, na.rm = TRUE)
+  )
+
+league_sd <- epl %>%
+  summarise(
+    Home_Goals = sd(home_goals, na.rm = TRUE),
+    Away_Goals = sd(away_goals, na.rm = TRUE),
+    Home_Shots = sd(home_shots, na.rm = TRUE),
+    Away_Shots = sd(away_shots, na.rm = TRUE),
+    Home_Possession = sd(home_possessions, na.rm = TRUE),
+    Away_Possession = sd(away_possessions, na.rm = TRUE),
+    Home_Pass = sd(home_pass, na.rm = TRUE),
+    Away_Pass = sd(away_pass, na.rm = TRUE)
+  )
+
+z_row <- (team_avg[1, -1] - league_mean) / league_sd
+z_row2 <- (team_avg[2, -1] - league_mean) / league_sd
+
+team_avg_z <- rbind(
+  team_avg,
+  c("Liverpool (z-score)", as.numeric(z_row)),
+  c("Manchester City (z-score)", as.numeric(z_row2))
+)
+
+team_avg_z[, -1] <- lapply(team_avg_z[, -1], as.numeric)
+
+kbl(team_avg_z, digits = 2,
+    col.names = c("Team", "H Goals", "A Goals", "H Shots", "A Shots", "H Poss",
+                  "A Poss", "H Pass", "A Pass")) %>%
+  kable_styling()
+```
+
+### 3d. Thinking about your results
+
+Interpret your results - what do the $z$ scores indicate about the offensive capabilities of the team? How does it vary by home vs. away? What other kind of data would you like to have to answer this question?
+
+> Both Liverpool and Manchester City have positive z-scores across all offensive metrics, showing that they perform above the league average in goals, shots, possession, and pass accuracy. Manchester City has higher z-scores overall, especially in possession and passing, suggesting stronger overall control.
+>
+> Liverpool’s shot z-scores are higher at home (0.90) than away (0.83), suggesting they create more shooting chances at home. In contrast, Manchester City’s away shot z-score (0.87) is slightly higher than at home (0.70), indicating they maintain strong offensive pressure even when playing away. Overall, both teams demonstrate balanced performance across venues, with Manchester City showing the strongest overall offensive profile, particularly in possession and passing.
+>
+> To better understand their offensive capabilities, it would be helpful to have additional data such as shot accuracy or conversion rate. These could reveal whether high shot volume effectively translates into goals.
+
+## Question 4: Your own investigation (25 points)
+
+### 4a. Selecting your own question
+
+Similar to the previous questions, think of your own question that you would like to ask of the data, ideally one that goes deeper into one of the questions considered above. Use the Think-Show-Tell procedure to conduct your investigation. Think deeply about what your result means.
+
+> *Think*
+
+*For this section, please write down your expectations, why you expect it, the variable meaning, and, given the variable type, the best way to display the data*
+
+> *Show*
+
+*For this section, please make an appropriate graph or table and briefly describe what you observe*
+
+> *Tell*
+
+*Please interpret the meaning of your finding here, especially with respect to your expectation*
+
+> Answers will vary here, good quality effort to interpret investigation of this question is required.
+
+### 4b. In summary
+
+Sum up everything that you have learned from questions 1-4. Do not simply repeat/rephrase your previous results but try to say something larger that synthesizes the results together to draw a more meaningful general conclusion.
+
+> Need to think deeply about what information this dataset provides for full points.
