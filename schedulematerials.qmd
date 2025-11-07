@@ -78,7 +78,7 @@ Topics covered:
 ## Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)
 
 -   Homework files: [Unit 1 homework](homeworks/Unit 1 homework/unit.1.homework.zip)
--   Homework sample solutions: [Unit 1 homework sample solutions]
+-   Homework sample solutions: [Unit 1 homework sample solutions](homeworks/Unit 1 homework/unit.1.homework.sample.solution.zip)
 
 # Unit 2: Relationships between variables
 
@@ -97,7 +97,7 @@ Topics covered:
 -   Lecture webpage: [Lecture 2.1](lectures/lecture.2.1.html)
 
 -   Lecture activity: [Lecture 2.1 activity](activities/Lecture 2.1/lecture.2.1.activity.zip)
-    -   Sample solution: [Lecture 2.1 activity sample solution](activities/Lecture 2.1/lecture.2.1.activity.solution.zip)
+    +   Sample solution: [Lecture 2.1 activity sample solution](activities/Lecture 2.1/lecture.2.1.activity.sample.solution.zip)
 
 ## Lecture 2.2: Simple Linear Regression (Thursday, November 6)
 
@@ -116,6 +116,7 @@ Topics covered:
 -   Lecture webpage: [Lecture 2.2](lectures/lecture.2.2.html)
 
 -   Lecture activity: [Lecture 2.2 activity](activities/Lecture 2.2/lecture.2.2.activity.zip)
+    +   Sample solution: [Lecture 2.2 activity sample solution](activities/Lecture 2.2/lecture.2.2.activity.sample.solution.zip)
 
 ## Lab 2.1: Working with regressions using `dplyr` (Thursday, November 6)
 
@@ -141,6 +142,7 @@ Topics covered:
 -   Lecture webpage: [Lecture 2.3](lectures/lecture.2.3.html)
 
 -   Lecture activity: [Lecture 2.3 activity](activities/Lecture 2.3/lecture.2.3.activity.zip)
+    +   Sample solution: [Lecture 2.3 activity sample solution](activities/Lecture 2.3/lecture.2.3.activity.sample.solution.zip)
 
 ## Online lab 2.2 (due on Friday, November 7 at 23:59:00)
 

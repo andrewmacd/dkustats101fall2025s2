@@ -67,7 +67,7 @@
     "href": "schedulematerials.html#unit-1-homework-due-sunday-november-2-at-235900-pm",
     "title": "Course Schedule and Class Materials",
     "section": "Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)",
-    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)\n\nHomework files: Unit 1 homework\nHomework sample solutions: [Unit 1 homework sample solutions]"
+    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)\n\nHomework files: Unit 1 homework\nHomework sample solutions: Unit 1 homework sample solutions"
   },
   {
     "objectID": "schedulematerials.html#lecture-2.1-association-and-correlation-tuesday-november-4",
@@ -81,7 +81,7 @@
     "href": "schedulematerials.html#lecture-2.2-simple-linear-regression-thursday-november-6",
     "title": "Course Schedule and Class Materials",
     "section": "Lecture 2.2: Simple Linear Regression (Thursday, November 6)",
-    "text": "Lecture 2.2: Simple Linear Regression (Thursday, November 6)\nReading to do before class: Chapter 7\nTopics covered:\n\nLine of best fit: least squares\nThe linear model\nWhat are residuals\nRegression assumptions\nLecture webpage: Lecture 2.2\nLecture activity: Lecture 2.2 activity"
+    "text": "Lecture 2.2: Simple Linear Regression (Thursday, November 6)\nReading to do before class: Chapter 7\nTopics covered:\n\nLine of best fit: least squares\nThe linear model\nWhat are residuals\nRegression assumptions\nLecture webpage: Lecture 2.2\nLecture activity: Lecture 2.2 activity\n\nSample solution: Lecture 2.2 activity sample solution"
   },
   {
     "objectID": "schedulematerials.html#lab-2.1-working-with-regressions-using-dplyr-thursday-november-6",
@@ -95,7 +95,7 @@
     "href": "schedulematerials.html#lecture-2.3-regression-wisdom-friday-november-7",
     "title": "Course Schedule and Class Materials",
     "section": "Lecture 2.3: Regression Wisdom (Friday, November 7)",
-    "text": "Lecture 2.3: Regression Wisdom (Friday, November 7)\n\nNote the special class time!\n\nReading to do before class: Chapter 8\nTopics covered:\n\nBeware extrapolation\nOutliers and leverage\nLurking variables\nStraightening scatterplots\nLecture webpage: Lecture 2.3\nLecture activity: Lecture 2.3 activity"
+    "text": "Lecture 2.3: Regression Wisdom (Friday, November 7)\n\nNote the special class time!\n\nReading to do before class: Chapter 8\nTopics covered:\n\nBeware extrapolation\nOutliers and leverage\nLurking variables\nStraightening scatterplots\nLecture webpage: Lecture 2.3\nLecture activity: Lecture 2.3 activity\n\nSample solution: Lecture 2.3 activity sample solution"
   },
   {
     "objectID": "schedulematerials.html#online-lab-2.2-due-on-friday-november-7-at-235900",
@@ -347,7 +347,7 @@
     "href": "homework.html",
     "title": "Homework",
     "section": "",
-    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\nUnit 2 homework\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
+    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\nUnit 1 homework sample solutions\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\nUnit 2 homework\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
   },
   {
     "objectID": "index.html",
@@ -648,7 +648,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.5041886"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.5322055"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",

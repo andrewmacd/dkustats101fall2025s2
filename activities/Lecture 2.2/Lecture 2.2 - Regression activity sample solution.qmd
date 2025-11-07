@@ -17,7 +17,7 @@ library(broom)
 
 theme_set(theme_minimal())
 
-mcdonalds <- read.csv("/Users/awm31/Github/dkustats101fall2025s2/activities/Lecture 2.2/mcdonalds.csv")
+mcdonalds <- read.csv("mcdonalds.csv")
 ```
 
 ![](mcdonaldsfood.jpg)
@@ -195,7 +195,7 @@ ggplot(mcdonalds, aes(x=Saturated.Fat, y=Calories)) +
 |----|----|----|----|----|
 | Chocolate Chip Cookie | 3.5 | 160 | 272.537 | -112.537 |
 | Coca-Cola Classic (Small) | 0 | 140 | 138.924 | 1.07 |
-| Iced Mocha (Medium) | 8 | 350 | 444.324 | -284.324 |
+| Iced Mocha (Medium) | 8 | 350 | 444.324 | 94.324 |
 
 : Residual calculations for Calories and Total fat model
 
@@ -269,6 +269,23 @@ ggplot(calmodel.augmented, aes(Saturated.Fat, .resid)) +
 
 What can you conclude about your model based on the `R` squared?
 
+```{r}
+#| label: modelrsquared
+
+summary(calmodel)$r.squared
+```
+> The R squared is quite high, which fits with the scatterplot created earlier - the model is a relatively good fit for the data.
+
 11. Which observations are obvious outliers? How does your line of best fit change if you exclude some of the outliers?
+
+```{r}
+mcdonalds.nooutliers <- mcdonalds %>% 
+  filter(Calories < 1400)
+
+summary(lm(Calories ~ Saturated.Fat, data=mcdonalds.nooutliers))
+```
+
+
+> The coefficients hardly change when we remove the 40 piece chicken nuggets - it was a high leverage but low influence point.
 
 > If you are finished with this analysis, conduct the exercise again for a different predictor variable.

@@ -55,7 +55,7 @@ These steps are steps that every statistical modeler should take when analyzing 
 #| fig-cap: "Wind speed vs. damage"
 #| echo: false
 
-ggplot(hurricanes, aes(x=LF.WindsMPH, y=BaseDam2014)) +
+ggplot(hurricanes, aes(x=LF.WindsKPH, y=BaseDam2014)) +
   geom_point() +
   labs(x="Wind speed (kph)", y="Base damage (2014 USD)")
 ```
@@ -70,7 +70,7 @@ ggplot(hurricanes, aes(x=LF.WindsMPH, y=BaseDam2014)) +
 hurricanes <- hurricanes %>% 
   mutate(log.dmg.2014 = log(BaseDam2014))
 
-ggplot(hurricanes, aes(x=LF.WindsMPH, y=log.dmg.2014)) +
+ggplot(hurricanes, aes(x=LF.WindsKPH, y=log.dmg.2014)) +
   geom_point() +
   labs(x="Wind speed (kph)", y="Base damage (Log 2014 USD)")
 ```
@@ -102,7 +102,19 @@ modelsummary(mod)
 
 8.  Solve for the predicted value of the response variable at Q1 and Q3 of the predictor variable. Does moving from Q1 to Q3 of the predictor variable result in a large change (in your opinion) in the response variable?
 
+```{r}
+#| label: predictormagnitude
 
+intercept <- mod$coefficients[1]
+slope <- mod$coefficients[2]
+predq1 <- quantile(hurricanes$LF.WindsKPH, 0.25)
+predq3 <- quantile(hurricanes$LF.WindsKPH, 0.75)
+
+print(unname(intercept + slope*predq1))
+print(unname(intercept + slope*predq3))
+```
+
+> A two log-unit change in predicted damage is realtively large given the Q1 to Q3 of the response variable goes from roughly 4 to 8.
 
 9.  Draw a box plot by hand of the residuals based on the regression results you can see from `summary(<your model name>)`. Does the boxplot suggest any problems? What are the units?
 
@@ -138,7 +150,7 @@ exp(summary(mod)$sigma)
 11. Make a scatterplot of the fitted values ($\hat{y}$) vs. the residuals with a line at the 0 value of the $y$ axis. Interpret this plot.
 
 ```{r}
-#| label: fig=residsplot
+#| label: fig-residsplot
 #| fig-cap: "Residuals plot of the model: windspeed vs. log 2014 USD damage"
 #| echo: false
 
@@ -153,11 +165,16 @@ ggplot(hurricane.resids, aes(x=.fitted, y=.resid)) +
 11. Interpret the $R^2$ Specifically, how much of the variance in the response variable is this model explaining?
 
 ```{r}
-#| 
+#| label: modelsummaryrsq
+
+summary(mod)$r.squared
 ```
 
+> This moderately low level of R squared is not too surprising - storms cause more damage the higher the wind speed but there are a lot of other factors as well, including whether it hit a populated area or not.
 
 13. What is some more information you'd like to know before making a final conclusion about the relationship between the two variables? Do you think there are any lurking variables?
+
+> Probably the main lurking variable is the population size of the area the storm hit. And also the diameter of the storm - a small diameter storm has less possibility of causing damage.
 
 # Real data
 
