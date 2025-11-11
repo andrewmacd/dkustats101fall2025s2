@@ -116,7 +116,7 @@
     "href": "schedulematerials.html#lecture-2.4-multiple-regression-tuesday-november-11",
     "title": "Course Schedule and Class Materials",
     "section": "Lecture 2.4: Multiple Regression (Tuesday, November 11)",
-    "text": "Lecture 2.4: Multiple Regression (Tuesday, November 11)\nReading to do before class: Chapter 9\nTopics covered:\n\nWhat is multiple regression?\nInterpreting multiple regression coefficients\nPartial regression plots\nIndicator variables\nLecture webpage: [Lecture 2.4]\nLecture activity: [Lecture 2.4 activity]"
+    "text": "Lecture 2.4: Multiple Regression (Tuesday, November 11)\nReading to do before class: Chapter 9\nTopics covered:\n\nWhat is multiple regression?\nInterpreting multiple regression coefficients\nPartial regression plots\nIndicator variables\nLecture webpage: Lecture 2.4\nLecture activity: Lecture 2.4 activity"
   },
   {
     "objectID": "schedulematerials.html#unit-2-homework-due-sunday-november-16-at-115900",
@@ -217,256 +217,53 @@
     "text": "Final project (due Wednesday, December 10 at 23:59:00)\n\nHomework files: [Final project instructions]"
   },
   {
-    "objectID": "lectures/lecture.2.3.html#model-fit-measures",
-    "href": "lectures/lecture.2.3.html#model-fit-measures",
-    "title": "Regression Wisdom",
-    "section": "Model fit measures",
-    "text": "Model fit measures\n\nRegression results\nMany parts of these results we already know how to interpret. For now, we will focus on model fit measures.\n\n\\(R^2\\)\n\\(s_e\\)\nResiduals 5 number summary\n\n\n\n\n\n\n\n\n\n\n\nResiduals - histogram\n\n\n\n\n\n\n\n\nHow would you interpret this residual histogram?\n\n\n\n\n\n\n\n\n\n\nCorrelation review\n\nRecall that a correlation, \\(r\\), ranges from -1 to 1 and indicates the strength of the association between two variables\n\nIf \\(r\\) is -1 or 1 exactly, there is no variation, the correlation indicate the relationship is a straight line\nNote that \\(r\\) does not indicate the slope\nIf \\(r\\) is 0, that means there is no relationship\n\nWhat is the slope in that case?\n\\(\\hat{y} = b_0 + b_1*x\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nR squared definition\n\n\\(R^2\\) is the square of \\(r\\) in a two variable case, so between 0 and 1\nBut, unlike \\(r\\), \\(R^2\\) is meaningful in multivariate models\nPercent of the total variation in the data explained by the model\nSum of the errors from our model divided by sum of errors from the ‘braindead’ model of \\(\\hat{y}=\\bar{y}\\)\nIf the \\(R^2\\) is small, that means our model doesn’t beat the ‘braindead’ model by very much\n\n\n\n\n\n\n\n\n\n\n\nWhen is \\(R^2\\) “big enough”?\n\n\\(R^2\\) is useful, but only so much so\nThe closer \\(R^2\\) is to 1, the more useful the model\n\nHow close is “close”?\nDepends on the situation\n\\(R^2\\) of 0.5 might be very bad for a model that uses height to predict weight\n\nShould be more closely related\n\n\\(R^2\\) of 0.5 might be very good for a model using test scores to predict future income\n\nResponse variable has a lot of factors that shape it and a lot of noise\n\n\nGood practice: always report \\(R^2\\) and \\(s_e\\) and let readers analyze the results as well"
+    "objectID": "lectures/lecture.2.4.html#basic-multiple-regression-interpretation",
+    "href": "lectures/lecture.2.4.html#basic-multiple-regression-interpretation",
+    "title": "Multiple Regression",
+    "section": "Basic multiple regression interpretation",
+    "text": "Basic multiple regression interpretation\n\nHouse prices\n\n\n\n\n\n\n\n\n\n\nWhen linear regression is not enough\n\n\\(R^2 = 0.278%\\) for sqft and sale_price\n27.8% of the variation in Price is accounted for\nWhat about the other 72%?\nCould include other lurking variables such as size of the lot a house is on - more land, higher cost right?\nA regression with two or more predictor variables is called a multiple regression.\n\n\n\nWhat is multiple regression?\n\nFor a simple regression, with one independent variable, the least squares line makes residuals as small as possible.\nFor multiple regression, the regression equation still makes the residuals as small as possible.\nNo longer trying to create a line though – instead a multidimensional hyperplane!\nCalculations difficult.\n\n\n\nCheck grade and sale_price\n\n\n\n\n\n\n\n\nWhat do you think will happen to the coefficient on grade when we add sqft?\n\n\n\n\n\n\n\n\n\n\nAdding both terms\n\n\n\n\n\n\n\n\n\n\nThe results\n\n\\(R^2=0.3051\\)\n\\(s_e=696500\\)\nCoefficient:\n\n\\(price = -872678 + 329.513sqft\\_livingspace + 177278grade\\)\n\n\nHow would you interpret this model and the diagnostic statistics?\n\n\n\n\n\n\n\n\n\n\nFurther investigation"
   },
   {
-    "objectID": "lectures/lecture.2.3.html#extrapolating",
-    "href": "lectures/lecture.2.3.html#extrapolating",
-    "title": "Regression Wisdom",
-    "section": "Extrapolating",
-    "text": "Extrapolating\n\nThe farther a new value is from the range of \\(x\\), the less trust we should place in the predicted value of \\(y\\)\nVenture into new \\(x\\) territory, called extrapolation\nDubious: questionable assumption that nothing changes about the relationship between x and y changes for extreme values of \\(x\\)\n\n\nPredicting MPG of cars\n1970s data on automobiles\n\n\n\n\n\n\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach interior\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach North Korea visit\n\n\nWill our model do a good job predicting this car’s miles per gallon?\n\n\n\n\n\n\n\n\n\n\nCan we predict this car’s MPG using our model?\nWeight: 6581 pounds\nModel: \\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 46.3 + -0.00767*6581\\)\n\\(\\hat{y} = -4.17\\) miles per gallon\n\nNonsense prediction\n\n\n\nBe wary of out of sample predictions"
+    "objectID": "lectures/lecture.2.4.html#what-is-different-in-multiple-regression",
+    "href": "lectures/lecture.2.4.html#what-is-different-in-multiple-regression",
+    "title": "Multiple Regression",
+    "section": "What is different in multiple regression?",
+    "text": "What is different in multiple regression?\n\nMeaning of coefficients has changed in a subtle way.\nIs an extraordinarily versatile calculation, underlying many widely used statistics methods.\nOffers a glimpse into statistical models that use more than two quantitative variables.\nModels that use several variables can be a big step toward realistic and useful modeling of complex phenomena and relationships\n\n\nMultiple regression - coefficients\n\nCan’t assume coefficients will stay the same\nCoefficients change\nOften in unexpected ways\nEven changing signs\nBe alert for a change in value\nBe alert for a change in meaning\n\n\n\nMultiple regression model\n\nNo simple relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) in a multiple regression may be quite different from zero\nStrong two-variable relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) in a multiple regression to be almost zero\nStrong two-variable relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) an be opposite in sign in a multiple regression\nEasy to extend the model with more predictors\nResiduals \\(e = y - \\hat{y}\\)"
   },
   {
-    "objectID": "lectures/lecture.2.3.html#outliers",
-    "href": "lectures/lecture.2.3.html#outliers",
-    "title": "Regression Wisdom",
-    "section": "Outliers",
-    "text": "Outliers\n\nHeight and net worth\nFirst, we can create random data for both a variable called height and one called log net worth but in the below example they are defined to be random and have no relation to each other.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdding Steve Ballmer\n\n\n\nSteve Ballmer\n\n\n\n\n\n\n\n\n\n\nWhat will happen to the slope and \\(R^2\\)?\n\n\n\n\n\n\n\n\n\n\nSteve Ballmer plot\n\n\n\n\n\n\n\n\n\n\nAdding Warren Buffet\n\n\n\nWarren Buffet\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdding Aleksandar Vučić\n\n\n\nAleksandar Vučić\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLeverage vs. influence\n\nA data point whose \\(x\\) value is far from the mean of the rest of the \\(x\\) values is said to have high leverage.\nLeverage points have the potential to strongly pull on the regression line.\nA point is influential if omitting it from the analysis changes the model enough to make a meaningful difference.\nInfluence is determined by\n\nThe residual\nThe leverage\n\n\n\n\nWarnings\n\nInfluential points can hide in plots of residuals.\nPoints with high leverage pull line close to them, so have small residuals.\nSee points in scatterplot of original data.\nFind regression model with and without the points."
+    "objectID": "lectures/lecture.2.4.html#assumptions",
+    "href": "lectures/lecture.2.4.html#assumptions",
+    "title": "Multiple Regression",
+    "section": "Assumptions",
+    "text": "Assumptions\n\nThree key assumptions\n\nLinearity assumption (straight enough condition)\nNo pattern in residuals (outliers, straight enough condition)\nEqual variance assumption (does the plot thicken?)\n\n\n\nLinearity assumption\n\nStraight Enough Condition\n\nWe must check the scatterplot for each of the predictor variables vs. the response variable\nDo not need the scatterplots to show any discernible slope, but should be reasonably straight\nCannot have bends, or other nonlinearity\nCan be easier to look at the plot of residuals\n\n\n\n\n\n\n\n\n\n\n\n\nCheck the residual\n\nErrors have a distribution that is:\n\nUnimodal\nSymmetric\nWithout outliers\n\nLook at histogram of residuals\nAssumption is less important as sample size increases\n\n\n\n\n\n\n\n\n\n\n\nEqual variance assumption\n\nSame variability of the errors for all values of each predictor\nDoes the Plot Thicken? Condition: the spread around the line must be nearly constant.\nBe alert for “fan” shaped pattern\nOr other tendency for variability to grow or shrink in one part of the scatterplot\n\n\n\n\n\n\n\n\n\n\n\nDecision loop\n\nStraight Enough Condition: scatterplots of y-variable against each x-variable\n\nIf straight enough, fit multiple regression model\n\nHow were data collected? Random? Represent identifiable population? Time? check independence\nFind the residuals and predicted values.\nScatterplot of the residuals against predicted values: patternless, no bends, no thickening\nHistogram of residuals: unimodal, symmetric, without outliers\nIf conditions check out, interpret regression model, and make predictions."
   },
   {
-    "objectID": "lectures/lecture.2.3.html#interpreting-a-regression",
-    "href": "lectures/lecture.2.3.html#interpreting-a-regression",
-    "title": "Regression Wisdom",
-    "section": "Interpreting a regression",
-    "text": "Interpreting a regression\n\nStep 1: develop some expectations\nHorsepower vs. MPG\n\nMore powerful engines probably are less fuel efficient\nRelationship is likely roughly linear\nThe exact relationship depends on the efficiency of the engine\n\nCould be noisy\n\n\n\n\nStep 2: make a picture\n\n\n\n\n\n\n\n\n\n\nStep 3: check the conditions\n\nQuantitative variable condition\nStraight enough condition\nOutlier condition\nDoes the plot thicken\nConclusion:?\n\n\n\n\n\n\n\n\n\n\n\nStep 4: identify the units\n\nMiles per gallon: amount of miles you can travel on one gallon of gas, a measure of efficiency.\n\nMost gasoline-using cars have MPG between 10-40, higher being better\n\nHorsepower: power of the engine.\n\nTypical values for standard cars are in the 100-200 range, higher meaning more powerful\n\n\n\n\nStep 5: intepret the slope of the regression line\n\n\n\n\n\n\n\n\n\nFor every one unit increase in horsepower, miles per gallon decreases by about -0.15 units\n\nIs that a lot or a little?\n\n\n\n\n\n\n\n\n\n\n\n\nStep 6: determine reasonable values for the predictor variable\n\n\n\n\n\n\n\n\n\n\nStep 7: interpret the intercept\n\n\n\n\n\n\n\n\n\n\nStep 8: solve for reasonable predictor values\nHorsepower = Q1 = 75:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 28.09\\)\nHorsepower = Median = 93.5:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 25.17\\)\nHorsepower = Q3 = 126:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 20.03\\)\n\n\nStep 9: interpret the residuals and identify their units\n\n\n\n\n\n\n\n\n\n\nStep 10: view the distribution of the residuals\n\n\n\n\n\n\n\n\n\n\nStep 11: interpret the residual standard error\n\n\n\n\n\n\n\n\n\n\nStep 12: interpret the R squared\n\n\n\n\n\n\n\n\n\n\nStep 13: think about confounders\n\nWhat are some confounders, or “lurking variables”?\n\nCategorical\nQuantitative"
+    "objectID": "lectures/lecture.2.4.html#partial-residual-plots",
+    "href": "lectures/lecture.2.4.html#partial-residual-plots",
+    "title": "Multiple Regression",
+    "section": "Partial residual plots",
+    "text": "Partial residual plots\nOne of the best ways to check the linearity condition is with a partial residual plot. This plot displays the relationship between the predictor variable and the response variable after removing all of the variance of the other variables in the explanatory variable.\n\nHow to check variables individually\n\nChecked overall equation for weirdness in residuals\nWhat about each individual variable’s contribution to the regression?\nPartial residual plot to the Rescue!\nLook at plot to judge whether its form is straight enough.\n\n\n\nPartial residual plots\n\n\n\n\n\n\n\n\n\n\nMeaning of a partial residual plot\n\nLeast squares line fit to plot has slope equal to the coefficient the plot illustrates.\nResiduals are same as final residuals of multiple regression\n\nJudge strength of estimation of the plot’s coefficients\n\nOutliers seen the same as they would appear in a simple scatterplot\nDirection corresponds to the sign of multiple regression coefficient"
   },
   {
-    "objectID": "lectures/lecture.2.1.html#exercise-1",
-    "href": "lectures/lecture.2.1.html#exercise-1",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Exercise 1",
-    "text": "Exercise 1\nIn your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.\n\n0.95\n0.75\n0.5\n0.25\n0.0\n-0.25\n-0.5\n-0.75\n-0.95\n\nPick a few of these and draw by hand what you expect these graphs to look like."
+    "objectID": "lectures/lecture.2.4.html#indicator-variables",
+    "href": "lectures/lecture.2.4.html#indicator-variables",
+    "title": "Multiple Regression",
+    "section": "Indicator variables",
+    "text": "Indicator variables\n\nWages\n\nIndicator variables are for when we want to include categorical variables in our regression\n\nIn a union vs. not in a union\nOften coded at 1=true 0=false, but that’s just convention, doesn’t really matter (remember, units don’t matter for regression)\n\nRegression equation\n\n\\(wages = b_0 + b_1exp + b_2union\\)\n\n\n\n\nWages\n\n\n\n\n\n\n\n\n\n\nSlopes of lines\n\n\n\n\n\n\n\n\n\n\nPredict some values\n\nEquation: \\(wages = 747.5634 + 8.2430exp + -77.7134union\\)"
   },
   {
-    "objectID": "lectures/lecture.2.1.html#exercise-2",
-    "href": "lectures/lecture.2.1.html#exercise-2",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Exercise 2",
-    "text": "Exercise 2\n\n\n\nSeattle"
+    "objectID": "lectures/lecture.2.4.html#interaction-terms",
+    "href": "lectures/lecture.2.4.html#interaction-terms",
+    "title": "Multiple Regression",
+    "section": "Interaction terms",
+    "text": "Interaction terms\n\nInteraction effects\n\nWhat if lines are not roughly parallel?\nIndicator variable that is 0 or 1 shifts line up or down.\n\nCan’t change slope\nWorks only when same slope just different intercepts\n\n\n\n\nAdjusting for different slopes\n\nIntroduce another constructed variable\nThe one is the product of an indicator variable and the predictor variable\nCoefficient of this constructed interaction term gives adjustment to slope, \\(b_1\\), to be made for the individuals in the indicated group.\n\n\n\nAdjusting for different slopes\n\n\n\n\n\n\n\n\n\n\nDifferent slopes for wages\n\n\n\n\n\n\n\n\n\n\nPredict some values\n\nEquation: \\(wages = 710.7896 + 10.1421exp + 28.9884union + -5.2755union*exp\\)"
   },
   {
-    "objectID": "lectures/lecture.2.1.html#viewing-an-example-relationship",
-    "href": "lectures/lecture.2.1.html#viewing-an-example-relationship",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Viewing an example relationship",
-    "text": "Viewing an example relationship\n\nFirst, what is our expectation about the relationship between bedrooms and square feet?\nDirection?\nForm?\nStrength?\nOutliers?"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---direction",
-    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---direction",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Bedrooms and square feet - direction",
-    "text": "Bedrooms and square feet - direction\nA scatterplot is the easiest way to check for direction. In this case, the direction is obvious"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---form",
-    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---form",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Bedrooms and square feet - form",
-    "text": "Bedrooms and square feet - form"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---strength",
-    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---strength",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Bedrooms and square feet - strength",
-    "text": "Bedrooms and square feet - strength\n\n\n\n\n\n\n\n\n\nCorrelation as a measure of strength\n\n\n\n\n\n\n\n\nThis correlation is a little weaker than perhaps what we expected\n\nIn general, mechanically generated processes with little noise can have very high correlations\nMost correlations of social or real world processes rarely have above moderate correlation due to noise"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---outlier",
-    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---outlier",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Bedrooms and square feet - outlier",
-    "text": "Bedrooms and square feet - outlier\nAgain, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values\n\n\n\n\n\n\n\n\nTo investigate if this outlier matters, we can check some other values of the observation.\n\n\n\n\n\n\n\n\nWhat kind of outlier do you think this is? Why?\n\nOutlier - actual observation\n\n\n\n\n\n\n\n\n\n\n\nLocation\n\n\n\n\n\nHouse details\n\n\n\n\nData with no outlier\n\n\n\n\n\n\n\n\n\n\nDescribing the association\n\nDirection - positive\nForm - linear\nStrength - moderate/strong\nOutliers - one possible\n\nOutlier:"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#does-bed-and-square-feeet-relationship-match-expectations",
-    "href": "lectures/lecture.2.1.html#does-bed-and-square-feeet-relationship-match-expectations",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Does bed and square feeet relationship match expectations?",
-    "text": "Does bed and square feeet relationship match expectations?\n\nSeems to, more or less, the larger the house, the more bedrooms, so the relationship is positive\nThe relationship is fairly linear, indicating a strong relationship\nRelationship is moderate\nOutliers don’t seem like it is a problem\n\nHowever….\n\nWhat are some possible lurking variables that influence the relationship of bedrooms and bathrooms?"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#relationship-reexpressed",
-    "href": "lectures/lecture.2.1.html#relationship-reexpressed",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Relationship reexpressed?",
-    "text": "Relationship reexpressed?\nOne final issue to consider is if this relationship should be reexpressed - made more linear.\n\n\n\n\n\n\n\n\n\nSeems clearer\n\n\nYour turn\nWith your partner, develop some expectations about some of the variables in the kc.houses dataset might be related.\nVariables:\n\n\n\n\n\n\n\n\nWhat to do with your partner:\n\nWrite down an interesting question we think we might be able to answer by examining a relationship in this dataset\nChoose the variables that you think might be able to answer this question\nWrite down what you expect the relationship to be between these two variables based on any prior knowledge\nDecide which variable is the response variable and which is the predictor variable\nMake a scatterplot using one of the codeblocks in the previous section and identify the features of the association"
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#distribution-of-common-quantities",
-    "href": "lectures/lecture.1.2.html#distribution-of-common-quantities",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Distribution of common quantities",
-    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread"
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#graphs-of-common-quantities",
-    "href": "lectures/lecture.1.2.html#graphs-of-common-quantities",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Graphs of common quantities",
-    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n\n\n\n\n\n\n\n\n\nFlower sepal width\n\n\n\n\n\n\n\n\n\n\nLife expetancy in 2007"
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#height-activity",
-    "href": "lectures/lecture.1.2.html#height-activity",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Height activity",
-    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses."
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#height-distribution",
-    "href": "lectures/lecture.1.2.html#height-distribution",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Height distribution",
-    "text": "Height distribution"
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#closing-thoughts",
-    "href": "lectures/lecture.1.2.html#closing-thoughts",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Closing thoughts",
-    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\nUnit 1 homework sample solutions\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\nUnit 2 homework\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Introduction",
-    "section": "",
-    "text": "Tuesday/Thursday class at 12:00 pm to 2:30 pm in Library room 2001\nThursday lab at 6:00 pm to 7:15 pm in Library room 2001\nOffice hours:\n\nWednesday from 1:00 pm to 5:00 pm in WDR 3114\n\nHomeworks are all due at 11:59 pm\nAll other announcements and information are posted on the class Teams site\nStats 101 lab manager: Jingyu Wang\n\nOffice hours: Fridays from 2:00 to 4:00 pm in WDR 2134"
-  },
-  {
-    "objectID": "index.html#assessment",
-    "href": "index.html#assessment",
-    "title": "Course Introduction",
-    "section": "Assessment",
-    "text": "Assessment\n\nHomework 65%: At the end of the first two groups of content, a homework will be assigned that will ask you to analyze a dataset and answer questions related to that concept group. These homeworks are due at the noted date at 11:59 pm China time. Each homework will also have a best graph contest, where the person whose classmates vote as having the best graph wins some extra credit points.\n\nHomework 1: 10%\nHomework 2: 25%\nFinal project: 30%\n\nHomework checks 3%: To make sure you are making good progress on your homework, the Sunday before the homework is due (except for the first homework) you will be required to submit your progress on the homework so far. You are required to have tried to have answered all the questions covered by the lectures and textbook up to the specified cutoff. I will not check your answers but rather check to see if you have made a good effort to answer all the questions derived from the material already covered. If you have a reasonable answer for each question checked you will get full points. If you have not made an effort to answer all the questions reviewed you will get a zero.\nUnit 3 exam 25%: Unit 3 comprehension is better checked through an in-class exam. The exam will be open notes but closed book and will take place during the normal lab session that week.\nData Camp labs 5%: A number of labs on the website Data Camp will be assigned to you; these labs are pass/fail and you will receive full credit if you complete each of the labs by the specified due date.\nSyllabus quiz 1%: A short quiz after the first class regarding the course requirements.\nPlacement exams 1%: A short quiz that you will take at both the start and end of class to measure how much pre-knowledge you have and how much knowledge you have gained during the course. Exams are pass/fail depending on if you complete them or not\nAttendance & warmup quizzes: I want you to attend class - there are a lot of studies that show those who attend class and pay attention, learn more and have higher grades. However, I am not your parent. So, it is up to you if you want to be assessed for attendance. Attendance is therefore optional, but, you can sign a pledge at the start of class promising to attend all classes and stay for the entire class (you can miss up to one class without an excuse) and if you complete the pledge, you will receive an extra 1% of extra credit on your final grade. However, if you fail the pledge, you will receive -1% grade deduction. Similarly, the beginning of the class warmup quizzes are partially for me to see how well you have understood the textbook materials, but it is also an incentive for you to read and understand the textbook chapters before class. I will not record your grade on the quizzes. However, you can also sign a pledge to count your warmup quizzes as part of your grade. If you agree to be assessed on the warmup quizzes, you must maintain at least a 75% average on the quizzes (I will drop your lowest quiz score). If you do, you will receive 2% extra credit on your final grade. If you sign the pledge but fail to maintain the average, you will be deducted 2% from your final grade."
-  },
-  {
-    "objectID": "index.html#lateness-policy",
-    "href": "index.html#lateness-policy",
-    "title": "Course Introduction",
-    "section": "Lateness policy",
-    "text": "Lateness policy\nSince the course moves very quickly, if you are submitting work late that means you are falling behind on other material and it may be difficult for you to recover. Therefore, I have a fairly strict lateness policy.\n\nAll major assignments are due at 11:59:00 pm. Not 11:59:01 or 11:59:31.\nIf it is later than 11:59:00 pm, then the assignment will be assessed a 5% lateness penalty\nIf it is later than 12:29:00 am, then the assignment will be assessed a 10% lateness penalty\nIf it is later than 11:59:00 pm the next day, the assignment will be assessed a 50% lateness penalty\nIf it is later than 2 days from the due date, I will no longer accept the assignment\n\n\nPlease be sure to check that your homework is complete and make sure to submit it a few minutes early. You can submit multiple times on Teams so make sure you have a nearly complete version uploaded even if you want to keep working on it right up to the deadline. I will not be sympathetic to messages that complain of computer problems when you are trying to submit for the first time at 11:58:51 pm."
-  },
-  {
-    "objectID": "index.html#contact-policy",
-    "href": "index.html#contact-policy",
-    "title": "Course Introduction",
-    "section": "Contact Policy",
-    "text": "Contact Policy\n\nI usually try to reply to emails on the same day (though not in the evenings), however responses may be slower on the weekend\nDo not message me 2 hours before a homework is due and expect an immediate response!\nFor general questions, such as how should one interpret a question on a homework or quiz, you should ask the question in the Discussion section of the Teams site. That way others can benefit from the response or someone else may be able to answer more quickly than I can. If you email me a question that really belongs in the help channel I will ask you to repost it.\nMany questions can be answered by carefully checking the class website or reviewing the materials in on Teams. If in doubt, though, feel free to ask."
-  },
-  {
-    "objectID": "index.html#chatgpt-and-similar-policy",
-    "href": "index.html#chatgpt-and-similar-policy",
-    "title": "Course Introduction",
-    "section": "ChatGPT (and similar) Policy",
-    "text": "ChatGPT (and similar) Policy\nUnless otherwise specified on an assignment, you may use ChatGPT as much as you wish. However, most of the assignments in this class are not very amenable to ChatGPT help. Your main grade will be understanding, annotating, and interpreting your output. Producing the output is the very simple minimal requirement. Also, ChatGPT often makes many coding mistakes. If you rely too much on ChatGPT to code, you will not understand when it makes mistakes and why it makes mistakes."
-  },
-  {
-    "objectID": "index.html#academic-dishonesty-policy",
-    "href": "index.html#academic-dishonesty-policy",
-    "title": "Course Introduction",
-    "section": "Academic Dishonesty Policy",
-    "text": "Academic Dishonesty Policy\nDon’t cheat. Don’t be that person. Yes, you. You know exactly what I’m talking about too.\nMore specifically, you are expected to strictly adhere to the Duke Kunshan University Community Standard in all of your work and participation, and violations will be enforced. More details can be found here.\nAll work must be done exclusively by the individual to whom it has been assigned. Any instance of copying code or analysis from others is considered cheating. You may exchange general ideas about how to complete the assignment but you must write your own code and also write your own analysis.\nIt may sound cliché to say, but if you cheat and borrow others code or answers you are only cheating yourself; you will not learn how to do statistics and doing so will mean you will do worse on the midterm and the final anyway. Cheating is ultimately self-defeating so for both of our benefit, please, don’t do it. If you are having trouble completing the assignment and feel tempted to cheat, please contact me directly instead with the difficulties you are having."
-  },
-  {
-    "objectID": "index.html#disabilities-policy",
-    "href": "index.html#disabilities-policy",
-    "title": "Course Introduction",
-    "section": "Disabilities Policy",
-    "text": "Disabilities Policy\nIf you need an accommodation due to a disability, you should not hesitate to request one. The process is that requests should be sent to the Dean of Undergraduate Studies, who will contact me with recommended type of accommodation that is needed. You do not need to disclose your reason for requesting an accommodation with me, and asking through the Dean of Undergraduate Studies helps make things official for both you and me."
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
-    "href": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Thoughts about comparing groups",
-    "text": "Thoughts about comparing groups\n\nFaceted histograms are a reasonable display to show distributions by a categorical variable\n\nHowever these displays become hard to interpret when the number of levels in a category grows large\n\nMuch easier to interpret is side by side box plots\nBox plots capture many important characteristics of a distribution into a summary display\nThink carefully about how you treat outliers\nLet’s view data from the 2024-2025 NBA season"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#two-group-comparison",
-    "href": "lectures/lecture.1.3.html#two-group-comparison",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Two group comparison",
-    "text": "Two group comparison\n\nNBA side-by-side histograms of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L (better)"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#many-group-comparison",
-    "href": "lectures/lecture.1.3.html#many-group-comparison",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Many group comparison",
-    "text": "Many group comparison\n\nNBA side-by-side histograms of points scored by team\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by team (better)\n\n\n\n\n\n\n\n\n\n\nYour turn\n\nWork with your neighbor to analyze a different set of statistics\n\nCan be by division or not\nRemember the key features of distributions\n\nShape\nCenter\nSpread\n\n\nInterpret your results\nVariable definitions:\n\nMP: minutes played\nFG: field goal baskets made\nFGA: field goal baskets attempted\nFG.: field goal percentage\nX3P: three pointers made\nX3PA: three pointers attempted\nFT: free throws made\nFTA: free throws attempted\nFT.: free throw percentage\nORB: offensive rebounds\nDRB: defensive rebounds\nTRB: total rebounds\nAST: assists\nSTL: steals\nBLK: blocks\nTOV: turnovers\nPF: personal fouls\nPTS: points scored"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#checking-outliers---assists",
-    "href": "lectures/lecture.1.3.html#checking-outliers---assists",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Checking outliers - assists",
-    "text": "Checking outliers - assists\n\nOutliers - assists\n\n\n\n\n\n\n\n\n\n\nAssists &gt; 40 - true outliers?"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#checking-outliers---points",
-    "href": "lectures/lecture.1.3.html#checking-outliers---points",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Checking outliers - points",
-    "text": "Checking outliers - points\n\nOutliers - points\n\n\n\n\n\n\n\n\n\n\nPoints by team &gt; 150 - true outliers?"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#in-summary",
-    "href": "lectures/lecture.1.3.html#in-summary",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "In summary",
-    "text": "In summary\n\nThink about which kind of display is appropriate for comparing distributions\nWhen conditioning on a categorical variable, boxplots are usually better\nBut boxplots lose information\nThink carefully about omitting outliers\nOutliers may reveal important information about your dataset!"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
-    "href": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Titanic passengers and the Normal distribution",
-    "text": "Titanic passengers and the Normal distribution\n\n\n\nTitanic\n\n\n\nDataset of passengers on the Titanic\n\n\n\n\n\n\n\n\n\nWhat are your expectations for how age should be distributed?\n\n\n\n\n\n\n\n\n\n\nWe are going to violate our first three rules:\n\nMake a picture\nMake a picture\nMake a picture\n\n\n\n\nWere the passenger ages normally distributed?\nTo answer that question, we need some information about the distribution\nRemember, our main information about distributions is:\n\nShape\nCenter\nSpread\n\n\n\nInformation about age\n\nStandard deviation: 14.4\nMean: 29.9\nNormal model: \\(N(\\mu, \\sigma) = N(29.9,14.4)\\)\n\n\\(\\mu\\) is the theoretical mean\n\\(\\sigma\\) is the theoretical standard deviation\nThese values define the data generating process\nWe only see some values of the data generating process, but if we saw infinite values, the mean would be \\(\\mu\\) and the sd would be \\(\\sigma\\)\nMore on this in the second half of class\n\nHow can we check normality using this information?"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#checking-normality",
-    "href": "lectures/lecture.1.3.html#checking-normality",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Checking normality",
-    "text": "Checking normality\n\nThinking about normality\n\nWe can check normality by comparing the quantiles of our data with that of the known quantiles of the normal distribution\n\nWe know approximately 95% of the data lies within two standard deviations\nTherefore, 2.5% data with the lowest values lie outside of -2 standard deviations and 2.5% of data with the highest values lie outside of 2 standard deviations\n\nSimilarly, we know the same information for data within one standard deviation (16%, 68%, 16%)\n\n\n\nData within standard deviations"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#checking-against-the-data",
-    "href": "lectures/lecture.1.3.html#checking-against-the-data",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Checking against the data",
-    "text": "Checking against the data\n\nHistogram of ages from the data\n\n\n\n\n\n\n\n\n\n\nNormality and scaling\n\nNote that normality does not depend on the size of the standard deviation or the size of the mean\nCould easily change the units to be months instead of years\n\nMean would increase a lot\nStandard deviation would increase a lot\nHowever, amount of observations within each standard deviation would stay the same"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#final-thoughts-on-normality",
-    "href": "lectures/lecture.1.3.html#final-thoughts-on-normality",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Final thoughts on normality",
-    "text": "Final thoughts on normality\n\nWhen is the normal distribution useful?\n\nWhen we know a data-generating process is normally distributed we don’t even need to sample the population\n\nCan find out exactly how much data is between a certain number of standard deviations\n\nWhen we expect a data-generating process to be normally distributed, can test for deviations from normality\n\nIn the case of Titanic passengers, some parts of the distribution were more bunched up, others more spread out\n\nA lot of our statistical techniques require or work better when the data is ‘roughly’ normal\n\nWill detail these in the coming weeks\n\nWe can transform our data to be closer to normal\n\nNote that transformations won’t work if the data has multiple modes, can only correct skew\n\n\n\n\nWhat transformation would be helpful for age?"
+    "objectID": "lectures/lecture.2.4.html#footnotes",
+    "href": "lectures/lecture.2.4.html#footnotes",
+    "title": "Multiple Regression",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nCredit to: https://crosscut.com/opinion/2020/11/washington-state-housing-question-and-answer↩︎"
   },
   {
     "objectID": "lectures/lecture.2.2.html#line-of-best-fit",
@@ -544,6 +341,258 @@
     "title": "Simple Linear Regression",
     "section": "Reexpressions",
     "text": "Reexpressions\n\nLog reexpressed\n\n\n\n\n\n\n\n\nWhat will happen to the shape of the graph?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLog reexpressed - outlier\nAny guess as to the outlier?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOutlier\n\n\n\n\n\n\n\n\n\n\nGraphing the residuals - log\n\n\n\n\n\n\n\n\n\n\nResiduals standard deviation - log\n\n\n\n\n\n\n\n\n\n\n\\(R^2\\)\n\nThe correlation coefficient: 0.95\nOur \\(R^2\\): 0.91\n\n\n\nRegression assumptions\nFor the log reexpressed version, have the assumptions been met?\n\nQuantitative variable assumption\nStraight enough condition\nOutlier condition\nDoes the plot thicken condition?"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
+    "href": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Thoughts about comparing groups",
+    "text": "Thoughts about comparing groups\n\nFaceted histograms are a reasonable display to show distributions by a categorical variable\n\nHowever these displays become hard to interpret when the number of levels in a category grows large\n\nMuch easier to interpret is side by side box plots\nBox plots capture many important characteristics of a distribution into a summary display\nThink carefully about how you treat outliers\nLet’s view data from the 2024-2025 NBA season"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#two-group-comparison",
+    "href": "lectures/lecture.1.3.html#two-group-comparison",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Two group comparison",
+    "text": "Two group comparison\n\nNBA side-by-side histograms of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L (better)"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#many-group-comparison",
+    "href": "lectures/lecture.1.3.html#many-group-comparison",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Many group comparison",
+    "text": "Many group comparison\n\nNBA side-by-side histograms of points scored by team\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by team (better)\n\n\n\n\n\n\n\n\n\n\nYour turn\n\nWork with your neighbor to analyze a different set of statistics\n\nCan be by division or not\nRemember the key features of distributions\n\nShape\nCenter\nSpread\n\n\nInterpret your results\nVariable definitions:\n\nMP: minutes played\nFG: field goal baskets made\nFGA: field goal baskets attempted\nFG.: field goal percentage\nX3P: three pointers made\nX3PA: three pointers attempted\nFT: free throws made\nFTA: free throws attempted\nFT.: free throw percentage\nORB: offensive rebounds\nDRB: defensive rebounds\nTRB: total rebounds\nAST: assists\nSTL: steals\nBLK: blocks\nTOV: turnovers\nPF: personal fouls\nPTS: points scored"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#checking-outliers---assists",
+    "href": "lectures/lecture.1.3.html#checking-outliers---assists",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking outliers - assists",
+    "text": "Checking outliers - assists\n\nOutliers - assists\n\n\n\n\n\n\n\n\n\n\nAssists &gt; 40 - true outliers?"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#checking-outliers---points",
+    "href": "lectures/lecture.1.3.html#checking-outliers---points",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking outliers - points",
+    "text": "Checking outliers - points\n\nOutliers - points\n\n\n\n\n\n\n\n\n\n\nPoints by team &gt; 150 - true outliers?"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#in-summary",
+    "href": "lectures/lecture.1.3.html#in-summary",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "In summary",
+    "text": "In summary\n\nThink about which kind of display is appropriate for comparing distributions\nWhen conditioning on a categorical variable, boxplots are usually better\nBut boxplots lose information\nThink carefully about omitting outliers\nOutliers may reveal important information about your dataset!"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
+    "href": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Titanic passengers and the Normal distribution",
+    "text": "Titanic passengers and the Normal distribution\n\n\n\nTitanic\n\n\n\nDataset of passengers on the Titanic\n\n\n\n\n\n\n\n\n\nWhat are your expectations for how age should be distributed?\n\n\n\n\n\n\n\n\n\n\nWe are going to violate our first three rules:\n\nMake a picture\nMake a picture\nMake a picture\n\n\n\n\nWere the passenger ages normally distributed?\nTo answer that question, we need some information about the distribution\nRemember, our main information about distributions is:\n\nShape\nCenter\nSpread\n\n\n\nInformation about age\n\nStandard deviation: 14.4\nMean: 29.9\nNormal model: \\(N(\\mu, \\sigma) = N(29.9,14.4)\\)\n\n\\(\\mu\\) is the theoretical mean\n\\(\\sigma\\) is the theoretical standard deviation\nThese values define the data generating process\nWe only see some values of the data generating process, but if we saw infinite values, the mean would be \\(\\mu\\) and the sd would be \\(\\sigma\\)\nMore on this in the second half of class\n\nHow can we check normality using this information?"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#checking-normality",
+    "href": "lectures/lecture.1.3.html#checking-normality",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking normality",
+    "text": "Checking normality\n\nThinking about normality\n\nWe can check normality by comparing the quantiles of our data with that of the known quantiles of the normal distribution\n\nWe know approximately 95% of the data lies within two standard deviations\nTherefore, 2.5% data with the lowest values lie outside of -2 standard deviations and 2.5% of data with the highest values lie outside of 2 standard deviations\n\nSimilarly, we know the same information for data within one standard deviation (16%, 68%, 16%)\n\n\n\nData within standard deviations"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#checking-against-the-data",
+    "href": "lectures/lecture.1.3.html#checking-against-the-data",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking against the data",
+    "text": "Checking against the data\n\nHistogram of ages from the data\n\n\n\n\n\n\n\n\n\n\nNormality and scaling\n\nNote that normality does not depend on the size of the standard deviation or the size of the mean\nCould easily change the units to be months instead of years\n\nMean would increase a lot\nStandard deviation would increase a lot\nHowever, amount of observations within each standard deviation would stay the same"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#final-thoughts-on-normality",
+    "href": "lectures/lecture.1.3.html#final-thoughts-on-normality",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Final thoughts on normality",
+    "text": "Final thoughts on normality\n\nWhen is the normal distribution useful?\n\nWhen we know a data-generating process is normally distributed we don’t even need to sample the population\n\nCan find out exactly how much data is between a certain number of standard deviations\n\nWhen we expect a data-generating process to be normally distributed, can test for deviations from normality\n\nIn the case of Titanic passengers, some parts of the distribution were more bunched up, others more spread out\n\nA lot of our statistical techniques require or work better when the data is ‘roughly’ normal\n\nWill detail these in the coming weeks\n\nWe can transform our data to be closer to normal\n\nNote that transformations won’t work if the data has multiple modes, can only correct skew\n\n\n\n\nWhat transformation would be helpful for age?"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Introduction",
+    "section": "",
+    "text": "Tuesday/Thursday class at 12:00 pm to 2:30 pm in Library room 2001\nThursday lab at 6:00 pm to 7:15 pm in Library room 2001\nOffice hours:\n\nWednesday from 1:00 pm to 5:00 pm in WDR 3114\n\nHomeworks are all due at 11:59 pm\nAll other announcements and information are posted on the class Teams site\nStats 101 lab manager: Jingyu Wang\n\nOffice hours: Fridays from 2:00 to 4:00 pm in WDR 2134"
+  },
+  {
+    "objectID": "index.html#assessment",
+    "href": "index.html#assessment",
+    "title": "Course Introduction",
+    "section": "Assessment",
+    "text": "Assessment\n\nHomework 65%: At the end of the first two groups of content, a homework will be assigned that will ask you to analyze a dataset and answer questions related to that concept group. These homeworks are due at the noted date at 11:59 pm China time. Each homework will also have a best graph contest, where the person whose classmates vote as having the best graph wins some extra credit points.\n\nHomework 1: 10%\nHomework 2: 25%\nFinal project: 30%\n\nHomework checks 3%: To make sure you are making good progress on your homework, the Sunday before the homework is due (except for the first homework) you will be required to submit your progress on the homework so far. You are required to have tried to have answered all the questions covered by the lectures and textbook up to the specified cutoff. I will not check your answers but rather check to see if you have made a good effort to answer all the questions derived from the material already covered. If you have a reasonable answer for each question checked you will get full points. If you have not made an effort to answer all the questions reviewed you will get a zero.\nUnit 3 exam 25%: Unit 3 comprehension is better checked through an in-class exam. The exam will be open notes but closed book and will take place during the normal lab session that week.\nData Camp labs 5%: A number of labs on the website Data Camp will be assigned to you; these labs are pass/fail and you will receive full credit if you complete each of the labs by the specified due date.\nSyllabus quiz 1%: A short quiz after the first class regarding the course requirements.\nPlacement exams 1%: A short quiz that you will take at both the start and end of class to measure how much pre-knowledge you have and how much knowledge you have gained during the course. Exams are pass/fail depending on if you complete them or not\nAttendance & warmup quizzes: I want you to attend class - there are a lot of studies that show those who attend class and pay attention, learn more and have higher grades. However, I am not your parent. So, it is up to you if you want to be assessed for attendance. Attendance is therefore optional, but, you can sign a pledge at the start of class promising to attend all classes and stay for the entire class (you can miss up to one class without an excuse) and if you complete the pledge, you will receive an extra 1% of extra credit on your final grade. However, if you fail the pledge, you will receive -1% grade deduction. Similarly, the beginning of the class warmup quizzes are partially for me to see how well you have understood the textbook materials, but it is also an incentive for you to read and understand the textbook chapters before class. I will not record your grade on the quizzes. However, you can also sign a pledge to count your warmup quizzes as part of your grade. If you agree to be assessed on the warmup quizzes, you must maintain at least a 75% average on the quizzes (I will drop your lowest quiz score). If you do, you will receive 2% extra credit on your final grade. If you sign the pledge but fail to maintain the average, you will be deducted 2% from your final grade."
+  },
+  {
+    "objectID": "index.html#lateness-policy",
+    "href": "index.html#lateness-policy",
+    "title": "Course Introduction",
+    "section": "Lateness policy",
+    "text": "Lateness policy\nSince the course moves very quickly, if you are submitting work late that means you are falling behind on other material and it may be difficult for you to recover. Therefore, I have a fairly strict lateness policy.\n\nAll major assignments are due at 11:59:00 pm. Not 11:59:01 or 11:59:31.\nIf it is later than 11:59:00 pm, then the assignment will be assessed a 5% lateness penalty\nIf it is later than 12:29:00 am, then the assignment will be assessed a 10% lateness penalty\nIf it is later than 11:59:00 pm the next day, the assignment will be assessed a 50% lateness penalty\nIf it is later than 2 days from the due date, I will no longer accept the assignment\n\n\nPlease be sure to check that your homework is complete and make sure to submit it a few minutes early. You can submit multiple times on Teams so make sure you have a nearly complete version uploaded even if you want to keep working on it right up to the deadline. I will not be sympathetic to messages that complain of computer problems when you are trying to submit for the first time at 11:58:51 pm."
+  },
+  {
+    "objectID": "index.html#contact-policy",
+    "href": "index.html#contact-policy",
+    "title": "Course Introduction",
+    "section": "Contact Policy",
+    "text": "Contact Policy\n\nI usually try to reply to emails on the same day (though not in the evenings), however responses may be slower on the weekend\nDo not message me 2 hours before a homework is due and expect an immediate response!\nFor general questions, such as how should one interpret a question on a homework or quiz, you should ask the question in the Discussion section of the Teams site. That way others can benefit from the response or someone else may be able to answer more quickly than I can. If you email me a question that really belongs in the help channel I will ask you to repost it.\nMany questions can be answered by carefully checking the class website or reviewing the materials in on Teams. If in doubt, though, feel free to ask."
+  },
+  {
+    "objectID": "index.html#chatgpt-and-similar-policy",
+    "href": "index.html#chatgpt-and-similar-policy",
+    "title": "Course Introduction",
+    "section": "ChatGPT (and similar) Policy",
+    "text": "ChatGPT (and similar) Policy\nUnless otherwise specified on an assignment, you may use ChatGPT as much as you wish. However, most of the assignments in this class are not very amenable to ChatGPT help. Your main grade will be understanding, annotating, and interpreting your output. Producing the output is the very simple minimal requirement. Also, ChatGPT often makes many coding mistakes. If you rely too much on ChatGPT to code, you will not understand when it makes mistakes and why it makes mistakes."
+  },
+  {
+    "objectID": "index.html#academic-dishonesty-policy",
+    "href": "index.html#academic-dishonesty-policy",
+    "title": "Course Introduction",
+    "section": "Academic Dishonesty Policy",
+    "text": "Academic Dishonesty Policy\nDon’t cheat. Don’t be that person. Yes, you. You know exactly what I’m talking about too.\nMore specifically, you are expected to strictly adhere to the Duke Kunshan University Community Standard in all of your work and participation, and violations will be enforced. More details can be found here.\nAll work must be done exclusively by the individual to whom it has been assigned. Any instance of copying code or analysis from others is considered cheating. You may exchange general ideas about how to complete the assignment but you must write your own code and also write your own analysis.\nIt may sound cliché to say, but if you cheat and borrow others code or answers you are only cheating yourself; you will not learn how to do statistics and doing so will mean you will do worse on the midterm and the final anyway. Cheating is ultimately self-defeating so for both of our benefit, please, don’t do it. If you are having trouble completing the assignment and feel tempted to cheat, please contact me directly instead with the difficulties you are having."
+  },
+  {
+    "objectID": "index.html#disabilities-policy",
+    "href": "index.html#disabilities-policy",
+    "title": "Course Introduction",
+    "section": "Disabilities Policy",
+    "text": "Disabilities Policy\nIf you need an accommodation due to a disability, you should not hesitate to request one. The process is that requests should be sent to the Dean of Undergraduate Studies, who will contact me with recommended type of accommodation that is needed. You do not need to disclose your reason for requesting an accommodation with me, and asking through the Dean of Undergraduate Studies helps make things official for both you and me."
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\nUnit 1 homework sample solutions\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\nUnit 2 homework\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#distribution-of-common-quantities",
+    "href": "lectures/lecture.1.2.html#distribution-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Distribution of common quantities",
+    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#graphs-of-common-quantities",
+    "href": "lectures/lecture.1.2.html#graphs-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Graphs of common quantities",
+    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n\n\n\n\n\n\n\n\n\nFlower sepal width\n\n\n\n\n\n\n\n\n\n\nLife expetancy in 2007"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#height-activity",
+    "href": "lectures/lecture.1.2.html#height-activity",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height activity",
+    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses."
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#height-distribution",
+    "href": "lectures/lecture.1.2.html#height-distribution",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height distribution",
+    "text": "Height distribution"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#closing-thoughts",
+    "href": "lectures/lecture.1.2.html#closing-thoughts",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Closing thoughts",
+    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#exercise-1",
+    "href": "lectures/lecture.2.1.html#exercise-1",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nIn your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.\n\n0.95\n0.75\n0.5\n0.25\n0.0\n-0.25\n-0.5\n-0.75\n-0.95\n\nPick a few of these and draw by hand what you expect these graphs to look like."
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#exercise-2",
+    "href": "lectures/lecture.2.1.html#exercise-2",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Exercise 2",
+    "text": "Exercise 2\n\n\n\nSeattle"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#viewing-an-example-relationship",
+    "href": "lectures/lecture.2.1.html#viewing-an-example-relationship",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Viewing an example relationship",
+    "text": "Viewing an example relationship\n\nFirst, what is our expectation about the relationship between bedrooms and square feet?\nDirection?\nForm?\nStrength?\nOutliers?"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---direction",
+    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---direction",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - direction",
+    "text": "Bedrooms and square feet - direction\nA scatterplot is the easiest way to check for direction. In this case, the direction is obvious"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---form",
+    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---form",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - form",
+    "text": "Bedrooms and square feet - form"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---strength",
+    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---strength",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - strength",
+    "text": "Bedrooms and square feet - strength\n\n\n\n\n\n\n\n\n\nCorrelation as a measure of strength\n\n\n\n\n\n\n\n\nThis correlation is a little weaker than perhaps what we expected\n\nIn general, mechanically generated processes with little noise can have very high correlations\nMost correlations of social or real world processes rarely have above moderate correlation due to noise"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---outlier",
+    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---outlier",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - outlier",
+    "text": "Bedrooms and square feet - outlier\nAgain, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values\n\n\n\n\n\n\n\n\nTo investigate if this outlier matters, we can check some other values of the observation.\n\n\n\n\n\n\n\n\nWhat kind of outlier do you think this is? Why?\n\nOutlier - actual observation\n\n\n\n\n\n\n\n\n\n\n\nLocation\n\n\n\n\n\nHouse details\n\n\n\n\nData with no outlier\n\n\n\n\n\n\n\n\n\n\nDescribing the association\n\nDirection - positive\nForm - linear\nStrength - moderate/strong\nOutliers - one possible\n\nOutlier:"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#does-bed-and-square-feeet-relationship-match-expectations",
+    "href": "lectures/lecture.2.1.html#does-bed-and-square-feeet-relationship-match-expectations",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Does bed and square feeet relationship match expectations?",
+    "text": "Does bed and square feeet relationship match expectations?\n\nSeems to, more or less, the larger the house, the more bedrooms, so the relationship is positive\nThe relationship is fairly linear, indicating a strong relationship\nRelationship is moderate\nOutliers don’t seem like it is a problem\n\nHowever….\n\nWhat are some possible lurking variables that influence the relationship of bedrooms and bathrooms?"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#relationship-reexpressed",
+    "href": "lectures/lecture.2.1.html#relationship-reexpressed",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Relationship reexpressed?",
+    "text": "Relationship reexpressed?\nOne final issue to consider is if this relationship should be reexpressed - made more linear.\n\n\n\n\n\n\n\n\n\nSeems clearer\n\n\nYour turn\nWith your partner, develop some expectations about some of the variables in the kc.houses dataset might be related.\nVariables:\n\n\n\n\n\n\n\n\nWhat to do with your partner:\n\nWrite down an interesting question we think we might be able to answer by examining a relationship in this dataset\nChoose the variables that you think might be able to answer this question\nWrite down what you expect the relationship to be between these two variables based on any prior knowledge\nDecide which variable is the response variable and which is the predictor variable\nMake a scatterplot using one of the codeblocks in the previous section and identify the features of the association"
+  },
+  {
+    "objectID": "lectures/lecture.2.3.html#model-fit-measures",
+    "href": "lectures/lecture.2.3.html#model-fit-measures",
+    "title": "Regression Wisdom",
+    "section": "Model fit measures",
+    "text": "Model fit measures\n\nRegression results\nMany parts of these results we already know how to interpret. For now, we will focus on model fit measures.\n\n\\(R^2\\)\n\\(s_e\\)\nResiduals 5 number summary\n\n\n\n\n\n\n\n\n\n\n\nResiduals - histogram\n\n\n\n\n\n\n\n\nHow would you interpret this residual histogram?\n\n\n\n\n\n\n\n\n\n\nCorrelation review\n\nRecall that a correlation, \\(r\\), ranges from -1 to 1 and indicates the strength of the association between two variables\n\nIf \\(r\\) is -1 or 1 exactly, there is no variation, the correlation indicate the relationship is a straight line\nNote that \\(r\\) does not indicate the slope\nIf \\(r\\) is 0, that means there is no relationship\n\nWhat is the slope in that case?\n\\(\\hat{y} = b_0 + b_1*x\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nR squared definition\n\n\\(R^2\\) is the square of \\(r\\) in a two variable case, so between 0 and 1\nBut, unlike \\(r\\), \\(R^2\\) is meaningful in multivariate models\nPercent of the total variation in the data explained by the model\nSum of the errors from our model divided by sum of errors from the ‘braindead’ model of \\(\\hat{y}=\\bar{y}\\)\nIf the \\(R^2\\) is small, that means our model doesn’t beat the ‘braindead’ model by very much\n\n\n\n\n\n\n\n\n\n\n\nWhen is \\(R^2\\) “big enough”?\n\n\\(R^2\\) is useful, but only so much so\nThe closer \\(R^2\\) is to 1, the more useful the model\n\nHow close is “close”?\nDepends on the situation\n\\(R^2\\) of 0.5 might be very bad for a model that uses height to predict weight\n\nShould be more closely related\n\n\\(R^2\\) of 0.5 might be very good for a model using test scores to predict future income\n\nResponse variable has a lot of factors that shape it and a lot of noise\n\n\nGood practice: always report \\(R^2\\) and \\(s_e\\) and let readers analyze the results as well"
+  },
+  {
+    "objectID": "lectures/lecture.2.3.html#extrapolating",
+    "href": "lectures/lecture.2.3.html#extrapolating",
+    "title": "Regression Wisdom",
+    "section": "Extrapolating",
+    "text": "Extrapolating\n\nThe farther a new value is from the range of \\(x\\), the less trust we should place in the predicted value of \\(y\\)\nVenture into new \\(x\\) territory, called extrapolation\nDubious: questionable assumption that nothing changes about the relationship between x and y changes for extreme values of \\(x\\)\n\n\nPredicting MPG of cars\n1970s data on automobiles\n\n\n\n\n\n\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach interior\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach North Korea visit\n\n\nWill our model do a good job predicting this car’s miles per gallon?\n\n\n\n\n\n\n\n\n\n\nCan we predict this car’s MPG using our model?\nWeight: 6581 pounds\nModel: \\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 46.3 + -0.00767*6581\\)\n\\(\\hat{y} = -4.17\\) miles per gallon\n\nNonsense prediction\n\n\n\nBe wary of out of sample predictions"
+  },
+  {
+    "objectID": "lectures/lecture.2.3.html#outliers",
+    "href": "lectures/lecture.2.3.html#outliers",
+    "title": "Regression Wisdom",
+    "section": "Outliers",
+    "text": "Outliers\n\nHeight and net worth\nFirst, we can create random data for both a variable called height and one called log net worth but in the below example they are defined to be random and have no relation to each other.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdding Steve Ballmer\n\n\n\nSteve Ballmer\n\n\n\n\n\n\n\n\n\n\nWhat will happen to the slope and \\(R^2\\)?\n\n\n\n\n\n\n\n\n\n\nSteve Ballmer plot\n\n\n\n\n\n\n\n\n\n\nAdding Warren Buffet\n\n\n\nWarren Buffet\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdding Aleksandar Vučić\n\n\n\nAleksandar Vučić\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLeverage vs. influence\n\nA data point whose \\(x\\) value is far from the mean of the rest of the \\(x\\) values is said to have high leverage.\nLeverage points have the potential to strongly pull on the regression line.\nA point is influential if omitting it from the analysis changes the model enough to make a meaningful difference.\nInfluence is determined by\n\nThe residual\nThe leverage\n\n\n\n\nWarnings\n\nInfluential points can hide in plots of residuals.\nPoints with high leverage pull line close to them, so have small residuals.\nSee points in scatterplot of original data.\nFind regression model with and without the points."
+  },
+  {
+    "objectID": "lectures/lecture.2.3.html#interpreting-a-regression",
+    "href": "lectures/lecture.2.3.html#interpreting-a-regression",
+    "title": "Regression Wisdom",
+    "section": "Interpreting a regression",
+    "text": "Interpreting a regression\n\nStep 1: develop some expectations\nHorsepower vs. MPG\n\nMore powerful engines probably are less fuel efficient\nRelationship is likely roughly linear\nThe exact relationship depends on the efficiency of the engine\n\nCould be noisy\n\n\n\n\nStep 2: make a picture\n\n\n\n\n\n\n\n\n\n\nStep 3: check the conditions\n\nQuantitative variable condition\nStraight enough condition\nOutlier condition\nDoes the plot thicken\nConclusion:?\n\n\n\n\n\n\n\n\n\n\n\nStep 4: identify the units\n\nMiles per gallon: amount of miles you can travel on one gallon of gas, a measure of efficiency.\n\nMost gasoline-using cars have MPG between 10-40, higher being better\n\nHorsepower: power of the engine.\n\nTypical values for standard cars are in the 100-200 range, higher meaning more powerful\n\n\n\n\nStep 5: intepret the slope of the regression line\n\n\n\n\n\n\n\n\n\nFor every one unit increase in horsepower, miles per gallon decreases by about -0.15 units\n\nIs that a lot or a little?\n\n\n\n\n\n\n\n\n\n\n\n\nStep 6: determine reasonable values for the predictor variable\n\n\n\n\n\n\n\n\n\n\nStep 7: interpret the intercept\n\n\n\n\n\n\n\n\n\n\nStep 8: solve for reasonable predictor values\nHorsepower = Q1 = 75:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 28.09\\)\nHorsepower = Median = 93.5:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 25.17\\)\nHorsepower = Q3 = 126:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 20.03\\)\n\n\nStep 9: interpret the residuals and identify their units\n\n\n\n\n\n\n\n\n\n\nStep 10: view the distribution of the residuals\n\n\n\n\n\n\n\n\n\n\nStep 11: interpret the residual standard error\n\n\n\n\n\n\n\n\n\n\nStep 12: interpret the R squared\n\n\n\n\n\n\n\n\n\n\nStep 13: think about confounders\n\nWhat are some confounders, or “lurking variables”?\n\nCategorical\nQuantitative"
   },
   {
     "objectID": "rmanual.html",
@@ -648,7 +697,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.5322055"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.4786886"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",
