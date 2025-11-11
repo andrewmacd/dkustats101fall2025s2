@@ -1,0 +1,324 @@
+---
+title: "Lecture 2.4 - Model building sample solution"
+author: "Student"
+date: "11/7/2025"
+format:
+  pdf:
+    colorlinks: true
+---
+
+![](china.aqi.png)
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(kableExtra)
+library(ggcorrplot)
+library(broom)
+library(gtsummary)
+library(visreg)
+library(sjPlot)
+
+theme_set(theme_minimal())
+
+china.aqi <- read.csv("china.aqi.csv")
+```
+
+# Interpretation steps
+
+## Hypothesis development
+
+Make a list of hypothesized relationships to AQI. Pick four variables that you think are most likely to be associated with AQI. For each variable, list what you expect its relationship to AQI to be and how strong you expect the relationship to be.
+
+>- Precipitation: I expect this will have a moderate and negative relationship with AQI
+>- Incineration amount: I expect this to have a moderate and positive relationship with AQI
+>- Coastal: I expect this to have a moderate and  positive relationship with AQI
+>- Altitude: I expect this to maybe have a slightly negative relationship with AQI
+
+After you have done that, write down the order in which you expect predictor variables to best predict AQI -- which do you think are the most important in 'causing' an increase in AQI?
+
+> 1. Coastal
+> 2. Precipitation
+> 3. Incineration amount
+> 4. Altitude
+
+## Variable exploration
+
+For this part of the lab, you should explore the distribution of the four variables via histograms. Make note of any outliers or non-normal distributions that may cause problems for your later statistical test. Also consider if any variables need to be recoded or transformed.
+
+```{r}
+#| label: fig-keyvarhists
+#| fig-cap: "Histograms of key variables"
+#| fig-subcap: 
+#|     - "AQI"
+#|     - "Distribution of precipitation"
+#|     - "Distribution of incineration amount"
+#|     - "Distribution of altitude"
+#| echo: false
+#| layout-ncol: 2
+#| message: false
+
+ggplot(china.aqi, aes(x=AQI)) +
+  geom_histogram(color="black", fill="purple") +
+  labs(y="Count", x="Precipitation")
+
+ggplot(china.aqi, aes(x=Precipitation)) +
+  geom_histogram(color="black", fill="blue") +
+  labs(y="Count", x="Precipitation")
+
+ggplot(china.aqi, aes(x=Incineration.Amount.10.000ton.)) +
+  geom_histogram(color="black", fill="green") +
+  labs(y="Count", x="Incineration amount (10000 tons)")
+
+ggplot(china.aqi, aes(x=Altitude)) +
+  geom_histogram(color="black", fill="red") +
+  labs(y="Count", x="Altitude (meters)")
+```
+
+> AQI is slightly right skewed but mostly normally distributed. Probably no transformation is necessary.
+
+> Both incineration amount and altitude look highly right skewed, so it is sensible to log transform them.
+
+```{r}
+#| label: tbl-coastdist
+#| tbl-cap: "Distribution of variable: coastal"
+#| echo: false
+#| message: false
+
+china.aqi %>% 
+  group_by(Coastal) %>% 
+  reframe(Count = n(),
+            Proportion = round(n() / nrow(china.aqi), 2)) %>% 
+  kbl() %>% 
+  kable_styling()
+    
+```
+
+> We can also see that only 25% of the counties are coastal. 
+
+## Two variable relationship
+
+Based on your hypothesized relationship between each of the predictor variables and AQI, check the two-way (meaning relationships between each individual predictor variable and the response variable) to see your expectations are met or not. You may also want to check the correlations between all variables. The command to create a correlation matrix plot is
+
+```{r}
+#| label: fig-twoway
+#| fig-cap: "Two way relationships between AQI and key variables"
+#| fig-subcap: 
+#|    - "AQI vs. precipitation"
+#|    - "AQI vs. incineration amount"
+#|    - "AQI vs. altitude"
+#| echo: false
+#| message: false
+#| layout-ncol: 2
+
+ggplot(china.aqi, aes(x=Precipitation, y=AQI)) +
+  geom_point() +
+  geom_smooth(color="blue", se=FALSE, method="lm") +
+  labs(y="AQI", x="Precipitation")
+
+ggplot(china.aqi, aes(x=Incineration.Amount.10.000ton., y=AQI)) +
+  geom_point() +
+  geom_smooth(color="green", se=FALSE, method="lm") +
+  labs(y="AQI", x="Incineration amount (10000 tons)")
+
+ggplot(china.aqi, aes(x=Altitude, y=AQI)) +
+  geom_point() +
+  geom_smooth(color="red", se=FALSE, method="lm") +
+  labs(y="AQI", x="Altitude (meters)")
+```
+
+> As we can see, incineration and altitude have very non-linear relationships with AQI. Taking the log improves the relationships though still weak. Note that there are a significant number of zero values the two variables, so a very small amount is added to the values to make them non-zero.
+
+```{r}
+#| label: fixlog
+#| echo: true
+#| warning: false
+
+china.aqi <- china.aqi %>% 
+  mutate(adj.Inc.Amount.10.000ton. = Incineration.Amount.10.000ton. + 0.0000001,
+         adj.Altitude = Altitude + 0.00000001) %>% 
+  mutate(Log.Incineration.Amount.10.000ton. = log(adj.Inc.Amount.10.000ton.),
+         Log.Altitude = log(adj.Altitude))
+```
+
+```{r}
+#| label: fig-twowaytrans
+#| fig-cap: "Two way relationships between AQI and key transformed variables"
+#| fig-subcap: 
+#|    - "AQI vs. log incineration amount"
+#|    - "AQI vs. log altitude"
+#| echo: false
+#| message: false
+#| warning: false
+#| layout-ncol: 2
+
+ggplot(china.aqi, aes(x=Log.Incineration.Amount.10.000ton., y=AQI)) +
+  geom_point() +
+  geom_smooth(color="green", se=FALSE, method="lm") +
+  labs(y="AQI", x="Log Incineration amount (10000 tons)")
+
+ggplot(china.aqi, aes(x=Log.Altitude, y=AQI)) +
+  geom_point() +
+  geom_smooth(color="red", se=FALSE, method="lm") +
+  labs(y="AQI", x="Log Altitude (meters)")
+```
+
+> Now we can view the correlation data
+
+```{r}
+#| label: fig-corplot
+#| fig-cap: "Correlation of key variables"
+#| echo: false
+
+aqicors <- cor(data.frame(china.aqi$AQI, 
+                          china.aqi$Precipitation, 
+                          china.aqi$Log.Incineration.Amount.10.000ton.,
+                          china.aqi$Log.Altitude), 
+                          use="complete.obs")
+
+
+colnames(aqicors) <- c("AQI", "Precipitation", "Log Incineration", "Log Altitude")
+rownames(aqicors) <- c("AQI", "Precipitation", "Log Incineration", "Log Altitude")
+
+ggcorrplot(aqicors)
+```
+
+Did any of the two-way relationships surprise you? Which ones and why?
+
+> As expected, the correlations are in the directions predicted though weaker than expected. Precipitation is the strongest, which is what was expected. The variables do have some correlation between them which may be a problem.
+
+## Model building
+
+Now, armed with your hypotheses, work with your lab partner to create the best regression model possible by trying combinations of the most 'important' variables until you arrive at a model you are happy with.
+
+> **Step 1**: Model basic results. As predicted from the correlations, the coefficients on the model are all in the expected direction. Though we will need to consider the units to check how meaningful they are.
+
+```{r}
+#| label: tbl-modelsummary
+#| tbl-cap: "Regression model on the response variable: AQI"
+#| echo: false
+#| warning: false
+#| message: false
+
+fit <- lm(data=china.aqi, 
+          AQI ~ Precipitation + Log.Incineration.Amount.10.000ton. + Log.Altitude,
+          na.action = na.exclude)
+aug.fit <- augment(fit, data=china.aqi)
+
+aqi.mod.tbl <- tbl_regression(fit,
+                              tidy_fun = function(x, ...) {
+                                  broom::tidy(x) %>%
+                                    select(term, estimate, statistic, p.value)
+                              },
+                              estimate_fun = ~ style_sigfig(.x, digits = 2),
+                              pvalue_fun = ~ style_pvalue(.x),
+                              conf.int = FALSE,
+                              intercept = TRUE,
+                              label = list(Log.Altitude = "Log Altitude",
+                                           `(Intercept)` = "Intercept",
+                                           Log.Incineration.Amount.10.000ton. = "Log Incineration"))
+
+resid_summary <- summary(residuals(fit))
+
+resid_text <- paste0(
+  "Residuals: Min = ", round(resid_summary["Min."], 2),
+  ", Q1 = ", round(resid_summary["1st Qu."], 2),
+  ", Median = ", round(resid_summary["Median"], 2),
+  ", Q3 = ", round(resid_summary["3rd Qu."], 2),
+  ", Max = ", round(resid_summary["Max."], 2))
+
+resid_se_text <- paste0("Residual standard error: ", 
+                        round(sd(aug.fit$.resid, na.rm=TRUE), 2))
+
+aqi.mod.tbl %>%
+  modify_header(
+    label ~ "Variable",
+    estimate ~ "Estimate",
+    statistic ~ "t value",
+    p.value ~ "p-value"
+  ) %>% 
+  add_glance_source_note(include = c(r.squared)) %>%
+  modify_source_note(paste("Number of cases (n):", nobs(fit))) %>% 
+  modify_source_note(resid_text) %>% 
+  modify_source_note(resid_se_text) 
+```
+
+
+```{r}
+#| label: fig-resids
+#| fig-cap: "Residual plots of the model"
+#| fig-subcap: 
+#|   - "Histogram of the residuals"
+#|   - "Residuals vs. predicted"
+#| echo: false
+#| warning: false
+#| message: false
+#| layout-ncol: 2
+
+ggplot(aug.fit, aes(x=.resid)) +
+  geom_histogram(color="black", fill="pink") +
+  labs(x="Residuals", y="Count")
+
+ggplot(aug.fit, aes(x=.fitted, y=.resid)) + 
+  geom_point(data = subset(aug.fit, .resid > 150),
+             color="red") + 
+  geom_point(data = subset(aug.fit, .resid < 150),
+             color="black") +
+  geom_hline(yintercept=0, color="red") +
+  geom_text(
+    data = subset(aug.fit, .resid > 150),
+    aes(label = City),
+    vjust = 1.66,
+    hjust = 1.1,
+    color = "blue") +
+  labs(x="Predicted", y="Residuals")
+```
+
+> **Step 2**: Analyze residuals. We can see the plot thickens condition in the scatterplot and a possible outlier. The histogram has some skew. So we may need to go back and see if there is anything we can revise. While Beijing is an outlier (its actual value is much higher than its predicted value), I don't think there are grounds to remove it.
+
+```{r}
+#| label: fig-partials
+#| fig-cap: "Partial residual plots"
+#| fig-subcap: 
+#|     - "AQI vs. precipitation"
+#|     - "AQI vs. log incineration amount"
+#|     - "AQI vs. log altitude"
+#| echo: false
+#| layout-ncol: 2
+
+visreg(fit, "Precipitation", gg=TRUE)
+visreg(fit, "Log.Incineration.Amount.10.000ton.", gg=TRUE)
+visreg(fit, "Log.Altitude", gg=TRUE)
+```
+
+> **Step 3**: Review partial residual plots. The partial residual plots here indicate that the relationship between the variables is about as linear as can be expected, although the only variable that shows a strong relationship is precipitation. I don't see any additional obvious transformation that would improve things.
+
+## Model interpretation
+
+Next, interpret your coefficients -- think about whether your predictor variables are predicted to make a big or a small change in the response variable.
+
+-   Some things to consider:
+    -   What are the units of the slope coefficients?
+    -   How big of an impact does a one unit change in the predictor variable have on the response variable?
+    -   Is that change a little or a lot?
+
+Then, evaluate your hypotheses with respect to the outcome of your model. Were you surprised by any of the results? Why or why not?
+
+```{r}
+#| label: fig-margins
+#| fig-cap: "Maginal effect plots"
+#| fig-subcap: 
+#|     - "Predicted values of AQI by precipitation"
+#|     - "Predicted values of AQI by log incineration"
+#|     - "Predicted values of AQI by log altitude"
+#| echo: false
+#| layout-ncol: 2
+
+plot_model(fit, type="pred", terms="Precipitation")
+plot_model(fit, type="pred", terms="Log.Incineration.Amount.10.000ton.")
+plot_model(fit, type="pred", terms="Log.Altitude")
+```
+
+> **Step 4**: Interpret coefficients. The margin plots here indicate that these variables all have some influence on AQI, with precipitation having perhaps the largest influence. The influence of these variables on AQI is modest, however, which is to be expected given the model's $R^2$ is only 0.26.
