@@ -29,13 +29,13 @@ Learning how to build an appropriate model for your data is a deep and difficult
 
 ## Hypothesis development
 
-Make a list of hypothesized relationships to AQI. For each variable, list what you expect its relationship to AQI to be and how strong you expect the relationship to be.
+Make a list of hypothesized relationships to AQI. Pick four variables that you think are most likely to be associated with AQI. For each variable, list what you expect its relationship to AQI to be and how strong you expect the relationship to be.
 
 After you have done that, write down the order in which you expect predictor variables to best predict AQI -- which do you think are the most important in 'causing' an increase in AQI?
 
 ## Variable exploration
 
-For this part of the lab, you should explore the distribution of all of the variables via histograms. Make note of any outliers or non-normal distributions that may cause problems for your later statistical test. Also consider if any variables need to be recoded or transformed.
+For this part of the lab, you should explore the distribution of the four variables via histograms. Make note of any outliers or non-normal distributions that may cause problems for your later statistical test. Also consider if any variables need to be recoded or transformed.
 
 ## Two variable relationship
 
