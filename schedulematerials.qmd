@@ -168,7 +168,7 @@ Topics covered:
 
 -   Lecture webpage: [Lecture 2.4](lectures/lecture.2.4.html)
 
--   Lecture activity: [Lecture 2.4 activity](Activities/Lecture 2.4/lecture.2.4.activity.zip)
+-   Lecture activity: [Lecture 2.4 activity](activities/Lecture 2.4/lecture.2.4.activity.zip)
 
 ## Unit 2 homework (due Sunday, November 16 at 11:59:00)
 
