@@ -197,7 +197,7 @@ Topics covered:
 
 ## Lab 2.2: Interpreting coefficients (Thursday, November 13)
 
--   Lab files: [Lab 2.2]
+-   Lab files: [Lab 2.2](labs/Lab 2.2/lab.2.2.zip)
     -   Make sure to extract (unzip) the lab files before attempting to modify them!
 
 ## Lecture 3.2: Confidence intervals - means (Tuesday, November 18)
