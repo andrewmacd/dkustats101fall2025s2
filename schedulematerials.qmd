@@ -194,6 +194,7 @@ Topics covered:
 -   Lecture webpage: [Lecture 3.1](lectures/lecture.3.1.html)
 
 -   Lecture activity: [Lecture 3.1 activity](activities/Lecture 3.1/lecture.3.1.activity.zip)
+    +   Sample solution: [Lecture 3.1 activity sample solution](activities/Lecture 3.1/lecture.3.1.activity.sample.solution.zip)
 
 ## Lab 2.2: Interpreting coefficients (Thursday, November 13)
 
