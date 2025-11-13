@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Professor MacDonald">
+<meta name="dcterms.date" content="2025-11-13">
+
+<title>Confidence Intervals - Proportions – DKU Stats 101 - Fall 2025 S2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DKU Stats 101 - Fall 2025 S2</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Course Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedulematerials.html"> 
+<span class="menu-text">Schedule and Course Materials</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../rmanual.html"> 
+<span class="menu-text">R Help Manual</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/andrewmacd/dkustats101fall2025s2"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Confidence Intervals - Proportions</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Professor MacDonald </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 13, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell" data-autorun="true">
+<div>
+<div id="webr-1" class="exercise-cell">
+
+</div>
+<script type="webr-1-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5jbHVkZSI6ZmFsc2UsImxhYmVsIjoic2V0dXAiLCJvdXRwdXQiOmZhbHNlLCJ3YXJuaW5nIjpmYWxzZX0sImNvZGUiOiJcbnRoZW1lX3NldCh0aGVtZV9jbGFzc2ljKCkpXG5cbmNsYXNzcm9zdGVyIDwtIHJlYWQuY3N2KFwiY2xhc3Nyb3N0ZXIuY3N2XCIsIGZpbGVFbmNvZGluZz1cIlVURi04LUJPTVwiKVxuXG5uLmV4YW1wbGUgPC0gMTAwXG5cbm1lYW4ubXVsdGlwbGUuc2FtcGxlcyA8LSBmdW5jdGlvbihudW1kcmF3cywgbnVtc2FtcGxlcywgdmFyaWFibGUpIHsgXG4gICAgIG1lYW52ZWN0b3IgPC0gYygpIFxuICAgICBtZWFub25lc2FtcGxlIDwtIDAgXG4gICAgIGZvciAoaSBpbiAxOm51bXNhbXBsZXMpIHsgXG4gICAgICAgbWVhbm9uZXNhbXBsZSA8LSBtZWFuKHNhbXBsZSh2YXJpYWJsZSwgbnVtZHJhd3MsIHJlcGxhY2U9VFJVRSkpIFxuICAgICAgICAgbWVhbnZlY3RvcltpXSA8LSBtZWFub25lc2FtcGxlIFxuICAgICB9IFxuICAgICBtZWFudmVjdG9yIFxufVxuXG5rYy5ob3VzZSA8LSByZWFkLmNzdihcImtpbmcuY291bnR5LnNhbGVzLnJlY2VudC5jc3ZcIilcblxua2MuaG91c2UgPC0ga2MuaG91c2UgJT4lXG4gIG11dGF0ZShpcy5mYW1pbHkuc2l6ZWQgPSBpZmVsc2UoYmVkcz49MywgMSwgMCkpICU+JSBcbiAgbXV0YXRlKHZpZXcgPSBjYXNlX3doZW4odmlld19yYWluaWVyID09IDEgfiAxLFxuICAgICAgICAgICAgICAgICAgICAgICAgICB2aWV3X29seW1waWNzID09IDEgfiAxLFxuICAgICAgICAgICAgICAgICAgICAgICAgICB2aWV3X2Nhc2NhZGVzID09IDEgfiAxLFxuICAgICAgICAgICAgICAgICAgICAgICAgICB2aWV3X3RlcnJpdG9yaWFsID09IDEgfiAxLFxuICAgICAgICAgICAgICAgICAgICAgICAgICB2aWV3X3NreWxpbmUgPT0gMSB+IDEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHZpZXdfc291bmQgPT0gMSB+IDEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHZpZXdfbGFrZXdhc2ggPT0gMSB+IDEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHZpZXdfbGFrZXNhbW0gPT0gMSB+IDEsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICB2aWV3X290aGVyd2F0ZXIgPT0gMSB+IDEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHZpZXdfb3RoZXIgPT0gMSB+IDEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIFRSVUUgfiAwKSkifQ==
+</script>
+</div>
+</div>
+<section id="confidence-intervals" class="level1">
+<h1>Confidence Intervals</h1>
+<ul>
+<li><p>The sampling distribution model for a proportion</p></li>
+<li><p>When does the normal model work?</p></li>
+<li><p>Confidence interval for a proportion</p></li>
+<li><p>Interpreting confidence intervals</p></li>
+<li><p>Margin of error: certainty vs.&nbsp;precision</p></li>
+</ul>
+<section id="the-sampling-distribution-model-for-a-proportion" class="level2">
+<h2 class="anchored" data-anchor-id="the-sampling-distribution-model-for-a-proportion">The sampling distribution model for a proportion</h2>
+<section id="sampling-model" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-model">Sampling model</h3>
+<ul>
+<li><p>Draw samples at random, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">n=100</annotation></semantics></math></p></li>
+<li><p>Samples vary</p></li>
+<li><p>Can’t draw all samples of size 100, astronomical</p></li>
+<li><p>Draw a few thousand samples</p></li>
+<li><p>Distribution is called the sampling distribution of the proportion.</p></li>
+</ul>
+<p>What shape do you think the sampling distribution will have if we have sample size <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">n=100</annotation></semantics></math>?</p>
+<div class="cell">
+<div>
+<div id="webr-2" class="exercise-cell">
+
+</div>
+<script type="webr-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJsYWJlbCI6InBpY2tlcjEiLCJ3YXJuaW5nIjpmYWxzZX0sImNvZGUiOiJzYW1wbGUoY2xhc3Nyb3N0ZXIkbmFtZSwgMSkifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="graph-of-a-sampling-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="graph-of-a-sampling-distribution">Graph of a <strong>sampling</strong> distribution</h3>
+<ul>
+<li>Remember, this is not a graph of the <strong>actual</strong> distribution</li>
+</ul>
+<div class="cell" data-caption="Sampling distribution of percent of houses that are family sized">
+<div>
+<div id="webr-3" class="exercise-cell">
+
+</div>
+<script type="webr-3-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiU2FtcGxpbmcgZGlzdHJpYnV0aW9uIG9mIHBlcmNlbnQgb2YgaG91c2VzIHRoYXQgYXJlIGZhbWlseSBzaXplZCIsImVkaXQiOnRydWUsImV2YWwiOnRydWUsImxhYmVsIjoiZmlnLXNhbXBsaW5ncGxvdCIsIndhcm5pbmciOmZhbHNlfSwiY29kZSI6InNldC5zZWVkKDg2NzUzMDkpXG5zYW1wbGluZy5kaXN0cmlidXRpb24gPC0gbWVhbi5tdWx0aXBsZS5zYW1wbGVzKDEwMCwgMTAwMDAwLCBrYy5ob3VzZSRpcy5mYW1pbHkuc2l6ZWQpICBcbiAgXG5nZ3Bsb3QoZGF0YS5mcmFtZShzYW1wbGluZy5kaXN0cmlidXRpb24pLCBhZXMoeD1zYW1wbGluZy5kaXN0cmlidXRpb24pKSArXG4gIGdlb21fZGVuc2l0eShjb2xvcj1cImRhcmtibHVlXCIsIGZpbGw9XCJsaWdodGJsdWVcIiwgYWRqdXN0PTIpICsgXG4gIGxhYnMoeD1cIlNhbXBsZSBtZWFuIG9mICUgb2YgaG91c2VzIHdpdGggPj0gMyBiZWRyb29tc1wiLCB5PVwiQ291bnRcIikgK1xuICBnZW9tX3ZsaW5lKHhpbnRlcmNlcHQ9bWVhbihzYW1wbGluZy5kaXN0cmlidXRpb24pLCBjb2xvcj1cInJlZFwiKSArIFxuICB0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChmYWNlPVwiYm9sZFwiLCBzaXplPTEwKSkifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="random-matters" class="level3">
+<h3 class="anchored" data-anchor-id="random-matters">Random matters</h3>
+<ul>
+<li><p>Sampling distribution for a proportion</p>
+<ul>
+<li><p>Symmetric - check</p></li>
+<li><p>Unimodal - check</p></li>
+<li><p>Centered at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>: <strong>0.853</strong></p></li>
+<li><p>Standard deviation: <strong>0.035</strong></p></li>
+<li><p>Follows the Normal model - check</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-normal-model-for-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="the-normal-model-for-sampling">The Normal model for sampling</h3>
+<ul>
+<li><p>Samples don’t all have the same proportion.</p></li>
+<li><p>Normal model is the right one for sample proportions.</p></li>
+<li><p>Modeling how sample statistics, proportions or means, vary from sample to sample is powerful.</p></li>
+<li><p>Allows us to quantify that variation.</p></li>
+<li><p>Make statements about corresponding population parameter.</p></li>
+<li><p>Make model for random behavior, then understand and and use that model.</p></li>
+</ul>
+</section>
+<section id="which-normal-model-to-choose" class="level3">
+<h3 class="anchored" data-anchor-id="which-normal-model-to-choose">Which Normal model to choose?</h3>
+<ul>
+<li><p>Reminder: normal model is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>μ</mi><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">N(\mu, \sigma^2)</annotation></semantics></math></p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> or mean is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>, or the proportion we want to estimate, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> is sample size</p></li>
+<li><p>For proportions, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msqrt><mfrac><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mi>n</mi></mfrac></msqrt></mrow><annotation encoding="application/x-tex">\sigma(p) = \sqrt{\frac{p(1-p)}{n}}</annotation></semantics></math></p></li>
+<li><p>This is the standard deviation of the <strong>SAMPLING DISTRIBUTION</strong>, that is the distribution of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> across infinite samples</p></li>
+</ul>
+</section>
+<section id="mean-and-standard-deviation" class="level3">
+<h3 class="anchored" data-anchor-id="mean-and-standard-deviation">Mean and standard deviation</h3>
+<div class="cell" data-caption="Normal-shaped sampling distribution">
+<div>
+<div id="webr-4" class="exercise-cell">
+
+</div>
+<script type="webr-4-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiTm9ybWFsLXNoYXBlZCBzYW1wbGluZyBkaXN0cmlidXRpb24iLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJsYWJlbCI6ImZpZy1tZWFuc2RwbG90Iiwid2FybmluZyI6ZmFsc2V9LCJjb2RlIjoic2V0LnNlZWQoODg4ODg4OClcbm5vcm1hbC5zYW1wbGluZy5kaXN0cmlidXRpb24gPC0gcm5vcm0oMTAwMDAwKVxuXG5nZ3Bsb3QoZGF0YS5mcmFtZShub3JtYWwuc2FtcGxpbmcuZGlzdHJpYnV0aW9uKSwgYWVzKHg9bm9ybWFsLnNhbXBsaW5nLmRpc3RyaWJ1dGlvbikpICsgXG4gIGdlb21fZGVuc2l0eShjb2xvcj1cImRhcmtibHVlXCIsIGZpbGw9XCJsaWdodGJsdWVcIikgK1xuICBzY2FsZV94X2NvbnRpbnVvdXMoYnJlYWtzPWMoLTMsIC0yLCAtMSwgMCwgMSwgMiwgMyksXG4gICAgICAgICAgICAgICAgICAgICBsYWJlbD1jKFwiLTNzcXJ0KHBxL24pXCIsIFwiLTJzcXJ0KHBxL24pXCIsIFwiLTFzcXJ0KHBxL24pXCIsIFwiMHNxcnQocHEvbilcIiwgXCIxc3FydChwcS9uKVwiLCBcIjJzcXJ0KHBxL24pXCIsIFwiM3NxcnQocHEvbilcIiksIFxuICAgICAgICAgICAgICAgICAgICAgbGltaXRzPWMoLTMsIDMpLFxuICAgICAgICAgICAgICAgICAgICAgZ3VpZGUgPSBndWlkZV9heGlzKG4uZG9kZ2U9MikpICtcbiAgbGFicyh4PVwiTm9ybWFsIG1vZGVsIGRpc3RhbmNlcyBmb3IgcHJvcG9ydGlvbnNcIiwgeT1cIkRlbnNpdHlcIikgKyBcbiAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoZmFjZT1cImJvbGRcIiwgc2l6ZT0xMCkpIn0=
+</script>
+</div>
+</div>
+</section>
+<section id="reminder---normal-model-rule" class="level3">
+<h3 class="anchored" data-anchor-id="reminder---normal-model-rule">Reminder - Normal model rule</h3>
+<ul>
+<li><p>Using this normal model rule, we can tell how likely it is to have a certain <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{p}</annotation></semantics></math> given the sampling distribution normal model</p></li>
+<li><p>Remember the 68–95–99.7 (1 sd, 2 sd, 3 sd), for other distances use technology</p></li>
+<li><p>Most common: 95% of samples have sample proportion within two standard deviations of the true population proportion.</p></li>
+<li><p>Knowing the sampling distribution tells us how much variation to expect</p></li>
+<li><p>Called the sampling error in some contexts</p></li>
+<li><p>Not really an error, just variability</p></li>
+<li><p>Better to call it sampling variability</p></li>
+</ul>
+</section>
+</section>
+<section id="when-does-the-normal-model-work" class="level2">
+<h2 class="anchored" data-anchor-id="when-does-the-normal-model-work">When does the normal model work?</h2>
+<ul>
+<li><p>Independence Assumption: check data collected in a way that makes this assumption plausible</p></li>
+<li><p>Randomization Condition: subjects randomly assigned treatments, or survey is simple random sample</p></li>
+<li><p>10% Condition: sample size less than 10% of the population size</p></li>
+<li><p>Success Failure Condition: there must be at least 10 expected successes and failures. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>≥</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n\hat{p}\geq10</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>n</mi><mo accent="true">̂</mo></mover><mi>p</mi><mo>≥</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">\hat{n}p\geq10</annotation></semantics></math></p></li>
+</ul>
+<section id="when-does-the-normal-model-fail-for-the-sampling-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="when-does-the-normal-model-fail-for-the-sampling-distribution">When does the normal model fail for the sampling distribution?</h3>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> close to 0 or 1</p></li>
+<li><p>People in this class that can dunk a basketball</p></li>
+<li><p>Sample size 100</p>
+<ul>
+<li>If true <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.001</mn></mrow><annotation encoding="application/x-tex">p = 0.001</annotation></semantics></math>, then probably none in sample of 100</li>
+</ul></li>
+<li><p>If we simulated samples of size 100 with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.001</mn></mrow><annotation encoding="application/x-tex">p = 0.001</annotation></semantics></math></p>
+<ul>
+<li>Distribution skewed right, can’t rely on normal model percentages anymore</li>
+</ul></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> is fine, but <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> is too small</p></li>
+</ul>
+<p>What will the shape of the sampling distribution look like if <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.001</mn></mrow><annotation encoding="application/x-tex">p = 0.001</annotation></semantics></math>?</p>
+<div class="cell">
+<div>
+<div id="webr-5" class="exercise-cell">
+
+</div>
+<script type="webr-5-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJsYWJlbCI6InBpY2tlcjIiLCJ3YXJuaW5nIjpmYWxzZX0sImNvZGUiOiJzYW1wbGUoY2xhc3Nyb3N0ZXIkbmFtZSwgMSkifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="example-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="example-simulation">Example simulation</h3>
+<div class="cell" data-caption="Skewed population sampling distribution">
+<div>
+<div id="webr-6" class="exercise-cell">
+
+</div>
+<script type="webr-6-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiU2tld2VkIHBvcHVsYXRpb24gc2FtcGxpbmcgZGlzdHJpYnV0aW9uIiwiZWRpdCI6dHJ1ZSwiZXZhbCI6dHJ1ZSwibGFiZWwiOiJmaWctc2tld3NhbXBsaW5ncGxvdCIsIndhcm5pbmciOmZhbHNlfSwiY29kZSI6InNldC5zZWVkKDEyMzQ1NjcpXG4jIFNldCB0aGUgdHJ1ZSBwb3B1bGF0aW9uXG5za2V3ZWQucG9wdWxhdGlvbiA8LSBzYW1wbGUoYygxLCAwKSwgMTAwMDAwLCByZXBsYWNlPVRSVUUsIHByb2IgPSBjKDAuMDAxLDAuOTk5KSlcbiMgU2FtcGxlIGZyb20gdGhlIHRydWUgcG9wdWxhdGlvblxuc2tld2VkLnNhbXBsZSA8LSBtZWFuLm11bHRpcGxlLnNhbXBsZXMoMTAwLCAxMDAwMDAsIHNrZXdlZC5wb3B1bGF0aW9uKVxuXG5nZ3Bsb3QoZGF0YS5mcmFtZShza2V3ZWQuc2FtcGxlKSwgYWVzKHg9c2tld2VkLnNhbXBsZSkpICtcbiAgZ2VvbV9kZW5zaXR5KGNvbG9yPVwiZGFya2JsdWVcIiwgZmlsbD1cImxpZ2h0Ymx1ZVwiKSArIFxuICBsYWJzKHg9XCJTYW1wbGUgbWVhbiBvZiB0aG9zZSB3aG8gY2FuIGR1bmsgd2l0aCBzYW1wbGUgc2l6ZSA9IDEwMFwiLCB5PVwiQ291bnRcIikifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="class-sampling-exercise" class="level3">
+<h3 class="anchored" data-anchor-id="class-sampling-exercise">Class sampling exercise</h3>
+<ul>
+<li><p>We know that about 50% of students at DKU plan to or have selected a major in the natural sciences</p></li>
+<li><p>? % of students in our class plan to major in the natural sciences in our class</p>
+<ul>
+<li>Is our class unusually small?</li>
+</ul></li>
+<li><p>Check conditions</p>
+<ul>
+<li>Randomization condition</li>
+<li>10% condition</li>
+<li>Success failure condition</li>
+</ul></li>
+</ul>
+</section>
+<section id="find-how-far-we-are-from-the-population-mean" class="level3">
+<h3 class="anchored" data-anchor-id="find-how-far-we-are-from-the-population-mean">Find how far we are from the population mean</h3>
+<ul>
+<li>Population standard deviation formula is:
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><msqrt><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msqrt><msqrt><mi>n</mi></msqrt></mfrac><annotation encoding="application/x-tex">\frac{\sqrt{p(1-p)}}{\sqrt{n}}</annotation></semantics></math></li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{p}</annotation></semantics></math> is the proportion of yeses</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> is the sample size</li>
+</ul></li>
+<li>We are calculating using the population <strong>sampling</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">SD</annotation></semantics></math> since we know it
+<ul>
+<li>If we don’t know the population sampling <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">SD</annotation></semantics></math> we have to use a different strategy, but not the case here</li>
+</ul></li>
+<li>Knowing the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">SD</annotation></semantics></math>, we can create a z score for the difference between our class and the population
+<ul>
+<li>z score is how many <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">SD</annotation></semantics></math>s our class is from the population mean
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>c</mi><mi>l</mi><mi>a</mi><mi>s</mi><mi>s</mi><mi>s</mi><mi>c</mi><mi>o</mi><mi>r</mi><mi>e</mi><mo>−</mo><mi>d</mi><mi>k</mi><mi>u</mi><mi>m</mi><mi>e</mi><mi>a</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>S</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">(class score - dkumean) / SD</annotation></semantics></math></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="normal-distribution-percentages" class="level3">
+<h3 class="anchored" data-anchor-id="normal-distribution-percentages">Normal distribution percentages</h3>
+<div class="cell" data-caption="Normal percentiles">
+<div>
+<div id="webr-7" class="exercise-cell">
+
+</div>
+<script type="webr-7-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiTm9ybWFsIHBlcmNlbnRpbGVzIiwiZWRpdCI6dHJ1ZSwiZXZhbCI6dHJ1ZSwibGFiZWwiOiJmaWctbm9ybWFscGVyY2VudGlsZXMiLCJ3YXJuaW5nIjpmYWxzZX0sImNvZGUiOiJnZ3Bsb3QoZGF0YS5mcmFtZShub3JtYWwuc2FtcGxpbmcuZGlzdHJpYnV0aW9uKSwgYWVzKHg9bm9ybWFsLnNhbXBsaW5nLmRpc3RyaWJ1dGlvbikpICsgXG4gIGdlb21fZGVuc2l0eShjb2xvcj1cImRhcmtibHVlXCIsIGZpbGw9XCJsaWdodGJsdWVcIikgK1xuICBzY2FsZV94X2NvbnRpbnVvdXMoYnJlYWtzPWMoLTMsIC0yLCAtMSwgMCwgMSwgMiwgMyksXG4gICAgICAgICAgICAgICAgICAgICBsYWJlbD1jKFwifjAuMDA1XCIsIFwifjAuMDI1XCIsIFwifjAuMTZcIiwgXCIwLjVcIiwgXCJ+MC44NFwiLCBcIn4wLjk1XCIsIFwifjAuOTk1XCIpLCBcbiAgICAgICAgICAgICAgICAgICAgIGxpbWl0cz1jKC0zLCAzKSxcbiAgICAgICAgICAgICAgICAgICAgIGd1aWRlID0gZ3VpZGVfYXhpcyhuLmRvZGdlPTIpKSArXG4gIGxhYnMoeD1cIkN1bXVsYXRpdmUgZGVuc2l0eVwiLCB5PVwiRGVuc2l0eVwiKSArXG4gIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGZhY2U9XCJib2xkXCIsIHNpemU9MTApKSJ9
+</script>
+</div>
+</div>
+</section>
+<section id="calculation-for-our-class" class="level3">
+<h3 class="anchored" data-anchor-id="calculation-for-our-class">Calculation for our class</h3>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><msqrt><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msqrt><msqrt><mi>n</mi></msqrt></mfrac><annotation encoding="application/x-tex">\frac{\sqrt{p(1-p)}}{\sqrt{n}}</annotation></semantics></math></p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{p}</annotation></semantics></math> is the proportion of yeses</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> is the sample size</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>−</mo><mi>p</mi></mrow><mrow><mi>S</mi><mi>D</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><annotation encoding="application/x-tex">\frac{\hat{p} - p}{SD(p)}</annotation></semantics></math></p></li>
+<li><p>68-95-99.7 Rule: Values ?<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">SD</annotation></semantics></math> above the mean occur less than ?% of the time. Our class mean appears to be far/near from the population mean</p></li>
+</ul>
+<p>Calculate the how likely our result would be if our class is a random sample of DKU students.</p>
+<div class="cell">
+<div>
+<div id="webr-8" class="exercise-cell">
+
+</div>
+<script type="webr-8-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJsYWJlbCI6InBpY2tlcjMiLCJ3YXJuaW5nIjpmYWxzZX0sImNvZGUiOiJzYW1wbGUoY2xhc3Nyb3N0ZXIkbmFtZSwgMSkifQ==
+</script>
+</div>
+</div>
+</section>
+</section>
+<section id="confidence-intervals-of-proportions" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-of-proportions">Confidence intervals of proportions</h2>
+<section id="standard-errors-for-proportions" class="level3">
+<h3 class="anchored" data-anchor-id="standard-errors-for-proportions">Standard errors for proportions</h3>
+<ul>
+<li><p>What is the sampling distribution?</p></li>
+<li><p>Usually we do not know the population proportion <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>.</p></li>
+<li><p>Therefore, we cannot find the standard deviation of the sampling distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><msqrt><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msqrt><msqrt><mi>n</mi></msqrt></mfrac><annotation encoding="application/x-tex">\frac{\sqrt{p(1-p)}}{\sqrt{n}}</annotation></semantics></math></p></li>
+<li><p>After taking a sample, we only know the sample proportion, which we use as an approximation (called the standard error)</p>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><msqrt><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msqrt><msqrt><mi>n</mi></msqrt></mfrac><annotation encoding="application/x-tex">\frac{\sqrt{\hat{p}(1-\hat{p})}}{\sqrt{n}}</annotation></semantics></math></li>
+</ul></li>
+</ul>
+</section>
+<section id="example-bedrooms" class="level3">
+<h3 class="anchored" data-anchor-id="example-bedrooms">Example: bedrooms</h3>
+<ul>
+<li>Draw a random sample of 100 houses</li>
+</ul>
+<div class="cell" data-caption="Sampling for a confidence interval">
+<div>
+<div id="webr-9" class="exercise-cell">
+
+</div>
+<script type="webr-9-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiU2FtcGxpbmcgZm9yIGEgY29uZmlkZW5jZSBpbnRlcnZhbCIsImVkaXQiOnRydWUsImV2YWwiOnRydWUsImxhYmVsIjoicmFuZG9tc2FtcGxlIiwid2FybmluZyI6ZmFsc2V9LCJjb2RlIjoic2V0LnNlZWQoNDQ0NDQ0NClcbnNhbXBsZS5vbmNlIDwtIHNhbXBsZShrYy5ob3VzZSRpcy5mYW1pbHkuc2l6ZWQsIDEwMCwgcmVwbGFjZT1UUlVFKVxuXG5wPC1yb3VuZChtZWFuKHNhbXBsZS5vbmNlKSwgZGlnaXRzPTMpXG5cbnAifQ==
+</script>
+</div>
+</div>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><msqrt><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msqrt><msqrt><mn>100</mn></msqrt></mfrac><annotation encoding="application/x-tex">\frac{\sqrt{\hat{p}(1-\hat{p})}}{\sqrt{100}}</annotation></semantics></math></p></li>
+<li><p>The sampling distribution should be approximately normal</p></li>
+</ul>
+</section>
+<section id="what-is-a-confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-a-confidence-interval">What is a confidence interval?</h3>
+<ul>
+<li><p>Confidence interval: a way to express the range of plausible values for the parameter (in this case, percent of homes with three bedrooms)</p></li>
+<li><p>We never know the true value but we want to say something about how wide the range of possible values are</p></li>
+<li><p>What is a reasonable range?</p>
+<ul>
+<li>Traditionally, 95% (about two standard deviations) of the standard error distribution</li>
+<li>Mean of our sample <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>±</mi><annotation encoding="application/x-tex">\pm</annotation></semantics></math> range of possible values we could get if we took additional samples</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-bedrooms-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-bedrooms-1">Example: bedrooms</h3>
+<ul>
+<li><p>Our mean: 0.87</p></li>
+<li><p>Our <strong>estimated</strong> sampling distribution standard error:</p>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mfrac><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mn>100</mn></mfrac></msqrt><annotation encoding="application/x-tex">\sqrt{\frac{\hat{p}(1-\hat{p})}{100}}</annotation></semantics></math></li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mfrac><mrow><mover><mn>0.87</mn><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mover><mn>0.87</mn><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mn>100</mn></mfrac></msqrt><annotation encoding="application/x-tex">\sqrt{\frac{\hat{0.87}(1-\hat{0.87})}{100}}</annotation></semantics></math></li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mfrac><mn>0.7569</mn><mn>100</mn></mfrac></msqrt><annotation encoding="application/x-tex">\sqrt{\frac{0.7569}{100}}</annotation></semantics></math></li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mn>0.007569</mn></msqrt><annotation encoding="application/x-tex">\sqrt{0.007569}</annotation></semantics></math></li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.087</mn><annotation encoding="application/x-tex">0.087</annotation></semantics></math></li>
+</ul></li>
+<li><p>A range of reasonable values if we sampled this again:</p>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>0.087</mn></mrow><annotation encoding="application/x-tex">2\times0.087</annotation></semantics></math></li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.87</mn><mo>±</mo><mn>0.174</mn></mrow><annotation encoding="application/x-tex">0.87\pm0.174</annotation></semantics></math></li>
+</ul></li>
+</ul>
+<p>Statement: we are ~95% confident that this interval contains the true proportion of houses with three or more bedrooms in the population</p>
+</section>
+<section id="critical-values" class="level3">
+<h3 class="anchored" data-anchor-id="critical-values">Critical values</h3>
+<ul>
+<li><p>Critical values are the cutoff we use to determine what is ‘reasonable’</p></li>
+<li><p>Derived from the Normal model</p></li>
+<li><p>Can use any z-score as a cutoff</p></li>
+<li><p>Corresponding multiplier of the SE is called the critical value.</p></li>
+<li><p>Normal model for this interval, it is denoted <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>z</mi><mo>*</mo></msup><annotation encoding="application/x-tex">z^*</annotation></semantics></math>.</p></li>
+<li><p>To find, need to use computer, calculator, Normal probability table</p></li>
+</ul>
+<div class="cell">
+<div>
+<div id="webr-10" class="exercise-cell">
+
+</div>
+<script type="webr-10-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJsYWJlbCI6Im5vcm1wZXJjZW50cyIsIndhcm5pbmciOmZhbHNlfSwiY29kZSI6InFub3JtKGMoMC4wMjUsIDAuOTc1KSkifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="recap" class="level3">
+<h3 class="anchored" data-anchor-id="recap">Recap</h3>
+<ul>
+<li><p>Make sure conditions are met, then find level C confidence interval for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{p}</annotation></semantics></math>, our population mean estimate</p></li>
+<li><p>Confidence interval is defined as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>±</mo><msup><mi>z</mi><mo>*</mo></msup><mo>×</mo><mi>S</mi><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{p}\pm z^* \times SE(\hat{p})</annotation></semantics></math></p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">SE(\hat{p})</annotation></semantics></math> estimated by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><msqrt><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msqrt><msqrt><mi>n</mi></msqrt></mfrac><annotation encoding="application/x-tex">\frac{\sqrt{\hat{p}(1-\hat{p})}}{\sqrt{n}}</annotation></semantics></math></p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>z</mi><mo>*</mo></msup><annotation encoding="application/x-tex">z^*</annotation></semantics></math> specifies number of SEs needed for C% of random samples to yield confidence intervals that capture the true parameter</p></li>
+</ul>
+</section>
+<section id="what-you-cannot-say-about-p-from-the-sample" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-cannot-say-about-p-from-the-sample">What you cannot say about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> from the sample</h3>
+<ol type="1">
+<li>“0.87 of all houses in King County have at least three bedrooms.”</li>
+</ol>
+<ul>
+<li>No.&nbsp;Observations vary. Another sample would yield a different sample proportion.</li>
+</ul>
+<ol start="2" type="1">
+<li>“It is probably true that 0.87 of all houses in King County have at least three bedrooms.”</li>
+</ol>
+<ul>
+<li>No again. In fact, even if we didn’t know the true proportion, we’d know that it’s probably not 0.87.</li>
+</ul>
+</section>
+<section id="what-you-cannot-say-about-p-from-the-sample-1" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-cannot-say-about-p-from-the-sample-1">What you cannot say about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> from the sample</h3>
+<ol start="3" type="1">
+<li>“We don’t know exactly what proportion of houses in King County have at least three bedrooms, but we know that it’s within the interval <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.87</mn><mo>±</mo><mn>2</mn><mo>×</mo><mn>0.087</mn></mrow><annotation encoding="application/x-tex">0.87\pm2\times0.087</annotation></semantics></math>.”<br>
+</li>
+</ol>
+<ul>
+<li>No but getting closer. We don’t know this for sure.</li>
+</ul>
+<ol start="4" type="1">
+<li>“We don’t know exactly what proportion of houses in King County have at least three bedrooms, but the interval from 0.696 to 1.044 probably contains the true proportion.”</li>
+</ol>
+<ul>
+<li>Right but can be more precise. We should specify how confident we are not just say <em>probably</em></li>
+</ul>
+</section>
+<section id="what-you-can-say-about-p-from-the-sample" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-can-say-about-p-from-the-sample">What you can say about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> from the sample</h3>
+<ol start="5" type="1">
+<li>“We are 95% confident that between 0.696 and 1.044 of houses in King County have at least three bedrooms.”</li>
+</ol>
+<ul>
+<li>Statements like these are called confidence intervals. They’re the best we can do.</li>
+</ul>
+</section>
+<section id="naming-the-confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="naming-the-confidence-interval">Naming the confidence interval</h3>
+<ul>
+<li><p>This confidence interval is a one-proportion z-interval.</p>
+<ul>
+<li>“One” since there is a single mean being calculated.</li>
+<li>“Proportion” since we are interested in the proportion of the population.</li>
+<li>“z-interval” since the distance of the interval relies on a normal sampling distribution model.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="interpreting-confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-confidence-intervals">Interpreting confidence intervals</h2>
+<section id="capturing-a-proportion" class="level3">
+<h3 class="anchored" data-anchor-id="capturing-a-proportion">Capturing a proportion</h3>
+<ul>
+<li><p>The confidence interval may or may not contain the true population proportion.</p></li>
+<li><p>Consider repeating the study over an over again, each time with the same sample size.</p></li>
+<li><p>Each time we would get a different <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{p}</annotation></semantics></math></p></li>
+<li><p>From each <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{p}</annotation></semantics></math>, a different confidence interval could be computed.</p></li>
+<li><p>About 95% of these confidence intervals will capture the true proportion.</p></li>
+<li><p>5% will be duds.</p></li>
+</ul>
+</section>
+<section id="random-matters---confidence-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="random-matters---confidence-intervals">Random matters - confidence intervals</h3>
+<ul>
+<li><p>There are a huge number of confidence intervals that could be drawn.</p></li>
+<li><p>In theory, all the confidence intervals could be listed.</p>
+<ul>
+<li>95% will “work” (capture the true proportion).</li>
+<li>5% will be “duds” (not capture the true proportion).</li>
+</ul></li>
+<li><p>What about our confidence interval (0.696, 1.044)?</p>
+<ul>
+<li>In this case, we can find out the true value</li>
+<li>Most of the time we never know</li>
+</ul></li>
+</ul>
+<div class="cell" data-caption="Dataset percentage of family-sized apartments (true p)">
+<div>
+<div id="webr-11" class="exercise-cell">
+
+</div>
+<script type="webr-11-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiRGF0YXNldCBwZXJjZW50YWdlIG9mIGZhbWlseS1zaXplZCBhcGFydG1lbnRzICh0cnVlIHApIiwiZWRpdCI6dHJ1ZSwiZXZhbCI6dHJ1ZSwibGFiZWwiOiJtZWFuZmFtaWx5Iiwid2FybmluZyI6ZmFsc2V9LCJjb2RlIjoibWVhbihrYy5ob3VzZSRpcy5mYW1pbHkuc2l6ZWQpIn0=
+</script>
+</div>
+</div>
+</section>
+<section id="random-matters---confidence-intervals-1" class="level3">
+<h3 class="anchored" data-anchor-id="random-matters---confidence-intervals-1">Random matters - confidence intervals</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Lecture 3.1/multi.ci.png" class="img-fluid figure-img"></p>
+<figcaption>100 samples CI</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="margin-of-error-certainty-vs.-precision" class="level2">
+<h2 class="anchored" data-anchor-id="margin-of-error-certainty-vs.-precision">Margin of error: certainty vs.&nbsp;precision</h2>
+<section id="margin-of-error" class="level3">
+<h3 class="anchored" data-anchor-id="margin-of-error">Margin of error</h3>
+<ul>
+<li><p>Confidence interval for a population proportion: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>±</mo><mn>2</mn><mo>×</mo><mi>S</mi><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{p} \pm 2\times SE(\hat{p})</annotation></semantics></math></p></li>
+<li><p>The distance, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="0.222em"></mspace><mn>2</mn><mo>×</mo><mi>S</mi><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">~2\times SE(\hat{p})</annotation></semantics></math>, from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{p}</annotation></semantics></math> is called the <em>margin of error</em></p></li>
+<li><p>Confidence intervals can be applied to many statistics, not just means. Regression slopes and other quantities can also have confidence intervals.</p>
+<ul>
+<li>In general, a confidence interval has the form <strong>estimate</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>±</mi><annotation encoding="application/x-tex">\pm</annotation></semantics></math> <strong>margin of error</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="certainty-vs.-precision" class="level3">
+<h3 class="anchored" data-anchor-id="certainty-vs.-precision">Certainty vs.&nbsp;precision</h3>
+<ul>
+<li>Competing goals
+<ul>
+<li>More certainty, need to capture <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> more often, need to make the interval wider.</li>
+<li>More precise, need to provider tighter bounds on our estimate for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>, need to make the interval narrower</li>
+</ul></li>
+<li>Instead of a 95% confidence interval, any percent can be used.
+<ul>
+<li>Increasing the confidence (e.g.&nbsp;99%) increases the margin of error.
+<ul>
+<li>Need to make our range wider to make sure we don’t ‘miss’</li>
+</ul></li>
+<li>Decreasing the confidence (e.g.&nbsp;90%) decreases the margin of error.
+<ul>
+<li>Need to make our range smaller so as to be more specific about our guess</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="what-sample-size" class="level3">
+<h3 class="anchored" data-anchor-id="what-sample-size">What sample size?</h3>
+<ul>
+<li><p>Can increase both certainty and precision by increasing sample size</p></li>
+<li><p>For 95%, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>z</mi><mo>*</mo></msup><annotation encoding="application/x-tex">z^*</annotation></semantics></math> = 1.96</p></li>
+<li><p>Values that make ME largest are <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">\hat{p}=0.5</annotation></semantics></math></p></li>
+<li><p>If we want to ensure, say, a <strong>margin of error</strong> of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&lt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">&lt;3%</annotation></semantics></math></p>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>E</mi><mo>=</mo><mi>z</mi><mo>×</mo><msqrt><mfrac><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mi>n</mi></mfrac></msqrt></mrow><annotation encoding="application/x-tex">ME = z\times \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}</annotation></semantics></math></li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.03</mn><mo>=</mo><mn>1.96</mn><mo>×</mo><msqrt><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>0.5</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>0.5</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mi>n</mi></mfrac></msqrt></mrow><annotation encoding="application/x-tex">0.03 = 1.96\times \sqrt{\frac{(0.5)(0.5)}{n}}</annotation></semantics></math></li>
+</ul></li>
+<li><p>Solving for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>, gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≈</mo><mn>1067.1</mn></mrow><annotation encoding="application/x-tex">n\approx1067.1</annotation></semantics></math></p></li>
+<li><p>We need to survey at least 1068 to ensure a ME less than 0.03 for the 95% confidence interval.</p></li>
+</ul>
+</section>
+<section id="thoughts-on-sample-size-and-me" class="level3">
+<h3 class="anchored" data-anchor-id="thoughts-on-sample-size-and-me">Thoughts on sample size and ME</h3>
+<ul>
+<li><p>Obtaining a large sample size can be expensive and/or take a long time.</p></li>
+<li><p>For a pilot study, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>E</mi><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">ME = 10%</annotation></semantics></math> can be acceptable.</p></li>
+<li><p>For full studies, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>E</mi><mo>&lt;</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">ME &lt; 5%</annotation></semantics></math> is better.</p></li>
+<li><p>Public opinion polls typically use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>E</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">ME = 3%</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">n = 1000</annotation></semantics></math></p></li>
+<li><p>If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> is expected to be very small such as 0.005, then much smaller ME such as 0.1% is required.</p>
+<ul>
+<li>Common in medical studies</li>
+</ul></li>
+</ul>
+
+
+<script type="webr-data">
+eyJvcHRpb25zIjp7ImJhc2VVcmwiOiJodHRwczovL3dlYnIuci13YXNtLm9yZy92MC40LjIvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyIsInRpZHl2ZXJzZSIsImtuaXRyIiwiYnJvb20iLCJncmlkRXh0cmEiLCJrYWJsZUV4dHJhIl0sInJlcG9zIjpbXX0sInJlbmRlcl9kZiI6ImRlZmF1bHQifQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTE7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xMSA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMTEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTA7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEwID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTAtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xMC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xMCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC05IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV85O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV85ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl85LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfODtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItOC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfOCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfOCwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzc7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici03IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNyA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici03LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzcgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC02IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV82O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItNiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzYgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV82ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl82LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNTtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTUtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfNSA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfNSwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzQ7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici00IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici00LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzQgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0zIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8zO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8zID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8zLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMjtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMiA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMiwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzE7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6Il93ZWJyX3ZhbHVlXzEgPSB7XG4gIGNvbnN0IHsgaGlnaGxpZ2h0UiwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXZhbHVhdGlvbiBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHtcbiAgICBpZDogXCJ3ZWJyLTEtY29udGVudHNcIixcbiAgICBlY2hvOiB0cnVlLFxuICAgIG91dHB1dDogdHJ1ZVxuICB9LCBibG9jay5hdHRyKTtcblxuICAvLyBFdmFsdWF0ZSB0aGUgcHJvdmlkZWQgUiBjb2RlXG4gIGNvbnN0IHJlc3VsdCA9IHdlYlJPanMucHJvY2Vzcyh7Y29kZTogYmxvY2suY29kZSwgb3B0aW9uc30sIHt9KTtcblxuICAvLyBFYXJseSB5aWVsZCB3aGlsZSB3ZSB3YWl0IGZvciB0aGUgZmlyc3QgZXZhbHVhdGlvbiBhbmQgcmVuZGVyXG4gIGlmIChvcHRpb25zLm91dHB1dCAmJiAhKFwiMVwiIGluIHdlYlJPanMucmVuZGVyZWRPanMpKSB7XG4gICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcbiAgICBjb25zdCBzcGlubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcblxuICAgIGlmIChvcHRpb25zLmVjaG8pIHtcbiAgICAgIC8vIFNob3cgb3V0cHV0IGFzIGhpZ2hsaWdodGVkIHNvdXJjZVxuICAgICAgY29uc3QgcHJlRWxlbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJwcmVcIik7XG4gICAgICBjb250YWluZXIuY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlXCI7XG4gICAgICBwcmVFbGVtLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZSByXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFIoYmxvY2suY29kZSkpO1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItZ3JvdyBzcGlubmVyLWdyb3ctc20gbS0yIHBvc2l0aW9uLWFic29sdXRlIHRvcC0wIGVuZC0wXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHByZUVsZW0pO1xuICAgIH0gZWxzZSB7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ib3JkZXIgc3Bpbm5lci1ib3JkZXItc21cIjtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICB9XG5cbiAgICB5aWVsZCBjb250YWluZXI7XG4gIH1cblxuICB3ZWJST2pzLnJlbmRlcmVkT2pzW1wiMVwiXSA9IHRydWU7XG4gIHlpZWxkIGF3YWl0IHJlc3VsdDtcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ3ZWJST2pzID0ge1xuICBjb25zdCB7IFdlYlIsIENoYW5uZWxUeXBlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lLldlYlI7XG4gIGNvbnN0IHtcbiAgICBXZWJSRXZhbHVhdG9yLFxuICAgIFdlYlJFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBSLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGhcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIHdlYlIgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgLy8gVXNlIFBvc3RNZXNzYWdlIGNoYW5uZWwgZm9yIGFzeW5jIGNvbW11bmljYXRpb25cbiAgLy8gV2UgZG8gbm90IGV4cGVjdCB0byB0YWtlIG5lc3RlZCBwcm9tcHQgaW5wdXQgaW4gUXVhcnRvIExpdmUgY2VsbHNcbiAgZGF0YS5vcHRpb25zLmNoYW5uZWxUeXBlID0gQ2hhbm5lbFR5cGUuUG9zdE1lc3NhZ2U7XG5cbiAgLy8gSW5pdGlhbGlzZSB3ZWJSIGFuZCBzZXR1cCBmb3IgUiBjb2RlIGV2YWx1YXRpb25cbiAgbGV0IHdlYlJQcm9taXNlID0gKGFzeW5jICh3ZWJSKSA9PiB7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyB3ZWJSYDtcbiAgICBhd2FpdCB3ZWJSLmluaXQoKTtcblxuICAgIC8vIEluc3RhbGwgcHJvdmlkZWQgbGlzdCBvZiBwYWNrYWdlc1xuICAgIC8vIEVuc3VyZSB3ZWJSIGRlZmF1bHQgcmVwbyBpcyBpbmNsdWRlZFxuICAgIGRhdGEucGFja2FnZXMucmVwb3MucHVzaChcImh0dHBzOi8vcmVwby5yLXdhc20ub3JnXCIpXG4gICAgYXdhaXQgZGF0YS5wYWNrYWdlcy5wa2dzLm1hcCgocGtnKSA9PiAoKSA9PiB7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6ICR7cGtnfWA7XG4gICAgICByZXR1cm4gd2ViUi5ldmFsUlZvaWQoYFxuICAgICAgICB3ZWJyOjppbnN0YWxsKHBrZywgcmVwb3MgPSByZXBvcylcbiAgICAgICAgbGlicmFyeShwa2csIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSlcbiAgICAgIGAsIHsgZW52OiB7XG4gICAgICAgIHBrZzogcGtnLFxuICAgICAgICByZXBvczogZGF0YS5wYWNrYWdlcy5yZXBvcyxcbiAgICAgIH19KTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIC8vIERvd25sb2FkIGFuZCBpbnN0YWxsIHJlc291cmNlc1xuICAgIGF3YWl0IGZpbGVzLm1hcCgoZmlsZSkgPT4gYXN5bmMgKCkgPT4ge1xuICAgICAgY29uc3QgbmFtZSA9IGZpbGUuc3Vic3RyaW5nKGZpbGUubGFzdEluZGV4T2YoJy8nKSArIDEpO1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyByZXNvdXJjZTogJHtuYW1lfWA7XG4gICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKGZpbGUpO1xuICAgICAgaWYgKCFyZXNwb25zZS5vaykge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYENhbid0IGRvd25sb2FkIFxcYCR7ZmlsZX1cXGAuIEVycm9yICR7cmVzcG9uc2Uuc3RhdHVzfTogXCIke3Jlc3BvbnNlLnN0YXR1c1RleHR9XCIuYCk7XG4gICAgICB9XG4gICAgICBjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTtcblxuICAgICAgLy8gU3RvcmUgVVJMcyBpbiB0aGUgY3dkIHdpdGhvdXQgYW55IHN1YmRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGlmIChmaWxlLmluY2x1ZGVzKFwiOi8vXCIpKSB7XG4gICAgICAgIGZpbGUgPSBuYW1lO1xuICAgICAgfVxuXG4gICAgICAvLyBDb2xsYXBzZSBoaWdoZXIgZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgZmlsZSA9IGNvbGxhcHNlUGF0aChmaWxlKTtcblxuICAgICAgLy8gQ3JlYXRlIGRpcmVjdG9yeSB0cmVlLCBpZ25vcmluZyBcImRpcmVjdG9yeSBleGlzdHNcIiBWRlMgZXJyb3JzXG4gICAgICBjb25zdCBwYXJ0cyA9IGZpbGUuc3BsaXQoJy8nKS5zbGljZSgwLCAtMSk7XG4gICAgICBsZXQgcGF0aCA9ICcnO1xuICAgICAgd2hpbGUgKHBhcnRzLmxlbmd0aCA+IDApIHtcbiAgICAgICAgcGF0aCArPSBwYXJ0cy5zaGlmdCgpICsgJy8nO1xuICAgICAgICB0cnkge1xuICAgICAgICAgIGF3YWl0IHdlYlIuRlMubWtkaXIocGF0aCk7XG4gICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICBpZiAoIWUubWVzc2FnZS5pbmNsdWRlcyhcIkZTIGVycm9yXCIpKSB7XG4gICAgICAgICAgICB0aHJvdyBlO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICAvLyBXcml0ZSB0aGlzIGZpbGUgdG8gdGhlIFZGU1xuICAgICAgcmV0dXJuIGF3YWl0IHdlYlIuRlMud3JpdGVGaWxlKGZpbGUsIG5ldyBVaW50OEFycmF5KGRhdGEpKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5zdGFsbGluZyB3ZWJSIHNoaW1zYDtcbiAgICBhd2FpdCB3ZWJSLmV2YWxSVm9pZChgd2Vicjo6c2hpbV9pbnN0YWxsKClgKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgV2ViUiBlbnZpcm9ubWVudCBzZXR1cGA7XG4gICAgYXdhaXQgc2V0dXBSKHdlYlIsIGRhdGEpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHdlYlI7XG4gIH0pKG5ldyBXZWJSKGRhdGEub3B0aW9ucykpO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCB3ZWJSID0gYXdhaXQgd2ViUlByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFdlYlJFdmFsdWF0b3Iod2ViUiwgY29udGV4dClcbiAgICBhd2FpdCBldmFsdWF0b3IucHJvY2VzcyhpbnB1dHMpO1xuICAgIHJldHVybiBldmFsdWF0b3IuY29udGFpbmVyO1xuICB9XG5cbiAgcmV0dXJuIHtcbiAgICBwcm9jZXNzLFxuICAgIHdlYlJQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICB9O1xufVxuIn1dfQ==
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+WyJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vYW5kcmV3bWFjZC9ka3VzdGF0czEwMWZhbGwyMDI1czIvbWFpbi9sZWN0dXJlcy9kYXRhc2V0cy9raW5nLmNvdW50eS5zYWxlcy5yZWNlbnQuY3N2IiwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2FuZHJld21hY2QvZGt1c3RhdHMxMDFmYWxsMjAyNXMyL21haW4vbGVjdHVyZXMvZGF0YXNldHMvY2xhc3Nyb3N0ZXIuY3N2Il0=
+</script>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../lectures";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
