@@ -144,7 +144,7 @@
     "href": "schedulematerials.html#lecture-3.2-confidence-intervals---means-tuesday-november-18",
     "title": "Course Schedule and Class Materials",
     "section": "Lecture 3.2: Confidence intervals - means (Tuesday, November 18)",
-    "text": "Lecture 3.2: Confidence intervals - means (Tuesday, November 18)\nReading to do before class: Chapter 14\nTopics covered:\n\nThe Central Limit Theorem\nConfidence interval for means\nInterpreting a confidence interval\nFinal thoughts on confidence intervals\nLecture webpage: [Lecture 3.2]\nNo lecture activity"
+    "text": "Lecture 3.2: Confidence intervals - means (Tuesday, November 18)\nReading to do before class: Chapter 14\nTopics covered:\n\nThe Central Limit Theorem\nConfidence interval for means\nInterpreting a confidence interval\nFinal thoughts on confidence intervals\nLecture webpage: Lecture 3.2\nLecture activity: Lecture 3.2 activity"
   },
   {
     "objectID": "schedulematerials.html#lecture-3.3-hypothesis-testing-thursday-november-20",
@@ -217,291 +217,102 @@
     "text": "Final project (due Wednesday, December 10 at 23:59:00)\n\nHomework files: [Final project instructions]"
   },
   {
-    "objectID": "lectures/lecture.3.1.html#the-sampling-distribution-model-for-a-proportion",
-    "href": "lectures/lecture.3.1.html#the-sampling-distribution-model-for-a-proportion",
-    "title": "Confidence Intervals - Proportions",
-    "section": "The sampling distribution model for a proportion",
-    "text": "The sampling distribution model for a proportion\n\nSampling model\n\nDraw samples at random, n=100n=100\nSamples vary\nCan’t draw all samples of size 100, astronomical\nDraw a few thousand samples\nDistribution is called the sampling distribution of the proportion.\n\nWhat shape do you think the sampling distribution will have if we have sample size n=100n=100?\n\n\n\n\n\n\n\n\n\n\nGraph of a sampling distribution\n\nRemember, this is not a graph of the actual distribution\n\n\n\n\n\n\n\n\n\n\n\nRandom matters\n\nSampling distribution for a proportion\n\nSymmetric - check\nUnimodal - check\nCentered at pp: 0.853\nStandard deviation: 0.035\nFollows the Normal model - check\n\n\n\n\nThe Normal model for sampling\n\nSamples don’t all have the same proportion.\nNormal model is the right one for sample proportions.\nModeling how sample statistics, proportions or means, vary from sample to sample is powerful.\nAllows us to quantify that variation.\nMake statements about corresponding population parameter.\nMake model for random behavior, then understand and and use that model.\n\n\n\nWhich Normal model to choose?\n\nReminder: normal model is N(μ,σ2)N(\\mu, \\sigma^2)\nμ\\mu or mean is pp, or the proportion we want to estimate, nn is sample size\nFor proportions, σ(p)=p(1−p)n\\sigma(p) = \\sqrt{\\frac{p(1-p)}{n}}\nThis is the standard deviation of the SAMPLING DISTRIBUTION, that is the distribution of pp across infinite samples\n\n\n\nMean and standard deviation\n\n\n\n\n\n\n\n\n\n\nReminder - Normal model rule\n\nUsing this normal model rule, we can tell how likely it is to have a certain p̂\\hat{p} given the sampling distribution normal model\nRemember the 68–95–99.7 (1 sd, 2 sd, 3 sd), for other distances use technology\nMost common: 95% of samples have sample proportion within two standard deviations of the true population proportion.\nKnowing the sampling distribution tells us how much variation to expect\nCalled the sampling error in some contexts\nNot really an error, just variability\nBetter to call it sampling variability"
+    "objectID": "lectures/lecture.3.2.html#house-price-revisited",
+    "href": "lectures/lecture.3.2.html#house-price-revisited",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "House price revisited",
+    "text": "House price revisited\n\nPrices in King County Houses:\n\n21937 houses\nHighly right skewed\nCan define this as the entire population\nPrices are quantitative\n\n\n\nHouse price graph\n\n\n\n\n\n\n\n\n\n\nDistribution\n\nDistribution:\n\nMin: 75000\nQ1: 685000\nMed: 906000\nQ3: 1355000\nMax: 23000000\nMean: 1152092\nSD: 835505\n\nHighly right skewed\nSD almost as large as the median\nIf a distribution looks like this, what do you think the sampling distribution will look like when n=25? How about when n=200?"
   },
   {
-    "objectID": "lectures/lecture.3.1.html#when-does-the-normal-model-work",
-    "href": "lectures/lecture.3.1.html#when-does-the-normal-model-work",
-    "title": "Confidence Intervals - Proportions",
-    "section": "When does the normal model work?",
-    "text": "When does the normal model work?\n\nIndependence Assumption: check data collected in a way that makes this assumption plausible\nRandomization Condition: subjects randomly assigned treatments, or survey is simple random sample\n10% Condition: sample size less than 10% of the population size\nSuccess Failure Condition: there must be at least 10 expected successes and failures. np̂≥10n\\hat{p}\\geq10 and n̂p≥10\\hat{n}p\\geq10\n\n\nWhen does the normal model fail for the sampling distribution?\n\npp close to 0 or 1\nPeople in this class that can dunk a basketball\nSample size 100\n\nIf true p=0.001p = 0.001, then probably none in sample of 100\n\nIf we simulated samples of size 100 with p=0.001p = 0.001\n\nDistribution skewed right, can’t rely on normal model percentages anymore\n\nnn is fine, but pp is too small\n\nWhat will the shape of the sampling distribution look like if p=0.001p = 0.001?\n\n\n\n\n\n\n\n\n\n\nExample simulation\n\n\n\n\n\n\n\n\n\n\nClass sampling exercise\n\nWe know that about 50% of students at DKU plan to or have selected a major in the natural sciences\n? % of students in our class plan to major in the natural sciences in our class\n\nIs our class unusually small?\n\nCheck conditions\n\nRandomization condition\n10% condition\nSuccess failure condition\n\n\n\n\nFind how far we are from the population mean\n\nPopulation standard deviation formula is:\n\np(1−p)n\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\np̂\\hat{p} is the proportion of yeses\nnn is the sample size\n\nWe are calculating using the population sampling SDSD since we know it\n\nIf we don’t know the population sampling SDSD we have to use a different strategy, but not the case here\n\nKnowing the SDSD, we can create a z score for the difference between our class and the population\n\nz score is how many SDSDs our class is from the population mean\n\n(classscore−dkumean)/SD(class score - dkumean) / SD\n\n\n\n\n\nNormal distribution percentages\n\n\n\n\n\n\n\n\n\n\nCalculation for our class\n\np(1−p)n\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\np̂\\hat{p} is the proportion of yeses\nnn is the sample size\np̂−pSD(p)\\frac{\\hat{p} - p}{SD(p)}\n68-95-99.7 Rule: Values ?SDSD above the mean occur less than ?% of the time. Our class mean appears to be far/near from the population mean\n\nCalculate the how likely our result would be if our class is a random sample of DKU students."
+    "objectID": "lectures/lecture.3.2.html#the-central-limit-theorem",
+    "href": "lectures/lecture.3.2.html#the-central-limit-theorem",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "The central limit theorem",
+    "text": "The central limit theorem\n\nThe Central Limit Theorem\n\nThe sampling distribution of any mean becomes nearly Normal as the sample size grows.\n\nRequirements\n\nObservations independent\nRandomly collected sample\n\nThe sampling distribution of the means is close to Normal if either:\n\nLarge sample size\nPopulation close to Normal\n\n\n\nSamples = 100, nn = 200\n\n\n\n\n\n\n\n\n\n\nSamples = 1000, nn = 200\n\n\n\n\n\n\n\n\n\n\nSamples = 100000, nn = 200"
   },
   {
-    "objectID": "lectures/lecture.3.1.html#confidence-intervals-of-proportions",
-    "href": "lectures/lecture.3.1.html#confidence-intervals-of-proportions",
-    "title": "Confidence Intervals - Proportions",
-    "section": "Confidence intervals of proportions",
-    "text": "Confidence intervals of proportions\n\nStandard errors for proportions\n\nWhat is the sampling distribution?\nUsually we do not know the population proportion pp.\nTherefore, we cannot find the standard deviation of the sampling distribution p(1−p)n\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\nAfter taking a sample, we only know the sample proportion, which we use as an approximation (called the standard error)\n\np̂(1−p̂)n\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{n}}\n\n\n\n\nExample: bedrooms\n\nDraw a random sample of 100 houses\n\n\n\n\n\n\n\n\n\n\np̂(1−p̂)100\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{100}}\nThe sampling distribution should be approximately normal\n\n\n\nWhat is a confidence interval?\n\nConfidence interval: a way to express the range of plausible values for the parameter (in this case, percent of homes with three bedrooms)\nWe never know the true value but we want to say something about how wide the range of possible values are\nWhat is a reasonable range?\n\nTraditionally, 95% (about two standard deviations) of the standard error distribution\nMean of our sample ±\\pm range of possible values we could get if we took additional samples\n\n\n\n\nExample: bedrooms\n\nOur mean: 0.87\nOur estimated sampling distribution standard error:\n\np̂(1−p̂)100\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{100}}\n0.87̂(1−0.87̂)100\\sqrt{\\frac{\\hat{0.87}(1-\\hat{0.87})}{100}}\n0.7569100\\sqrt{\\frac{0.7569}{100}}\n0.007569\\sqrt{0.007569}\n0.0870.087\n\nA range of reasonable values if we sampled this again:\n\n2×0.0872\\times0.087\n0.87±0.1740.87\\pm0.174\n\n\nStatement: we are ~95% confident that this interval contains the true proportion of houses with three or more bedrooms in the population\n\n\nCritical values\n\nCritical values are the cutoff we use to determine what is ‘reasonable’\nDerived from the Normal model\nCan use any z-score as a cutoff\nCorresponding multiplier of the SE is called the critical value.\nNormal model for this interval, it is denoted z*z^*.\nTo find, need to use computer, calculator, Normal probability table\n\n\n\n\n\n\n\n\n\n\n\nRecap\n\nMake sure conditions are met, then find level C confidence interval for p̂\\hat{p}, our population mean estimate\nConfidence interval is defined as p̂±z*×SE(p̂)\\hat{p}\\pm z^* \\times SE(\\hat{p})\nSE(p̂)SE(\\hat{p}) estimated by p̂(1−p̂)n\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{n}}\nz*z^* specifies number of SEs needed for C% of random samples to yield confidence intervals that capture the true parameter\n\n\n\nWhat you cannot say about pp from the sample\n\n“0.87 of all houses in King County have at least three bedrooms.”\n\n\nNo. Observations vary. Another sample would yield a different sample proportion.\n\n\n“It is probably true that 0.87 of all houses in King County have at least three bedrooms.”\n\n\nNo again. In fact, even if we didn’t know the true proportion, we’d know that it’s probably not 0.87.\n\n\n\nWhat you cannot say about pp from the sample\n\n“We don’t know exactly what proportion of houses in King County have at least three bedrooms, but we know that it’s within the interval 0.87±2×0.0870.87\\pm2\\times0.087.”\n\n\n\nNo but getting closer. We don’t know this for sure.\n\n\n“We don’t know exactly what proportion of houses in King County have at least three bedrooms, but the interval from 0.696 to 1.044 probably contains the true proportion.”\n\n\nRight but can be more precise. We should specify how confident we are not just say probably\n\n\n\nWhat you can say about pp from the sample\n\n“We are 95% confident that between 0.696 and 1.044 of houses in King County have at least three bedrooms.”\n\n\nStatements like these are called confidence intervals. They’re the best we can do.\n\n\n\nNaming the confidence interval\n\nThis confidence interval is a one-proportion z-interval.\n\n“One” since there is a single mean being calculated.\n“Proportion” since we are interested in the proportion of the population.\n“z-interval” since the distance of the interval relies on a normal sampling distribution model."
+    "objectID": "lectures/lecture.3.2.html#sampling-distribution-shape",
+    "href": "lectures/lecture.3.2.html#sampling-distribution-shape",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "Sampling distribution shape",
+    "text": "Sampling distribution shape\n\nAs number of samples taken goes to infinity, shape of the sampling distribution becomes more clearly normally shaped\nDoesn’t matter the shape of the underlying distribution except for a very few exceptions\nHow about holding samples fixed and changing nn in our sample of a skewed distribution?\n\n\nnn = 10\n\n\n\n\n\n\n\n\n\n\nnn = 25\n\n\n\n\n\n\n\n\n\n\nnn = 50\n\n\n\n\n\n\n\n\n\n\nnn = 100\n\n\n\n\n\n\n\n\n\n\nCentral limit theorem formally\n\nWhen a random sample is drawn from any population with mean μ\\mu and standard deviation σ\\sigma, its sample mean, y‾\\bar{y}, has a sampling distribution with the same mean but whose standard deviation is σn\\frac{\\sigma}{\\sqrt{n}} and we write σ(y‾)=SD(y‾)=σn\\sigma(\\bar{y})=SD(\\bar{y})=\\frac{\\sigma}{\\sqrt{n}}\nNo matter what population the random sample comes from, the shape of the sampling distribution is approximately Normal as long as the sample size is large enough.\nThe larger the sample used, the more closely the Normal approximates the sampling distribution for the mean.\nPractically, nn does not have to be very large for this to work in most cases\n\n\n\nPractical issue with finding the sampling distribution sd\n\nWe almost never know σ\\sigma\nNatural thing is to use sdsamplê\\hat{sd_{sample}}\nWith this, we can estimate the sampling distribution SD with SE:\n\nSE(y‾)=snSE(\\bar{y})=\\frac{s}{\\sqrt{n}}\n\nThis formula works well for large samples, not so much for small\n\nProblem: too much variation in the sample SD from sample to sample\n\nFor smaller nn, need to turn to Gosset and a new family of models depending on sample size"
   },
   {
-    "objectID": "lectures/lecture.3.1.html#interpreting-confidence-intervals",
-    "href": "lectures/lecture.3.1.html#interpreting-confidence-intervals",
-    "title": "Confidence Intervals - Proportions",
+    "objectID": "lectures/lecture.3.2.html#a-confidence-interval-for-the-mean",
+    "href": "lectures/lecture.3.2.html#a-confidence-interval-for-the-mean",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "A confidence interval for the mean",
+    "text": "A confidence interval for the mean\n\nGosset the brewer\n\n\n\nGuiness\n\n\n\n\nGosset\n\n\n\nGosset\n\n\n\n\nWhat Gosset discovered\n\nAt Guinness, Gosset experimented with beer.\nThe Normal Model was not right, especially for small samples.\nStill bell shaped, but details differed, depending on nn\nCame up with the “Student’s tt Distribution” as the correct model\n\n\n\nA practical sampling distribution model\n\nWhen certain assumptions and conditions are met, the standardized sample mean is:\n\nt=y‾−μSE(y‾)t=\\frac{\\bar{y}-\\mu}{SE(\\bar{y})}\n\nThe t score indicates that the result should be interpreted by a Student’s tt model with n−1n-1 degrees of freedom\nWe can estimate the standard deviation of the sampling distribution by:\n\nSE(y‾)=snSE(\\bar{y}) = \\frac{s}{\\sqrt{n}}\n\n\nDegrees of freedom\n\nFor every sample size nn, there is a different Student’s tt distribution\nDegrees of freedom: df=n−1df=n-1\nSimilar to the n−1n-1 calculation for sample standard deviation\nReason for this is a bit complicated, at this point can just remember to specify tt distribution with n−1n-1\n\n\n\nStudent’s tt\n\n\n\nStudent’s t\n\n\n\n\nOne sample tt interval for the mean\n\nWhen the assumptions are met, the confidence interval for the mean is:\n\ny‾±tn−1×SE(y‾)\\bar{y} \\pm t_{n-1}\\times SE(\\bar{y})\n\nThe critical value, tn−1*t^*_{n-1}, depends on the confidence interval, CC, and the degrees of freedom n−1n-1\n\n\n\nExample: A one sample tt interval for the mean\n\nPrice from one sample in King County\n\n\n\n\n\n\n\n\n\n\n\nAverage house price\n\ny‾±t19*×SE(y‾)\\bar{y}\\pm t^*_{19} \\times SE(\\bar{y})\n1118400±2.09×SE(789011(20))1118400\\pm 2.09 \\times SE(\\frac{789011}{\\sqrt{(20)}})\n1118400±2.09×176428.331118400\\pm 2.09 \\times 176428.33\n[739538−1497262][739538 - 1497262]\n\nWhat is the right way to talk about this confidence interval?\n\n\n\n\n\n\n\n\n\n\nThoughts about zz and tt\n\nThe Student’s t distribution:\n\nIs unimodal.\nIs symmetric about its mean.\nBell-shaped\n\nSamller values of dfdf have longer tails and larger standard deviation than the Normal.\nAs dfdf increase, look more and more like Normal.\nIs needed because we are using s as an estimate for σ\\sigma\nIf you happen to know σ\\sigma, which almost never happens, use the Normal model and not Student’s tt\nAs nn becomes larger, still safe to use the tt distribution because it basically turns into the normal distribution\n\n\n\nAssumptions and conditions\n\nIndependence Assumption\n\nData values should be mutually independent\nExample: weighing yourself every day\n\nRandomization Condition: The data should arise from a random sample or suitably randomized experiment.\n\nData from SRS almost surely independent\nIf doesn’t satisfy Randomization Condition, think about whether values are independent and whether sample is representative of the population.\n\n\n\n\nAssumptions and conditions\n\nNormal Population Assumption\n\nNearly Normal Condition: Distribution is unimodal and symmetric.\nCheck with a histogram.\nn&lt;15n &lt; 15: data should follow a normal model closely. If outliers or strong skewness, don’t use tt-methods\n15&lt;n&lt;4015 &lt; n &lt; 40: tt-methods work well as long as data are unimodal and reasonably symmetric.\nn&gt;40n &gt; 40: tt-methods are safe as long as data are not extremely skewed.\nSimilar to the rule for proportions that must have somewhat even distribution of yeses and noes\n\n\n\n\nExample: Checking Assumptions and Conditions for Student’s tt\n\nPrice of housing in King County\n\nIndependence Assumption: Yes\nNearly Normal Condition: No"
+  },
+  {
+    "objectID": "lectures/lecture.3.2.html#interpreting-confidence-intervals",
+    "href": "lectures/lecture.3.2.html#interpreting-confidence-intervals",
+    "title": "Lecture 3.2 - Confidence intervals - means",
     "section": "Interpreting confidence intervals",
-    "text": "Interpreting confidence intervals\n\nCapturing a proportion\n\nThe confidence interval may or may not contain the true population proportion.\nConsider repeating the study over an over again, each time with the same sample size.\nEach time we would get a different p̂\\hat{p}\nFrom each p̂\\hat{p}, a different confidence interval could be computed.\nAbout 95% of these confidence intervals will capture the true proportion.\n5% will be duds.\n\n\n\nRandom matters - confidence intervals\n\nThere are a huge number of confidence intervals that could be drawn.\nIn theory, all the confidence intervals could be listed.\n\n95% will “work” (capture the true proportion).\n5% will be “duds” (not capture the true proportion).\n\nWhat about our confidence interval (0.696, 1.044)?\n\nIn this case, we can find out the true value\nMost of the time we never know\n\n\n\n\n\n\n\n\n\n\n\n\nRandom matters - confidence intervals\n\n\n\n100 samples CI"
+    "text": "Interpreting confidence intervals\n\nWhat not to say\nDon’t say:\n\n“95% of the price of houses in King County is between $739538 and $1497262.”\n\nThe CI is about the mean price, not about the individual houses.\n\n“We are 95% confident that a randomly selected house price will be between $739538 and $1497262.”\n\nAgain, we are concerned here with the mean, not individual houses\n\n\n\n\nWhat not to say continued\nDon’t Say\n\n“The mean price is $1118400 95% of the time.”\n\nThe population mean never changes. Only sample means vary from sample to sample.\n\n“95% of all samples will have a mean price between $739538 and $1497262.”\n\nThis interval does not set the standard for all other intervals. This interval is no more likely to be correct than any other.\n\n\n\n\nWhat you should say\nDo Say\n\n“I am 95% confident that the true mean price is between $739538 and $1497262.”\n\nTechnically: “95% of all random samples will produce intervals that cover the true value.”\n\n\nThe first statement is more personal and less technical."
   },
   {
-    "objectID": "lectures/lecture.3.1.html#margin-of-error-certainty-vs.-precision",
-    "href": "lectures/lecture.3.1.html#margin-of-error-certainty-vs.-precision",
-    "title": "Confidence Intervals - Proportions",
-    "section": "Margin of error: certainty vs. precision",
-    "text": "Margin of error: certainty vs. precision\n\nMargin of error\n\nConfidence interval for a population proportion: p̂±2×SE(p̂)\\hat{p} \\pm 2\\times SE(\\hat{p})\nThe distance, 2×SE(p̂)~2\\times SE(\\hat{p}), from p̂\\hat{p} is called the margin of error\nConfidence intervals can be applied to many statistics, not just means. Regression slopes and other quantities can also have confidence intervals.\n\nIn general, a confidence interval has the form estimate ±\\pm margin of error\n\n\n\n\nCertainty vs. precision\n\nCompeting goals\n\nMore certainty, need to capture pp more often, need to make the interval wider.\nMore precise, need to provider tighter bounds on our estimate for pp, need to make the interval narrower\n\nInstead of a 95% confidence interval, any percent can be used.\n\nIncreasing the confidence (e.g. 99%) increases the margin of error.\n\nNeed to make our range wider to make sure we don’t ‘miss’\n\nDecreasing the confidence (e.g. 90%) decreases the margin of error.\n\nNeed to make our range smaller so as to be more specific about our guess\n\n\n\n\n\nWhat sample size?\n\nCan increase both certainty and precision by increasing sample size\nFor 95%, z*z^* = 1.96\nValues that make ME largest are p̂=0.5\\hat{p}=0.5\nIf we want to ensure, say, a margin of error of &lt;3&lt;3%\n\nME=z×p̂(1−p̂)nME = z\\times \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}\n0.03=1.96×(0.5)(0.5)n0.03 = 1.96\\times \\sqrt{\\frac{(0.5)(0.5)}{n}}\n\nSolving for nn, gives n≈1067.1n\\approx1067.1\nWe need to survey at least 1068 to ensure a ME less than 0.03 for the 95% confidence interval.\n\n\n\nThoughts on sample size and ME\n\nObtaining a large sample size can be expensive and/or take a long time.\nFor a pilot study, ME=10ME = 10% can be acceptable.\nFor full studies, ME&lt;5ME &lt; 5% is better.\nPublic opinion polls typically use ME=3ME = 3%, n=1000n = 1000\nIf pp is expected to be very small such as 0.005, then much smaller ME such as 0.1% is required.\n\nCommon in medical studies"
+    "objectID": "lectures/lecture.3.2.html#bootstrapping",
+    "href": "lectures/lecture.3.2.html#bootstrapping",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "Bootstrapping",
+    "text": "Bootstrapping\n\nPicking our interval up by our bootstraps\n\n\n\n\n\n\n\n\n\n\nKeep in mind\n\nThe confidence interval (unlike the sampling distribution) is centered at y‾\\bar{y} rather than at μ\\mu.\nWe need to know how far to reach out from y‾\\bar{y}, so we need to estimate the population standard deviation. Estimating σ\\sigma means we need to refer to Student’s tt-models.\nUsing Student’s tt-requires the assumption that the underlying data follow a Normal model.\n\nPractically, we need to check that the data distribution of our sample is at least unimodal and reasonably symmetric, with no outliers for n&lt;100n&lt;100.\n\n\n\n\nBootstrapping\nProcess:\n\nWe have a random sample, representative of population.\nMake copies and build a pseudo-population\nSample repeatedly from this population\nFind means\nMake a histogram\nObserve how means are distributed and how much they vary\n\n\n\nBootstrapping\n\n\n\n\n\n\n\n\nHow will this bootstrapping confidence interval compare to the confidence interval calculated by classical means?"
   },
   {
-    "objectID": "lectures/lecture.2.3.html#model-fit-measures",
-    "href": "lectures/lecture.2.3.html#model-fit-measures",
-    "title": "Regression Wisdom",
-    "section": "Model fit measures",
-    "text": "Model fit measures\n\nRegression results\nMany parts of these results we already know how to interpret. For now, we will focus on model fit measures.\n\n\\(R^2\\)\n\\(s_e\\)\nResiduals 5 number summary\n\n\n\n\n\n\n\n\n\n\n\nResiduals - histogram\n\n\n\n\n\n\n\n\nHow would you interpret this residual histogram?\n\n\n\n\n\n\n\n\n\n\nCorrelation review\n\nRecall that a correlation, \\(r\\), ranges from -1 to 1 and indicates the strength of the association between two variables\n\nIf \\(r\\) is -1 or 1 exactly, there is no variation, the correlation indicate the relationship is a straight line\nNote that \\(r\\) does not indicate the slope\nIf \\(r\\) is 0, that means there is no relationship\n\nWhat is the slope in that case?\n\\(\\hat{y} = b_0 + b_1*x\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nR squared definition\n\n\\(R^2\\) is the square of \\(r\\) in a two variable case, so between 0 and 1\nBut, unlike \\(r\\), \\(R^2\\) is meaningful in multivariate models\nPercent of the total variation in the data explained by the model\nSum of the errors from our model divided by sum of errors from the ‘braindead’ model of \\(\\hat{y}=\\bar{y}\\)\nIf the \\(R^2\\) is small, that means our model doesn’t beat the ‘braindead’ model by very much\n\n\n\n\n\n\n\n\n\n\n\nWhen is \\(R^2\\) “big enough”?\n\n\\(R^2\\) is useful, but only so much so\nThe closer \\(R^2\\) is to 1, the more useful the model\n\nHow close is “close”?\nDepends on the situation\n\\(R^2\\) of 0.5 might be very bad for a model that uses height to predict weight\n\nShould be more closely related\n\n\\(R^2\\) of 0.5 might be very good for a model using test scores to predict future income\n\nResponse variable has a lot of factors that shape it and a lot of noise\n\n\nGood practice: always report \\(R^2\\) and \\(s_e\\) and let readers analyze the results as well"
+    "objectID": "lectures/lecture.3.2.html#thoughts-about-confidence-intervals",
+    "href": "lectures/lecture.3.2.html#thoughts-about-confidence-intervals",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "Thoughts about confidence intervals",
+    "text": "Thoughts about confidence intervals\n\nConfidence intervals - what’s important\n\nIt’s not their precision.\nOur specific confidence interval is random by nature\nChanges with the sample\nImportant to know how they are constructed\nNeed to check assumptions and conditions\nContains our best guess of the mean\nAnd how precise we think that guess is"
   },
   {
-    "objectID": "lectures/lecture.2.3.html#extrapolating",
-    "href": "lectures/lecture.2.3.html#extrapolating",
-    "title": "Regression Wisdom",
-    "section": "Extrapolating",
-    "text": "Extrapolating\n\nThe farther a new value is from the range of \\(x\\), the less trust we should place in the predicted value of \\(y\\)\nVenture into new \\(x\\) territory, called extrapolation\nDubious: questionable assumption that nothing changes about the relationship between x and y changes for extreme values of \\(x\\)\n\n\nPredicting MPG of cars\n1970s data on automobiles\n\n\n\n\n\n\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach interior\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach North Korea visit\n\n\nWill our model do a good job predicting this car’s miles per gallon?\n\n\n\n\n\n\n\n\n\n\nCan we predict this car’s MPG using our model?\nWeight: 6581 pounds\nModel: \\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 46.3 + -0.00767*6581\\)\n\\(\\hat{y} = -4.17\\) miles per gallon\n\nNonsense prediction\n\n\n\nBe wary of out of sample predictions"
+    "objectID": "lectures/lecture.2.4.html#basic-multiple-regression-interpretation",
+    "href": "lectures/lecture.2.4.html#basic-multiple-regression-interpretation",
+    "title": "Multiple Regression",
+    "section": "Basic multiple regression interpretation",
+    "text": "Basic multiple regression interpretation\n\nHouse prices\n\n\n\n\n\n\n\n\n\n\nWhen linear regression is not enough\n\n\\(R^2 = 0.278%\\) for sqft and sale_price\n27.8% of the variation in Price is accounted for\nWhat about the other 72%?\nCould include other lurking variables such as size of the lot a house is on - more land, higher cost right?\nA regression with two or more predictor variables is called a multiple regression.\n\n\n\nWhat is multiple regression?\n\nFor a simple regression, with one independent variable, the least squares line makes residuals as small as possible.\nFor multiple regression, the regression equation still makes the residuals as small as possible.\nNo longer trying to create a line though – instead a multidimensional hyperplane!\nCalculations difficult.\n\n\n\nCheck grade and sale_price\n\n\n\n\n\n\n\n\nWhat do you think will happen to the coefficient on grade when we add sqft?\n\n\n\n\n\n\n\n\n\n\nAdding both terms\n\n\n\n\n\n\n\n\n\n\nThe results\n\n\\(R^2=0.3051\\)\n\\(s_e=696500\\)\nCoefficient:\n\n\\(price = -872678 + 329.513sqft\\_livingspace + 177278grade\\)\n\n\nHow would you interpret this model and the diagnostic statistics?\n\n\n\n\n\n\n\n\n\n\nFurther investigation"
   },
   {
-    "objectID": "lectures/lecture.2.3.html#outliers",
-    "href": "lectures/lecture.2.3.html#outliers",
-    "title": "Regression Wisdom",
-    "section": "Outliers",
-    "text": "Outliers\n\nHeight and net worth\nFirst, we can create random data for both a variable called height and one called log net worth but in the below example they are defined to be random and have no relation to each other.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdding Steve Ballmer\n\n\n\nSteve Ballmer\n\n\n\n\n\n\n\n\n\n\nWhat will happen to the slope and \\(R^2\\)?\n\n\n\n\n\n\n\n\n\n\nSteve Ballmer plot\n\n\n\n\n\n\n\n\n\n\nAdding Warren Buffet\n\n\n\nWarren Buffet\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdding Aleksandar Vučić\n\n\n\nAleksandar Vučić\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLeverage vs. influence\n\nA data point whose \\(x\\) value is far from the mean of the rest of the \\(x\\) values is said to have high leverage.\nLeverage points have the potential to strongly pull on the regression line.\nA point is influential if omitting it from the analysis changes the model enough to make a meaningful difference.\nInfluence is determined by\n\nThe residual\nThe leverage\n\n\n\n\nWarnings\n\nInfluential points can hide in plots of residuals.\nPoints with high leverage pull line close to them, so have small residuals.\nSee points in scatterplot of original data.\nFind regression model with and without the points."
+    "objectID": "lectures/lecture.2.4.html#what-is-different-in-multiple-regression",
+    "href": "lectures/lecture.2.4.html#what-is-different-in-multiple-regression",
+    "title": "Multiple Regression",
+    "section": "What is different in multiple regression?",
+    "text": "What is different in multiple regression?\n\nMeaning of coefficients has changed in a subtle way.\nIs an extraordinarily versatile calculation, underlying many widely used statistics methods.\nOffers a glimpse into statistical models that use more than two quantitative variables.\nModels that use several variables can be a big step toward realistic and useful modeling of complex phenomena and relationships\n\n\nMultiple regression - coefficients\n\nCan’t assume coefficients will stay the same\nCoefficients change\nOften in unexpected ways\nEven changing signs\nBe alert for a change in value\nBe alert for a change in meaning\n\n\n\nMultiple regression model\n\nNo simple relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) in a multiple regression may be quite different from zero\nStrong two-variable relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) in a multiple regression to be almost zero\nStrong two-variable relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) an be opposite in sign in a multiple regression\nEasy to extend the model with more predictors\nResiduals \\(e = y - \\hat{y}\\)"
   },
   {
-    "objectID": "lectures/lecture.2.3.html#interpreting-a-regression",
-    "href": "lectures/lecture.2.3.html#interpreting-a-regression",
-    "title": "Regression Wisdom",
-    "section": "Interpreting a regression",
-    "text": "Interpreting a regression\n\nStep 1: develop some expectations\nHorsepower vs. MPG\n\nMore powerful engines probably are less fuel efficient\nRelationship is likely roughly linear\nThe exact relationship depends on the efficiency of the engine\n\nCould be noisy\n\n\n\n\nStep 2: make a picture\n\n\n\n\n\n\n\n\n\n\nStep 3: check the conditions\n\nQuantitative variable condition\nStraight enough condition\nOutlier condition\nDoes the plot thicken\nConclusion:?\n\n\n\n\n\n\n\n\n\n\n\nStep 4: identify the units\n\nMiles per gallon: amount of miles you can travel on one gallon of gas, a measure of efficiency.\n\nMost gasoline-using cars have MPG between 10-40, higher being better\n\nHorsepower: power of the engine.\n\nTypical values for standard cars are in the 100-200 range, higher meaning more powerful\n\n\n\n\nStep 5: intepret the slope of the regression line\n\n\n\n\n\n\n\n\n\nFor every one unit increase in horsepower, miles per gallon decreases by about -0.15 units\n\nIs that a lot or a little?\n\n\n\n\n\n\n\n\n\n\n\n\nStep 6: determine reasonable values for the predictor variable\n\n\n\n\n\n\n\n\n\n\nStep 7: interpret the intercept\n\n\n\n\n\n\n\n\n\n\nStep 8: solve for reasonable predictor values\nHorsepower = Q1 = 75:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 28.09\\)\nHorsepower = Median = 93.5:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 25.17\\)\nHorsepower = Q3 = 126:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 20.03\\)\n\n\nStep 9: interpret the residuals and identify their units\n\n\n\n\n\n\n\n\n\n\nStep 10: view the distribution of the residuals\n\n\n\n\n\n\n\n\n\n\nStep 11: interpret the residual standard error\n\n\n\n\n\n\n\n\n\n\nStep 12: interpret the R squared\n\n\n\n\n\n\n\n\n\n\nStep 13: think about confounders\n\nWhat are some confounders, or “lurking variables”?\n\nCategorical\nQuantitative"
+    "objectID": "lectures/lecture.2.4.html#assumptions",
+    "href": "lectures/lecture.2.4.html#assumptions",
+    "title": "Multiple Regression",
+    "section": "Assumptions",
+    "text": "Assumptions\n\nThree key assumptions\n\nLinearity assumption (straight enough condition)\nNo pattern in residuals (outliers, straight enough condition)\nEqual variance assumption (does the plot thicken?)\n\n\n\nLinearity assumption\n\nStraight Enough Condition\n\nWe must check the scatterplot for each of the predictor variables vs. the response variable\nDo not need the scatterplots to show any discernible slope, but should be reasonably straight\nCannot have bends, or other nonlinearity\nCan be easier to look at the plot of residuals\n\n\n\n\n\n\n\n\n\n\n\n\nCheck the residual\n\nErrors have a distribution that is:\n\nUnimodal\nSymmetric\nWithout outliers\n\nLook at histogram of residuals\nAssumption is less important as sample size increases\n\n\n\n\n\n\n\n\n\n\n\nEqual variance assumption\n\nSame variability of the errors for all values of each predictor\nDoes the Plot Thicken? Condition: the spread around the line must be nearly constant.\nBe alert for “fan” shaped pattern\nOr other tendency for variability to grow or shrink in one part of the scatterplot\n\n\n\n\n\n\n\n\n\n\n\nDecision loop\n\nStraight Enough Condition: scatterplots of y-variable against each x-variable\n\nIf straight enough, fit multiple regression model\n\nHow were data collected? Random? Represent identifiable population? Time? check independence\nFind the residuals and predicted values.\nScatterplot of the residuals against predicted values: patternless, no bends, no thickening\nHistogram of residuals: unimodal, symmetric, without outliers\nIf conditions check out, interpret regression model, and make predictions."
   },
   {
-    "objectID": "lectures/lecture.2.1.html#exercise-1",
-    "href": "lectures/lecture.2.1.html#exercise-1",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Exercise 1",
-    "text": "Exercise 1\nIn your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.\n\n0.95\n0.75\n0.5\n0.25\n0.0\n-0.25\n-0.5\n-0.75\n-0.95\n\nPick a few of these and draw by hand what you expect these graphs to look like."
+    "objectID": "lectures/lecture.2.4.html#partial-residual-plots",
+    "href": "lectures/lecture.2.4.html#partial-residual-plots",
+    "title": "Multiple Regression",
+    "section": "Partial residual plots",
+    "text": "Partial residual plots\nOne of the best ways to check the linearity condition is with a partial residual plot. This plot displays the relationship between the predictor variable and the response variable after removing all of the variance of the other variables in the explanatory variable.\n\nHow to check variables individually\n\nChecked overall equation for weirdness in residuals\nWhat about each individual variable’s contribution to the regression?\nPartial residual plot to the Rescue!\nLook at plot to judge whether its form is straight enough.\n\n\n\nPartial residual plots\n\n\n\n\n\n\n\n\n\n\nMeaning of a partial residual plot\n\nLeast squares line fit to plot has slope equal to the coefficient the plot illustrates.\nResiduals are same as final residuals of multiple regression\n\nJudge strength of estimation of the plot’s coefficients\n\nOutliers seen the same as they would appear in a simple scatterplot\nDirection corresponds to the sign of multiple regression coefficient"
   },
   {
-    "objectID": "lectures/lecture.2.1.html#exercise-2",
-    "href": "lectures/lecture.2.1.html#exercise-2",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Exercise 2",
-    "text": "Exercise 2\n\n\n\nSeattle"
+    "objectID": "lectures/lecture.2.4.html#indicator-variables",
+    "href": "lectures/lecture.2.4.html#indicator-variables",
+    "title": "Multiple Regression",
+    "section": "Indicator variables",
+    "text": "Indicator variables\n\nWages\n\nIndicator variables are for when we want to include categorical variables in our regression\n\nIn a union vs. not in a union\nOften coded at 1=true 0=false, but that’s just convention, doesn’t really matter (remember, units don’t matter for regression)\n\nRegression equation\n\n\\(wages = b_0 + b_1exp + b_2union\\)\n\n\n\n\nWages\n\n\n\n\n\n\n\n\n\n\nSlopes of lines\n\n\n\n\n\n\n\n\n\n\nPredict some values\n\nEquation: \\(wages = 747.5634 + 8.2430exp + -77.7134union\\)"
   },
   {
-    "objectID": "lectures/lecture.2.1.html#viewing-an-example-relationship",
-    "href": "lectures/lecture.2.1.html#viewing-an-example-relationship",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Viewing an example relationship",
-    "text": "Viewing an example relationship\n\nFirst, what is our expectation about the relationship between bedrooms and square feet?\nDirection?\nForm?\nStrength?\nOutliers?"
+    "objectID": "lectures/lecture.2.4.html#interaction-terms",
+    "href": "lectures/lecture.2.4.html#interaction-terms",
+    "title": "Multiple Regression",
+    "section": "Interaction terms",
+    "text": "Interaction terms\n\nInteraction effects\n\nWhat if lines are not roughly parallel?\nIndicator variable that is 0 or 1 shifts line up or down.\n\nCan’t change slope\nWorks only when same slope just different intercepts\n\n\n\n\nAdjusting for different slopes\n\nIntroduce another constructed variable\nThe one is the product of an indicator variable and the predictor variable\nCoefficient of this constructed interaction term gives adjustment to slope, \\(b_1\\), to be made for the individuals in the indicated group.\n\n\n\nAdjusting for different slopes\n\n\n\n\n\n\n\n\n\n\nDifferent slopes for wages\n\n\n\n\n\n\n\n\n\n\nPredict some values\n\nEquation: \\(wages = 710.7896 + 10.1421exp + 28.9884union + -5.2755union*exp\\)"
   },
   {
-    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---direction",
-    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---direction",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Bedrooms and square feet - direction",
-    "text": "Bedrooms and square feet - direction\nA scatterplot is the easiest way to check for direction. In this case, the direction is obvious"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---form",
-    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---form",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Bedrooms and square feet - form",
-    "text": "Bedrooms and square feet - form"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---strength",
-    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---strength",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Bedrooms and square feet - strength",
-    "text": "Bedrooms and square feet - strength\n\n\n\n\n\n\n\n\n\nCorrelation as a measure of strength\n\n\n\n\n\n\n\n\nThis correlation is a little weaker than perhaps what we expected\n\nIn general, mechanically generated processes with little noise can have very high correlations\nMost correlations of social or real world processes rarely have above moderate correlation due to noise"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---outlier",
-    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---outlier",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Bedrooms and square feet - outlier",
-    "text": "Bedrooms and square feet - outlier\nAgain, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values\n\n\n\n\n\n\n\n\nTo investigate if this outlier matters, we can check some other values of the observation.\n\n\n\n\n\n\n\n\nWhat kind of outlier do you think this is? Why?\n\nOutlier - actual observation\n\n\n\n\n\n\n\n\n\n\n\nLocation\n\n\n\n\n\nHouse details\n\n\n\n\nData with no outlier\n\n\n\n\n\n\n\n\n\n\nDescribing the association\n\nDirection - positive\nForm - linear\nStrength - moderate/strong\nOutliers - one possible\n\nOutlier:"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#does-bed-and-square-feeet-relationship-match-expectations",
-    "href": "lectures/lecture.2.1.html#does-bed-and-square-feeet-relationship-match-expectations",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Does bed and square feeet relationship match expectations?",
-    "text": "Does bed and square feeet relationship match expectations?\n\nSeems to, more or less, the larger the house, the more bedrooms, so the relationship is positive\nThe relationship is fairly linear, indicating a strong relationship\nRelationship is moderate\nOutliers don’t seem like it is a problem\n\nHowever….\n\nWhat are some possible lurking variables that influence the relationship of bedrooms and bathrooms?"
-  },
-  {
-    "objectID": "lectures/lecture.2.1.html#relationship-reexpressed",
-    "href": "lectures/lecture.2.1.html#relationship-reexpressed",
-    "title": "Lecture 2.1 - Association and correlation",
-    "section": "Relationship reexpressed?",
-    "text": "Relationship reexpressed?\nOne final issue to consider is if this relationship should be reexpressed - made more linear.\n\n\n\n\n\n\n\n\n\nSeems clearer\n\n\nYour turn\nWith your partner, develop some expectations about some of the variables in the kc.houses dataset might be related.\nVariables:\n\n\n\n\n\n\n\n\nWhat to do with your partner:\n\nWrite down an interesting question we think we might be able to answer by examining a relationship in this dataset\nChoose the variables that you think might be able to answer this question\nWrite down what you expect the relationship to be between these two variables based on any prior knowledge\nDecide which variable is the response variable and which is the predictor variable\nMake a scatterplot using one of the codeblocks in the previous section and identify the features of the association"
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#distribution-of-common-quantities",
-    "href": "lectures/lecture.1.2.html#distribution-of-common-quantities",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Distribution of common quantities",
-    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread"
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#graphs-of-common-quantities",
-    "href": "lectures/lecture.1.2.html#graphs-of-common-quantities",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Graphs of common quantities",
-    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n\n\n\n\n\n\n\n\n\nFlower sepal width\n\n\n\n\n\n\n\n\n\n\nLife expetancy in 2007"
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#height-activity",
-    "href": "lectures/lecture.1.2.html#height-activity",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Height activity",
-    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses."
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#height-distribution",
-    "href": "lectures/lecture.1.2.html#height-distribution",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Height distribution",
-    "text": "Height distribution"
-  },
-  {
-    "objectID": "lectures/lecture.1.2.html#closing-thoughts",
-    "href": "lectures/lecture.1.2.html#closing-thoughts",
-    "title": "Lecture 1.2 - Characteristics of distributions",
-    "section": "Closing thoughts",
-    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\nUnit 1 homework sample solutions\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\nUnit 2 homework\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Introduction",
-    "section": "",
-    "text": "Tuesday/Thursday class at 12:00 pm to 2:30 pm in Library room 2001\nThursday lab at 6:00 pm to 7:15 pm in Library room 2001\nOffice hours:\n\nWednesday from 1:00 pm to 5:00 pm in WDR 3114\n\nHomeworks are all due at 11:59 pm\nAll other announcements and information are posted on the class Teams site\nStats 101 lab manager: Jingyu Wang\n\nOffice hours: Fridays from 2:00 to 4:00 pm in WDR 2134"
-  },
-  {
-    "objectID": "index.html#assessment",
-    "href": "index.html#assessment",
-    "title": "Course Introduction",
-    "section": "Assessment",
-    "text": "Assessment\n\nHomework 65%: At the end of the first two groups of content, a homework will be assigned that will ask you to analyze a dataset and answer questions related to that concept group. These homeworks are due at the noted date at 11:59 pm China time. Each homework will also have a best graph contest, where the person whose classmates vote as having the best graph wins some extra credit points.\n\nHomework 1: 10%\nHomework 2: 25%\nFinal project: 30%\n\nHomework checks 3%: To make sure you are making good progress on your homework, the Sunday before the homework is due (except for the first homework) you will be required to submit your progress on the homework so far. You are required to have tried to have answered all the questions covered by the lectures and textbook up to the specified cutoff. I will not check your answers but rather check to see if you have made a good effort to answer all the questions derived from the material already covered. If you have a reasonable answer for each question checked you will get full points. If you have not made an effort to answer all the questions reviewed you will get a zero.\nUnit 3 exam 25%: Unit 3 comprehension is better checked through an in-class exam. The exam will be open notes but closed book and will take place during the normal lab session that week.\nData Camp labs 5%: A number of labs on the website Data Camp will be assigned to you; these labs are pass/fail and you will receive full credit if you complete each of the labs by the specified due date.\nSyllabus quiz 1%: A short quiz after the first class regarding the course requirements.\nPlacement exams 1%: A short quiz that you will take at both the start and end of class to measure how much pre-knowledge you have and how much knowledge you have gained during the course. Exams are pass/fail depending on if you complete them or not\nAttendance & warmup quizzes: I want you to attend class - there are a lot of studies that show those who attend class and pay attention, learn more and have higher grades. However, I am not your parent. So, it is up to you if you want to be assessed for attendance. Attendance is therefore optional, but, you can sign a pledge at the start of class promising to attend all classes and stay for the entire class (you can miss up to one class without an excuse) and if you complete the pledge, you will receive an extra 1% of extra credit on your final grade. However, if you fail the pledge, you will receive -1% grade deduction. Similarly, the beginning of the class warmup quizzes are partially for me to see how well you have understood the textbook materials, but it is also an incentive for you to read and understand the textbook chapters before class. I will not record your grade on the quizzes. However, you can also sign a pledge to count your warmup quizzes as part of your grade. If you agree to be assessed on the warmup quizzes, you must maintain at least a 75% average on the quizzes (I will drop your lowest quiz score). If you do, you will receive 2% extra credit on your final grade. If you sign the pledge but fail to maintain the average, you will be deducted 2% from your final grade."
-  },
-  {
-    "objectID": "index.html#lateness-policy",
-    "href": "index.html#lateness-policy",
-    "title": "Course Introduction",
-    "section": "Lateness policy",
-    "text": "Lateness policy\nSince the course moves very quickly, if you are submitting work late that means you are falling behind on other material and it may be difficult for you to recover. Therefore, I have a fairly strict lateness policy.\n\nAll major assignments are due at 11:59:00 pm. Not 11:59:01 or 11:59:31.\nIf it is later than 11:59:00 pm, then the assignment will be assessed a 5% lateness penalty\nIf it is later than 12:29:00 am, then the assignment will be assessed a 10% lateness penalty\nIf it is later than 11:59:00 pm the next day, the assignment will be assessed a 50% lateness penalty\nIf it is later than 2 days from the due date, I will no longer accept the assignment\n\n\nPlease be sure to check that your homework is complete and make sure to submit it a few minutes early. You can submit multiple times on Teams so make sure you have a nearly complete version uploaded even if you want to keep working on it right up to the deadline. I will not be sympathetic to messages that complain of computer problems when you are trying to submit for the first time at 11:58:51 pm."
-  },
-  {
-    "objectID": "index.html#contact-policy",
-    "href": "index.html#contact-policy",
-    "title": "Course Introduction",
-    "section": "Contact Policy",
-    "text": "Contact Policy\n\nI usually try to reply to emails on the same day (though not in the evenings), however responses may be slower on the weekend\nDo not message me 2 hours before a homework is due and expect an immediate response!\nFor general questions, such as how should one interpret a question on a homework or quiz, you should ask the question in the Discussion section of the Teams site. That way others can benefit from the response or someone else may be able to answer more quickly than I can. If you email me a question that really belongs in the help channel I will ask you to repost it.\nMany questions can be answered by carefully checking the class website or reviewing the materials in on Teams. If in doubt, though, feel free to ask."
-  },
-  {
-    "objectID": "index.html#chatgpt-and-similar-policy",
-    "href": "index.html#chatgpt-and-similar-policy",
-    "title": "Course Introduction",
-    "section": "ChatGPT (and similar) Policy",
-    "text": "ChatGPT (and similar) Policy\nUnless otherwise specified on an assignment, you may use ChatGPT as much as you wish. However, most of the assignments in this class are not very amenable to ChatGPT help. Your main grade will be understanding, annotating, and interpreting your output. Producing the output is the very simple minimal requirement. Also, ChatGPT often makes many coding mistakes. If you rely too much on ChatGPT to code, you will not understand when it makes mistakes and why it makes mistakes."
-  },
-  {
-    "objectID": "index.html#academic-dishonesty-policy",
-    "href": "index.html#academic-dishonesty-policy",
-    "title": "Course Introduction",
-    "section": "Academic Dishonesty Policy",
-    "text": "Academic Dishonesty Policy\nDon’t cheat. Don’t be that person. Yes, you. You know exactly what I’m talking about too.\nMore specifically, you are expected to strictly adhere to the Duke Kunshan University Community Standard in all of your work and participation, and violations will be enforced. More details can be found here.\nAll work must be done exclusively by the individual to whom it has been assigned. Any instance of copying code or analysis from others is considered cheating. You may exchange general ideas about how to complete the assignment but you must write your own code and also write your own analysis.\nIt may sound cliché to say, but if you cheat and borrow others code or answers you are only cheating yourself; you will not learn how to do statistics and doing so will mean you will do worse on the midterm and the final anyway. Cheating is ultimately self-defeating so for both of our benefit, please, don’t do it. If you are having trouble completing the assignment and feel tempted to cheat, please contact me directly instead with the difficulties you are having."
-  },
-  {
-    "objectID": "index.html#disabilities-policy",
-    "href": "index.html#disabilities-policy",
-    "title": "Course Introduction",
-    "section": "Disabilities Policy",
-    "text": "Disabilities Policy\nIf you need an accommodation due to a disability, you should not hesitate to request one. The process is that requests should be sent to the Dean of Undergraduate Studies, who will contact me with recommended type of accommodation that is needed. You do not need to disclose your reason for requesting an accommodation with me, and asking through the Dean of Undergraduate Studies helps make things official for both you and me."
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
-    "href": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Thoughts about comparing groups",
-    "text": "Thoughts about comparing groups\n\nFaceted histograms are a reasonable display to show distributions by a categorical variable\n\nHowever these displays become hard to interpret when the number of levels in a category grows large\n\nMuch easier to interpret is side by side box plots\nBox plots capture many important characteristics of a distribution into a summary display\nThink carefully about how you treat outliers\nLet’s view data from the 2024-2025 NBA season"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#two-group-comparison",
-    "href": "lectures/lecture.1.3.html#two-group-comparison",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Two group comparison",
-    "text": "Two group comparison\n\nNBA side-by-side histograms of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L (better)"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#many-group-comparison",
-    "href": "lectures/lecture.1.3.html#many-group-comparison",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Many group comparison",
-    "text": "Many group comparison\n\nNBA side-by-side histograms of points scored by team\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by team (better)\n\n\n\n\n\n\n\n\n\n\nYour turn\n\nWork with your neighbor to analyze a different set of statistics\n\nCan be by division or not\nRemember the key features of distributions\n\nShape\nCenter\nSpread\n\n\nInterpret your results\nVariable definitions:\n\nMP: minutes played\nFG: field goal baskets made\nFGA: field goal baskets attempted\nFG.: field goal percentage\nX3P: three pointers made\nX3PA: three pointers attempted\nFT: free throws made\nFTA: free throws attempted\nFT.: free throw percentage\nORB: offensive rebounds\nDRB: defensive rebounds\nTRB: total rebounds\nAST: assists\nSTL: steals\nBLK: blocks\nTOV: turnovers\nPF: personal fouls\nPTS: points scored"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#checking-outliers---assists",
-    "href": "lectures/lecture.1.3.html#checking-outliers---assists",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Checking outliers - assists",
-    "text": "Checking outliers - assists\n\nOutliers - assists\n\n\n\n\n\n\n\n\n\n\nAssists &gt; 40 - true outliers?"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#checking-outliers---points",
-    "href": "lectures/lecture.1.3.html#checking-outliers---points",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Checking outliers - points",
-    "text": "Checking outliers - points\n\nOutliers - points\n\n\n\n\n\n\n\n\n\n\nPoints by team &gt; 150 - true outliers?"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#in-summary",
-    "href": "lectures/lecture.1.3.html#in-summary",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "In summary",
-    "text": "In summary\n\nThink about which kind of display is appropriate for comparing distributions\nWhen conditioning on a categorical variable, boxplots are usually better\nBut boxplots lose information\nThink carefully about omitting outliers\nOutliers may reveal important information about your dataset!"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
-    "href": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Titanic passengers and the Normal distribution",
-    "text": "Titanic passengers and the Normal distribution\n\n\n\nTitanic\n\n\n\nDataset of passengers on the Titanic\n\n\n\n\n\n\n\n\n\nWhat are your expectations for how age should be distributed?\n\n\n\n\n\n\n\n\n\n\nWe are going to violate our first three rules:\n\nMake a picture\nMake a picture\nMake a picture\n\n\n\n\nWere the passenger ages normally distributed?\nTo answer that question, we need some information about the distribution\nRemember, our main information about distributions is:\n\nShape\nCenter\nSpread\n\n\n\nInformation about age\n\nStandard deviation: 14.4\nMean: 29.9\nNormal model: \\(N(\\mu, \\sigma) = N(29.9,14.4)\\)\n\n\\(\\mu\\) is the theoretical mean\n\\(\\sigma\\) is the theoretical standard deviation\nThese values define the data generating process\nWe only see some values of the data generating process, but if we saw infinite values, the mean would be \\(\\mu\\) and the sd would be \\(\\sigma\\)\nMore on this in the second half of class\n\nHow can we check normality using this information?"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#checking-normality",
-    "href": "lectures/lecture.1.3.html#checking-normality",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Checking normality",
-    "text": "Checking normality\n\nThinking about normality\n\nWe can check normality by comparing the quantiles of our data with that of the known quantiles of the normal distribution\n\nWe know approximately 95% of the data lies within two standard deviations\nTherefore, 2.5% data with the lowest values lie outside of -2 standard deviations and 2.5% of data with the highest values lie outside of 2 standard deviations\n\nSimilarly, we know the same information for data within one standard deviation (16%, 68%, 16%)\n\n\n\nData within standard deviations"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#checking-against-the-data",
-    "href": "lectures/lecture.1.3.html#checking-against-the-data",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Checking against the data",
-    "text": "Checking against the data\n\nHistogram of ages from the data\n\n\n\n\n\n\n\n\n\n\nNormality and scaling\n\nNote that normality does not depend on the size of the standard deviation or the size of the mean\nCould easily change the units to be months instead of years\n\nMean would increase a lot\nStandard deviation would increase a lot\nHowever, amount of observations within each standard deviation would stay the same"
-  },
-  {
-    "objectID": "lectures/lecture.1.3.html#final-thoughts-on-normality",
-    "href": "lectures/lecture.1.3.html#final-thoughts-on-normality",
-    "title": "Lecture 1.3 - Advanced distributions",
-    "section": "Final thoughts on normality",
-    "text": "Final thoughts on normality\n\nWhen is the normal distribution useful?\n\nWhen we know a data-generating process is normally distributed we don’t even need to sample the population\n\nCan find out exactly how much data is between a certain number of standard deviations\n\nWhen we expect a data-generating process to be normally distributed, can test for deviations from normality\n\nIn the case of Titanic passengers, some parts of the distribution were more bunched up, others more spread out\n\nA lot of our statistical techniques require or work better when the data is ‘roughly’ normal\n\nWill detail these in the coming weeks\n\nWe can transform our data to be closer to normal\n\nNote that transformations won’t work if the data has multiple modes, can only correct skew\n\n\n\n\nWhat transformation would be helpful for age?"
+    "objectID": "lectures/lecture.2.4.html#footnotes",
+    "href": "lectures/lecture.2.4.html#footnotes",
+    "title": "Multiple Regression",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nCredit to: https://crosscut.com/opinion/2020/11/washington-state-housing-question-and-answer↩︎"
   },
   {
     "objectID": "lectures/lecture.2.2.html#line-of-best-fit",
@@ -581,53 +392,291 @@
     "text": "Reexpressions\n\nLog reexpressed\n\n\n\n\n\n\n\n\nWhat will happen to the shape of the graph?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLog reexpressed - outlier\nAny guess as to the outlier?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOutlier\n\n\n\n\n\n\n\n\n\n\nGraphing the residuals - log\n\n\n\n\n\n\n\n\n\n\nResiduals standard deviation - log\n\n\n\n\n\n\n\n\n\n\n\\(R^2\\)\n\nThe correlation coefficient: 0.95\nOur \\(R^2\\): 0.91\n\n\n\nRegression assumptions\nFor the log reexpressed version, have the assumptions been met?\n\nQuantitative variable assumption\nStraight enough condition\nOutlier condition\nDoes the plot thicken condition?"
   },
   {
-    "objectID": "lectures/lecture.2.4.html#basic-multiple-regression-interpretation",
-    "href": "lectures/lecture.2.4.html#basic-multiple-regression-interpretation",
-    "title": "Multiple Regression",
-    "section": "Basic multiple regression interpretation",
-    "text": "Basic multiple regression interpretation\n\nHouse prices\n\n\n\n\n\n\n\n\n\n\nWhen linear regression is not enough\n\n\\(R^2 = 0.278%\\) for sqft and sale_price\n27.8% of the variation in Price is accounted for\nWhat about the other 72%?\nCould include other lurking variables such as size of the lot a house is on - more land, higher cost right?\nA regression with two or more predictor variables is called a multiple regression.\n\n\n\nWhat is multiple regression?\n\nFor a simple regression, with one independent variable, the least squares line makes residuals as small as possible.\nFor multiple regression, the regression equation still makes the residuals as small as possible.\nNo longer trying to create a line though – instead a multidimensional hyperplane!\nCalculations difficult.\n\n\n\nCheck grade and sale_price\n\n\n\n\n\n\n\n\nWhat do you think will happen to the coefficient on grade when we add sqft?\n\n\n\n\n\n\n\n\n\n\nAdding both terms\n\n\n\n\n\n\n\n\n\n\nThe results\n\n\\(R^2=0.3051\\)\n\\(s_e=696500\\)\nCoefficient:\n\n\\(price = -872678 + 329.513sqft\\_livingspace + 177278grade\\)\n\n\nHow would you interpret this model and the diagnostic statistics?\n\n\n\n\n\n\n\n\n\n\nFurther investigation"
+    "objectID": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
+    "href": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Thoughts about comparing groups",
+    "text": "Thoughts about comparing groups\n\nFaceted histograms are a reasonable display to show distributions by a categorical variable\n\nHowever these displays become hard to interpret when the number of levels in a category grows large\n\nMuch easier to interpret is side by side box plots\nBox plots capture many important characteristics of a distribution into a summary display\nThink carefully about how you treat outliers\nLet’s view data from the 2024-2025 NBA season"
   },
   {
-    "objectID": "lectures/lecture.2.4.html#what-is-different-in-multiple-regression",
-    "href": "lectures/lecture.2.4.html#what-is-different-in-multiple-regression",
-    "title": "Multiple Regression",
-    "section": "What is different in multiple regression?",
-    "text": "What is different in multiple regression?\n\nMeaning of coefficients has changed in a subtle way.\nIs an extraordinarily versatile calculation, underlying many widely used statistics methods.\nOffers a glimpse into statistical models that use more than two quantitative variables.\nModels that use several variables can be a big step toward realistic and useful modeling of complex phenomena and relationships\n\n\nMultiple regression - coefficients\n\nCan’t assume coefficients will stay the same\nCoefficients change\nOften in unexpected ways\nEven changing signs\nBe alert for a change in value\nBe alert for a change in meaning\n\n\n\nMultiple regression model\n\nNo simple relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) in a multiple regression may be quite different from zero\nStrong two-variable relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) in a multiple regression to be almost zero\nStrong two-variable relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) an be opposite in sign in a multiple regression\nEasy to extend the model with more predictors\nResiduals \\(e = y - \\hat{y}\\)"
+    "objectID": "lectures/lecture.1.3.html#two-group-comparison",
+    "href": "lectures/lecture.1.3.html#two-group-comparison",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Two group comparison",
+    "text": "Two group comparison\n\nNBA side-by-side histograms of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by W/L (better)"
   },
   {
-    "objectID": "lectures/lecture.2.4.html#assumptions",
-    "href": "lectures/lecture.2.4.html#assumptions",
-    "title": "Multiple Regression",
-    "section": "Assumptions",
-    "text": "Assumptions\n\nThree key assumptions\n\nLinearity assumption (straight enough condition)\nNo pattern in residuals (outliers, straight enough condition)\nEqual variance assumption (does the plot thicken?)\n\n\n\nLinearity assumption\n\nStraight Enough Condition\n\nWe must check the scatterplot for each of the predictor variables vs. the response variable\nDo not need the scatterplots to show any discernible slope, but should be reasonably straight\nCannot have bends, or other nonlinearity\nCan be easier to look at the plot of residuals\n\n\n\n\n\n\n\n\n\n\n\n\nCheck the residual\n\nErrors have a distribution that is:\n\nUnimodal\nSymmetric\nWithout outliers\n\nLook at histogram of residuals\nAssumption is less important as sample size increases\n\n\n\n\n\n\n\n\n\n\n\nEqual variance assumption\n\nSame variability of the errors for all values of each predictor\nDoes the Plot Thicken? Condition: the spread around the line must be nearly constant.\nBe alert for “fan” shaped pattern\nOr other tendency for variability to grow or shrink in one part of the scatterplot\n\n\n\n\n\n\n\n\n\n\n\nDecision loop\n\nStraight Enough Condition: scatterplots of y-variable against each x-variable\n\nIf straight enough, fit multiple regression model\n\nHow were data collected? Random? Represent identifiable population? Time? check independence\nFind the residuals and predicted values.\nScatterplot of the residuals against predicted values: patternless, no bends, no thickening\nHistogram of residuals: unimodal, symmetric, without outliers\nIf conditions check out, interpret regression model, and make predictions."
+    "objectID": "lectures/lecture.1.3.html#many-group-comparison",
+    "href": "lectures/lecture.1.3.html#many-group-comparison",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Many group comparison",
+    "text": "Many group comparison\n\nNBA side-by-side histograms of points scored by team\n\n\n\n\n\n\n\n\n\n\nNBA boxplot comparison of points scored by team (better)\n\n\n\n\n\n\n\n\n\n\nYour turn\n\nWork with your neighbor to analyze a different set of statistics\n\nCan be by division or not\nRemember the key features of distributions\n\nShape\nCenter\nSpread\n\n\nInterpret your results\nVariable definitions:\n\nMP: minutes played\nFG: field goal baskets made\nFGA: field goal baskets attempted\nFG.: field goal percentage\nX3P: three pointers made\nX3PA: three pointers attempted\nFT: free throws made\nFTA: free throws attempted\nFT.: free throw percentage\nORB: offensive rebounds\nDRB: defensive rebounds\nTRB: total rebounds\nAST: assists\nSTL: steals\nBLK: blocks\nTOV: turnovers\nPF: personal fouls\nPTS: points scored"
   },
   {
-    "objectID": "lectures/lecture.2.4.html#partial-residual-plots",
-    "href": "lectures/lecture.2.4.html#partial-residual-plots",
-    "title": "Multiple Regression",
-    "section": "Partial residual plots",
-    "text": "Partial residual plots\nOne of the best ways to check the linearity condition is with a partial residual plot. This plot displays the relationship between the predictor variable and the response variable after removing all of the variance of the other variables in the explanatory variable.\n\nHow to check variables individually\n\nChecked overall equation for weirdness in residuals\nWhat about each individual variable’s contribution to the regression?\nPartial residual plot to the Rescue!\nLook at plot to judge whether its form is straight enough.\n\n\n\nPartial residual plots\n\n\n\n\n\n\n\n\n\n\nMeaning of a partial residual plot\n\nLeast squares line fit to plot has slope equal to the coefficient the plot illustrates.\nResiduals are same as final residuals of multiple regression\n\nJudge strength of estimation of the plot’s coefficients\n\nOutliers seen the same as they would appear in a simple scatterplot\nDirection corresponds to the sign of multiple regression coefficient"
+    "objectID": "lectures/lecture.1.3.html#checking-outliers---assists",
+    "href": "lectures/lecture.1.3.html#checking-outliers---assists",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking outliers - assists",
+    "text": "Checking outliers - assists\n\nOutliers - assists\n\n\n\n\n\n\n\n\n\n\nAssists &gt; 40 - true outliers?"
   },
   {
-    "objectID": "lectures/lecture.2.4.html#indicator-variables",
-    "href": "lectures/lecture.2.4.html#indicator-variables",
-    "title": "Multiple Regression",
-    "section": "Indicator variables",
-    "text": "Indicator variables\n\nWages\n\nIndicator variables are for when we want to include categorical variables in our regression\n\nIn a union vs. not in a union\nOften coded at 1=true 0=false, but that’s just convention, doesn’t really matter (remember, units don’t matter for regression)\n\nRegression equation\n\n\\(wages = b_0 + b_1exp + b_2union\\)\n\n\n\n\nWages\n\n\n\n\n\n\n\n\n\n\nSlopes of lines\n\n\n\n\n\n\n\n\n\n\nPredict some values\n\nEquation: \\(wages = 747.5634 + 8.2430exp + -77.7134union\\)"
+    "objectID": "lectures/lecture.1.3.html#checking-outliers---points",
+    "href": "lectures/lecture.1.3.html#checking-outliers---points",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking outliers - points",
+    "text": "Checking outliers - points\n\nOutliers - points\n\n\n\n\n\n\n\n\n\n\nPoints by team &gt; 150 - true outliers?"
   },
   {
-    "objectID": "lectures/lecture.2.4.html#interaction-terms",
-    "href": "lectures/lecture.2.4.html#interaction-terms",
-    "title": "Multiple Regression",
-    "section": "Interaction terms",
-    "text": "Interaction terms\n\nInteraction effects\n\nWhat if lines are not roughly parallel?\nIndicator variable that is 0 or 1 shifts line up or down.\n\nCan’t change slope\nWorks only when same slope just different intercepts\n\n\n\n\nAdjusting for different slopes\n\nIntroduce another constructed variable\nThe one is the product of an indicator variable and the predictor variable\nCoefficient of this constructed interaction term gives adjustment to slope, \\(b_1\\), to be made for the individuals in the indicated group.\n\n\n\nAdjusting for different slopes\n\n\n\n\n\n\n\n\n\n\nDifferent slopes for wages\n\n\n\n\n\n\n\n\n\n\nPredict some values\n\nEquation: \\(wages = 710.7896 + 10.1421exp + 28.9884union + -5.2755union*exp\\)"
+    "objectID": "lectures/lecture.1.3.html#in-summary",
+    "href": "lectures/lecture.1.3.html#in-summary",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "In summary",
+    "text": "In summary\n\nThink about which kind of display is appropriate for comparing distributions\nWhen conditioning on a categorical variable, boxplots are usually better\nBut boxplots lose information\nThink carefully about omitting outliers\nOutliers may reveal important information about your dataset!"
   },
   {
-    "objectID": "lectures/lecture.2.4.html#footnotes",
-    "href": "lectures/lecture.2.4.html#footnotes",
-    "title": "Multiple Regression",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nCredit to: https://crosscut.com/opinion/2020/11/washington-state-housing-question-and-answer↩︎"
+    "objectID": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
+    "href": "lectures/lecture.1.3.html#titanic-passengers-and-the-normal-distribution",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Titanic passengers and the Normal distribution",
+    "text": "Titanic passengers and the Normal distribution\n\n\n\nTitanic\n\n\n\nDataset of passengers on the Titanic\n\n\n\n\n\n\n\n\n\nWhat are your expectations for how age should be distributed?\n\n\n\n\n\n\n\n\n\n\nWe are going to violate our first three rules:\n\nMake a picture\nMake a picture\nMake a picture\n\n\n\n\nWere the passenger ages normally distributed?\nTo answer that question, we need some information about the distribution\nRemember, our main information about distributions is:\n\nShape\nCenter\nSpread\n\n\n\nInformation about age\n\nStandard deviation: 14.4\nMean: 29.9\nNormal model: \\(N(\\mu, \\sigma) = N(29.9,14.4)\\)\n\n\\(\\mu\\) is the theoretical mean\n\\(\\sigma\\) is the theoretical standard deviation\nThese values define the data generating process\nWe only see some values of the data generating process, but if we saw infinite values, the mean would be \\(\\mu\\) and the sd would be \\(\\sigma\\)\nMore on this in the second half of class\n\nHow can we check normality using this information?"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#checking-normality",
+    "href": "lectures/lecture.1.3.html#checking-normality",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking normality",
+    "text": "Checking normality\n\nThinking about normality\n\nWe can check normality by comparing the quantiles of our data with that of the known quantiles of the normal distribution\n\nWe know approximately 95% of the data lies within two standard deviations\nTherefore, 2.5% data with the lowest values lie outside of -2 standard deviations and 2.5% of data with the highest values lie outside of 2 standard deviations\n\nSimilarly, we know the same information for data within one standard deviation (16%, 68%, 16%)\n\n\n\nData within standard deviations"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#checking-against-the-data",
+    "href": "lectures/lecture.1.3.html#checking-against-the-data",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Checking against the data",
+    "text": "Checking against the data\n\nHistogram of ages from the data\n\n\n\n\n\n\n\n\n\n\nNormality and scaling\n\nNote that normality does not depend on the size of the standard deviation or the size of the mean\nCould easily change the units to be months instead of years\n\nMean would increase a lot\nStandard deviation would increase a lot\nHowever, amount of observations within each standard deviation would stay the same"
+  },
+  {
+    "objectID": "lectures/lecture.1.3.html#final-thoughts-on-normality",
+    "href": "lectures/lecture.1.3.html#final-thoughts-on-normality",
+    "title": "Lecture 1.3 - Advanced distributions",
+    "section": "Final thoughts on normality",
+    "text": "Final thoughts on normality\n\nWhen is the normal distribution useful?\n\nWhen we know a data-generating process is normally distributed we don’t even need to sample the population\n\nCan find out exactly how much data is between a certain number of standard deviations\n\nWhen we expect a data-generating process to be normally distributed, can test for deviations from normality\n\nIn the case of Titanic passengers, some parts of the distribution were more bunched up, others more spread out\n\nA lot of our statistical techniques require or work better when the data is ‘roughly’ normal\n\nWill detail these in the coming weeks\n\nWe can transform our data to be closer to normal\n\nNote that transformations won’t work if the data has multiple modes, can only correct skew\n\n\n\n\nWhat transformation would be helpful for age?"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Introduction",
+    "section": "",
+    "text": "Tuesday/Thursday class at 12:00 pm to 2:30 pm in Library room 2001\nThursday lab at 6:00 pm to 7:15 pm in Library room 2001\nOffice hours:\n\nWednesday from 1:00 pm to 5:00 pm in WDR 3114\n\nHomeworks are all due at 11:59 pm\nAll other announcements and information are posted on the class Teams site\nStats 101 lab manager: Jingyu Wang\n\nOffice hours: Fridays from 2:00 to 4:00 pm in WDR 2134"
+  },
+  {
+    "objectID": "index.html#assessment",
+    "href": "index.html#assessment",
+    "title": "Course Introduction",
+    "section": "Assessment",
+    "text": "Assessment\n\nHomework 65%: At the end of the first two groups of content, a homework will be assigned that will ask you to analyze a dataset and answer questions related to that concept group. These homeworks are due at the noted date at 11:59 pm China time. Each homework will also have a best graph contest, where the person whose classmates vote as having the best graph wins some extra credit points.\n\nHomework 1: 10%\nHomework 2: 25%\nFinal project: 30%\n\nHomework checks 3%: To make sure you are making good progress on your homework, the Sunday before the homework is due (except for the first homework) you will be required to submit your progress on the homework so far. You are required to have tried to have answered all the questions covered by the lectures and textbook up to the specified cutoff. I will not check your answers but rather check to see if you have made a good effort to answer all the questions derived from the material already covered. If you have a reasonable answer for each question checked you will get full points. If you have not made an effort to answer all the questions reviewed you will get a zero.\nUnit 3 exam 25%: Unit 3 comprehension is better checked through an in-class exam. The exam will be open notes but closed book and will take place during the normal lab session that week.\nData Camp labs 5%: A number of labs on the website Data Camp will be assigned to you; these labs are pass/fail and you will receive full credit if you complete each of the labs by the specified due date.\nSyllabus quiz 1%: A short quiz after the first class regarding the course requirements.\nPlacement exams 1%: A short quiz that you will take at both the start and end of class to measure how much pre-knowledge you have and how much knowledge you have gained during the course. Exams are pass/fail depending on if you complete them or not\nAttendance & warmup quizzes: I want you to attend class - there are a lot of studies that show those who attend class and pay attention, learn more and have higher grades. However, I am not your parent. So, it is up to you if you want to be assessed for attendance. Attendance is therefore optional, but, you can sign a pledge at the start of class promising to attend all classes and stay for the entire class (you can miss up to one class without an excuse) and if you complete the pledge, you will receive an extra 1% of extra credit on your final grade. However, if you fail the pledge, you will receive -1% grade deduction. Similarly, the beginning of the class warmup quizzes are partially for me to see how well you have understood the textbook materials, but it is also an incentive for you to read and understand the textbook chapters before class. I will not record your grade on the quizzes. However, you can also sign a pledge to count your warmup quizzes as part of your grade. If you agree to be assessed on the warmup quizzes, you must maintain at least a 75% average on the quizzes (I will drop your lowest quiz score). If you do, you will receive 2% extra credit on your final grade. If you sign the pledge but fail to maintain the average, you will be deducted 2% from your final grade."
+  },
+  {
+    "objectID": "index.html#lateness-policy",
+    "href": "index.html#lateness-policy",
+    "title": "Course Introduction",
+    "section": "Lateness policy",
+    "text": "Lateness policy\nSince the course moves very quickly, if you are submitting work late that means you are falling behind on other material and it may be difficult for you to recover. Therefore, I have a fairly strict lateness policy.\n\nAll major assignments are due at 11:59:00 pm. Not 11:59:01 or 11:59:31.\nIf it is later than 11:59:00 pm, then the assignment will be assessed a 5% lateness penalty\nIf it is later than 12:29:00 am, then the assignment will be assessed a 10% lateness penalty\nIf it is later than 11:59:00 pm the next day, the assignment will be assessed a 50% lateness penalty\nIf it is later than 2 days from the due date, I will no longer accept the assignment\n\n\nPlease be sure to check that your homework is complete and make sure to submit it a few minutes early. You can submit multiple times on Teams so make sure you have a nearly complete version uploaded even if you want to keep working on it right up to the deadline. I will not be sympathetic to messages that complain of computer problems when you are trying to submit for the first time at 11:58:51 pm."
+  },
+  {
+    "objectID": "index.html#contact-policy",
+    "href": "index.html#contact-policy",
+    "title": "Course Introduction",
+    "section": "Contact Policy",
+    "text": "Contact Policy\n\nI usually try to reply to emails on the same day (though not in the evenings), however responses may be slower on the weekend\nDo not message me 2 hours before a homework is due and expect an immediate response!\nFor general questions, such as how should one interpret a question on a homework or quiz, you should ask the question in the Discussion section of the Teams site. That way others can benefit from the response or someone else may be able to answer more quickly than I can. If you email me a question that really belongs in the help channel I will ask you to repost it.\nMany questions can be answered by carefully checking the class website or reviewing the materials in on Teams. If in doubt, though, feel free to ask."
+  },
+  {
+    "objectID": "index.html#chatgpt-and-similar-policy",
+    "href": "index.html#chatgpt-and-similar-policy",
+    "title": "Course Introduction",
+    "section": "ChatGPT (and similar) Policy",
+    "text": "ChatGPT (and similar) Policy\nUnless otherwise specified on an assignment, you may use ChatGPT as much as you wish. However, most of the assignments in this class are not very amenable to ChatGPT help. Your main grade will be understanding, annotating, and interpreting your output. Producing the output is the very simple minimal requirement. Also, ChatGPT often makes many coding mistakes. If you rely too much on ChatGPT to code, you will not understand when it makes mistakes and why it makes mistakes."
+  },
+  {
+    "objectID": "index.html#academic-dishonesty-policy",
+    "href": "index.html#academic-dishonesty-policy",
+    "title": "Course Introduction",
+    "section": "Academic Dishonesty Policy",
+    "text": "Academic Dishonesty Policy\nDon’t cheat. Don’t be that person. Yes, you. You know exactly what I’m talking about too.\nMore specifically, you are expected to strictly adhere to the Duke Kunshan University Community Standard in all of your work and participation, and violations will be enforced. More details can be found here.\nAll work must be done exclusively by the individual to whom it has been assigned. Any instance of copying code or analysis from others is considered cheating. You may exchange general ideas about how to complete the assignment but you must write your own code and also write your own analysis.\nIt may sound cliché to say, but if you cheat and borrow others code or answers you are only cheating yourself; you will not learn how to do statistics and doing so will mean you will do worse on the midterm and the final anyway. Cheating is ultimately self-defeating so for both of our benefit, please, don’t do it. If you are having trouble completing the assignment and feel tempted to cheat, please contact me directly instead with the difficulties you are having."
+  },
+  {
+    "objectID": "index.html#disabilities-policy",
+    "href": "index.html#disabilities-policy",
+    "title": "Course Introduction",
+    "section": "Disabilities Policy",
+    "text": "Disabilities Policy\nIf you need an accommodation due to a disability, you should not hesitate to request one. The process is that requests should be sent to the Dean of Undergraduate Studies, who will contact me with recommended type of accommodation that is needed. You do not need to disclose your reason for requesting an accommodation with me, and asking through the Dean of Undergraduate Studies helps make things official for both you and me."
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "Unit 1 homework (due Sunday, November 2 at 23:59:00)\n\nUnit 1 homework\nUnit 1 homework sample solutions\n\n\n\nUnit 2 homework (due Sunday, November 16 at 23:59:00)\n\nUnit 2 homework\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Thursday, November 27 from 6:00 pm to 7:15 pm)\n\n\nFinal project (due Wednesday, December 10 at 23:59:00)\n\n[Final project]"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#distribution-of-common-quantities",
+    "href": "lectures/lecture.1.2.html#distribution-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Distribution of common quantities",
+    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#graphs-of-common-quantities",
+    "href": "lectures/lecture.1.2.html#graphs-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Graphs of common quantities",
+    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n\n\n\n\n\n\n\n\n\nFlower sepal width\n\n\n\n\n\n\n\n\n\n\nLife expetancy in 2007"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#height-activity",
+    "href": "lectures/lecture.1.2.html#height-activity",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height activity",
+    "text": "Height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses."
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#height-distribution",
+    "href": "lectures/lecture.1.2.html#height-distribution",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Height distribution",
+    "text": "Height distribution"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#closing-thoughts",
+    "href": "lectures/lecture.1.2.html#closing-thoughts",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Closing thoughts",
+    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#exercise-1",
+    "href": "lectures/lecture.2.1.html#exercise-1",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nIn your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.\n\n0.95\n0.75\n0.5\n0.25\n0.0\n-0.25\n-0.5\n-0.75\n-0.95\n\nPick a few of these and draw by hand what you expect these graphs to look like."
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#exercise-2",
+    "href": "lectures/lecture.2.1.html#exercise-2",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Exercise 2",
+    "text": "Exercise 2\n\n\n\nSeattle"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#viewing-an-example-relationship",
+    "href": "lectures/lecture.2.1.html#viewing-an-example-relationship",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Viewing an example relationship",
+    "text": "Viewing an example relationship\n\nFirst, what is our expectation about the relationship between bedrooms and square feet?\nDirection?\nForm?\nStrength?\nOutliers?"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---direction",
+    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---direction",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - direction",
+    "text": "Bedrooms and square feet - direction\nA scatterplot is the easiest way to check for direction. In this case, the direction is obvious"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---form",
+    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---form",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - form",
+    "text": "Bedrooms and square feet - form"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---strength",
+    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---strength",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - strength",
+    "text": "Bedrooms and square feet - strength\n\n\n\n\n\n\n\n\n\nCorrelation as a measure of strength\n\n\n\n\n\n\n\n\nThis correlation is a little weaker than perhaps what we expected\n\nIn general, mechanically generated processes with little noise can have very high correlations\nMost correlations of social or real world processes rarely have above moderate correlation due to noise"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#bedrooms-and-square-feet---outlier",
+    "href": "lectures/lecture.2.1.html#bedrooms-and-square-feet---outlier",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Bedrooms and square feet - outlier",
+    "text": "Bedrooms and square feet - outlier\nAgain, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values\n\n\n\n\n\n\n\n\nTo investigate if this outlier matters, we can check some other values of the observation.\n\n\n\n\n\n\n\n\nWhat kind of outlier do you think this is? Why?\n\nOutlier - actual observation\n\n\n\n\n\n\n\n\n\n\n\nLocation\n\n\n\n\n\nHouse details\n\n\n\n\nData with no outlier\n\n\n\n\n\n\n\n\n\n\nDescribing the association\n\nDirection - positive\nForm - linear\nStrength - moderate/strong\nOutliers - one possible\n\nOutlier:"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#does-bed-and-square-feeet-relationship-match-expectations",
+    "href": "lectures/lecture.2.1.html#does-bed-and-square-feeet-relationship-match-expectations",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Does bed and square feeet relationship match expectations?",
+    "text": "Does bed and square feeet relationship match expectations?\n\nSeems to, more or less, the larger the house, the more bedrooms, so the relationship is positive\nThe relationship is fairly linear, indicating a strong relationship\nRelationship is moderate\nOutliers don’t seem like it is a problem\n\nHowever….\n\nWhat are some possible lurking variables that influence the relationship of bedrooms and bathrooms?"
+  },
+  {
+    "objectID": "lectures/lecture.2.1.html#relationship-reexpressed",
+    "href": "lectures/lecture.2.1.html#relationship-reexpressed",
+    "title": "Lecture 2.1 - Association and correlation",
+    "section": "Relationship reexpressed?",
+    "text": "Relationship reexpressed?\nOne final issue to consider is if this relationship should be reexpressed - made more linear.\n\n\n\n\n\n\n\n\n\nSeems clearer\n\n\nYour turn\nWith your partner, develop some expectations about some of the variables in the kc.houses dataset might be related.\nVariables:\n\n\n\n\n\n\n\n\nWhat to do with your partner:\n\nWrite down an interesting question we think we might be able to answer by examining a relationship in this dataset\nChoose the variables that you think might be able to answer this question\nWrite down what you expect the relationship to be between these two variables based on any prior knowledge\nDecide which variable is the response variable and which is the predictor variable\nMake a scatterplot using one of the codeblocks in the previous section and identify the features of the association"
+  },
+  {
+    "objectID": "lectures/lecture.2.3.html#model-fit-measures",
+    "href": "lectures/lecture.2.3.html#model-fit-measures",
+    "title": "Regression Wisdom",
+    "section": "Model fit measures",
+    "text": "Model fit measures\n\nRegression results\nMany parts of these results we already know how to interpret. For now, we will focus on model fit measures.\n\n\\(R^2\\)\n\\(s_e\\)\nResiduals 5 number summary\n\n\n\n\n\n\n\n\n\n\n\nResiduals - histogram\n\n\n\n\n\n\n\n\nHow would you interpret this residual histogram?\n\n\n\n\n\n\n\n\n\n\nCorrelation review\n\nRecall that a correlation, \\(r\\), ranges from -1 to 1 and indicates the strength of the association between two variables\n\nIf \\(r\\) is -1 or 1 exactly, there is no variation, the correlation indicate the relationship is a straight line\nNote that \\(r\\) does not indicate the slope\nIf \\(r\\) is 0, that means there is no relationship\n\nWhat is the slope in that case?\n\\(\\hat{y} = b_0 + b_1*x\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nR squared definition\n\n\\(R^2\\) is the square of \\(r\\) in a two variable case, so between 0 and 1\nBut, unlike \\(r\\), \\(R^2\\) is meaningful in multivariate models\nPercent of the total variation in the data explained by the model\nSum of the errors from our model divided by sum of errors from the ‘braindead’ model of \\(\\hat{y}=\\bar{y}\\)\nIf the \\(R^2\\) is small, that means our model doesn’t beat the ‘braindead’ model by very much\n\n\n\n\n\n\n\n\n\n\n\nWhen is \\(R^2\\) “big enough”?\n\n\\(R^2\\) is useful, but only so much so\nThe closer \\(R^2\\) is to 1, the more useful the model\n\nHow close is “close”?\nDepends on the situation\n\\(R^2\\) of 0.5 might be very bad for a model that uses height to predict weight\n\nShould be more closely related\n\n\\(R^2\\) of 0.5 might be very good for a model using test scores to predict future income\n\nResponse variable has a lot of factors that shape it and a lot of noise\n\n\nGood practice: always report \\(R^2\\) and \\(s_e\\) and let readers analyze the results as well"
+  },
+  {
+    "objectID": "lectures/lecture.2.3.html#extrapolating",
+    "href": "lectures/lecture.2.3.html#extrapolating",
+    "title": "Regression Wisdom",
+    "section": "Extrapolating",
+    "text": "Extrapolating\n\nThe farther a new value is from the range of \\(x\\), the less trust we should place in the predicted value of \\(y\\)\nVenture into new \\(x\\) territory, called extrapolation\nDubious: questionable assumption that nothing changes about the relationship between x and y changes for extreme values of \\(x\\)\n\n\nPredicting MPG of cars\n1970s data on automobiles\n\n\n\n\n\n\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach interior\n\n\n\n\nPredicting the Maybach\n\n\n\nMaybach North Korea visit\n\n\nWill our model do a good job predicting this car’s miles per gallon?\n\n\n\n\n\n\n\n\n\n\nCan we predict this car’s MPG using our model?\nWeight: 6581 pounds\nModel: \\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 46.3 + -0.00767*6581\\)\n\\(\\hat{y} = -4.17\\) miles per gallon\n\nNonsense prediction\n\n\n\nBe wary of out of sample predictions"
+  },
+  {
+    "objectID": "lectures/lecture.2.3.html#outliers",
+    "href": "lectures/lecture.2.3.html#outliers",
+    "title": "Regression Wisdom",
+    "section": "Outliers",
+    "text": "Outliers\n\nHeight and net worth\nFirst, we can create random data for both a variable called height and one called log net worth but in the below example they are defined to be random and have no relation to each other.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdding Steve Ballmer\n\n\n\nSteve Ballmer\n\n\n\n\n\n\n\n\n\n\nWhat will happen to the slope and \\(R^2\\)?\n\n\n\n\n\n\n\n\n\n\nSteve Ballmer plot\n\n\n\n\n\n\n\n\n\n\nAdding Warren Buffet\n\n\n\nWarren Buffet\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdding Aleksandar Vučić\n\n\n\nAleksandar Vučić\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLeverage vs. influence\n\nA data point whose \\(x\\) value is far from the mean of the rest of the \\(x\\) values is said to have high leverage.\nLeverage points have the potential to strongly pull on the regression line.\nA point is influential if omitting it from the analysis changes the model enough to make a meaningful difference.\nInfluence is determined by\n\nThe residual\nThe leverage\n\n\n\n\nWarnings\n\nInfluential points can hide in plots of residuals.\nPoints with high leverage pull line close to them, so have small residuals.\nSee points in scatterplot of original data.\nFind regression model with and without the points."
+  },
+  {
+    "objectID": "lectures/lecture.2.3.html#interpreting-a-regression",
+    "href": "lectures/lecture.2.3.html#interpreting-a-regression",
+    "title": "Regression Wisdom",
+    "section": "Interpreting a regression",
+    "text": "Interpreting a regression\n\nStep 1: develop some expectations\nHorsepower vs. MPG\n\nMore powerful engines probably are less fuel efficient\nRelationship is likely roughly linear\nThe exact relationship depends on the efficiency of the engine\n\nCould be noisy\n\n\n\n\nStep 2: make a picture\n\n\n\n\n\n\n\n\n\n\nStep 3: check the conditions\n\nQuantitative variable condition\nStraight enough condition\nOutlier condition\nDoes the plot thicken\nConclusion:?\n\n\n\n\n\n\n\n\n\n\n\nStep 4: identify the units\n\nMiles per gallon: amount of miles you can travel on one gallon of gas, a measure of efficiency.\n\nMost gasoline-using cars have MPG between 10-40, higher being better\n\nHorsepower: power of the engine.\n\nTypical values for standard cars are in the 100-200 range, higher meaning more powerful\n\n\n\n\nStep 5: intepret the slope of the regression line\n\n\n\n\n\n\n\n\n\nFor every one unit increase in horsepower, miles per gallon decreases by about -0.15 units\n\nIs that a lot or a little?\n\n\n\n\n\n\n\n\n\n\n\n\nStep 6: determine reasonable values for the predictor variable\n\n\n\n\n\n\n\n\n\n\nStep 7: interpret the intercept\n\n\n\n\n\n\n\n\n\n\nStep 8: solve for reasonable predictor values\nHorsepower = Q1 = 75:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 28.09\\)\nHorsepower = Median = 93.5:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 25.17\\)\nHorsepower = Q3 = 126:\n\\(\\hat{y} = b_0 + b_1*x\\)\n\\(\\hat{y} = 39.94 + -0.158*100\\)\n\\(\\hat{y} = 20.03\\)\n\n\nStep 9: interpret the residuals and identify their units\n\n\n\n\n\n\n\n\n\n\nStep 10: view the distribution of the residuals\n\n\n\n\n\n\n\n\n\n\nStep 11: interpret the residual standard error\n\n\n\n\n\n\n\n\n\n\nStep 12: interpret the R squared\n\n\n\n\n\n\n\n\n\n\nStep 13: think about confounders\n\nWhat are some confounders, or “lurking variables”?\n\nCategorical\nQuantitative"
+  },
+  {
+    "objectID": "lectures/lecture.3.1.html#the-sampling-distribution-model-for-a-proportion",
+    "href": "lectures/lecture.3.1.html#the-sampling-distribution-model-for-a-proportion",
+    "title": "Confidence Intervals - Proportions",
+    "section": "The sampling distribution model for a proportion",
+    "text": "The sampling distribution model for a proportion\n\nSampling model\n\nDraw samples at random, n=100n=100\nSamples vary\nCan’t draw all samples of size 100, astronomical\nDraw a few thousand samples\nDistribution is called the sampling distribution of the proportion.\n\nWhat shape do you think the sampling distribution will have if we have sample size n=100n=100?\n\n\n\n\n\n\n\n\n\n\nGraph of a sampling distribution\n\nRemember, this is not a graph of the actual distribution\n\n\n\n\n\n\n\n\n\n\n\nRandom matters\n\nSampling distribution for a proportion\n\nSymmetric - check\nUnimodal - check\nCentered at pp: 0.853\nStandard deviation: 0.035\nFollows the Normal model - check\n\n\n\n\nThe Normal model for sampling\n\nSamples don’t all have the same proportion.\nNormal model is the right one for sample proportions.\nModeling how sample statistics, proportions or means, vary from sample to sample is powerful.\nAllows us to quantify that variation.\nMake statements about corresponding population parameter.\nMake model for random behavior, then understand and and use that model.\n\n\n\nWhich Normal model to choose?\n\nReminder: normal model is N(μ,σ2)N(\\mu, \\sigma^2)\nμ\\mu or mean is pp, or the proportion we want to estimate, nn is sample size\nFor proportions, σ(p)=p(1−p)n\\sigma(p) = \\sqrt{\\frac{p(1-p)}{n}}\nThis is the standard deviation of the SAMPLING DISTRIBUTION, that is the distribution of pp across infinite samples\n\n\n\nMean and standard deviation\n\n\n\n\n\n\n\n\n\n\nReminder - Normal model rule\n\nUsing this normal model rule, we can tell how likely it is to have a certain p̂\\hat{p} given the sampling distribution normal model\nRemember the 68–95–99.7 (1 sd, 2 sd, 3 sd), for other distances use technology\nMost common: 95% of samples have sample proportion within two standard deviations of the true population proportion.\nKnowing the sampling distribution tells us how much variation to expect\nCalled the sampling error in some contexts\nNot really an error, just variability\nBetter to call it sampling variability"
+  },
+  {
+    "objectID": "lectures/lecture.3.1.html#when-does-the-normal-model-work",
+    "href": "lectures/lecture.3.1.html#when-does-the-normal-model-work",
+    "title": "Confidence Intervals - Proportions",
+    "section": "When does the normal model work?",
+    "text": "When does the normal model work?\n\nIndependence Assumption: check data collected in a way that makes this assumption plausible\nRandomization Condition: subjects randomly assigned treatments, or survey is simple random sample\n10% Condition: sample size less than 10% of the population size\nSuccess Failure Condition: there must be at least 10 expected successes and failures. np̂≥10n\\hat{p}\\geq10 and n̂p≥10\\hat{n}p\\geq10\n\n\nWhen does the normal model fail for the sampling distribution?\n\npp close to 0 or 1\nPeople in this class that can dunk a basketball\nSample size 100\n\nIf true p=0.001p = 0.001, then probably none in sample of 100\n\nIf we simulated samples of size 100 with p=0.001p = 0.001\n\nDistribution skewed right, can’t rely on normal model percentages anymore\n\nnn is fine, but pp is too small\n\nWhat will the shape of the sampling distribution look like if p=0.001p = 0.001?\n\n\n\n\n\n\n\n\n\n\nExample simulation\n\n\n\n\n\n\n\n\n\n\nClass sampling exercise\n\nWe know that about 50% of students at DKU plan to or have selected a major in the natural sciences\n? % of students in our class plan to major in the natural sciences in our class\n\nIs our class unusually small?\n\nCheck conditions\n\nRandomization condition\n10% condition\nSuccess failure condition\n\n\n\n\nFind how far we are from the population mean\n\nPopulation standard deviation formula is:\n\np(1−p)n\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\np̂\\hat{p} is the proportion of yeses\nnn is the sample size\n\nWe are calculating using the population sampling SDSD since we know it\n\nIf we don’t know the population sampling SDSD we have to use a different strategy, but not the case here\n\nKnowing the SDSD, we can create a z score for the difference between our class and the population\n\nz score is how many SDSDs our class is from the population mean\n\n(classscore−dkumean)/SD(class score - dkumean) / SD\n\n\n\n\n\nNormal distribution percentages\n\n\n\n\n\n\n\n\n\n\nCalculation for our class\n\np(1−p)n\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\np̂\\hat{p} is the proportion of yeses\nnn is the sample size\np̂−pSD(p)\\frac{\\hat{p} - p}{SD(p)}\n68-95-99.7 Rule: Values ?SDSD above the mean occur less than ?% of the time. Our class mean appears to be far/near from the population mean\n\nCalculate the how likely our result would be if our class is a random sample of DKU students."
+  },
+  {
+    "objectID": "lectures/lecture.3.1.html#confidence-intervals-of-proportions",
+    "href": "lectures/lecture.3.1.html#confidence-intervals-of-proportions",
+    "title": "Confidence Intervals - Proportions",
+    "section": "Confidence intervals of proportions",
+    "text": "Confidence intervals of proportions\n\nStandard errors for proportions\n\nWhat is the sampling distribution?\nUsually we do not know the population proportion pp.\nTherefore, we cannot find the standard deviation of the sampling distribution p(1−p)n\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\nAfter taking a sample, we only know the sample proportion, which we use as an approximation (called the standard error)\n\np̂(1−p̂)n\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{n}}\n\n\n\n\nExample: bedrooms\n\nDraw a random sample of 100 houses\n\n\n\n\n\n\n\n\n\n\np̂(1−p̂)100\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{100}}\nThe sampling distribution should be approximately normal\n\n\n\nWhat is a confidence interval?\n\nConfidence interval: a way to express the range of plausible values for the parameter (in this case, percent of homes with three bedrooms)\nWe never know the true value but we want to say something about how wide the range of possible values are\nWhat is a reasonable range?\n\nTraditionally, 95% (about two standard deviations) of the standard error distribution\nMean of our sample ±\\pm range of possible values we could get if we took additional samples\n\n\n\n\nExample: bedrooms\n\nOur mean: 0.87\nOur estimated sampling distribution standard error:\n\np̂(1−p̂)100\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{100}}\n0.87̂(1−0.87̂)100\\sqrt{\\frac{\\hat{0.87}(1-\\hat{0.87})}{100}}\n0.7569100\\sqrt{\\frac{0.7569}{100}}\n0.007569\\sqrt{0.007569}\n0.0870.087\n\nA range of reasonable values if we sampled this again:\n\n2×0.0872\\times0.087\n0.87±0.1740.87\\pm0.174\n\n\nStatement: we are ~95% confident that this interval contains the true proportion of houses with three or more bedrooms in the population\n\n\nCritical values\n\nCritical values are the cutoff we use to determine what is ‘reasonable’\nDerived from the Normal model\nCan use any z-score as a cutoff\nCorresponding multiplier of the SE is called the critical value.\nNormal model for this interval, it is denoted z*z^*.\nTo find, need to use computer, calculator, Normal probability table\n\n\n\n\n\n\n\n\n\n\n\nRecap\n\nMake sure conditions are met, then find level C confidence interval for p̂\\hat{p}, our population mean estimate\nConfidence interval is defined as p̂±z*×SE(p̂)\\hat{p}\\pm z^* \\times SE(\\hat{p})\nSE(p̂)SE(\\hat{p}) estimated by p̂(1−p̂)n\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{n}}\nz*z^* specifies number of SEs needed for C% of random samples to yield confidence intervals that capture the true parameter\n\n\n\nWhat you cannot say about pp from the sample\n\n“0.87 of all houses in King County have at least three bedrooms.”\n\n\nNo. Observations vary. Another sample would yield a different sample proportion.\n\n\n“It is probably true that 0.87 of all houses in King County have at least three bedrooms.”\n\n\nNo again. In fact, even if we didn’t know the true proportion, we’d know that it’s probably not 0.87.\n\n\n\nWhat you cannot say about pp from the sample\n\n“We don’t know exactly what proportion of houses in King County have at least three bedrooms, but we know that it’s within the interval 0.87±2×0.0870.87\\pm2\\times0.087.”\n\n\n\nNo but getting closer. We don’t know this for sure.\n\n\n“We don’t know exactly what proportion of houses in King County have at least three bedrooms, but the interval from 0.696 to 1.044 probably contains the true proportion.”\n\n\nRight but can be more precise. We should specify how confident we are not just say probably\n\n\n\nWhat you can say about pp from the sample\n\n“We are 95% confident that between 0.696 and 1.044 of houses in King County have at least three bedrooms.”\n\n\nStatements like these are called confidence intervals. They’re the best we can do.\n\n\n\nNaming the confidence interval\n\nThis confidence interval is a one-proportion z-interval.\n\n“One” since there is a single mean being calculated.\n“Proportion” since we are interested in the proportion of the population.\n“z-interval” since the distance of the interval relies on a normal sampling distribution model."
+  },
+  {
+    "objectID": "lectures/lecture.3.1.html#interpreting-confidence-intervals",
+    "href": "lectures/lecture.3.1.html#interpreting-confidence-intervals",
+    "title": "Confidence Intervals - Proportions",
+    "section": "Interpreting confidence intervals",
+    "text": "Interpreting confidence intervals\n\nCapturing a proportion\n\nThe confidence interval may or may not contain the true population proportion.\nConsider repeating the study over an over again, each time with the same sample size.\nEach time we would get a different p̂\\hat{p}\nFrom each p̂\\hat{p}, a different confidence interval could be computed.\nAbout 95% of these confidence intervals will capture the true proportion.\n5% will be duds.\n\n\n\nRandom matters - confidence intervals\n\nThere are a huge number of confidence intervals that could be drawn.\nIn theory, all the confidence intervals could be listed.\n\n95% will “work” (capture the true proportion).\n5% will be “duds” (not capture the true proportion).\n\nWhat about our confidence interval (0.696, 1.044)?\n\nIn this case, we can find out the true value\nMost of the time we never know\n\n\n\n\n\n\n\n\n\n\n\n\nRandom matters - confidence intervals\n\n\n\n100 samples CI"
+  },
+  {
+    "objectID": "lectures/lecture.3.1.html#margin-of-error-certainty-vs.-precision",
+    "href": "lectures/lecture.3.1.html#margin-of-error-certainty-vs.-precision",
+    "title": "Confidence Intervals - Proportions",
+    "section": "Margin of error: certainty vs. precision",
+    "text": "Margin of error: certainty vs. precision\n\nMargin of error\n\nConfidence interval for a population proportion: p̂±2×SE(p̂)\\hat{p} \\pm 2\\times SE(\\hat{p})\nThe distance, 2×SE(p̂)~2\\times SE(\\hat{p}), from p̂\\hat{p} is called the margin of error\nConfidence intervals can be applied to many statistics, not just means. Regression slopes and other quantities can also have confidence intervals.\n\nIn general, a confidence interval has the form estimate ±\\pm margin of error\n\n\n\n\nCertainty vs. precision\n\nCompeting goals\n\nMore certainty, need to capture pp more often, need to make the interval wider.\nMore precise, need to provider tighter bounds on our estimate for pp, need to make the interval narrower\n\nInstead of a 95% confidence interval, any percent can be used.\n\nIncreasing the confidence (e.g. 99%) increases the margin of error.\n\nNeed to make our range wider to make sure we don’t ‘miss’\n\nDecreasing the confidence (e.g. 90%) decreases the margin of error.\n\nNeed to make our range smaller so as to be more specific about our guess\n\n\n\n\n\nWhat sample size?\n\nCan increase both certainty and precision by increasing sample size\nFor 95%, z*z^* = 1.96\nValues that make ME largest are p̂=0.5\\hat{p}=0.5\nIf we want to ensure, say, a margin of error of &lt;3&lt;3%\n\nME=z×p̂(1−p̂)nME = z\\times \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}\n0.03=1.96×(0.5)(0.5)n0.03 = 1.96\\times \\sqrt{\\frac{(0.5)(0.5)}{n}}\n\nSolving for nn, gives n≈1067.1n\\approx1067.1\nWe need to survey at least 1068 to ensure a ME less than 0.03 for the 95% confidence interval.\n\n\n\nThoughts on sample size and ME\n\nObtaining a large sample size can be expensive and/or take a long time.\nFor a pilot study, ME=10ME = 10% can be acceptable.\nFor full studies, ME&lt;5ME &lt; 5% is better.\nPublic opinion polls typically use ME=3ME = 3%, n=1000n = 1000\nIf pp is expected to be very small such as 0.005, then much smaller ME such as 0.1% is required.\n\nCommon in medical studies"
   },
   {
     "objectID": "rmanual.html",
@@ -732,7 +781,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.4963316"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.4930062"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",
@@ -852,152 +901,5 @@
     "title": "R Manual",
     "section": "Inference for Difference between Two Samples",
     "text": "Inference for Difference between Two Samples\nThe R code for \\(t\\) tests is very similar to the code for hypothesis testing.\n\nfourcyl &lt;- mtcars %&gt;% \n  filter(cyl==4) %&gt;% \n  summarize(mean=mean(mpg),\n            len=length(mpg),\n            sd=sd(mpg))\n\neightcyl &lt;- mtcars %&gt;% \n  filter(cyl==8) %&gt;% \n  summarize(mean=mean(mpg),\n            len=length(mpg),\n            sd=sd(mpg))\n\ndiff.sd &lt;- sqrt(fourcyl$sd ^ 2 / fourcyl$len + eightcyl$sd ^ 2 / eightcyl$len)\ndiff.mpg.t  &lt;- (fourcyl$mean - eightcyl$mean) / diff.sd\n\n# Note that the df here is just an approximation; the textbook provides the correct formula.\n# The rule of thumb method from the the textbook recommends using the lowest df of the two samples\n# minus one.\ndiff.mpg.p  &lt;- 2 * pt(-abs(diff.mpg.t), df = min(c(fourcyl$len, eightcyl$len))-1)\n\ndiff.mpg.p\n\n[1] 1.847002e-05\n\n\nIn other words, the odds that, assuming the two samples have the same sample mean, the odds that we would see a difference between the two sample means this large or larger is effectively zero, therefore we can reject the null hypothesis.\nR does have a built-in method to do this calculation but you should understand how to achieve the same result by direct calcuation.\n\nfourcyl.data &lt;- mtcars %&gt;% \n  filter(cyl==4) %&gt;% \n  select(mpg)\n\neightcyl.data &lt;- mtcars %&gt;% \n  filter(cyl==8) %&gt;% \n  select(mpg)\n\nt.test(fourcyl.data$mpg, eightcyl.data, alternative = \"two.sided\" , mu = 0, var.equal = FALSE, conf.level = 0.95)\n\n\n    Welch Two Sample t-test\n\ndata:  fourcyl.data$mpg and eightcyl.data\nt = 7.5967, df = 14.967, p-value = 1.641e-06\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n  8.318518 14.808755\nsample estimates:\nmean of x mean of y \n 26.66364  15.10000 \n\n\nDue to the first method using a rule of thumb method for calculating the degrees of freedom, the result is slightly different but very close to the R function result."
-  },
-  {
-    "objectID": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html",
-    "href": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html",
-    "title": "Confidence Intervals - Proportions",
-    "section": "",
-    "text": "#| label: setup\n#| autorun: true\n#| include: false\n\ntheme_set(theme_classic())\n\nclassroster &lt;- read.csv(\"classroster.csv\", fileEncoding=\"UTF-8-BOM\")\n\nn.example &lt;- 100\n\nmean.multiple.samples &lt;- function(numdraws, numsamples, variable) { \n     meanvector &lt;- c() \n     meanonesample &lt;- 0 \n     for (i in 1:numsamples) { \n       meanonesample &lt;- mean(sample(variable, numdraws, replace=TRUE)) \n         meanvector[i] &lt;- meanonesample \n     } \n     meanvector \n}\n\nkc.house &lt;- read.csv(\"king.county.sales.recent.csv\")\n\nkc.house &lt;- kc.house %&gt;%\n  mutate(is.family.sized = ifelse(beds&gt;=3, 1, 0)) %&gt;% \n  mutate(view = case_when(view_rainier == 1 ~ 1,\n                          view_olympics == 1 ~ 1,\n                          view_cascades == 1 ~ 1,\n                          view_territorial == 1 ~ 1,\n                          view_skyline == 1 ~ 1,\n                          view_sound == 1 ~ 1,\n                          view_lakewash == 1 ~ 1,\n                          view_lakesamm == 1 ~ 1, \n                          view_otherwater == 1 ~ 1,\n                          view_other == 1 ~ 1,\n                          TRUE ~ 0))"
-  },
-  {
-    "objectID": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#the-sampling-distribution-model-for-a-proportion",
-    "href": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#the-sampling-distribution-model-for-a-proportion",
-    "title": "Confidence Intervals - Proportions",
-    "section": "The sampling distribution model for a proportion",
-    "text": "The sampling distribution model for a proportion\n\nSampling model\n\nDraw samples at random, \\(n=100\\)\nSamples vary\nCan’t draw all samples of size 100, astronomical\nDraw a few thousand samples\nDistribution is called the sampling distribution of the proportion.\n\nWhat shape do you think the sampling distribution will have if we have sample size \\(n=100\\)?\n\n#| label: picker1\nsample(classroster$name, 1)\n\n\n\nGraph of a sampling distribution\n\nRemember, this is not a graph of the actual distribution\n\n\n#| label: fig-samplingplot\n#| caption: \"Sampling distribution of percent of houses that are family sized\"\nset.seed(8675309)\nsampling.distribution &lt;- mean.multiple.samples(100, 100000, kc.house$is.family.sized)  \n  \nggplot(data.frame(sampling.distribution), aes(x=sampling.distribution)) +\n  geom_density(color=\"darkblue\", fill=\"lightblue\", adjust=2) + \n  labs(x=\"Sample mean of % of houses with &gt;= 3 bedrooms\", y=\"Count\") +\n  geom_vline(xintercept=mean(sampling.distribution), color=\"red\") + \n  theme(axis.text.x = element_text(face=\"bold\", size=10))\n\n\n\nRandom matters\n\nSampling distribution for a proportion\n\nSymmetric - check\nUnimodal - check\nCentered at \\(p\\): 0.853\nStandard deviation: 0.035\nFollows the Normal model - check\n\n\n\n\nThe Normal model for sampling\n\nSamples don’t all have the same proportion.\nNormal model is the right one for sample proportions.\nModeling how sample statistics, proportions or means, vary from sample to sample is powerful.\nAllows us to quantify that variation.\nMake statements about corresponding population parameter.\nMake model for random behavior, then understand and and use that model.\n\n\n\nWhich Normal model to choose?\n\nReminder: normal model is \\(N(\\mu, \\sigma^2)\\)\n\\(\\mu\\) or mean is \\(p\\), or the proportion we want to estimate, \\(n\\) is sample size\nFor proportions, \\(\\sigma(p) = \\sqrt{\\frac{p(1-p)}{n}}\\)\nThis is the standard deviation of the SAMPLING DISTRIBUTION, that is the distribution of \\(p\\) across infinite samples\n\n\n\nMean and standard deviation\n\n#| label: fig-meansdplot\n#| caption: \"Normal-shaped sampling distribution\"\nset.seed(8888888)\nnormal.sampling.distribution &lt;- rnorm(100000)\n\nggplot(data.frame(normal.sampling.distribution), aes(x=normal.sampling.distribution)) + \n  geom_density(color=\"darkblue\", fill=\"lightblue\") +\n  scale_x_continuous(breaks=c(-3, -2, -1, 0, 1, 2, 3),\n                     label=c(\"-3sqrt(pq/n)\", \"-2sqrt(pq/n)\", \"-1sqrt(pq/n)\", \"0sqrt(pq/n)\", \"1sqrt(pq/n)\", \"2sqrt(pq/n)\", \"3sqrt(pq/n)\"), \n                     limits=c(-3, 3),\n                     guide = guide_axis(n.dodge=2)) +\n  labs(x=\"Normal model distances for proportions\", y=\"Density\") + \n  theme(axis.text.x = element_text(face=\"bold\", size=10))\n\n\n\nReminder - Normal model rule\n\nUsing this normal model rule, we can tell how likely it is to have a certain \\(\\hat{p}\\) given the sampling distribution normal model\nRemember the 68–95–99.7 (1 sd, 2 sd, 3 sd), for other distances use technology\nMost common: 95% of samples have sample proportion within two standard deviations of the true population proportion.\nKnowing the sampling distribution tells us how much variation to expect\nCalled the sampling error in some contexts\nNot really an error, just variability\nBetter to call it sampling variability"
-  },
-  {
-    "objectID": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#when-does-the-normal-model-work",
-    "href": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#when-does-the-normal-model-work",
-    "title": "Confidence Intervals - Proportions",
-    "section": "When does the normal model work?",
-    "text": "When does the normal model work?\n\nIndependence Assumption: check data collected in a way that makes this assumption plausible\nRandomization Condition: subjects randomly assigned treatments, or survey is simple random sample\n10% Condition: sample size less than 10% of the population size\nSuccess Failure Condition: there must be at least 10 expected successes and failures. \\(n\\hat{p}\\geq10\\) and \\(\\hat{n}p\\geq10\\)\n\n\nWhen does the normal model fail for the sampling distribution?\n\n\\(p\\) close to 0 or 1\nPeople in this class that can dunk a basketball\nSample size 100\n\nIf true \\(p = 0.001\\), then probably none in sample of 100\n\nIf we simulated samples of size 100 with \\(p = 0.001\\)\n\nDistribution skewed right, can’t rely on normal model percentages anymore\n\n\\(n\\) is fine, but \\(p\\) is too small\n\nWhat will the shape of the sampling distribution look like if \\(p = 0.001\\)?\n\n#| label: picker2\nsample(classroster$name, 1)\n\n\n\nExample simulation\n\n#| label: fig-skewsamplingplot\n#| caption: \"Skewed population sampling distribution\"\nset.seed(1234567)\n# Set the true population\nskewed.population &lt;- sample(c(1, 0), 100000, replace=TRUE, prob = c(0.001,0.999))\n# Sample from the true population\nskewed.sample &lt;- mean.multiple.samples(100, 100000, skewed.population)\n\nggplot(data.frame(skewed.sample), aes(x=skewed.sample)) +\n  geom_density(color=\"darkblue\", fill=\"lightblue\") + \n  labs(x=\"Sample mean of those who can dunk with sample size = 100\", y=\"Count\")\n\n\n\nClass sampling exercise\n\nWe know that about 50% of students at DKU plan to or have selected a major in the natural sciences\n? % of students in our class plan to major in the natural sciences in our class\n\nIs our class unusually small?\n\nCheck conditions\n\nRandomization condition\n10% condition\nSuccess failure condition\n\n\n\n\nFind how far we are from the population mean\n\nPopulation standard deviation formula is:\n\n\\(\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\\)\n\\(\\hat{p}\\) is the proportion of yeses\n\\(n\\) is the sample size\n\nWe are calculating using the population sampling \\(SD\\) since we know it\n\nIf we don’t know the population sampling \\(SD\\) we have to use a different strategy, but not the case here\n\nKnowing the \\(SD\\), we can create a z score for the difference between our class and the population\n\nz score is how many \\(SD\\)s our class is from the population mean\n\n\\((class score - dkumean) / SD\\)\n\n\n\n\n\nNormal distribution percentages\n\n#| label: fig-normalpercentiles\n#| caption: \"Normal percentiles\"\nggplot(data.frame(normal.sampling.distribution), aes(x=normal.sampling.distribution)) + \n  geom_density(color=\"darkblue\", fill=\"lightblue\") +\n  scale_x_continuous(breaks=c(-3, -2, -1, 0, 1, 2, 3),\n                     label=c(\"~0.005\", \"~0.025\", \"~0.16\", \"0.5\", \"~0.84\", \"~0.95\", \"~0.995\"), \n                     limits=c(-3, 3),\n                     guide = guide_axis(n.dodge=2)) +\n  labs(x=\"Cumulative density\", y=\"Density\") +\n  theme(axis.text.x = element_text(face=\"bold\", size=10))\n\n\n\nCalculation for our class\n\n\\(\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\\)\n\\(\\hat{p}\\) is the proportion of yeses\n\\(n\\) is the sample size\n\\(\\frac{\\hat{p} - p}{SD(p)}\\)\n68-95-99.7 Rule: Values ?\\(SD\\) above the mean occur less than ?% of the time. Our class mean appears to be far/near from the population mean\n\nCalculate the how likely our result would be if our class is a random sample of DKU students.\n\n#| label: picker3\nsample(classroster$name, 1)"
-  },
-  {
-    "objectID": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#confidence-intervals-of-proportions",
-    "href": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#confidence-intervals-of-proportions",
-    "title": "Confidence Intervals - Proportions",
-    "section": "Confidence intervals of proportions",
-    "text": "Confidence intervals of proportions\n\nStandard errors for proportions\n\nWhat is the sampling distribution?\nUsually we do not know the population proportion \\(p\\).\nTherefore, we cannot find the standard deviation of the sampling distribution \\(\\frac{\\sqrt{p(1-p)}}{\\sqrt{n}}\\)\nAfter taking a sample, we only know the sample proportion, which we use as an approximation (called the standard error)\n\n\\(\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{n}}\\)\n\n\n\n\nExample: bedrooms\n\nDraw a random sample of 100 houses\n\n\n#| label: randomsample\n#| caption: \"Sampling for a confidence interval\"\nset.seed(4444444)\nsample.once &lt;- sample(kc.house$is.family.sized, 100, replace=TRUE)\n\np&lt;-round(mean(sample.once), digits=3)\n\np\n\n\n\\(\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{100}}\\)\nThe sampling distribution should be approximately normal\n\n\n\nWhat is a confidence interval?\n\nConfidence interval: a way to express the range of plausible values for the parameter (in this case, percent of homes with three bedrooms)\nWe never know the true value but we want to say something about how wide the range of possible values are\nWhat is a reasonable range?\n\nTraditionally, 95% (about two standard deviations) of the standard error distribution\nMean of our sample \\(\\pm\\) range of possible values we could get if we took additional samples\n\n\n\n\nExample: bedrooms\n\nOur mean: 0.87\nOur estimated sampling distribution standard error:\n\n\\(\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{100}}\\)\n\\(\\sqrt{\\frac{\\hat{0.87}(1-\\hat{0.87})}{100}}\\)\n\\(\\sqrt{\\frac{0.7569}{100}}\\)\n\\(\\sqrt{0.007569}\\)\n\\(0.087\\)\n\nA range of reasonable values if we sampled this again:\n\n\\(2\\times0.087\\)\n\\(0.87\\pm0.174\\)\n\n\nStatement: we are ~95% confident that this interval contains the true proportion of houses with three or more bedrooms in the population\n\n\nCritical values\n\nCritical values are the cutoff we use to determine what is ‘reasonable’\nDerived from the Normal model\nCan use any z-score as a cutoff\nCorresponding multiplier of the SE is called the critical value.\nNormal model for this interval, it is denoted \\(z^*\\).\nTo find, need to use computer, calculator, Normal probability table\n\n\n#| label: normpercents\nqnorm(c(0.025, 0.975))\n\n\n\nRecap\n\nMake sure conditions are met, then find level C confidence interval for \\(\\hat{p}\\), our population mean estimate\nConfidence interval is defined as \\(\\hat{p}\\pm z^* \\times SE(\\hat{p})\\)\n\\(SE(\\hat{p})\\) estimated by \\(\\frac{\\sqrt{\\hat{p}(1-\\hat{p})}}{\\sqrt{n}}\\)\n\\(z^*\\) specifies number of SEs needed for C% of random samples to yield confidence intervals that capture the true parameter\n\n\n\nWhat you cannot say about \\(p\\) from the sample\n\n“0.87 of all houses in King County have at least three bedrooms.”\n\n\nNo. Observations vary. Another sample would yield a different sample proportion.\n\n\n“It is probably true that 0.87 of all houses in King County have at least three bedrooms.”\n\n\nNo again. In fact, even if we didn’t know the true proportion, we’d know that it’s probably not 0.87.\n\n\n\nWhat you cannot say about \\(p\\) from the sample\n\n“We don’t know exactly what proportion of houses in King County have at least three bedrooms, but we know that it’s within the interval \\(0.87\\pm2\\times0.087\\).”\n\n\n\nNo but getting closer. We don’t know this for sure.\n\n\n“We don’t know exactly what proportion of houses in King County have at least three bedrooms, but the interval from 0.696 to 1.044 probably contains the true proportion.”\n\n\nRight but can be more precise. We should specify how confident we are not just say probably\n\n\n\nWhat you can say about \\(p\\) from the sample\n\n“We are 95% confident that between 0.696 and 1.044 of houses in King County have at least three bedrooms.”\n\n\nStatements like these are called confidence intervals. They’re the best we can do.\n\n\n\nNaming the confidence interval\n\nThis confidence interval is a one-proportion z-interval.\n\n“One” since there is a single mean being calculated.\n“Proportion” since we are interested in the proportion of the population.\n“z-interval” since the distance of the interval relies on a normal sampling distribution model."
-  },
-  {
-    "objectID": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#interpreting-confidence-intervals",
-    "href": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#interpreting-confidence-intervals",
-    "title": "Confidence Intervals - Proportions",
-    "section": "Interpreting confidence intervals",
-    "text": "Interpreting confidence intervals\n\nCapturing a proportion\n\nThe confidence interval may or may not contain the true population proportion.\nConsider repeating the study over an over again, each time with the same sample size.\nEach time we would get a different \\(\\hat{p}\\)\nFrom each \\(\\hat{p}\\), a different confidence interval could be computed.\nAbout 95% of these confidence intervals will capture the true proportion.\n5% will be duds.\n\n\n\nRandom matters - confidence intervals\n\nThere are a huge number of confidence intervals that could be drawn.\nIn theory, all the confidence intervals could be listed.\n\n95% will “work” (capture the true proportion).\n5% will be “duds” (not capture the true proportion).\n\nWhat about our confidence interval (0.696, 1.044)?\n\nIn this case, we can find out the true value\nMost of the time we never know\n\n\n\n#| label: meanfamily\n#| caption: \"Dataset percentage of family-sized apartments (true p)\"\nmean(kc.house$is.family.sized)\n\n\n\nRandom matters - confidence intervals\n\n\n\n100 samples CI"
-  },
-  {
-    "objectID": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#margin-of-error-certainty-vs.-precision",
-    "href": "lectures/Lecture 3.1 - Confidence Intervals - Proportions.html#margin-of-error-certainty-vs.-precision",
-    "title": "Confidence Intervals - Proportions",
-    "section": "Margin of error: certainty vs. precision",
-    "text": "Margin of error: certainty vs. precision\n\nMargin of error\n\nConfidence interval for a population proportion: \\(\\hat{p} \\pm 2\\times SE(\\hat{p})\\)\nThe distance, \\(~2\\times SE(\\hat{p})\\), from \\(\\hat{p}\\) is called the margin of error\nConfidence intervals can be applied to many statistics, not just means. Regression slopes and other quantities can also have confidence intervals.\n\nIn general, a confidence interval has the form estimate \\(\\pm\\) margin of error\n\n\n\n\nCertainty vs. precision\n\nCompeting goals\n\nMore certainty, need to capture \\(p\\) more often, need to make the interval wider.\nMore precise, need to provider tighter bounds on our estimate for \\(p\\), need to make the interval narrower\n\nInstead of a 95% confidence interval, any percent can be used.\n\nIncreasing the confidence (e.g. 99%) increases the margin of error.\n\nNeed to make our range wider to make sure we don’t ‘miss’\n\nDecreasing the confidence (e.g. 90%) decreases the margin of error.\n\nNeed to make our range smaller so as to be more specific about our guess\n\n\n\n\n\nWhat sample size?\n\nCan increase both certainty and precision by increasing sample size\nFor 95%, \\(z^*\\) = 1.96\nValues that make ME largest are \\(\\hat{p}=0.5\\)\nIf we want to ensure, say, a margin of error of \\(&lt;3%\\)\n\n\\(ME = z\\times \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}\\)\n\\(0.03 = 1.96\\times \\sqrt{\\frac{(0.5)(0.5)}{n}}\\)\n\nSolving for \\(n\\), gives \\(n\\approx1067.1\\)\nWe need to survey at least 1068 to ensure a ME less than 0.03 for the 95% confidence interval.\n\n\n\nThoughts on sample size and ME\n\nObtaining a large sample size can be expensive and/or take a long time.\nFor a pilot study, \\(ME = 10%\\) can be acceptable.\nFor full studies, \\(ME &lt; 5%\\) is better.\nPublic opinion polls typically use \\(ME = 3%\\), \\(n = 1000\\)\nIf \\(p\\) is expected to be very small such as 0.005, then much smaller ME such as 0.1% is required.\n\nCommon in medical studies"
-  },
-  {
-    "objectID": "lectures/Lecture 2.4 - Multiple Regression.html",
-    "href": "lectures/Lecture 2.4 - Multiple Regression.html",
-    "title": "Multiple Regression",
-    "section": "",
-    "text": "#| label: setup\n#| autorun: true\n#| include: false\ntheme_set(theme_classic())\nset.seed(20251107)\n\nkc.housing &lt;- read.csv(\"king.county.sales.recent.csv\")\nwages &lt;- read.csv(\"us.dol.wages.csv\")\nclassroster &lt;- read.csv(\"classroster.csv\", fileEncoding=\"UTF-8-BOM\")\noptions(scipen=999)\n\nmod &lt;- lm(data=kc.housing, sale_price ~ sqft + grade)\nkc.housing.aug &lt;- augment(mod, kc.housing)"
-  },
-  {
-    "objectID": "lectures/Lecture 2.4 - Multiple Regression.html#basic-multiple-regression-interpretation",
-    "href": "lectures/Lecture 2.4 - Multiple Regression.html#basic-multiple-regression-interpretation",
-    "title": "Multiple Regression",
-    "section": "Basic multiple regression interpretation",
-    "text": "Basic multiple regression interpretation\n\nHouse prices\n\n#| label: livingpricemod\n#| caption: \"Price model with sqft\"\nsummary(lm(data=kc.housing, sale_price ~ sqft), digits=3)\n\n\n\nWhen linear regression is not enough\n\n\\(R^2 = 0.278%\\) for sqft and sale_price\n27.8% of the variation in Price is accounted for\nWhat about the other 72%?\nCould include other lurking variables such as size of the lot a house is on - more land, higher cost right?\nA regression with two or more predictor variables is called a multiple regression.\n\n\n\nWhat is multiple regression?\n\nFor a simple regression, with one independent variable, the least squares line makes residuals as small as possible.\nFor multiple regression, the regression equation still makes the residuals as small as possible.\nNo longer trying to create a line though – instead a multidimensional hyperplane!\nCalculations difficult.\n\n\n\nCheck grade and sale_price\n\n#| label: gradepricemod\n#| caption: \"Price model with grade\"\nsummary(lm(data=kc.housing, sale_price ~ grade), digits=3)\n\nWhat do you think will happen to the coefficient on grade when we add sqft?\n\n#| label: picker1\nsample(classroster$name, 1)\n\n\n\nAdding both terms\n\n#| label: combinedmod\n#| caption: \"Price model with two predictors\"\nsummary(lm(data=kc.housing, sale_price ~ sqft + grade), digits=3)\n\n\n\nThe results\n\n\\(R^2=0.3051\\)\n\\(s_e=696500\\)\nCoefficient:\n\n\\(price = -872678 + 329.513sqft\\_livingspace + 177278grade\\)\n\n\nHow would you interpret this model and the diagnostic statistics?\n\n#| label: picker2\nsample(classroster$name, 1)\n\n\n\nFurther investigation\n\n#| label: livingvsgrade\n#| caption: \"Graph of sqft vs. grade\"\nggplot(kc.housing, aes(x=grade, y=sqft)) +\n  geom_jitter() + \n  geom_smooth(method=\"lm\", se=FALSE) +\n  labs(x=\"Grade\", y=\"Sqft living space\") + \n  scale_x_continuous(labels = scales::comma) + \n  scale_y_continuous(labels = scales::comma)"
-  },
-  {
-    "objectID": "lectures/Lecture 2.4 - Multiple Regression.html#what-is-different-in-multiple-regression",
-    "href": "lectures/Lecture 2.4 - Multiple Regression.html#what-is-different-in-multiple-regression",
-    "title": "Multiple Regression",
-    "section": "What is different in multiple regression?",
-    "text": "What is different in multiple regression?\n\nMeaning of coefficients has changed in a subtle way.\nIs an extraordinarily versatile calculation, underlying many widely used statistics methods.\nOffers a glimpse into statistical models that use more than two quantitative variables.\nModels that use several variables can be a big step toward realistic and useful modeling of complex phenomena and relationships\n\n\nMultiple regression - coefficients\n\nCan’t assume coefficients will stay the same\nCoefficients change\nOften in unexpected ways\nEven changing signs\nBe alert for a change in value\nBe alert for a change in meaning\n\n\n\nMultiple regression model\n\nNo simple relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) in a multiple regression may be quite different from zero\nStrong two-variable relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) in a multiple regression to be almost zero\nStrong two-variable relationship between \\(y\\) and \\(x_j\\), yet \\(b_j\\) an be opposite in sign in a multiple regression\nEasy to extend the model with more predictors\nResiduals \\(e = y - \\hat{y}\\)"
-  },
-  {
-    "objectID": "lectures/Lecture 2.4 - Multiple Regression.html#assumptions",
-    "href": "lectures/Lecture 2.4 - Multiple Regression.html#assumptions",
-    "title": "Multiple Regression",
-    "section": "Assumptions",
-    "text": "Assumptions\n\nThree key assumptions\n\nLinearity assumption (straight enough condition)\nNo pattern in residuals (outliers, straight enough condition)\nEqual variance assumption (does the plot thicken?)\n\n\n\nLinearity assumption\n\nStraight Enough Condition\n\nWe must check the scatterplot for each of the predictor variables vs. the response variable\nDo not need the scatterplots to show any discernible slope, but should be reasonably straight\nCannot have bends, or other nonlinearity\nCan be easier to look at the plot of residuals\n\n\n\n#| label: straightenoughcheck\n#| caption: \"Straight enough?\"\nlivingsp &lt;- ggplot(kc.housing, aes(x=sqft, y=sale_price)) + \n  geom_point() +\n  geom_smooth(method=\"lm\", se=FALSE) +\n  labs(x=\"Sqft living space\", y=\"Price\") +\n  scale_x_continuous(labels = scales::comma) + \n  scale_y_continuous(labels = scales::comma) \n\ngrade &lt;- ggplot(kc.housing, aes(x=grade, y=sale_price)) +\n  geom_jitter() + \n  geom_smooth(method=\"lm\", se=FALSE) +\n  labs(x=\"Grade\", y=\"Price\") + \n  scale_x_continuous(labels = scales::comma) + \n  scale_y_continuous(labels = scales::comma) \n\ngrid.arrange(livingsp, grade)\n\n\n\nCheck the residual\n\nErrors have a distribution that is:\n\nUnimodal\nSymmetric\nWithout outliers\n\nLook at histogram of residuals\nAssumption is less important as sample size increases\n\n\n#| label: residdistcheck\n#| caption: \"Residual distribution check\"\nmod &lt;- lm(data=kc.housing, sale_price ~ sqft + grade)\nkc.housing.aug &lt;- augment(mod, kc.housing)\n\nggplot(kc.housing.aug, aes(x=.fitted)) + \n  geom_histogram(fill=\"blue4\") + \n  labs(x=\"Residuals\", y=\"Count\") +  \n  scale_x_continuous(labels = scales::comma)\n\n\n\nEqual variance assumption\n\nSame variability of the errors for all values of each predictor\nDoes the Plot Thicken? Condition: the spread around the line must be nearly constant.\nBe alert for “fan” shaped pattern\nOr other tendency for variability to grow or shrink in one part of the scatterplot\n\n\n#| label: residpatterncheck\n#| caption: \"Residual pattern check\"\nggplot(kc.housing.aug, aes(x=.fitted, y=.resid)) + \n  geom_point() + \n  geom_hline(yintercept=0, color=\"red\") +\n  labs(x=\"Fitted (predicted) values\", y=\"Residuals\") +  \n  scale_x_continuous(labels = scales::comma) + \n  scale_y_continuous(labels = scales::comma) \n\n\n\nDecision loop\n\nStraight Enough Condition: scatterplots of y-variable against each x-variable\n\nIf straight enough, fit multiple regression model\n\nHow were data collected? Random? Represent identifiable population? Time? check independence\nFind the residuals and predicted values.\nScatterplot of the residuals against predicted values: patternless, no bends, no thickening\nHistogram of residuals: unimodal, symmetric, without outliers\nIf conditions check out, interpret regression model, and make predictions."
-  },
-  {
-    "objectID": "lectures/Lecture 2.4 - Multiple Regression.html#partial-residual-plots",
-    "href": "lectures/Lecture 2.4 - Multiple Regression.html#partial-residual-plots",
-    "title": "Multiple Regression",
-    "section": "Partial residual plots",
-    "text": "Partial residual plots\nOne of the best ways to check the linearity condition is with a partial residual plot. This plot displays the relationship between the predictor variable and the response variable after removing all of the variance of the other variables in the explanatory variable.\n\nHow to check variables individually\n\nChecked overall equation for weirdness in residuals\nWhat about each individual variable’s contribution to the regression?\nPartial residual plot to the Rescue!\nLook at plot to judge whether its form is straight enough.\n\n\n\nPartial residual plots\n\n#| label: partialresidcheck\n#| caption: \"Partial residual plot check\"\neff1 &lt;- visreg(mod, \"sqft\", gg=TRUE) +\n  labs(x=\"Sqft living space\",  y=\"Price\") +\n  scale_x_continuous(labels = scales::comma) + \n  scale_y_continuous(labels = scales::comma) \n\neff2 &lt;- visreg(mod, \"grade\", gg=TRUE) + \n  labs(x=\"Grade\", y=\"Price\") +\n  scale_x_continuous(labels = scales::comma) + \n  scale_y_continuous(labels = scales::comma) \n\ngrid.arrange(eff1, eff2)\n\n\n\nMeaning of a partial residual plot\n\nLeast squares line fit to plot has slope equal to the coefficient the plot illustrates.\nResiduals are same as final residuals of multiple regression\n\nJudge strength of estimation of the plot’s coefficients\n\nOutliers seen the same as they would appear in a simple scatterplot\nDirection corresponds to the sign of multiple regression coefficient"
-  },
-  {
-    "objectID": "lectures/Lecture 2.4 - Multiple Regression.html#indicator-variables",
-    "href": "lectures/Lecture 2.4 - Multiple Regression.html#indicator-variables",
-    "title": "Multiple Regression",
-    "section": "Indicator variables",
-    "text": "Indicator variables\n\nWages\n\nIndicator variables are for when we want to include categorical variables in our regression\n\nIn a union vs. not in a union\nOften coded at 1=true 0=false, but that’s just convention, doesn’t really matter (remember, units don’t matter for regression)\n\nRegression equation\n\n\\(wages = b_0 + b_1exp + b_2union\\)\n\n\n\n\nWages\n\n#| label: wagesmod\n#| caption: \"Wages model\"\nsummary(lm(data=wages, wage ~ exp + factor(union)), digits=3)\n\n\n\nSlopes of lines\n\n#| label: wagesplot\n#| caption: \"Wages model plot\"\nggplot(wages, aes(x=exp, y=wage)) +\n  geom_point(aes(color=factor(union))) +\n  geom_abline(slope=8.2430, intercept=747.5634, color=\"#F8766D\") +\n  geom_abline(slope=8.2430, intercept=669.85, color=\"#00BFC4\") +\n  labs(x=\"Years experience\", y=\"Wage in dollars\", color=\"Union member?\")\n\n\n\nPredict some values\n\nEquation: \\(wages = 747.5634 + 8.2430exp + -77.7134union\\)\n\n\n#| label: predictedwages\n#| caption: \"Predicted wages table\"\nexp.table &lt;- c(\"Experience\", \"5\", \"10\", \"15\", \"20\")\nin.union &lt;- c(\"In union\", \" \", \" \", \" \", \" \")\nnot.union &lt;- c(\"Not in union\", \" \", \" \", \" \", \" \")\n\ndf &lt;- NULL\n\ndf &lt;- rbind(df, exp.table)\ndf &lt;- rbind(df, in.union)\ndf &lt;- rbind(df, not.union)\n\nkable(df, row.names=FALSE) %&gt;% \n  kable_styling()\n\n\n#| label: picker3\nsample(classroster$name, 1)"
-  },
-  {
-    "objectID": "lectures/Lecture 2.4 - Multiple Regression.html#interaction-terms",
-    "href": "lectures/Lecture 2.4 - Multiple Regression.html#interaction-terms",
-    "title": "Multiple Regression",
-    "section": "Interaction terms",
-    "text": "Interaction terms\n\nInteraction effects\n\nWhat if lines are not roughly parallel?\nIndicator variable that is 0 or 1 shifts line up or down.\n\nCan’t change slope\nWorks only when same slope just different intercepts\n\n\n\n\nAdjusting for different slopes\n\nIntroduce another constructed variable\nThe one is the product of an indicator variable and the predictor variable\nCoefficient of this constructed interaction term gives adjustment to slope, \\(b_1\\), to be made for the individuals in the indicated group.\n\n\n\nAdjusting for different slopes\n\n#| label: wagesinteractmodel\n#| caption: \"Wages model with interaction\"\nsummary(lm(data=wages, wage ~ exp + factor(union) + factor(union) * exp, digits=3))\n\n\n\nDifferent slopes for wages\n\n#| label: wagesinteractplot\n#| caption: \"Wages model plot with interaction\"\nggplot(wages, aes(x=exp, y=wage, color=factor(union))) +\n  geom_point() +\n  geom_smooth(method=\"lm\", se=FALSE) +\n  labs(x=\"Years experience\", y=\"Wage in dollars\", color=\"Union member?\")\n\n\n\nPredict some values\n\nEquation: \\(wages = 710.7896 + 10.1421exp + 28.9884union + -5.2755union*exp\\)\n\n\n#| label: predictedwagesinteract\n#| caption: \"Predicted wages table with interaction\"\nexp.table &lt;- c(\"Experience\", \"5\", \"10\", \"15\", \"20\")\nin.union &lt;- c(\"In union\", \" \", \" \", \" \", \" \")\nnot.union &lt;- c(\"Not in union\", \" \", \" \", \" \", \" \")\n\ndf &lt;- NULL\n\ndf &lt;- rbind(df,exp.table)\ndf &lt;- rbind(df, in.union)\ndf &lt;- rbind(df, not.union)\n\nkable(df, row.names=FALSE) %&gt;% \n  kable_styling()\n\n\n#| label: picker4\nsample(classroster$name, 1)"
-  },
-  {
-    "objectID": "lectures/Lecture 2.4 - Multiple Regression.html#footnotes",
-    "href": "lectures/Lecture 2.4 - Multiple Regression.html#footnotes",
-    "title": "Multiple Regression",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nCredit to: https://crosscut.com/opinion/2020/11/washington-state-housing-question-and-answer↩︎"
-  },
-  {
-    "objectID": "lectures/lecture.3.2.html#house-price-revisited",
-    "href": "lectures/lecture.3.2.html#house-price-revisited",
-    "title": "Lecture 3.2 - Confidence intervals - means",
-    "section": "House price revisited",
-    "text": "House price revisited\n\nPrices in King County Houses:\n\n21937 houses\nHighly right skewed\nCan define this as the entire population\nPrices are quantitative\n\n\n\nHouse price graph\n\n\n\n\n\n\n\n\n\n\nDistribution\n\nDistribution:\n\nMin: 75000\nQ1: 685000\nMed: 906000\nQ3: 1355000\nMax: 23000000\nMean: 1152092\nSD: 835505\n\nHighly right skewed\nSD almost as large as the median\nIf a distribution looks like this, what do you think the sampling distribution will look like when n=25? How about when n=200?"
-  },
-  {
-    "objectID": "lectures/lecture.3.2.html#the-central-limit-theorem",
-    "href": "lectures/lecture.3.2.html#the-central-limit-theorem",
-    "title": "Lecture 3.2 - Confidence intervals - means",
-    "section": "The central limit theorem",
-    "text": "The central limit theorem\n\nThe Central Limit Theorem\n\nThe sampling distribution of any mean becomes nearly Normal as the sample size grows.\n\nRequirements\n\nObservations independent\nRandomly collected sample\n\nThe sampling distribution of the means is close to Normal if either:\n\nLarge sample size\nPopulation close to Normal\n\n\n\nSamples = 100, nn = 200\n\n\n\n\n\n\n\n\n\n\nSamples = 1000, nn = 200\n\n\n\n\n\n\n\n\n\n\nSamples = 100000, nn = 200"
-  },
-  {
-    "objectID": "lectures/lecture.3.2.html#sampling-distribution-shape",
-    "href": "lectures/lecture.3.2.html#sampling-distribution-shape",
-    "title": "Lecture 3.2 - Confidence intervals - means",
-    "section": "Sampling distribution shape",
-    "text": "Sampling distribution shape\n\nAs number of samples taken goes to infinity, shape of the sampling distribution becomes more clearly normally shaped\nDoesn’t matter the shape of the underlying distribution except for a very few exceptions\nHow about holding samples fixed and changing nn in our sample of a skewed distribution?\n\n\nnn = 10\n\n\n\n\n\n\n\n\n\n\nnn = 25\n\n\n\n\n\n\n\n\n\n\nnn = 50\n\n\n\n\n\n\n\n\n\n\nnn = 100\n\n\n\n\n\n\n\n\n\n\nCentral limit theorem formally\n\nWhen a random sample is drawn from any population with mean μ\\mu and standard deviation σ\\sigma, its sample mean, y‾\\bar{y}, has a sampling distribution with the same mean but whose standard deviation is σn\\frac{\\sigma}{\\sqrt{n}} and we write σ(y‾)=SD(y‾)=σn\\sigma(\\bar{y})=SD(\\bar{y})=\\frac{\\sigma}{\\sqrt{n}}\nNo matter what population the random sample comes from, the shape of the sampling distribution is approximately Normal as long as the sample size is large enough.\nThe larger the sample used, the more closely the Normal approximates the sampling distribution for the mean.\nPractically, nn does not have to be very large for this to work in most cases\n\n\n\nPractical issue with finding the sampling distribution sd\n\nWe almost never know σ\\sigma\nNatural thing is to use sdsamplê\\hat{sd_{sample}}\nWith this, we can estimate the sampling distribution SD with SE:\n\nSE(y‾)=snSE(\\bar{y})=\\frac{s}{\\sqrt{n}}\n\nThis formula works well for large samples, not so much for small\n\nProblem: too much variation in the sample SD from sample to sample\n\nFor smaller nn, need to turn to Gosset and a new family of models depending on sample size"
-  },
-  {
-    "objectID": "lectures/lecture.3.2.html#a-confidence-interval-for-the-mean",
-    "href": "lectures/lecture.3.2.html#a-confidence-interval-for-the-mean",
-    "title": "Lecture 3.2 - Confidence intervals - means",
-    "section": "A confidence interval for the mean",
-    "text": "A confidence interval for the mean\n\nGosset the brewer\n\n\n\nGuiness\n\n\n\n\nGosset\n\n\n\nGosset\n\n\n\n\nWhat Gosset discovered\n\nAt Guinness, Gosset experimented with beer.\nThe Normal Model was not right, especially for small samples.\nStill bell shaped, but details differed, depending on nn\nCame up with the “Student’s tt Distribution” as the correct model\n\n\n\nA practical sampling distribution model\n\nWhen certain assumptions and conditions are met, the standardized sample mean is:\n\nt=y‾−μSE(y‾)t=\\frac{\\bar{y}-\\mu}{SE(\\bar{y})}\n\nThe t score indicates that the result should be interpreted by a Student’s tt model with n−1n-1 degrees of freedom\nWe can estimate the standard deviation of the sampling distribution by:\n\nSE(y‾)=snSE(\\bar{y}) = \\frac{s}{\\sqrt{n}}\n\n\nDegrees of freedom\n\nFor every sample size nn, there is a different Student’s tt distribution\nDegrees of freedom: df=n−1df=n-1\nSimilar to the n−1n-1 calculation for sample standard deviation\nReason for this is a bit complicated, at this point can just remember to specify tt distribution with n−1n-1\n\n\n\nStudent’s tt\n\n\n\nStudent’s t\n\n\n\n\nOne sample tt interval for the mean\n\nWhen the assumptions are met, the confidence interval for the mean is:\n\ny‾±tn−1×SE(y‾)\\bar{y} \\pm t_{n-1}\\times SE(\\bar{y})\n\nThe critical value, tn−1*t^*_{n-1}, depends on the confidence interval, CC, and the degrees of freedom n−1n-1\n\n\n\nExample: A one sample tt interval for the mean\n\nPrice from one sample in King County\n\n\n\n\n\n\n\n\n\n\n\nAverage house price\n\ny‾±t19*×SE(y‾)\\bar{y}\\pm t^*_{19} \\times SE(\\bar{y})\n1118400±2.09×SE(789011(20))1118400\\pm 2.09 \\times SE(\\frac{789011}{\\sqrt{(20)}})\n1118400±2.09×176428.331118400\\pm 2.09 \\times 176428.33\n[739538−1497262][739538 - 1497262]\n\nWhat is the right way to talk about this confidence interval?\n\n\n\n\n\n\n\n\n\n\nThoughts about zz and tt\n\nThe Student’s t distribution:\n\nIs unimodal.\nIs symmetric about its mean.\nBell-shaped\n\nSamller values of dfdf have longer tails and larger standard deviation than the Normal.\nAs dfdf increase, look more and more like Normal.\nIs needed because we are using s as an estimate for σ\\sigma\nIf you happen to know σ\\sigma, which almost never happens, use the Normal model and not Student’s tt\nAs nn becomes larger, still safe to use the tt distribution because it basically turns into the normal distribution\n\n\n\nAssumptions and conditions\n\nIndependence Assumption\n\nData values should be mutually independent\nExample: weighing yourself every day\n\nRandomization Condition: The data should arise from a random sample or suitably randomized experiment.\n\nData from SRS almost surely independent\nIf doesn’t satisfy Randomization Condition, think about whether values are independent and whether sample is representative of the population.\n\n\n\n\nAssumptions and conditions\n\nNormal Population Assumption\n\nNearly Normal Condition: Distribution is unimodal and symmetric.\nCheck with a histogram.\nn&lt;15n &lt; 15: data should follow a normal model closely. If outliers or strong skewness, don’t use tt-methods\n15&lt;n&lt;4015 &lt; n &lt; 40: tt-methods work well as long as data are unimodal and reasonably symmetric.\nn&gt;40n &gt; 40: tt-methods are safe as long as data are not extremely skewed.\nSimilar to the rule for proportions that must have somewhat even distribution of yeses and noes\n\n\n\n\nExample: Checking Assumptions and Conditions for Student’s tt\n\nPrice of housing in King County\n\nIndependence Assumption: Yes\nNearly Normal Condition: No"
-  },
-  {
-    "objectID": "lectures/lecture.3.2.html#interpreting-confidence-intervals",
-    "href": "lectures/lecture.3.2.html#interpreting-confidence-intervals",
-    "title": "Lecture 3.2 - Confidence intervals - means",
-    "section": "Interpreting confidence intervals",
-    "text": "Interpreting confidence intervals\n\nWhat not to say\nDon’t say:\n\n“95% of the price of houses in King County is between $739538 and $1497262.”\n\nThe CI is about the mean price, not about the individual houses.\n\n“We are 95% confident that a randomly selected house price will be between $739538 and $1497262.”\n\nAgain, we are concerned here with the mean, not individual houses\n\n\n\n\nWhat not to say continued\nDon’t Say\n\n“The mean price is $1118400 95% of the time.”\n\nThe population mean never changes. Only sample means vary from sample to sample.\n\n“95% of all samples will have a mean price between $739538 and $1497262.”\n\nThis interval does not set the standard for all other intervals. This interval is no more likely to be correct than any other.\n\n\n\n\nWhat you should say\nDo Say\n\n“I am 95% confident that the true mean price is between $739538 and $1497262.”\n\nTechnically: “95% of all random samples will produce intervals that cover the true value.”\n\n\nThe first statement is more personal and less technical."
-  },
-  {
-    "objectID": "lectures/lecture.3.2.html#bootstrapping",
-    "href": "lectures/lecture.3.2.html#bootstrapping",
-    "title": "Lecture 3.2 - Confidence intervals - means",
-    "section": "Bootstrapping",
-    "text": "Bootstrapping\n\nPicking our interval up by our bootstraps\n\n\n\n\n\n\n\n\n\n\nKeep in mind\n\nThe confidence interval (unlike the sampling distribution) is centered at y‾\\bar{y} rather than at μ\\mu.\nWe need to know how far to reach out from y‾\\bar{y}, so we need to estimate the population standard deviation. Estimating σ\\sigma means we need to refer to Student’s tt-models.\nUsing Student’s tt-requires the assumption that the underlying data follow a Normal model.\n\nPractically, we need to check that the data distribution of our sample is at least unimodal and reasonably symmetric, with no outliers for n&lt;100n&lt;100.\n\n\n\n\nBootstrapping\nProcess:\n\nWe have a random sample, representative of population.\nMake copies and build a pseudo-population\nSample repeatedly from this population\nFind means\nMake a histogram\nObserve how means are distributed and how much they vary\n\n\n\nBootstrapping\n\n\n\n\n\n\n\n\nHow will this bootstrapping confidence interval compare to the confidence interval calculated by classical means?"
-  },
-  {
-    "objectID": "lectures/lecture.3.2.html#thoughts-about-confidence-intervals",
-    "href": "lectures/lecture.3.2.html#thoughts-about-confidence-intervals",
-    "title": "Lecture 3.2 - Confidence intervals - means",
-    "section": "Thoughts about confidence intervals",
-    "text": "Thoughts about confidence intervals\n\nConfidence intervals - what’s important\n\nIt’s not their precision.\nOur specific confidence interval is random by nature\nChanges with the sample\nImportant to know how they are constructed\nNeed to check assumptions and conditions\nContains our best guess of the mean\nAnd how precise we think that guess is"
   }
 ]

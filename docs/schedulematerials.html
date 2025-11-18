@@ -39,9 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-35fd0a5f43bb2600a33a7e8521cd9424.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,8 +67,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -102,9 +98,10 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -155,7 +152,56 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#unit-1-distributions" id="toc-unit-1-distributions" class="nav-link active" data-scroll-target="#unit-1-distributions">Unit 1: Distributions</a>
+  <ul class="collapse">
+  <li><a href="#lecture-1.1-class-welcome-thursday-october-23" id="toc-lecture-1.1-class-welcome-thursday-october-23" class="nav-link" data-scroll-target="#lecture-1.1-class-welcome-thursday-october-23">Lecture 1.1: Class welcome (Thursday, October 23)</a></li>
+  <li><a href="#lab-1.1-r-and-quarto-familiarization-thursday-october-23" id="toc-lab-1.1-r-and-quarto-familiarization-thursday-october-23" class="nav-link" data-scroll-target="#lab-1.1-r-and-quarto-familiarization-thursday-october-23">Lab 1.1: R and Quarto familiarization (Thursday, October 23)</a></li>
+  <li><a href="#online-lab-1.1-due-sunday-october-26-at-115900-pm" id="toc-online-lab-1.1-due-sunday-october-26-at-115900-pm" class="nav-link" data-scroll-target="#online-lab-1.1-due-sunday-october-26-at-115900-pm">Online lab 1.1 (due Sunday, October 26 at 11:59:00 pm)</a></li>
+  <li><a href="#lecture-1.2-characteristics-of-distributions-tuesday-october-28" id="toc-lecture-1.2-characteristics-of-distributions-tuesday-october-28" class="nav-link" data-scroll-target="#lecture-1.2-characteristics-of-distributions-tuesday-october-28">Lecture 1.2: Characteristics of distributions (Tuesday, October 28)</a></li>
+  <li><a href="#lecture-1.3-comparing-distributions-and-the-normal-distribution-thursday-october-30" id="toc-lecture-1.3-comparing-distributions-and-the-normal-distribution-thursday-october-30" class="nav-link" data-scroll-target="#lecture-1.3-comparing-distributions-and-the-normal-distribution-thursday-october-30">Lecture 1.3: Comparing distributions and the Normal distribution (Thursday, October 30)</a></li>
+  <li><a href="#lab-1.2-advanced-quarto-editing-thursday-october-30" id="toc-lab-1.2-advanced-quarto-editing-thursday-october-30" class="nav-link" data-scroll-target="#lab-1.2-advanced-quarto-editing-thursday-october-30">Lab 1.2: Advanced Quarto editing (Thursday, October 30)</a></li>
+  <li><a href="#unit-1-homework---progress-check-due-thursday-october-30-at-235900" id="toc-unit-1-homework---progress-check-due-thursday-october-30-at-235900" class="nav-link" data-scroll-target="#unit-1-homework---progress-check-due-thursday-october-30-at-235900">Unit 1 homework - progress check (due Thursday, October 30 at 23:59:00)</a></li>
+  <li><a href="#online-lab-1.2-due-on-friday-october-31-at-235900" id="toc-online-lab-1.2-due-on-friday-october-31-at-235900" class="nav-link" data-scroll-target="#online-lab-1.2-due-on-friday-october-31-at-235900">Online lab 1.2 (due on Friday, October 31 at 23:59:00)</a></li>
+  <li><a href="#unit-1-homework-due-sunday-november-2-at-235900-pm" id="toc-unit-1-homework-due-sunday-november-2-at-235900-pm" class="nav-link" data-scroll-target="#unit-1-homework-due-sunday-november-2-at-235900-pm">Unit 1 homework (due Sunday, November 2 at 23:59:00 pm)</a></li>
+  </ul></li>
+  <li><a href="#unit-2-relationships-between-variables" id="toc-unit-2-relationships-between-variables" class="nav-link" data-scroll-target="#unit-2-relationships-between-variables">Unit 2: Relationships between variables</a>
+  <ul class="collapse">
+  <li><a href="#lecture-2.1-association-and-correlation-tuesday-november-4" id="toc-lecture-2.1-association-and-correlation-tuesday-november-4" class="nav-link" data-scroll-target="#lecture-2.1-association-and-correlation-tuesday-november-4">Lecture 2.1: Association and correlation (Tuesday, November 4)</a></li>
+  <li><a href="#lecture-2.2-simple-linear-regression-thursday-november-6" id="toc-lecture-2.2-simple-linear-regression-thursday-november-6" class="nav-link" data-scroll-target="#lecture-2.2-simple-linear-regression-thursday-november-6">Lecture 2.2: Simple Linear Regression (Thursday, November 6)</a></li>
+  <li><a href="#lab-2.1-working-with-regressions-using-dplyr-thursday-november-6" id="toc-lab-2.1-working-with-regressions-using-dplyr-thursday-november-6" class="nav-link" data-scroll-target="#lab-2.1-working-with-regressions-using-dplyr-thursday-november-6">Lab 2.1: Working with regressions using <code>dplyr</code> (Thursday, November 6)</a></li>
+  <li><a href="#lecture-2.3-regression-wisdom-friday-november-7" id="toc-lecture-2.3-regression-wisdom-friday-november-7" class="nav-link" data-scroll-target="#lecture-2.3-regression-wisdom-friday-november-7">Lecture 2.3: Regression Wisdom (Friday, November 7)</a></li>
+  <li><a href="#online-lab-2.2-due-on-friday-november-7-at-235900" id="toc-online-lab-2.2-due-on-friday-november-7-at-235900" class="nav-link" data-scroll-target="#online-lab-2.2-due-on-friday-november-7-at-235900">Online lab 2.2 (due on Friday, November 7 at 23:59:00)</a></li>
+  <li><a href="#unit-2-homework---progress-check-due-sunday-november-9-at-235900" id="toc-unit-2-homework---progress-check-due-sunday-november-9-at-235900" class="nav-link" data-scroll-target="#unit-2-homework---progress-check-due-sunday-november-9-at-235900">Unit 2 homework - progress check (due Sunday, November 9 at 23:59:00)</a></li>
+  <li><a href="#lecture-2.4-multiple-regression-tuesday-november-11" id="toc-lecture-2.4-multiple-regression-tuesday-november-11" class="nav-link" data-scroll-target="#lecture-2.4-multiple-regression-tuesday-november-11">Lecture 2.4: Multiple Regression (Tuesday, November 11)</a></li>
+  <li><a href="#unit-2-homework-due-sunday-november-16-at-115900" id="toc-unit-2-homework-due-sunday-november-16-at-115900" class="nav-link" data-scroll-target="#unit-2-homework-due-sunday-november-16-at-115900">Unit 2 homework (due Sunday, November 16 at 11:59:00)</a></li>
+  </ul></li>
+  <li><a href="#unit-3-measuring-uncertainty" id="toc-unit-3-measuring-uncertainty" class="nav-link" data-scroll-target="#unit-3-measuring-uncertainty">Unit 3: Measuring uncertainty</a>
+  <ul class="collapse">
+  <li><a href="#lecture-3.1-confidence-intervals---proportions-thursday-november-13" id="toc-lecture-3.1-confidence-intervals---proportions-thursday-november-13" class="nav-link" data-scroll-target="#lecture-3.1-confidence-intervals---proportions-thursday-november-13">Lecture 3.1: Confidence intervals - proportions (Thursday, November 13)</a></li>
+  <li><a href="#lab-2.2-interpreting-coefficients-thursday-november-13" id="toc-lab-2.2-interpreting-coefficients-thursday-november-13" class="nav-link" data-scroll-target="#lab-2.2-interpreting-coefficients-thursday-november-13">Lab 2.2: Interpreting coefficients (Thursday, November 13)</a></li>
+  <li><a href="#lecture-3.2-confidence-intervals---means-tuesday-november-18" id="toc-lecture-3.2-confidence-intervals---means-tuesday-november-18" class="nav-link" data-scroll-target="#lecture-3.2-confidence-intervals---means-tuesday-november-18">Lecture 3.2: Confidence intervals - means (Tuesday, November 18)</a></li>
+  <li><a href="#lecture-3.3-hypothesis-testing-thursday-november-20" id="toc-lecture-3.3-hypothesis-testing-thursday-november-20" class="nav-link" data-scroll-target="#lecture-3.3-hypothesis-testing-thursday-november-20">Lecture 3.3: Hypothesis testing (Thursday, November 20)</a></li>
+  <li><a href="#lab-3.1-bootstrapping-thursday-november-20" id="toc-lab-3.1-bootstrapping-thursday-november-20" class="nav-link" data-scroll-target="#lab-3.1-bootstrapping-thursday-november-20">Lab 3.1: Bootstrapping (Thursday, November 20)</a></li>
+  <li><a href="#lecture-3.4-hypothesis-testing-wisdom-tuesday-november-25" id="toc-lecture-3.4-hypothesis-testing-wisdom-tuesday-november-25" class="nav-link" data-scroll-target="#lecture-3.4-hypothesis-testing-wisdom-tuesday-november-25">Lecture 3.4: Hypothesis testing wisdom (Tuesday, November 25)</a></li>
+  <li><a href="#in-class-unit-3-exam-thursday-november-27-from-600-pm-to-715-pm" id="toc-in-class-unit-3-exam-thursday-november-27-from-600-pm-to-715-pm" class="nav-link" data-scroll-target="#in-class-unit-3-exam-thursday-november-27-from-600-pm-to-715-pm">In-class Unit 3 exam: Thursday, November 27 from 6:00 pm to 7:15 pm</a></li>
+  </ul></li>
+  <li><a href="#unit-4-statistical-inference" id="toc-unit-4-statistical-inference" class="nav-link" data-scroll-target="#unit-4-statistical-inference">Unit 4: Statistical inference</a>
+  <ul class="collapse">
+  <li><a href="#lecture-4.1-comparing-groups-thursday-november-27" id="toc-lecture-4.1-comparing-groups-thursday-november-27" class="nav-link" data-scroll-target="#lecture-4.1-comparing-groups-thursday-november-27">Lecture 4.1: Comparing groups (Thursday, November 27)</a></li>
+  <li><a href="#lecture-4.2-returning-to-regression-tuesday-december-2" id="toc-lecture-4.2-returning-to-regression-tuesday-december-2" class="nav-link" data-scroll-target="#lecture-4.2-returning-to-regression-tuesday-december-2">Lecture 4.2: Returning to regression (Tuesday, December 2)</a></li>
+  <li><a href="#final-class-4.3-interpretation-activity-thursday-december-4" id="toc-final-class-4.3-interpretation-activity-thursday-december-4" class="nav-link" data-scroll-target="#final-class-4.3-interpretation-activity-thursday-december-4">Final class 4.3: Interpretation activity (Thursday, December 4)</a></li>
+  <li><a href="#online-lab-4.1-due-on-friday-december-6-at-115900" id="toc-online-lab-4.1-due-on-friday-december-6-at-115900" class="nav-link" data-scroll-target="#online-lab-4.1-due-on-friday-december-6-at-115900">Online lab 4.1 (due on Friday, December 6 at 11:59:00)</a></li>
+  <li><a href="#final-project---progress-check-due-sunday-december-8-at-235900" id="toc-final-project---progress-check-due-sunday-december-8-at-235900" class="nav-link" data-scroll-target="#final-project---progress-check-due-sunday-december-8-at-235900">Final project - progress check (due Sunday, December 8 at 23:59:00)</a></li>
+  <li><a href="#final-project-due-wednesday-december-10-at-235900" id="toc-final-project-due-wednesday-december-10-at-235900" class="nav-link" data-scroll-target="#final-project-due-wednesday-december-10-at-235900">Final project (due Wednesday, December 10 at 23:59:00)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -390,8 +436,8 @@ window.Quarto = {
 <li><p>Confidence interval for means</p></li>
 <li><p>Interpreting a confidence interval</p></li>
 <li><p>Final thoughts on confidence intervals</p></li>
-<li><p>Lecture webpage: [Lecture 3.2]</p></li>
-<li><p>No lecture activity</p></li>
+<li><p>Lecture webpage: <a href="lectures/lecture.3.2.html">Lecture 3.2</a></p></li>
+<li><p>Lecture activity: <a href="activities/Lecture 3.2/lecture.3.2.activity.zip">Lecture 3.2 activity</a></p></li>
 </ul>
 </section>
 <section id="lecture-3.3-hypothesis-testing-thursday-november-20" class="level2">
@@ -492,35 +538,10 @@ window.Quarto = {
 </ul>
 
 
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
-<div id="exercise-loading-status" class="d-flex gap-2">
-
-</div>
-<div class="spinner-grow spinner-grow-sm">
-
-</div>
-</div>
-<script type="vfs-file">
-W10=
-</script>
 </section>
 </section>
 
 </main> <!-- /main -->
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<script type="module">
-if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../..";
-window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
