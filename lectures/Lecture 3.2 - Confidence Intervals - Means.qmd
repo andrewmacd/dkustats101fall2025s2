@@ -1,7 +1,7 @@
 ---
-title: "Lecture 3.2 - Confidence Intervals - Means"
+title: "Lecture 3.2 - Confidence intervals - means"
 author: "Professor MacDonald"
-date: "4/14/2025"
+date: "11/18/2025"
 format: 
     live-html: 
       output-file: lecture.3.2.html
@@ -17,8 +17,8 @@ webr:
     - gridExtra
     - kableExtra
   resources:
-    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2025s4/main/lectures/datasets/king.county.sales.recent.csv
-    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2025s4/main/lectures/datasets/classroster.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/king.county.sales.recent.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/classroster.csv
 ---
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}

@@ -950,5 +950,54 @@
     "title": "Multiple Regression",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nCredit to: https://crosscut.com/opinion/2020/11/washington-state-housing-question-and-answer↩︎"
+  },
+  {
+    "objectID": "lectures/lecture.3.2.html#house-price-revisited",
+    "href": "lectures/lecture.3.2.html#house-price-revisited",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "House price revisited",
+    "text": "House price revisited\n\nPrices in King County Houses:\n\n21937 houses\nHighly right skewed\nCan define this as the entire population\nPrices are quantitative\n\n\n\nHouse price graph\n\n\n\n\n\n\n\n\n\n\nDistribution\n\nDistribution:\n\nMin: 75000\nQ1: 685000\nMed: 906000\nQ3: 1355000\nMax: 23000000\nMean: 1152092\nSD: 835505\n\nHighly right skewed\nSD almost as large as the median\nIf a distribution looks like this, what do you think the sampling distribution will look like when n=25? How about when n=200?"
+  },
+  {
+    "objectID": "lectures/lecture.3.2.html#the-central-limit-theorem",
+    "href": "lectures/lecture.3.2.html#the-central-limit-theorem",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "The central limit theorem",
+    "text": "The central limit theorem\n\nThe Central Limit Theorem\n\nThe sampling distribution of any mean becomes nearly Normal as the sample size grows.\n\nRequirements\n\nObservations independent\nRandomly collected sample\n\nThe sampling distribution of the means is close to Normal if either:\n\nLarge sample size\nPopulation close to Normal\n\n\n\nSamples = 100, nn = 200\n\n\n\n\n\n\n\n\n\n\nSamples = 1000, nn = 200\n\n\n\n\n\n\n\n\n\n\nSamples = 100000, nn = 200"
+  },
+  {
+    "objectID": "lectures/lecture.3.2.html#sampling-distribution-shape",
+    "href": "lectures/lecture.3.2.html#sampling-distribution-shape",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "Sampling distribution shape",
+    "text": "Sampling distribution shape\n\nAs number of samples taken goes to infinity, shape of the sampling distribution becomes more clearly normally shaped\nDoesn’t matter the shape of the underlying distribution except for a very few exceptions\nHow about holding samples fixed and changing nn in our sample of a skewed distribution?\n\n\nnn = 10\n\n\n\n\n\n\n\n\n\n\nnn = 25\n\n\n\n\n\n\n\n\n\n\nnn = 50\n\n\n\n\n\n\n\n\n\n\nnn = 100\n\n\n\n\n\n\n\n\n\n\nCentral limit theorem formally\n\nWhen a random sample is drawn from any population with mean μ\\mu and standard deviation σ\\sigma, its sample mean, y‾\\bar{y}, has a sampling distribution with the same mean but whose standard deviation is σn\\frac{\\sigma}{\\sqrt{n}} and we write σ(y‾)=SD(y‾)=σn\\sigma(\\bar{y})=SD(\\bar{y})=\\frac{\\sigma}{\\sqrt{n}}\nNo matter what population the random sample comes from, the shape of the sampling distribution is approximately Normal as long as the sample size is large enough.\nThe larger the sample used, the more closely the Normal approximates the sampling distribution for the mean.\nPractically, nn does not have to be very large for this to work in most cases\n\n\n\nPractical issue with finding the sampling distribution sd\n\nWe almost never know σ\\sigma\nNatural thing is to use sdsamplê\\hat{sd_{sample}}\nWith this, we can estimate the sampling distribution SD with SE:\n\nSE(y‾)=snSE(\\bar{y})=\\frac{s}{\\sqrt{n}}\n\nThis formula works well for large samples, not so much for small\n\nProblem: too much variation in the sample SD from sample to sample\n\nFor smaller nn, need to turn to Gosset and a new family of models depending on sample size"
+  },
+  {
+    "objectID": "lectures/lecture.3.2.html#a-confidence-interval-for-the-mean",
+    "href": "lectures/lecture.3.2.html#a-confidence-interval-for-the-mean",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "A confidence interval for the mean",
+    "text": "A confidence interval for the mean\n\nGosset the brewer\n\n\n\nGuiness\n\n\n\n\nGosset\n\n\n\nGosset\n\n\n\n\nWhat Gosset discovered\n\nAt Guinness, Gosset experimented with beer.\nThe Normal Model was not right, especially for small samples.\nStill bell shaped, but details differed, depending on nn\nCame up with the “Student’s tt Distribution” as the correct model\n\n\n\nA practical sampling distribution model\n\nWhen certain assumptions and conditions are met, the standardized sample mean is:\n\nt=y‾−μSE(y‾)t=\\frac{\\bar{y}-\\mu}{SE(\\bar{y})}\n\nThe t score indicates that the result should be interpreted by a Student’s tt model with n−1n-1 degrees of freedom\nWe can estimate the standard deviation of the sampling distribution by:\n\nSE(y‾)=snSE(\\bar{y}) = \\frac{s}{\\sqrt{n}}\n\n\nDegrees of freedom\n\nFor every sample size nn, there is a different Student’s tt distribution\nDegrees of freedom: df=n−1df=n-1\nSimilar to the n−1n-1 calculation for sample standard deviation\nReason for this is a bit complicated, at this point can just remember to specify tt distribution with n−1n-1\n\n\n\nStudent’s tt\n\n\n\nStudent’s t\n\n\n\n\nOne sample tt interval for the mean\n\nWhen the assumptions are met, the confidence interval for the mean is:\n\ny‾±tn−1×SE(y‾)\\bar{y} \\pm t_{n-1}\\times SE(\\bar{y})\n\nThe critical value, tn−1*t^*_{n-1}, depends on the confidence interval, CC, and the degrees of freedom n−1n-1\n\n\n\nExample: A one sample tt interval for the mean\n\nPrice from one sample in King County\n\n\n\n\n\n\n\n\n\n\n\nAverage house price\n\ny‾±t19*×SE(y‾)\\bar{y}\\pm t^*_{19} \\times SE(\\bar{y})\n1118400±2.09×SE(789011(20))1118400\\pm 2.09 \\times SE(\\frac{789011}{\\sqrt{(20)}})\n1118400±2.09×176428.331118400\\pm 2.09 \\times 176428.33\n[739538−1497262][739538 - 1497262]\n\nWhat is the right way to talk about this confidence interval?\n\n\n\n\n\n\n\n\n\n\nThoughts about zz and tt\n\nThe Student’s t distribution:\n\nIs unimodal.\nIs symmetric about its mean.\nBell-shaped\n\nSamller values of dfdf have longer tails and larger standard deviation than the Normal.\nAs dfdf increase, look more and more like Normal.\nIs needed because we are using s as an estimate for σ\\sigma\nIf you happen to know σ\\sigma, which almost never happens, use the Normal model and not Student’s tt\nAs nn becomes larger, still safe to use the tt distribution because it basically turns into the normal distribution\n\n\n\nAssumptions and conditions\n\nIndependence Assumption\n\nData values should be mutually independent\nExample: weighing yourself every day\n\nRandomization Condition: The data should arise from a random sample or suitably randomized experiment.\n\nData from SRS almost surely independent\nIf doesn’t satisfy Randomization Condition, think about whether values are independent and whether sample is representative of the population.\n\n\n\n\nAssumptions and conditions\n\nNormal Population Assumption\n\nNearly Normal Condition: Distribution is unimodal and symmetric.\nCheck with a histogram.\nn&lt;15n &lt; 15: data should follow a normal model closely. If outliers or strong skewness, don’t use tt-methods\n15&lt;n&lt;4015 &lt; n &lt; 40: tt-methods work well as long as data are unimodal and reasonably symmetric.\nn&gt;40n &gt; 40: tt-methods are safe as long as data are not extremely skewed.\nSimilar to the rule for proportions that must have somewhat even distribution of yeses and noes\n\n\n\n\nExample: Checking Assumptions and Conditions for Student’s tt\n\nPrice of housing in King County\n\nIndependence Assumption: Yes\nNearly Normal Condition: No"
+  },
+  {
+    "objectID": "lectures/lecture.3.2.html#interpreting-confidence-intervals",
+    "href": "lectures/lecture.3.2.html#interpreting-confidence-intervals",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "Interpreting confidence intervals",
+    "text": "Interpreting confidence intervals\n\nWhat not to say\nDon’t say:\n\n“95% of the price of houses in King County is between $739538 and $1497262.”\n\nThe CI is about the mean price, not about the individual houses.\n\n“We are 95% confident that a randomly selected house price will be between $739538 and $1497262.”\n\nAgain, we are concerned here with the mean, not individual houses\n\n\n\n\nWhat not to say continued\nDon’t Say\n\n“The mean price is $1118400 95% of the time.”\n\nThe population mean never changes. Only sample means vary from sample to sample.\n\n“95% of all samples will have a mean price between $739538 and $1497262.”\n\nThis interval does not set the standard for all other intervals. This interval is no more likely to be correct than any other.\n\n\n\n\nWhat you should say\nDo Say\n\n“I am 95% confident that the true mean price is between $739538 and $1497262.”\n\nTechnically: “95% of all random samples will produce intervals that cover the true value.”\n\n\nThe first statement is more personal and less technical."
+  },
+  {
+    "objectID": "lectures/lecture.3.2.html#bootstrapping",
+    "href": "lectures/lecture.3.2.html#bootstrapping",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "Bootstrapping",
+    "text": "Bootstrapping\n\nPicking our interval up by our bootstraps\n\n\n\n\n\n\n\n\n\n\nKeep in mind\n\nThe confidence interval (unlike the sampling distribution) is centered at y‾\\bar{y} rather than at μ\\mu.\nWe need to know how far to reach out from y‾\\bar{y}, so we need to estimate the population standard deviation. Estimating σ\\sigma means we need to refer to Student’s tt-models.\nUsing Student’s tt-requires the assumption that the underlying data follow a Normal model.\n\nPractically, we need to check that the data distribution of our sample is at least unimodal and reasonably symmetric, with no outliers for n&lt;100n&lt;100.\n\n\n\n\nBootstrapping\nProcess:\n\nWe have a random sample, representative of population.\nMake copies and build a pseudo-population\nSample repeatedly from this population\nFind means\nMake a histogram\nObserve how means are distributed and how much they vary\n\n\n\nBootstrapping\n\n\n\n\n\n\n\n\nHow will this bootstrapping confidence interval compare to the confidence interval calculated by classical means?"
+  },
+  {
+    "objectID": "lectures/lecture.3.2.html#thoughts-about-confidence-intervals",
+    "href": "lectures/lecture.3.2.html#thoughts-about-confidence-intervals",
+    "title": "Lecture 3.2 - Confidence intervals - means",
+    "section": "Thoughts about confidence intervals",
+    "text": "Thoughts about confidence intervals\n\nConfidence intervals - what’s important\n\nIt’s not their precision.\nOur specific confidence interval is random by nature\nChanges with the sample\nImportant to know how they are constructed\nNeed to check assumptions and conditions\nContains our best guess of the mean\nAnd how precise we think that guess is"
   }
 ]
