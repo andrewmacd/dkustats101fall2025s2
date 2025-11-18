@@ -1,0 +1,49 @@
+Q1
+
+Q2
+
+Q3
+
+Q4
+
+Overall
+
+-----
+
+Q1
+
+-2 Histogram in 1b is strange
+-2 Somehow you've gotten the wrong code to calculate home vs. away goals
+-2 Your results in 1a and 1b don't exactly match your discussion in 1d. Need to think more clearly about what your results mean.
+-1 1d could have a bit more thought put into it.
+-1 I don't think a histogram with two layers is probably the best way to view this data
+-1 In general, you should pick a plot type and focus on that plot rather than display a bunch of different plot types of the same thing
+-1 In general, you should pick a plot type and focus on that plot rather than display a bunch of different plot types of the same thing
+
+
+Q2 
+
+-3 I think you are mis-interpreting your results. The home teams had more fouls than the away teams in non-Covid matches - this is a very surprising result! Additionally, I would say that the difference in covid matches is so small as to be effectively a zero result, I don't think you should interpret that difference as being meaningful.
+-2 Need to relate the results in 2c to the hypothesis listed at the start of the question
+-2 The home teams had more fouls than the away teams in Covid matches - this is a very surprising result! You should comment on this.
+
+
+Q3
+
+-1 Table should be formatted/labeled a bit better
+-1 Explanations in 3d are ok but could be a little more thoughtful - it is a bit confusing.
+-2 Need to interpret the magnitude of the z score - do they indicate a large difference from the group mean or a small one?
+
+Q4
+
+-2 I don't really understand your question or why it is meaningful
+-2 4b conclusion needs to be more specific and thoughtful
+
+Overall
+
+-1 Document could be a little neater
+-2 Document needs some cleanup
+-2 Need to actually view/investigate outliers
+-1 Graphs need better labeling
+-1 Don't have your code showing unless specifically asked for
+-10 Need to submit a rendered PDF file not a .qmd document
