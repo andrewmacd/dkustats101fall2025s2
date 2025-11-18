@@ -223,6 +223,7 @@ Topics covered:
 -   Lecture webpage: [Lecture 3.2](lectures/lecture.3.2.html)
 
 -   Lecture activity: [Lecture 3.2 activity](activities/Lecture 3.2/lecture.3.2.activity.zip)
+    -   Sample solution: [Lecture 3.2 activity sample solution](activities/Lecture 3.2/lecture.3.2.activity.sample.solution.zip)
 
 ## Lecture 3.3: Hypothesis testing (Thursday, November 20)
 
