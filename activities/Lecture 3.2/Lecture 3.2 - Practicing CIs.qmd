@@ -1,0 +1,71 @@
+---
+title: "Lecture 3.2 - Practicing Confidence Intervals II"
+author: "Student"
+date: "11/18/2025"
+format:
+  pdf:
+    colorlinks: true
+---
+
+```{r}
+#| label: setup 
+#| include: false
+
+# put your setup code here
+```
+
+![](rental.jpeg){width=80% fig-align="center"}
+
+# Practicing Confidence Intervals
+
+## Setup
+
+Pretend you are a real estate agent interested in renting houses in one of the cities listed in the dataset. This dataset contains the rental prices of one large firm's rental property portfolio across several major U.S. cities.
+
+You can view the list of cities in the dataset by:
+
+```
+table(<your dataset name>$City)
+```
+
+1.  Go online and search for some information about the rental market in that city and write down some expectations about the rental prices.
+
+2.  Filter for only rentals in your chosen city using the following command:
+
+```
+rental.sample %>% <your dataset name>
+  filter(City=="<your chosen city>")
+```
+
+3.  Take a sample of this data of size 50 using the following command:
+
+```
+rental.sample <- rental.sample %>% 
+  slice_sample(n=50)
+``` 
+
+## Exploring the data
+
+4.  Make a histogram of the rental prices. Write a sentence about the distribution of rental prices in your sample. Do you think the data, based on your histogram, is suitable for a confidence interval? Why or why not?
+
+5.  Calculate the mean and standard deviation of rental prices in your sample. Then, using a calculator, create and interpret a 95% confidence interval for the mean rental price in your sample using the formula from the textbook.
+
+## Thinking about validity
+
+6.  Consider the conditions required for the confidence interval to be valid. Write a brief paragraph addressing each of the conditions and whether they are met.
+
+7.  Consider whether the mean accurately reflects the rental price. Write a brief paragraph describing why or why not the mean would be a useful prediction for the price you might pay for an apartment rent.
+
+## Going from your sample to the population
+
+8.  Now find the mean of price from the subset of all rentals from the city, not your sample. Does your confidence interval cover the dataset's mean for your chosen city? How close was your sample's standard deviation to the population standard deviation? About what percent of the time would you expect the confidence interval to cover the true population mean?
+
+9.  How useful would this confidence interval be, in your opinion, for an aspiring real estate agent in your city?
+
+10. An important statistical concept is called a [*sampling frame*](https://en.wikipedia.org/wiki/Sampling_frame). What is the sampling frame of this dataset? How does it limit the utility of the findings? Why might you be careful about generalizing your result based on your calculation here?
+
+## Expanding on your findings
+
+11. Create a regression model that you think would better predict rental price in your chosen city.
+-   Start with creating a regression model with no predictor variables using your sample data. Compare the standard error in the regression table to what you calculated by hand.
+-   Create a more expansive model based on your model-building skills
