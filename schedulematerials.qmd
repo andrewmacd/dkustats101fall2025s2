@@ -237,9 +237,9 @@ Topics covered:
 
 -   $p$ values and decisions -- how to make a decision
 
--   Lecture webpage: \[Lecture 3.3\]
+-   Lecture webpage: [Lecture 3.3](lectures/lecture.3.3.html)
 
--   Lecture activity: \[Lecture 3.3 activity\]
+-   Lecture activity: [Lecture 3.3 activity](activities/Lecture 3.3/lecture.3.3.activity.zip)
 
 ## Lab 3.1: Bootstrapping (Thursday, November 20)
 
