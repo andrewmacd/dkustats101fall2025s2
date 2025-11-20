@@ -1,0 +1,181 @@
+---
+title: "Lecture 3.3 - Practicing hypotheses tests"
+author: "Student"
+date: "11/20/2025"
+format:
+  pdf:
+    colorlinks: true
+---
+
+```{r}
+#| label: setup 
+#| include: false
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+students <- read.csv("student.drinking.cleaned.csv")
+```
+
+![](portugal.jpeg){width="100%"}
+
+# Hypothesis Testing
+
+## Setting Expectations
+
+Included is a dataset regarding student drinking habits and other student characteristics from a 2008 survey of Portugese high school students.
+
+Some basic facts about Europe:
+
+-   According to a paper titled, “Youth Drinking Rates and Problems: A Comparison of European Countries and the United States” by Friese and Grube, the average problem drinking rate in Europe is about 19%.
+-   According to https://www.statista.com/statistics/377585/household-internet-access-in-eu28/, in 2008, the number of households in Europe with Internet access was about 60%
+-   According to http://strongerfamilies.eu/about-us-2/one-parent-families-in-europe/, about 10% of families in Europe are single-parent families
+-   According to https://www.pewinternet.org/2015/10/01/basics-of-teen-romantic-relationships/, about 19% of US students are in a romantic relationship
+
+## Setup and Data Exploration
+
+1.  What are the variables that map to these outcomes in your dataset?
+
+> -   Problem drinking: `alochol.use`
+> -   Has internet at home: `internet.at.home`
+> -   Single parent families: `parent.status`
+> -   In a relationship: `has.romantic.partner`
+
+For the following questions, make a small table:
+
+2.  What is the percentage of problem drinkers in the sample?
+
+```{r}
+#| label: transformdrinking
+#| echo: true
+
+students <- students %>% 
+  mutate(problem.drinking = case_when(alcohol.use < 4 ~ "SAFE",
+                                      alcohol.use >= 4 ~ "DANGEROUS"))
+```
+
+> Think about what would happen if you reclassified this by defining 4 and above as problem drinking – make a note about this.
+
+> Obviously fewer students would qualify as a problem drinker. You need to think carefully about how the dataset values map to the hypothesis you want to test. It would be best to test both ways of classifying the data.
+
+3.  What is the percentage of students with Internet in their home in the sample?
+
+4.  What is the percentage of students who have single family homes in the sample?
+
+> Note that A is Apart and T is Together
+
+5.  What is the percentage of students who are in a romantic relationship in the sample?
+
+```{r}
+#| label: disttable
+#| tbl-cap: "Distribution of key variables"
+#| echo: false
+
+students %>%
+  select(problem.drinking, internet.at.home, parent.status, has.romantic.partner) %>%
+  rename(
+    `Problem drinker` = problem.drinking,
+    `Internet at home` = internet.at.home,
+    `Parent status` = parent.status,
+    `Has romantic partner` = has.romantic.partner
+  ) %>%
+  pivot_longer(everything(), names_to = "variable", values_to = "value") %>%
+  group_by(variable, value) %>%
+  summarize(n = n(), .groups = "drop") %>%
+  group_by(variable) %>%
+  mutate(proportion = round(n / sum(n), 2)) %>%
+  arrange(variable, desc(proportion)) %>% 
+  kbl() %>% 
+  kable_styling()
+```
+
+## Planning
+
+Pick one of the variables from questions 2-5. For this variable, consider the following questions:
+
+6.  What, in your opinion, would be a substantively significant difference in this mean/proportion? How large would a difference need to be for you to consider it meaningful? Make some notes about this.
+
+> Let's say has romantic partner. I think maybe a 10% difference would seem meaningful.
+
+7.  Are the conditions satisfied for conducting a hypothesis test? Why or why not?
+
+```{r}
+#| label: conditionscheck
+#| echo: false
+
+counts <- table(students$has.romantic.partner)
+
+p_count <- counts[1]
+q_count <- counts[2]
+```
+
+> Conditions:
+>
+> -   Randomization: Probably not met, but that has never stopped a study author before
+>
+> -   Independence: Depends on the sample design, but likely unless this is a snowball sample
+>
+> -   Success/failure: There are `r p_count` students who `r names(counts)[1]` and `r q_count` who `r names(counts)[2]`. Condition met.
+
+8.  What, in your opinion, should Portuguese policymakers do if you judge the the mean/proportion in your data are significantly different than world averages? Make some notes about this.
+
+> Hard to say. Maybe if there are too many students in a romantic relationship they should consider how much free time students have and how much they are focused on their studies.
+
+## Calculation
+
+9.  Write a fully specified hypothesis using a 95% cutoff.
+
+> **Hypotheses**
+
+> $H_0: p = 0.19$ $H_A: p \neq 0.19$
+
+> where $p$ represents the true proportion of students who are in a romantic relationship. We are testing whether the proportion in our sample differs from the population value of 19%.
+
+> **Significance Level**
+
+> $\alpha$ = 0.05
+
+10. Calculate the $p$ value for your hypothesis and and indicate whether you reject or fail to reject the null hypothesis
+
+```{r}
+#| label: pvaluecalc
+#| echo: false
+
+# Data and null hypothesis
+yes_count <- sum(students$has.romantic.partner == "yes")
+n <- length(students$has.romantic.partner)
+p0 <- 0.19
+
+# Sample proportion
+phat <- yes_count / n
+
+# Standard error under H0
+se0 <- sqrt(p0 * (1 - p0) / n)
+
+# z statistic
+z_stat <- (phat - p0) / se0
+
+# Two-sided p-value
+p_value_manual <- 2 * (1 - pnorm(abs(z_stat)))
+```
+
+> $\hat{p} = \frac{\text{yes count}}{n} = \frac{`r yes_count`}{`r n`} \approx `r round(phat, 3)`.$
+
+> Under the null hypothesis $H_0: p = 0.19$, the standard error is $SE_0 = \sqrt{\frac{p_0(1 - p_0)}{n}} = \sqrt{\frac{0.19 \times 0.81}{`r n`}} \approx `r round(se0, 4)`.$
+
+> The test statistic is $z = \frac{\hat{p} - p_0}{SE_0} = \frac{`r round(phat, 3)` - 0.19}{`r round(se0, 4)`} \approx `r round(z_stat, 3)`.$
+
+> The two-sided p-value is $p\text{-value} = 2 \times P(Z > |z|) = 2 \times \big(1 - (|`r round(z_stat, 3)`|)\big) \approx `r round(p_value_manual, 4)`.$
+
+> **REJECT the null**
+
+## Interpretation
+
+11. Write a paragraph describing your results and also what kind of policy reforms you would recommend to policymakers based on the results of your hypotheses tests
+
+> It does appear many more students in Portugal are in a relationship, the difference with the population is both statistically and practically significant. I am not sure what kind of reforms would be necessary here, you would want to do some additional investigation as to whether the high rate of relationships is hurting the students' study habits.
+
+## Extra
+
+Repeat the process for any of the other variables from questions 2-5 that you did not consider in the first round.

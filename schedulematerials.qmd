@@ -242,6 +242,9 @@ Topics covered:
 
 -   Lecture activity: [Lecture 3.3 activity](activities/Lecture 3.3/lecture.3.3.activity.zip)
 
+    -   Sample solution: [Lecture 3.3 activity sample solution](activities/Lecture 3.3/lecture.3.3.activity.sample.solution.zip)
+
+
 ## Lab 3.1: Bootstrapping (Thursday, November 20)
 
 -   Lab files: [Lab 3.1](labs/Lab%203.1/lab.3.1.zip)
