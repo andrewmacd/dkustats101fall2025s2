@@ -240,14 +240,14 @@ Topics covered:
 
 -   Lecture webpage: [Lecture 3.3](lectures/lecture.3.3.html)
 
--   Lecture activity: [Lecture 3.3 activity](activities/Lecture 3.3/lecture.3.3.activity.zip)
+-   Lecture activity: [Lecture 3.3 activity](activities/Lecture%203.3/lecture.3.3.activity.zip)
 
-    -   Sample solution: [Lecture 3.3 activity sample solution](activities/Lecture 3.3/lecture.3.3.activity.sample.solution.zip)
-
+    -   Sample solution: [Lecture 3.3 activity sample solution](activities/Lecture%203.3/lecture.3.3.activity.sample.solution.zip)
 
 ## Lab 3.1: Bootstrapping (Thursday, November 20)
 
 -   Lab files: [Lab 3.1](labs/Lab%203.1/lab.3.1.zip)
+    -   Sample solution: [Lab 3.1 sample solution](labs/Lab%203.1/lab.3.1.Sample.Solution.zip)
     -   Make sure to extract (unzip) the lab files before attempting to modify them!
 
 ## Lecture 3.4: Hypothesis testing wisdom (Tuesday, November 25)

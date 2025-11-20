@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.22">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Professor MacDonald">
+<meta name="dcterms.date" content="2025-11-20">
+
+<title>Lecture 3.3 - Hypothesis Testing – DKU Stats 101 - Fall 2025 S2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b4406b7675125bc2ba204020e191172.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-88e77c2e7946dc1e54cfe5c331b01367.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DKU Stats 101 - Fall 2025 S2</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Course Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedulematerials.html"> 
+<span class="menu-text">Schedule and Course Materials</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../rmanual.html"> 
+<span class="menu-text">R Help Manual</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/andrewmacd/dkustats101fall2025s2"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#hypothesis-tests" id="toc-hypothesis-tests" class="nav-link active" data-scroll-target="#hypothesis-tests">Hypothesis tests</a>
+  <ul class="collapse">
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses">Hypotheses</a>
+  <ul class="collapse">
+  <li><a href="#king-county" id="toc-king-county" class="nav-link" data-scroll-target="#king-county">King county</a></li>
+  <li><a href="#percent-of-houses-with-a-view" id="toc-percent-of-houses-with-a-view" class="nav-link" data-scroll-target="#percent-of-houses-with-a-view">Percent of houses with a view</a></li>
+  <li><a href="#hypotheses-1" id="toc-hypotheses-1" class="nav-link" data-scroll-target="#hypotheses-1">Hypotheses</a></li>
+  <li><a href="#how-small-to-convince-us" id="toc-how-small-to-convince-us" class="nav-link" data-scroll-target="#how-small-to-convince-us">How small to convince us?</a></li>
+  <li><a href="#is-the-rate-of-houses-with-a-view-different" id="toc-is-the-rate-of-houses-with-a-view-different" class="nav-link" data-scroll-target="#is-the-rate-of-houses-with-a-view-different">Is the rate of houses with a view different?</a></li>
+  <li><a href="#is-the-rate-of-houses-with-a-view-different-1" id="toc-is-the-rate-of-houses-with-a-view-different-1" class="nav-link" data-scroll-target="#is-the-rate-of-houses-with-a-view-different-1">Is the rate of houses with a view different?</a></li>
+  <li><a href="#clt-means-we-can-use-the-normal-model" id="toc-clt-means-we-can-use-the-normal-model" class="nav-link" data-scroll-target="#clt-means-we-can-use-the-normal-model">CLT means we can use the Normal model</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#a-trial-as-a-hypothesis-test" id="toc-a-trial-as-a-hypothesis-test" class="nav-link" data-scroll-target="#a-trial-as-a-hypothesis-test">A trial as a hypothesis test</a></li>
+  <li><a href="#a-trial-as-a-hypothesis-test---decision" id="toc-a-trial-as-a-hypothesis-test---decision" class="nav-link" data-scroll-target="#a-trial-as-a-hypothesis-test---decision">A trial as a hypothesis test - decision</a></li>
+  </ul></li>
+  <li><a href="#p-values" id="toc-p-values" class="nav-link" data-scroll-target="#p-values"><span class="math inline">\(p\)</span> values</a>
+  <ul class="collapse">
+  <li><a href="#the-p-value-and-surprise" id="toc-the-p-value-and-surprise" class="nav-link" data-scroll-target="#the-p-value-and-surprise">The <span class="math inline">\(p\)</span> value and surprise</a></li>
+  <li><a href="#guilty-or-not-enough-evidence" id="toc-guilty-or-not-enough-evidence" class="nav-link" data-scroll-target="#guilty-or-not-enough-evidence">Guilty or not enough evidence?</a></li>
+  <li><a href="#when-the-p-value-is-not-small" id="toc-when-the-p-value-is-not-small" class="nav-link" data-scroll-target="#when-the-p-value-is-not-small">When the <span class="math inline">\(p\)</span> value is not small</a></li>
+  </ul></li>
+  <li><a href="#the-reasoning-of-a-hypothesis-test" id="toc-the-reasoning-of-a-hypothesis-test" class="nav-link" data-scroll-target="#the-reasoning-of-a-hypothesis-test">The reasoning of a hypothesis test</a>
+  <ul class="collapse">
+  <li><a href="#step-1-state-the-hypothesis" id="toc-step-1-state-the-hypothesis" class="nav-link" data-scroll-target="#step-1-state-the-hypothesis">Step 1: state the hypothesis</a></li>
+  <li><a href="#hypotheses-about-breakfast" id="toc-hypotheses-about-breakfast" class="nav-link" data-scroll-target="#hypotheses-about-breakfast">Hypotheses about breakfast</a></li>
+  <li><a href="#hypotheses-about-breakfast-1" id="toc-hypotheses-about-breakfast-1" class="nav-link" data-scroll-target="#hypotheses-about-breakfast-1">Hypotheses about breakfast</a></li>
+  <li><a href="#step-2-the-model" id="toc-step-2-the-model" class="nav-link" data-scroll-target="#step-2-the-model">Step 2: the model</a></li>
+  <li><a href="#step-2a-1-proportion-z-test" id="toc-step-2a-1-proportion-z-test" class="nav-link" data-scroll-target="#step-2a-1-proportion-z-test">Step 2a: 1-proportion <span class="math inline">\(z\)</span> test</a></li>
+  <li><a href="#step-2b-checking-conditions---eating-breakfast" id="toc-step-2b-checking-conditions---eating-breakfast" class="nav-link" data-scroll-target="#step-2b-checking-conditions---eating-breakfast">Step 2b: checking conditions - eating breakfast</a></li>
+  <li><a href="#step-3-mechanics" id="toc-step-3-mechanics" class="nav-link" data-scroll-target="#step-3-mechanics">Step 3: mechanics</a></li>
+  <li><a href="#step-4-conclusion" id="toc-step-4-conclusion" class="nav-link" data-scroll-target="#step-4-conclusion">Step 4: conclusion</a></li>
+  </ul></li>
+  <li><a href="#a-hypothesis-test-for-the-mean" id="toc-a-hypothesis-test-for-the-mean" class="nav-link" data-scroll-target="#a-hypothesis-test-for-the-mean">A hypothesis test for the mean</a>
+  <ul class="collapse">
+  <li><a href="#one-sample-t-test-for-the-mean" id="toc-one-sample-t-test-for-the-mean" class="nav-link" data-scroll-target="#one-sample-t-test-for-the-mean">One sample <span class="math inline">\(t\)</span> test for the mean</a></li>
+  </ul></li>
+  <li><a href="#interval-and-tests" id="toc-interval-and-tests" class="nav-link" data-scroll-target="#interval-and-tests">Interval and tests</a>
+  <ul class="collapse">
+  <li><a href="#intervals-and-tests" id="toc-intervals-and-tests" class="nav-link" data-scroll-target="#intervals-and-tests">Intervals and tests</a></li>
+  <li><a href="#the-special-case-with-proportions" id="toc-the-special-case-with-proportions" class="nav-link" data-scroll-target="#the-special-case-with-proportions">The special case with proportions</a></li>
+  </ul></li>
+  <li><a href="#p-values-and-decisions-what-to-tell-about-a-hypothesis-test" id="toc-p-values-and-decisions-what-to-tell-about-a-hypothesis-test" class="nav-link" data-scroll-target="#p-values-and-decisions-what-to-tell-about-a-hypothesis-test"><span class="math inline">\(p\)</span> values and decisions: what to tell about a hypothesis test</a>
+  <ul class="collapse">
+  <li><a href="#how-small-a-p-value-is-small-enough" id="toc-how-small-a-p-value-is-small-enough" class="nav-link" data-scroll-target="#how-small-a-p-value-is-small-enough">How small a <span class="math inline">\(p\)</span> value is small enough?</a></li>
+  <li><a href="#acceptable-p-value-depends-on-results-importance" id="toc-acceptable-p-value-depends-on-results-importance" class="nav-link" data-scroll-target="#acceptable-p-value-depends-on-results-importance">Acceptable <span class="math inline">\(p\)</span> value depends on result’s importance</a></li>
+  <li><a href="#recommendations-from-the-american-statistical-association" id="toc-recommendations-from-the-american-statistical-association" class="nav-link" data-scroll-target="#recommendations-from-the-american-statistical-association">Recommendations from the American Statistical Association</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lecture 3.3 - Hypothesis Testing</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Professor MacDonald </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 20, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell" data-autorun="true">
+<pre class="{webr}"><code>#| label: setup
+#| include: false
+#| autorun: true
+
+theme_set(theme_classic())
+
+set.seed(1234)
+options(scipen=999)
+
+mean.multiple.samples &lt;- function(numdraws, numsamples, variable) { 
+     meanvector &lt;- c() 
+     meanonesample &lt;- 0 
+     for (i in 1:numsamples) { 
+       meanonesample &lt;- mean(sample(variable, numdraws, replace=TRUE)) 
+         meanvector[i] &lt;- meanonesample 
+     } 
+     meanvector 
+}
+
+kc.house &lt;- read.csv("king.county.sales.recent.csv")
+classroster &lt;- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+
+kc.house &lt;- kc.house %&gt;% 
+  mutate(view = view_rainier +
+                view_olympics +
+                view_cascades +
+                view_territorial +
+                view_skyline +
+                view_sound +
+                view_lakewash +
+                view_lakesamm +
+                view_otherwater +
+                view_other) %&gt;% 
+  mutate(view = ifelse(view &gt; 0, 1, 0))
+  
+view.frac &lt;- round(mean(kc.house$view), digits=3)
+view.percent &lt;- view.frac*100
+view.sd &lt;- round(sqrt(view.frac*(1-view.frac)/100), digits=3)
+
+view.dist &lt;- mean.multiple.samples(100, 1000000, kc.house$view)
+view.dist.plot &lt;- ggplot(data.frame(view.dist), aes(view.dist)) +
+  geom_histogram(color="darkblue", fill="lightblue") + 
+  labs(x="Sample proportion of houses that have a view", y="Count")
+
+survey.view.frac &lt;- quantile(view.dist,probs=c(0.85))
+survey.view.z &lt;- (survey.view.frac - mean(kc.house$view))/sqrt(view.frac*(1-view.frac)/100)
+survey.view.p &lt;- pnorm(survey.view.z)
+  
+p &lt;- 11
+q &lt;- 15
+p.frac &lt;- p/(p+q)
+q.frac &lt;- q/(p+q)
+p.null &lt;- 0.656
+q.null &lt;- 1-p.null
+se.p &lt;- sqrt(p.null*q.null/(p+q))
+z.p &lt;- (p.frac - 0.656)/se.p
+p.val.p &lt;- pnorm(z.p)
+
+p.frac &lt;- round(p.frac, digits=3)
+q.frac &lt;- round(q.frac, digits=3)
+se.p &lt;- round(se.p, digits=3)
+z.p &lt;- round(z.p, digits=3)
+p.val.p &lt;- round(p.val.p, digits=3)</code></pre>
+</div>
+<section id="hypothesis-tests" class="level1">
+<h1>Hypothesis tests</h1>
+<ul>
+<li>Hypotheses</li>
+<li><span class="math inline">\(p\)</span> values</li>
+<li>The reasoning of hypothesis testing</li>
+<li>A hypothesis test for the mean</li>
+<li>Interval and tests</li>
+<li><span class="math inline">\(p\)</span> values and decisions: what to tell about a hypothesis test</li>
+</ul>
+<section id="hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="hypotheses">Hypotheses</h2>
+<section id="king-county" class="level3">
+<h3 class="anchored" data-anchor-id="king-county">King county</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Lecture 3.3/king.county.jpg" class="img-fluid figure-img"></p>
+<figcaption>One sided tests</figcaption>
+</figure>
+</div>
+</section>
+<section id="percent-of-houses-with-a-view" class="level3">
+<h3 class="anchored" data-anchor-id="percent-of-houses-with-a-view">Percent of houses with a view</h3>
+<ul>
+<li><p>11% of houses in King County have a view</p></li>
+<li><p>Put ourselves in the shoes of a a researcher – we only have a budget to drive around and sample 100 houses in a particular neighborhood</p></li>
+<li><p>Does our sample represent the the idea that the neighborhood we chose to sample has a higher or lower percentage of houses with a view as compared to the overall county?</p></li>
+</ul>
+</section>
+<section id="hypotheses-1" class="level3">
+<h3 class="anchored" data-anchor-id="hypotheses-1">Hypotheses</h3>
+<ul>
+<li>The starting hypothesis to be tested is call the null hypothesis – null because it assumes that nothing has changed.
+<ul>
+<li>We denote it <span class="math inline">\(H_0\)</span></li>
+<li>Called “H naught”
+<ul>
+<li><span class="math inline">\(H_0\)</span>: parameter = hypothesized value</li>
+<li><span class="math inline">\(H_0\)</span>: has.a.view = 0.11</li>
+</ul></li>
+</ul></li>
+<li>The alternative hypothesis is not a single value, it contains all other values
+<ul>
+<li><span class="math inline">\(H_A\)</span>: parameter <span class="math inline">\(\neq\)</span> hypothesized value</li>
+<li><span class="math inline">\(H_A\)</span>: has.a.view <span class="math inline">\(\neq\)</span> 0.11</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-small-to-convince-us" class="level3">
+<h3 class="anchored" data-anchor-id="how-small-to-convince-us">How small to convince us?</h3>
+<ul>
+<li>If the percent of houses with a view in our sample is 16%, we would be skeptical that there was any difference
+<ul>
+<li>Not so unlikely to be different only by random chance</li>
+</ul></li>
+<li>If the percent of houses with a view is 31%, it would clearly indicate a change from 11%
+<ul>
+<li>Extremely unlikely that this could happen just by random chance</li>
+</ul></li>
+<li>Can turn to confidence interval
+<ul>
+<li>Standard deviation <strong>of the sampling distribution</strong></li>
+<li><span class="math inline">\(SD(p) = \sqrt{\frac{pq}{n}} = \sqrt{\frac{0.11\times0.89}{100}} = 0.031\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="is-the-rate-of-houses-with-a-view-different" class="level3">
+<h3 class="anchored" data-anchor-id="is-the-rate-of-houses-with-a-view-different">Is the rate of houses with a view different?</h3>
+<ul>
+<li>Idea: simulation</li>
+</ul>
+<div class="cell" data-caption="Sampling distribution of whether a house has a view, n=100">
+<pre class="{webr}"><code>#| label: fig-viewdistplot
+#| caption: "Sampling distribution of whether a house has a view, n=100"
+set.seed(1234567)
+view.dist &lt;- mean.multiple.samples(100, 1000000, kc.house$view)
+
+ggplot(data.frame(view.dist), aes(view.dist)) +
+  geom_histogram(color="darkblue", fill="lightblue") + 
+  labs(x="Sample proportion of houses that have a view", y="Count")</code></pre>
+</div>
+</section>
+<section id="is-the-rate-of-houses-with-a-view-different-1" class="level3">
+<h3 class="anchored" data-anchor-id="is-the-rate-of-houses-with-a-view-different-1">Is the rate of houses with a view different?</h3>
+<ul>
+<li><p>In 95% of samples of this size, percent of houses with a view is within 5% to 17% just by chance</p></li>
+<li><p>In any given sample, should see between 5% and 17% of houses with a view</p></li>
+<li><p>If we surveyed a neighborhood and actually saw 14%</p></li>
+<li><p>Surprising?</p></li>
+<li><p>Should we conclude that the percent of houses with a view in this neighborhood is different overall compared to King County?</p></li>
+</ul>
+</section>
+<section id="clt-means-we-can-use-the-normal-model" class="level3">
+<h3 class="anchored" data-anchor-id="clt-means-we-can-use-the-normal-model">CLT means we can use the Normal model</h3>
+<ul>
+<li><p>Central Limit Theorem: use Normal model to find probability instead of using a simulation</p></li>
+<li><p>View rate of 0.14, 0.03 from null hypothesis, 0.11</p></li>
+<li><p>Use the SD = 0.031 to find the area in the tails that lie more than 0.973 <span class="math inline">\(z\)</span> scores away from the null hypothesis</p></li>
+<li><p>Indicates how rare observed rate is</p></li>
+<li><p>Probability is 0.165 in each tail, or about 0.33 total that we would get an observation this far or father from the mean by chance</p></li>
+</ul>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<ul>
+<li><p>A difference in view percentages of houses of 0.03 or larger would happen about 33% of the time just by chance.</p></li>
+<li><p>Does/Doesn’t seem very unusual.</p>
+<ul>
+<li><strong>Both?</strong></li>
+</ul></li>
+<li><p>So observed proportion of 0.14 does/doesn’t provide evidence that this sample has a different percentage of houses with a view</p>
+<ul>
+<li><strong>Borderline</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="a-trial-as-a-hypothesis-test" class="level3">
+<h3 class="anchored" data-anchor-id="a-trial-as-a-hypothesis-test">A trial as a hypothesis test</h3>
+<ul>
+<li><p>Begin with the presumption of innocence (<span class="math inline">\(H_0\)</span>)</p></li>
+<li><p>Collect evidence</p>
+<ul>
+<li>Bank money in house</li>
+<li>Still wearing mask</li>
+<li>Getaway car found in his name</li>
+</ul></li>
+<li><p>Evidence beyond a reasonable doubt?</p>
+<ul>
+<li>Is 5% small enough chance?</li>
+<li>How about 1%?</li>
+<li>6.7%?</li>
+</ul></li>
+</ul>
+</section>
+<section id="a-trial-as-a-hypothesis-test---decision" class="level3">
+<h3 class="anchored" data-anchor-id="a-trial-as-a-hypothesis-test---decision">A trial as a hypothesis test - decision</h3>
+<ul>
+<li><p>Beyond a reasonable doubt - ambiguous</p></li>
+<li><p>Jury does not use probability to decide.</p></li>
+<li><p>Null hypothesis - quantify exactly how surprising the evidence would be if the null hypothesis were true</p></li>
+<li><p>How unlikely is unlikely?</p></li>
+<li><p>1 out of 20, 5%, or 0.05</p></li>
+<li><p>1 out of 100, 1%, or 0.01</p></li>
+<li><p>You must judge for yourself in each situation whether the probability of observing your data is small enough to constitute “reasonable doubt.”</p></li>
+</ul>
+</section>
+</section>
+<section id="p-values" class="level2">
+<h2 class="anchored" data-anchor-id="p-values"><span class="math inline">\(p\)</span> values</h2>
+<section id="the-p-value-and-surprise" class="level3">
+<h3 class="anchored" data-anchor-id="the-p-value-and-surprise">The <span class="math inline">\(p\)</span> value and surprise</h3>
+<ul>
+<li><p>The <span class="math inline">\(p\)</span> value is the probability of seeing data like these (or even more unlikely data) given the null hypothesis is true.</p></li>
+<li><p>Tells us how surprised we would be to get these data given <span class="math inline">\(H_0\)</span> is true.</p>
+<ul>
+<li><p><span class="math inline">\(p\)</span> value is very low: Either <span class="math inline">\(H_0\)</span> is not true or something remarkable occurred. Reject <span class="math inline">\(H_0\)</span>.</p></li>
+<li><p><span class="math inline">\(p\)</span> value is high: Not a surprise. Data consistent with the model. Do not reject <span class="math inline">\(H_0\)</span>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="guilty-or-not-enough-evidence" class="level3">
+<h3 class="anchored" data-anchor-id="guilty-or-not-enough-evidence">Guilty or not enough evidence?</h3>
+<ul>
+<li>Defendant is either:
+<ul>
+<li>Guilty: <span class="math inline">\(p\)</span> value too small. The evidence is clear.</li>
+<li>Not Guilty: <span class="math inline">\(p\)</span> value not small enough. The evidence is not sufficient. Not the same as innocent.
+<ul>
+<li>May be innocent or may be guilty, but not enough evidence found.</li>
+</ul></li>
+</ul></li>
+<li>Two Choices
+<ul>
+<li>Fail to reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(p\)</span> value large.
+<ul>
+<li><em>Never</em> accept <span class="math inline">\(H_0\)</span>.</li>
+</ul></li>
+<li>Reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(p\)</span> value is small. Accept <span class="math inline">\(H_A\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="when-the-p-value-is-not-small" class="level3">
+<h3 class="anchored" data-anchor-id="when-the-p-value-is-not-small">When the <span class="math inline">\(p\)</span> value is not small</h3>
+<ul>
+<li>It is wrong to say:
+<ul>
+<li>Accept <span class="math inline">\(H_0\)</span>.</li>
+<li>We have proven <span class="math inline">\(H_0\)</span>.</li>
+</ul></li>
+<li>It is correct to say:
+<ul>
+<li>Fail to reject <span class="math inline">\(H_0\)</span></li>
+<li>There is insufficient evidence to reject <span class="math inline">\(H_0\)</span>.</li>
+<li><span class="math inline">\(H_0\)</span> may or may not be true.</li>
+</ul></li>
+<li>Example: <span class="math inline">\(H_0\)</span>: All swans are white.
+<ul>
+<li>If we sample 100 swans that are all white, there could still be a nonwhite swan.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="the-reasoning-of-a-hypothesis-test" class="level2">
+<h2 class="anchored" data-anchor-id="the-reasoning-of-a-hypothesis-test">The reasoning of a hypothesis test</h2>
+<section id="step-1-state-the-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-state-the-hypothesis">Step 1: state the hypothesis</h3>
+<ul>
+<li><span class="math inline">\(H_0\)</span>:
+<ul>
+<li><span class="math inline">\(H_0\)</span> usually states that there’s nothing different.</li>
+<li><span class="math inline">\(H_0:\)</span> parameter = hypothesized value</li>
+<li>Note the parameter describes the population not the sample.</li>
+<li><span class="math inline">\(H_0\)</span> is called the <strong>null hypothesis</strong>.</li>
+</ul></li>
+<li><span class="math inline">\(H_A\)</span>:
+<ul>
+<li><span class="math inline">\(H_A\)</span> is a statement that something has changed, gotten bigger or smaller</li>
+<li><span class="math inline">\(H_A\)</span> is called the alternative hypothesis.</li>
+</ul></li>
+</ul>
+</section>
+<section id="hypotheses-about-breakfast" class="level3">
+<h3 class="anchored" data-anchor-id="hypotheses-about-breakfast">Hypotheses about breakfast</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Lecture 3.3/breakfast.png" class="img-fluid figure-img"></p>
+<figcaption>Breakfast study</figcaption>
+</figure>
+</div>
+<p>What would our hypotheses be if we did a study of DKU students and compared it to the percentage found in this paper (treat it as the population mean)?</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: picker1
+sample(classroster$name, 1)</code></pre>
+</div>
+</section>
+<section id="hypotheses-about-breakfast-1" class="level3">
+<h3 class="anchored" data-anchor-id="hypotheses-about-breakfast-1">Hypotheses about breakfast</h3>
+<ul>
+<li><p>Our data claims that 65.6% of students don’t eat breakfast.</p></li>
+<li><p>In a survey of 26 students at DKU, 11 ate breakfast.</p></li>
+<li><p>Is there evidence that breakfast rate is below 65.6%?</p>
+<ul>
+<li><span class="math inline">\(H_0: p = 0.656\)</span></li>
+<li><span class="math inline">\(H_A: p \neq 0.656\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="step-2-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-the-model">Step 2: the model</h3>
+<ul>
+<li><p>Decide on the model to test the null hypothesis and parameter.</p></li>
+<li><p>Check conditions, e.g.&nbsp;independence, sample size.</p></li>
+<li><p>If the conditions are not met, either quit or redesign the study.</p></li>
+<li><p>Normal models use <span class="math inline">\(z\)</span> scores. Other models may not use <span class="math inline">\(z\)</span> scores.</p></li>
+<li><p>Name the model, e.g.&nbsp;1-proportion <span class="math inline">\(z\)</span> test.</p></li>
+</ul>
+</section>
+<section id="step-2a-1-proportion-z-test" class="level3">
+<h3 class="anchored" data-anchor-id="step-2a-1-proportion-z-test">Step 2a: 1-proportion <span class="math inline">\(z\)</span> test</h3>
+<ul>
+<li><p>Conditions: same as a 1-Proportion <span class="math inline">\(z\)</span> interval</p></li>
+<li><p>Null hypothesis: <span class="math inline">\(H_0: p = p_0\)</span></p></li>
+<li><p>Test statistics</p>
+<ul>
+<li><span class="math inline">\(z = \frac{\hat{p}-p_0}{SD(\hat{p})}\)</span></li>
+<li><span class="math inline">\(SE(\hat{p}) = \sqrt{\frac{p_0q_0}{n}}\)</span></li>
+</ul></li>
+</ul>
+<p>What conditions do we need to check to do a 1-proportion <span class="math inline">\(z\)</span> test?</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: picker2
+sample(classroster$name, 1)</code></pre>
+</div>
+</section>
+<section id="step-2b-checking-conditions---eating-breakfast" class="level3">
+<h3 class="anchored" data-anchor-id="step-2b-checking-conditions---eating-breakfast">Step 2b: checking conditions - eating breakfast</h3>
+<ul>
+<li><p>Randomization Condition: The 26 students were a random selection of DKU students</p></li>
+<li><p>10% Condition: 26 is fewer than 10% of the total number of all students who are of interest.</p></li>
+<li><p>Success/Failure Condition:</p></li>
+<li><p><span class="math inline">\(np_0 = (26)(0.656) = 17 &gt; 10\)</span>?</p></li>
+<li><p><span class="math inline">\(nq_0 = (26)(0.344) = 9 &gt; 10\)</span>?</p></li>
+<li><p>The conditions are satisfied. We can use the Normal model and perform a 1-Proportion z-Test.</p></li>
+</ul>
+</section>
+<section id="step-3-mechanics" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-mechanics">Step 3: mechanics</h3>
+<ul>
+<li>Claim: 65.6% students eat breakfast.
+<ul>
+<li>11 students in our class ate breakfast.</li>
+</ul></li>
+<li>Find <span class="math inline">\(p\)</span> value
+<ul>
+<li><span class="math inline">\(SE(\hat{p})=\sqrt{\frac{0.656\cdot0.344}{26}}\)</span></li>
+<li><span class="math inline">\(z\)</span> score of difference = <span class="math inline">\(\frac{0.423 - 0.656}{0.093} = -2.5\)</span></li>
+</ul></li>
+<li>Probability of seeing that large a difference: <span class="math inline">\(pnorm(-2.5)\rightarrow\)</span> 1.2% of the time we will see a difference from the mean this large or larger
+<ul>
+<li>98.8% of the time we will see a difference this small or smaller.</li>
+<li>Note: <span class="math inline">\(p\)</span> values usually reported as “this large or larger”</li>
+</ul></li>
+</ul>
+<p>What can we conclude from these results?</p>
+<div class="cell">
+<pre class="{webr}"><code>#| label: picker3
+sample(classroster$name, 1)</code></pre>
+</div>
+</section>
+<section id="step-4-conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-conclusion">Step 4: conclusion</h3>
+<ul>
+<li><p>Is our sample different than the overall mean of students in the US? <span class="math inline">\(p\)</span> value = 0.012</p></li>
+<li><p>What can be concluded? What does the <span class="math inline">\(p\)</span> value mean?</p>
+<ul>
+<li><p><span class="math inline">\(p\)</span> value = 0.012 <span class="math inline">\(\rightarrow\)</span> Fail to Reject/Reject <span class="math inline">\(H_0\)</span></p></li>
+<li><p>The survey data does not provide strong evidence that the rate that DKU students eat breakfast is different than US average.</p></li>
+<li><p>This should not be the end of the conversation.</p></li>
+<li><p>The next step would be to see if the breakfast eating rate is lower for all classes/among freshman/sophomores/etc.</p></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="a-hypothesis-test-for-the-mean" class="level2">
+<h2 class="anchored" data-anchor-id="a-hypothesis-test-for-the-mean">A hypothesis test for the mean</h2>
+<section id="one-sample-t-test-for-the-mean" class="level3">
+<h3 class="anchored" data-anchor-id="one-sample-t-test-for-the-mean">One sample <span class="math inline">\(t\)</span> test for the mean</h3>
+<ul>
+<li><p>Assumptions are the same.</p></li>
+<li><p><span class="math inline">\(H_0: \mu=\mu_0\)</span></p></li>
+<li><p><span class="math inline">\(t_{n-1}=\frac{\bar{y}-\mu_0}{SE(\bar{y})}\)</span></p></li>
+<li><p>Standard Error of <span class="math inline">\(\bar{y}: SE(\bar{y})=\frac{\sigma}{\sqrt{n}}\)</span></p></li>
+<li><p>When the conditions are met and <span class="math inline">\(H_0\)</span> is true, the statistic follows the Student’s <span class="math inline">\(t\)</span> Model with <span class="math inline">\(n – 1\)</span> df.</p></li>
+<li><p>Use this model to find the <span class="math inline">\(p\)</span> value.</p></li>
+</ul>
+</section>
+</section>
+<section id="interval-and-tests" class="level2">
+<h2 class="anchored" data-anchor-id="interval-and-tests">Interval and tests</h2>
+<section id="intervals-and-tests" class="level3">
+<h3 class="anchored" data-anchor-id="intervals-and-tests">Intervals and tests</h3>
+<ul>
+<li>Confidence Intervals
+<ul>
+<li>Start with data and find plausible values for the parameter. CI is data-centric.</li>
+<li>Always 2-sided</li>
+</ul></li>
+<li>Hypothesis Tests
+<ul>
+<li>Using CI, is proposed parameter value consistent with interval? Test is model-centric.</li>
+<li>2-sided test: Within the confidence interval means fail to reject <span class="math inline">\(H_0\)</span>.<br>
+</li>
+<li><span class="math inline">\(p\)</span> value = 1 – C is the cutoff.</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-special-case-with-proportions" class="level3">
+<h3 class="anchored" data-anchor-id="the-special-case-with-proportions">The special case with proportions</h3>
+<ul>
+<li>Confidence intervals
+<ul>
+<li>Use <span class="math inline">\(\hat{p}\)</span> to calculate <span class="math inline">\(SE(\hat{p})=\sqrt{\frac{\hat{p}\hat{q}}{n}}\)</span></li>
+</ul></li>
+<li>Hypothesis Tests
+<ul>
+<li>Use <span class="math inline">\(\hat{p}\)</span> to calculate <span class="math inline">\(SD(\hat{p})=\sqrt{\frac{pq}{n}}\)</span></li>
+</ul></li>
+</ul>
+<p>If <span class="math inline">\(SE(\hat{p})\)</span> and <span class="math inline">\(SD(\hat{p})\)</span> are far from each other, the relationship between the confidence interval and the hypothesis test breaks down.</p>
+</section>
+</section>
+<section id="p-values-and-decisions-what-to-tell-about-a-hypothesis-test" class="level2">
+<h2 class="anchored" data-anchor-id="p-values-and-decisions-what-to-tell-about-a-hypothesis-test"><span class="math inline">\(p\)</span> values and decisions: what to tell about a hypothesis test</h2>
+<section id="how-small-a-p-value-is-small-enough" class="level3">
+<h3 class="anchored" data-anchor-id="how-small-a-p-value-is-small-enough">How small a <span class="math inline">\(p\)</span> value is small enough?</h3>
+<ul>
+<li><p>How small is small enough is context specific.</p></li>
+<li><p>Test to see if a renowned musicologist can distinguish between Mozart and Hayden.</p>
+<ul>
+<li><span class="math inline">\(p\)</span> value of 0.1 may be good enough. Just reaffirming known talent.</li>
+</ul></li>
+<li><p>A friend claims psychic abilities and can predict heads or tails.</p>
+<ul>
+<li>Very small <span class="math inline">\(p\)</span> value such as 0.01 needed. Breaking scientific theory.</li>
+</ul></li>
+</ul>
+</section>
+<section id="acceptable-p-value-depends-on-results-importance" class="level3">
+<h3 class="anchored" data-anchor-id="acceptable-p-value-depends-on-results-importance">Acceptable <span class="math inline">\(p\)</span> value depends on result’s importance</h3>
+<ul>
+<li><p>Proportion of students with full time jobs has increased.</p>
+<ul>
+<li>Not that important. <span class="math inline">\(p\)</span> value = 0.05 will work.</li>
+</ul></li>
+<li><p>Testing the strength of a bridge based on a sample of concrete quality</p>
+<ul>
+<li>Life and death decision. Need a very small <span class="math inline">\(p\)</span> value</li>
+</ul></li>
+<li><p>Whether rejecting or failing to reject, always cite the <span class="math inline">\(p\)</span> value.</p></li>
+<li><p>An accompanying confidence interval helps also.</p></li>
+</ul>
+</section>
+<section id="recommendations-from-the-american-statistical-association" class="level3">
+<h3 class="anchored" data-anchor-id="recommendations-from-the-american-statistical-association">Recommendations from the American Statistical Association</h3>
+<ol type="1">
+<li><span class="math inline">\(p\)</span> values can indicate how incompatible the data are with a specified statistical model.</li>
+<li><span class="math inline">\(p\)</span> values do not measure the probability that the studied hypothesis is true, or the probability that the data were produced by random chance alone.</li>
+<li>Scientific conclusions and business or policy decisions should not be based only on whether a <span class="math inline">\(p\)</span> value passes a specific threshold.</li>
+<li>Proper inference requires full reporting and transparency.</li>
+<li>A <span class="math inline">\(p\)</span> value, or statistical significance, does not measure the size of an effect or the importance of a result.</li>
+<li>By itself, a <span class="math inline">\(p\)</span> value does not provide a good measure of evidence regarding a model or hypothesis.</li>
+</ol>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
