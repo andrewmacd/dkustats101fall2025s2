@@ -1,7 +1,7 @@
 ---
-title: "Hypothesis Testing Wisdom"
+title: "Lecture 3.4 - Hypothesis testing wisdom"
 author: "Professor MacDonald"
-date: "4/22/2025"
+date: "11/25/2025"
 format: 
     live-html: 
       output-file: lecture.3.4.html
