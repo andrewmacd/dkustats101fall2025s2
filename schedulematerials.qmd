@@ -266,15 +266,15 @@ Topics covered:
 
 -   Power of a test
 
--   Lecture webpage: \[Lecture 3.4\]
+-   Lecture webpage: [Lecture 3.4](lectures/lecture.3.4.html)
 
--   Lecture activity: \[Lecture 3.4 activity\]
+-   Lecture activity: [Lecture 3.4 activity](activities/Lecture 3.4/lecture.3.4.activity.zip)
 
 ## In-class Unit 3 exam: Thursday, November 27 from 6:00 pm to 7:15 pm
 
 # Unit 4: Statistical inference
 
-## Lecture 4.1: Comparing groups (Thursday, November 27)
+## Lecture 4.1: Comparing groups (Tuesday, December 2)
 
 Reading to do before class: Chapter 17
 
@@ -292,7 +292,7 @@ Topics covered:
 
 -   Lecture activity: \[Lecture 4.1 activity\]
 
-## Lecture 4.2: Returning to regression (Tuesday, December 2)
+## Lecture 4.2: Returning to regression (Tursday, December 4)
 
 Reading to do before class: Chapter 20
 
@@ -308,17 +308,9 @@ Topics covered:
 
 -   Lecture activity: \[Lecture 4.2 activity\]
 
-## Final class 4.3: Interpretation activity (Thursday, December 4)
+## Lab 4.1: Interpretation activity (Thursday, December 4)
 
--   How to read academic statistical results
-
--   Locating the model
-
--   Interpreting the test
-
--   Determining possible weaknesses of the model
-
--   Final class activity: \[Final class 4.3 activity\]
+-   Lab files: [Lab 4.1]
 
 ## Online lab 4.1 (due on Friday, December 6 at 11:59:00)
 
