@@ -16,4 +16,4 @@ title: "Homework"
 
 # Final project (due Wednesday, December 10 at 23:59:00) 
 
-  - [Final project]
+  - [Final project](homeworks/Final Project/final.project.zip)
