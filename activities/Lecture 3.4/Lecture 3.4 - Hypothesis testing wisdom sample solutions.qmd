@@ -1,0 +1,174 @@
+---
+title: "Lecture 3.4 - Hypothesis Testing Wisdom"
+author: "Student"
+date: "11/25/2025"
+format:
+  pdf:
+    colorlinks: true
+---
+
+```{r}
+#| label: setup 
+#| include: false
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+set.seed(8888)
+
+theme_set(theme_minimal())
+
+wages <- read.csv("us.dol.wages.csv")
+```
+
+![](alabama.jpeg){fig-align="center" width="30%"}
+
+# Hypothesis Testing Wisdom
+
+## Setting Expectations
+
+Today we are working with a dataset on wages in the U.S. collected by the US Department of Labor: `us.dol.wages.csv`
+
+We will first assume that the dataset approximately represents all workers in the U.S. – statistics of the mean/proportions can serve as stand-ins for the true population parameters.
+
+1.  Subset your data and take a sample of 100 from the South region only using the `slice_sample()` command (documented [here](https://dplyr.tidyverse.org/reference/slice.html)):
+
+```         
+south_sample <- us.dol.wages %>%
+    filter(south=="yes") %>% 
+    slice_sample(n=100, replace=TRUE)
+```
+
+```{r}
+#| label: createsouthsample
+
+south.sample <- wages %>%
+    filter(south=="yes") %>% 
+    slice_sample(n=100, replace=TRUE)
+```
+
+2.  Write down your expectations for one of the following variables. Use Google if needed.
+
+```         
+ed - education (years)
+wage - salary per week
+bluecol - whether the worker works in a blue collar job
+union - whether the person is in a union
+```
+
+You can find the proportions/means of these variables with the `table()` and `summary()` commands.
+
+> I would expect education to be relatively medium - it was the 1980s.
+
+```{r}
+#| label: edtable
+#| tbl-cap: "Summary statistics of education in subsample: South"
+#| echo: false
+
+summary_table <- south.sample %>%
+  group_by(ed) %>%
+  summarise(
+    n = n(),
+    percent = round(n / nrow(wages) * 100, 2)
+  )
+
+summary_table %>%
+  kbl(col.names = c("Education Level", "Count", "Percent")) %>%
+  kable_styling()
+```
+
+## Confidence interval, $p$ values, and $\alpha$ values
+
+First, consider the issue of an $\alpha$ value.
+
+3.  What, in your opinion, is a reasonable choice for the $\alpha$ value? (i.e. how much proof would you need to be convinced there was a ‘real’ difference between the sample and the population)? Write down some reasons for your choice.
+
+> Without strong priors, I think 0.05 is reasonable
+
+4.  Now, generate alternative and null hypotheses, fully specifying the $\alpha$ level and the tailed-ness of the test for your chosen variable. The null hypothesis should be the overall population proportions/means.
+
+> $H_0: South_{ed}=Pop_{ed}$ $H_a: South_{ed} \neq Pop_{ed}$
+
+5.  Make a note of why you chose a one or two tailed hypothesis test.
+
+> Two tailed seems most reasonable here - the difference could be in either direction, even though we expect, based on prior knowledge, that the South is probably less educated.
+
+6.  Next, make a small table with both the $p$ value and the confidence interval for your variable. Check the conditions for hypothesis testing.
+
+> -   Randomization condition: yes, random from the South subset
+> -   Independence condition: probably true, though would need to check dataset origin
+> -   10% condition: yes definitely less than 10% of the population
+> -   Nearly normal condition: since $n>40$, this condition is met, but the sample is at least symmetric and unimodal, though not very normal.
+
+```{r}
+#| label: nearlynormalcheck
+#| fig-cap: "Distribution of education in South sample"
+#| echo: false
+#| message: false
+
+ggplot(south.sample, aes(x=ed)) +
+  geom_density(color="black", fill="blue")
+```
+
+> $t_{diff} = \frac{\bar{x} - \mu}{SE}$
+>
+> $t_{diff} = \frac{\bar{x} - \mu}{\frac{sd}{\sqrt{n}}}$
+>
+> $t_{diff} = \frac{`r round(mean(south.sample$ed), 2)`-`r round(mean(wages$ed), 2)`}{\frac{`r round(sd(south.sample$ed))\`}{\sqrt{100}}}\$
+>
+> $t_{diff} = \frac{`r round(mean(south.sample$ed)-mean(wages$ed), 2)`}{`r round(sd(south.sample$ed) / sqrt(100), 2)\`}\$
+>
+> $t_{diff} = `r round((mean(south.sample$ed)-mean(wages$ed)) / (sd(south.sample$ed) / sqrt(100)), 2)\`\$
+>
+> $p_{tdiff} = pt(tdiff, df=99) \times 2 =`r round(pt((mean(south.sample$ed)-mean(wages$ed)) / (sd(south.sample$ed) / sqrt(100)), df=99) \* 2, 2)\`\$
+>
+> $CI_{diff} = (\bar{x} - \mu) \pm t^* \times SE$
+>
+> $CI_{diff} = (\bar{x} - \mu) \pm t^* \times \frac{sd}{\sqrt{n}}$
+>
+> $CI_{diff} = (`r round(mean(south.sample$ed), 2)`-`r round(mean(wages$ed), 2)`) \pm `r round(qt(0.975, df=99), 2)` \times `r round(sd(south.sample$ed) / sqrt(100), 2)\`\$
+>
+> $CI_{diff} = `r round(mean(south.sample$ed)-mean(wages$ed), 2)` \pm `r round(qt(0.975, df=99) * sd(south.sample$ed) / sqrt(100), 2)\`\$
+
+```{r}
+#| label: difftable
+#| tbl-cap: "Statistics of the difference between South and Pop on years of education"
+#| echo: false
+
+sample.mean <- round(mean(south.sample$ed), 2)
+pop.mean <- round(mean(wages$ed), 2)
+diff <- mean(south.sample$ed)-mean(wages$ed)
+se.diff <- sd(south.sample$ed) / sqrt(100)
+cv.neg <- qt(0.025, df=99)
+cv.pos <- qt(0.975, df=99)
+
+diff.lower <- cv.neg * se.diff
+diff.upper <- cv.pos * se.diff
+
+p.val.diff <- round(pt(diff / se.diff, df=99), 2)
+ci <- paste0("(", diff + diff.lower, ", ", diff + diff.upper, ")")
+
+
+```
+
+
+7.  Interpret your p-value and confidence interval with respect to your $\alpha$ level. In the end, do you conclude that your variable is statistically significantly different from the population, based on your sample?
+
+> It is cleary not statistically significantly different, it is nowhere close to the chosen alpha value.
+
+8.  Add two additional columns to your table with the ‘true’ value of the variable for just the `south` region and the ‘true’ value of your variable for the overall dataset. Were your conclusions correct or not?
+
+## Errors & Effect Size
+
+For the same variable, put yourself in the shoes of a policymaker that is considering additional government programs to help people in the `south` region if it can be shown that they are different on your chosen variable.
+
+9.  Add another column to your table. Assess whether you think a Type I or Type II error would be more serious. Provide a justification for why.
+
+10. Add another column to your table with the size of the difference. Assess whether the difference is substantively large or not. How do you know if that is a large difference? You may want to check Google, etc. to see what the normal range of variation for your variable is.
+
+11. Overall, with your partner, write up a summary paragraph with the results of your findings and how we should interpret the results of your calculations and thoughts based on your 100-person sample of Southern workers.
+
+## Extra time
+
+12. Repeat this process by adding another line to your table and select a second variable
