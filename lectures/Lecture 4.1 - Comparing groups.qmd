@@ -1,0 +1,438 @@
+---
+title: "Lecture 4.1 - Comparing groups"
+author: "Professor MacDonald"
+date: "12/2/2025"
+format: 
+    live-html: 
+      output-file: lecture.4.1.html
+      html-math-method: mathml
+webr:
+  cell-options:
+    autorun: false
+    warning: false
+  packages:
+    - tidyverse
+    - knitr
+    - broom
+    - gridExtra
+    - kableExtra
+    - scales
+  resources:
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/king.county.sales.recent.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/titanic.survival.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2025s2/main/lectures/datasets/classroster.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{webr}
+#| label: setup
+#| include: false
+#| autorun: true
+
+theme_set(theme_classic())
+
+set.seed(87654321)
+options(scipen=999)
+
+titanic <- read.csv("titanic.survival.csv")
+kc.house <- read.csv("king.county.sales.recent.csv")
+classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+
+titanic <- titanic %>%
+  mutate(sex = as.factor(sex),
+         survived = factor(survived, levels=c("no", "yes")))
+
+pct.survived = mean(as.numeric(titanic$survied)) - 1
+
+kc.house <- kc.house %>%
+  mutate(view = case_when(view_rainier == 1 ~ 1,
+                          view_olympics == 1 ~ 1,
+                          view_cascades == 1 ~ 1,
+                          view_territorial == 1 ~ 1,
+                          view_skyline == 1 ~ 1,
+                          view_sound == 1 ~ 1,
+                          view_lakewash == 1 ~ 1,
+                          view_lakesamm == 1 ~ 1, 
+                          view_otherwater == 1 ~ 1,
+                          view_other == 1 ~ 1,
+                          TRUE ~ 0))
+```
+
+```{r}
+#| label: rsetup
+#| include: false
+
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+set.seed(8675309)
+options(scipen=999)
+
+titanic <- read.csv("datasets/titanic.survival.csv")
+kc.house <- read.csv("datasets/king.county.sales.recent.csv")
+
+titanic <- titanic %>%
+  mutate(sex = as.factor(sex),
+         survived = factor(survived, levels=c("no", "yes")))
+
+pct.survived = mean(as.numeric(titanic$survied)) - 1
+
+kc.house <- kc.house %>%
+  mutate(view = case_when(view_rainier == 1 ~ 1,
+                          view_olympics == 1 ~ 1,
+                          view_cascades == 1 ~ 1,
+                          view_territorial == 1 ~ 1,
+                          view_skyline == 1 ~ 1,
+                          view_sound == 1 ~ 1,
+                          view_lakewash == 1 ~ 1,
+                          view_lakesamm == 1 ~ 1, 
+                          view_otherwater == 1 ~ 1,
+                          view_other == 1 ~ 1,
+                          TRUE ~ 0))
+
+rounded.mean.view <- round(mean(kc.house$sale_price[kc.house$view==1]), digits=0)
+rounded.mean.noview <- round(mean(kc.house$sale_price[kc.house$view==0]), digits=0)
+rounded.sd.view <- round(sd(kc.house$sale_price[kc.house$view==1]), digits=0)
+rounded.sd.noview <- round(sd(kc.house$sale_price[kc.house$view==0]), digits=0)
+
+n.view <- length(kc.house$sale_price[kc.house$view==1])
+n.noview <- length(kc.house$sale_price[kc.house$view==0])
+
+rounded.diff <- round(mean(kc.house$sale_price[kc.house$view==1]) - mean(kc.house$sale_price[kc.house$view==0]), digits=0)
+rounded.SE <- round(sqrt(sd(kc.house$sale_price[kc.house$view==1])^2/n.view + sd(kc.house$sale_price[kc.house$view==0])^2/n.noview), digits=0)
+rounded.t <- round((mean(kc.house$sale_price[kc.house$view==1]) - mean(kc.house$sale_price[kc.house$view==0]))/(sqrt(sd(kc.house$sale_price[kc.house$view==1])^2/n.view + sd(kc.house$sale_price[kc.house$view==0])^2/n.noview)), digits=2)
+rounded.p <- 1-round(pt((mean(kc.house$sale_price[kc.house$view==1]) - mean(kc.house$sale_price[kc.house$view==0]))/(sqrt(sd(kc.house$sale_price[kc.house$view==1])^2/n.view + sd(kc.house$sale_price[kc.house$view==0])^2/n.noview)), df=n.view), digits=6)
+```
+
+
+# Comparing groups
+
+* What type of inference is a $t$ test?
+* A confidence interval for the difference between two means
+* The two-sample $t$ test: testing for the difference between two means
+* Experiments and causality
+
+![Seattle waterfront](images/Lecture 4.1/seattlewaterfront.jpeg)
+
+## What type of inference is a $t$ test?
+
+### A review - descriptive vs. inference
+
+```{r}
+#| label: tbl-inferencetypegen
+#| tbl-cap: "Inference types - general"
+#| echo: false
+cnames <- c("Type of analysis", "Descriptive", "Inferential")
+col1 <- c("Univariate", "Univariate compared to theoretical expectation", "Comparing two variables", "Comparing many variables")
+col2 <- c("Histogram, bar chart", "QQ plot", "Scatterplot, two variable regression", "Multiple variable regression")
+col3 <- c("Confidence interval", "One proportion z test, one proportion t test", "Two proportion z test, two proportion t test", "Multiple variable regression")
+review.table <- data.frame(col1, col2, col3)
+colnames(review.table) <- cnames
+
+kable(review.table) %>% 
+  kable_styling()
+```
+
+### A review - one vs. two mean test
+
+```{r}
+#| label: tbl-inferencetypemean
+#| tbl-cap: "Inference types - mean"
+#| echo: false
+cnames <- c("One mean test", "Two mean test")
+col1 <- c("Comparing the mean of your sample to some statement about the world", "Null hypothesis: based on some belief we have about the general population, i.e. students sleep 7.03 hours")
+col2 <- c("Comparing the mean of one part of your sample to another part of your sample", "Null hypothesis: no difference between groups")
+review.table <- data.frame(col1, col2)
+colnames(review.table) <- cnames
+
+kable(review.table) %>% 
+  kable_styling()
+```
+
+### Example
+
+```{r}
+#| label: tbl-inferenceexample
+#| tbl-cap: "Inference example"
+#| echo: false
+#| warning: false
+cnames <- c("One mean test", "Two mean test")
+col1 <- c("$H_0$: Our sample mean of hours of sleep is the same as all students in the world", "$H_a$: Our sample mean is different than the world's population mean")
+col2 <- c("$H_0$: The sample mean of male students hours slept is the same as the mean of female students hours slept", "$H_a$: The sample mean of female students is different than the sample mean of male students")
+review.table <- data.frame(col1, col2)
+colnames(review.table) <- cnames
+
+kable(review.table, format="markdown") %>% 
+  kable_styling()
+```
+
+## A confidence interval for the difference between two means/proportions
+
+### Difference between means/proportions: standard error
+
+* Want to find the $SE$ for $\bar{y}_1-\bar{y}_2$
+* Start with theoretical properties:
+  + $SD(\bar{y}_1-\bar{y}_2) = \sqrt{Var(\bar{y}_1) + Var(\bar{y}_2)}$
+  + $SD(\bar{y}_1-\bar{y}_2) = \sqrt{\frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2}}$
+* Don't know the population $\sigma$ for each subsample, so use the sample $SD$s as before
+  + $SE(\bar{y}_1-\bar{y}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+  
+### Example: proportions
+
+* 658 male passengers on the Titanic; 135 survived
+* 388 female passengers on the Titanic; 292 survived
+* $SD(\hat{p}_1-\hat{p}_2) = \sqrt{\frac{p_1q_1}{n_1} + \frac{p_1q_2}{n_2}}$
+* $SE(0.205-0.753) = \sqrt{\frac{0.205\times0.795}{658} + \frac{0.753\times0.247}{388}}$
+* $SE(0.205-0.753) = \sqrt{0.00024 + 0.000479}$
+* $SE(0.205-0.753) = 0.0269$
+
+### Confidence interval
+
+* What is the 95% confidence interval of the *difference* in means?
+
+* $\bar{y}_1-\bar{y}_2\pm Critical value \times SE$
+
+* $-0.548\pm z^* \times 0.0269$
+
+* $-0.548\pm 1.96 \times 0.0269$
+
+* $-0.548\pm 0.0528$
+
+What can you conclude from this - how can you state the results? What are some factors that are omitted?
+
+```{webr}
+#| label: picker1
+sample(classroster$name, 1)
+```
+
+### CI for the difference between two proportions/means
+
+* First find two-sample $z$/$t$ interval for the difference in means
+* Then apply two-sample $z$/$t$ test
+* Interval looks like others we have seen
+  + $\bar{y}_1-\bar{y}_2\pm ME$
+  + $ME = t^*/z^*\times SE(\bar{y}_1-\bar{y}_2)$
+* Uses the $z$ model (proportion) or Student’s $t$ model (mean)
+* The degrees of freedom for $t$ are complicated, so just use a computer
+
+### Sampling distribution for the difference between two means
+
+* When the conditions are met, the sampling distribution of the standardized sample difference between the means of two independent groups:
+  + $t = \frac{(\bar{y}_1-\bar{y}_2) - (\mu_1 - \mu_2)}{SE(\bar{y}_1-\bar{y}_2)}$
+
+* Uses the Student's $t$ model
+
+* Degrees of freedom are found with a special formula
+
+* Think carefully here about what we are modeling
+
+### Assumptions
+
+* Independence assumption:
+  + Within each group, individual responses should be independent of each other.
+  + Knowing one response should not provide  information about other responses.
+* Randomization condition: 
+  + If responses are selected with randomization, their independence is likely.
+* Independent Groups Assumption
+  + Responses in the two groups are independent of each other.
+  + Knowing how one group responds should not provide information about the other group.
+
+### Assumptions continued 
+
+* Nearly normal condition
+  + Check this for both groups
+  + A violation by either one, violates the condition
+  + $n < 15$ in either group: should not use these methods if the histogram or Normal probability plot shows severe skewness 
+  + $n$ closer to 40 for both groups: mildly skewed histogram is OK
+  + $n > 40$ for both groups: Fine as long as no extreme outliers or extreme skewness
+
+### Confidence interval formally
+
+* When the conditions are met, the confidence interval for the difference between means from two independent groups is
+
+  + $(\bar{y}_1-\bar{y}_2)\pm t^*_{df}\times SE(\bar{y}_1-\bar{y}_2)$
+
+  + where $SE(\bar{y}_1-\bar{y}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+
+* Critical value $t^*_{df}$ depends on confidence level $C$
+
+## The two sample $t$ test: testing for the difference between two means
+
+### A two sample $t$ test for difference between means
+
+* Conditions same as two-sample t-interval
+  + $H_0: \mu_1-\mu_2 = \Delta_0$ ($\Delta_0$ usually $0$)
+  
+* When the conditions are met and the null hypothesis is true, use the Student’s $t$ model to find the $p$ value.
+  + $t = \frac{(\bar{y}_1-\bar{y}_2) - \Delta_0}{SE(\bar{y}_1-\bar{y}_2)}$
+  + $SE(\bar{y}_1-\bar{y}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+  
+### Step by step example
+
+* Is there a difference in housing price depending on if the house has a view?
+  + Think $\rightarrow$
+    - Plan: I have housing prices from many thousands of houses in King County, assumed to have been sampled randomly.
+    - Hypotheses
+    - $H_0: \mu_w-\mu_{notw}=0$
+    - $H_a: \mu_w-\mu_{notw}\ne0$
+      
+### Step by step example
+
+* Think $\rightarrow$
+  + Mean price of house with a view: `r rounded.mean.view`, mean price no view: `r rounded.mean.noview`
+  + Model:  
+    - Randomization  Condition:  Subjects assigned to treatment groups randomly? 
+    - Independent Groups Assumption:  Sampling method gives independent groups?
+    - Nearly normal condition:  Histograms are reasonably unimodal and symmetric? 
+    - The assumptions and conditions are reasonable? 
+
+```{webr}
+#| label: fig-pricediffbyview
+#| caption: "Price difference by view"
+ggplot(kc.house, aes(x=sale_price)) +
+  geom_histogram(aes(y=..density..), fill="blue4") + 
+  scale_y_continuous(labels=scales::percent) +
+  labs(x="Price", y="Percent cases") +
+  facet_wrap(~factor(view, labels=c("No view", "View")))
+```
+
+After analyzing these assumptions , are we justified in using the Student’s t-model to perform a two-sample t-test?
+  
+```{webr}
+#| label: picker2
+sample(classroster$name, 1)
+```
+
+### Step by step example
+
+* Show
+  + Mechanics
+    - Mean price of house with a view: `r rounded.mean.view`
+    - Mean price no view: `r rounded.mean.noview`
+    - SD of view: `r rounded.sd.view`
+    - SD no view: `r rounded.sd.noview`
+    - $n$ of view: `r n.view`
+    - $n$ of no view `r n.noview`
+  
+What is the formula we should use in the next step?
+
+```{webr}
+#| label: picker3
+sample(classroster$name, 1)
+```
+
+### Step by step example
+
+* Show
+  + Mechanics
+    - solve for the SE: $SE(\bar{y}_1-\bar{y}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+    - solve for the SE: $SE(\bar{y}_1-\bar{y}_2) = \sqrt{\frac{`r rounded.sd.view`}{`r n.view`} + \frac{`r rounded.sd.noview`}{`r n.noview`}}$
+    - solve for the SE:
+    - find $t$ score: $t = \frac{(\bar{y}_1-\bar{y}_2) - \Delta_0}{SE(\bar{y}_1-\bar{y}_2)}$
+    - find $t$ score: $t = \frac{(`r rounded.mean.view`-`r rounded.mean.noview`) - 0}{`r rounded.SE`}$
+    - find $t$ score: $t = `r rounded.t`$
+    - find $p$ value: can use table with $df=`r n.view`$, $p = `r rounded.p`$
+  
+### Step by step example
+
+Alternatively, we can use the built-in $t$ test function
+
+* Show
+
+```{webr}
+#| label: ttestview
+#| caption: "T test of price difference by view"
+t.test(kc.house$sale_price[kc.house$view==1], kc.house$sale_price[kc.house$view==0])
+```
+
+What can we conclude, based on the results of this $t$ test? What are some assumptions of this $t$ test that may be violated?
+
+```{webr}
+#| label: picker4
+sample(classroster$name, 1)
+```
+
+### Step by step example
+
+* Tell $\rightarrow$
+  + Conclusion: the $p$ value = `r rounded.p` is less than the critical value
+  + If there were no difference in the mean prices, then a difference this large would occur 1 times in millions of times
+  + Too rare to believe happened by chance? **Yes**
+  + Reject $H_0$? **Yes**
+  + Conclude that houses with a view are more expensive than regular houses? **Yes**
+
+## Experiments
+
+### Independence
+
+* Independence assumption:
+  + Within each group, individual responses should be independent of each other.
+  + Knowing one response should not provide  information about other responses.
+* Randomization condition: 
+  + If responses are selected with randomization, their independence is likely.
+* **Independent Groups Assumption**
+  + **Responses in the two groups are independent of each other.**
+  + **Knowing how one group responds should not provide information about the other group.**
+  
+### The importance of the counterfactual
+
+* For causal inference, one should ask the counter-factual question, for those who received “treatment”, what would have happened to them if they hadn't been treated?  
+
+* That is, we only observe one state of reality (had more vegetables), but we want to know the **DIFFERENCE** the treatment had on the person by asking what would have happened if the **DID NOT** receive the treatment
+
+### The importance of the counterfactual
+
+* More formally, we are interested in the difference the treatment has on the response variable (Health)
+
+* On a child ($y_1$)that did receive more vegetables, we want to consider the case of what would have happened if they had **NOT** had the vegetables and find the treatment effect
+  + Or, $y_1^t- y_1^c$ = treatment effect ($t$ denoting treatment; $c$ denoting control)
+  + Note that $y_1^t$ is observed, but $y_1^c$ is not.
+
+* The problem is one of missing data – how to estimate $y_1^c$?
+
+### Comparability problems
+
+* If subjects who receive treatment and those who do not are different in some important characteristics, we have selectivity bias – e.g. higher SES children were more likely to be in the vegetable treatment group  
+  + Violates the independent group assumption because if rich children are more likely to be in the "eats vegetables" group we know that the observed value of the response variable, $heath$, is likely to be higher
+  + Knowing which group they are in gives us some knowledge of what their observed value of $y$ will be
+
+* Often called “omitted variable bias.”
+
+* Big problem in observational studies – many variables are probably not present that we’d like to know
+
+* What are some omitted variables that might bias our finding that houses on the view have a higher price than houses not on the view? 
+
+```{webr}
+#| label: picker5
+sample(classroster$name, 1)
+```
+
+### Experiments
+
+* Experiments solve the omitted variable bias
+* Random assignment of treatment and control status ensures that subjects differ **ON AVERAGE** only in the treatment they receive
+* We can then compute the Average Treatment Effect (ATE) of being in the control vs. treatment
+* A $t$ test between treatment and control group will therefore be accurate
+* In observational studies, it is very rare to be able to guarantee that assignment to the two groups are independent of the response variable. 
+  + If there are important other omitted variables that influence assignment to the two groups, need to control for these omitted variables via a multiple regression 
+
+### Drawbacks of experiments
+
+* Lack of generalizability – Often done on college students or in contrived settings (external validity)
+* Cost – very expensive to run a full experiment
+* Ethics – why shouldn’t we give positive treatments to everyone?
+* Mechanically complicated
+  + Difficult to ensure proper randomization 
+  + Difficult to design appropriate treatments
+  + Difficult to develop appropriate measurements 
+
+### Multiple regression
+
+* Multiple Regression
+  + Attempts to control for, or estimate the treatment effect, for each variable included, **INDEPENDENT** of the other variables
+  + How sure are we of the treatment effect? 
+  + $t$ test of the slope of the regression line
+  + Null hypothesis is that treatment variable ("eats vegetables") makes no difference on response variable
+  + If slope is non-zero, it indicates that differences in treatment produce differences in response variable (increase education $\rightarrow$ increase in wages)
