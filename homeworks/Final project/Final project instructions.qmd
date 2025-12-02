@@ -25,14 +25,14 @@ An indie game developer who is still deciding on what type of game to make asks 
 
 She is primarily interested in a metric of the games positive feedback as the response variable and she asks you specifically to consider the genre of the game, whether it is available on PC only or on other platforms, its price, and whether the game continues to be popular even after initial release. How you choose to operationalize, or define, these concepts is a choice left up to you but you need to justify your decisions.
 
-You may need to extract various parts of `Release.date` using the `lubridate` library as discussed [here](https://lubridate.tidyverse.org/). You can see the variable definitions [here]()
+You may need to extract various parts of `Release.date` using the `lubridate` library as discussed [here](https://lubridate.tidyverse.org/). You can see the variable definitions [here](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) - note, in the Kaggle data viewer, the columns and column descriptions for some reason do not perfectly line up.
 
 You will need to use all the material we learned in class to:
 
 1.  Think carefully about the sampling frame, what your research expectations and questions are, and how the method of data collection can influence your findings
 2.  Interpret summary data
 3.  Examine important bi-variate relationships
-4.  Construct a high-quality regression model of `viewCount` and at least one variable related to each of: the title, description, and publish time.
+4.  Construct a high-quality regression model of your metric of a game's review score and at least the following variables: platform availability, price, continuing popularity.
 5.  Interpret this model, including ALL relevant diagnostics and $p$ values.
 6.  Propose a plan to the developer about what games are popular and what might be a reasonable type of game to start developing.
 7.  Also note the limitations of the report and what other data you think the developer should consider before reaching a final conclusion
