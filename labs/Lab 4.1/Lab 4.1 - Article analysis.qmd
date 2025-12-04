@@ -1,0 +1,52 @@
+---
+title: "Final class 4.3 - Article analysis"
+author: "Professor MacDonald"
+date: "12/4/2025"
+format:
+  pdf:
+    colorlinks: true
+---
+
+![](runners.jpg){fig-align="center" width=60%}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Instructions
+
+Please answer the following questions regarding [this study on runners and knee pain](https://www.sciencedirect.com/science/article/pii/S074937970800353X). You will need your VPN on to access the study online.
+
+## Objective of the study
+
++ Summarize the larger issue that the article is trying to understand.
+
+## Study protocol
+
++ Please describe how the data is collected, what the sample size is, the specific response variable definition, what predictor variables were measured, and a summary of the nonresponse.
++ What problems, if any, do you see with this study given the study protocol? 
++ Does the protocol provide a good test of the hypotheses? Why or why not?
++ Do you agree with how the variables are defined to match the study concepts? 
+
+## Summary data
+
++ What does the summary data indicate about the hypotheses? 
++ How easy is it, in your opinion, to generalize the result of this sample to other situations and contexts?
+
+## Inference analysis
+
++ What do the results of t-tests in Table 2 tell you? 
++ Are the conditions for regression met for Table 3?
++ Interpret the coefficients in Table 3 - is the magnitude of the coefficients large or small? What are the units?
++ Can you think of any lurking variables missing from these regressions?
+
+## Discussion and conclusion
+
++ Do you feel the discussion and conclusion did a good job summarizing the statistical results? 
++ How serious do you think the limitations of this study are?
+
+## Additional questions
+
++ What are some areas that you felt the author(s) of the study were unclear on? 
++ What connections between the results and the argument were unclear? 
++ Write around 5 additional questions you still have after doing a careful analysis of the article.

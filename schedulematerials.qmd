@@ -310,7 +310,7 @@ Topics covered:
 
 ## Lab 4.1: Interpretation activity (Thursday, December 4)
 
--   Lab files: [Lab 4.1]
+-   Lab files: [Lab 4.1](labs/Lab 4.1/lab.4.1.zip)
 
 ## Online lab 4.1 (due on Friday, December 6 at 11:59:00)
 

@@ -11,7 +11,12 @@ format:
 #| label: setup 
 #| include: false
 
-# put your setup code here
+library(gridExtra)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+schools <- read.csv("ca.school.csv")
 ```
 
 ![](ca.schools.jpg)
